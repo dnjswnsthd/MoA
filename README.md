@@ -53,5 +53,7 @@
 
 ![techStack.png](images/techStack.png)
 
+# 팀 구성원 소개
 
+![team_members.png](images/team_members.png)
 
