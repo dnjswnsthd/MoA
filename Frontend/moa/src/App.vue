@@ -16,6 +16,5 @@ export default {
    NavHeader,
    NavFooter
   },
-
 };
 </script>
