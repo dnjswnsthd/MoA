@@ -8,15 +8,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	private static final String[] EXCLUDE_PATHS = { "/user/confirm/**", "/error/**" };
+	// 예외 처리할 path 작성
+	private static final String[] INCLUDE_PATHS = { "/user/confirm/**", "/error/**" };
 
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")// 기본 적용 경로
-				.excludePathPatterns(EXCLUDE_PATHS);// 적용 제외 경로
+		registry.addInterceptor(jwtInterceptor).addPathPatterns(INCLUDE_PATHS);	// 기본 적용 경로
 //		registry.addInterceptor(jwtInterceptor).addPathPatterns("/user/**", "/article/**", "/memo/**") // 기본 적용 경로
 //        .excludePathPatterns(Arrays.asList("/user/confirm/**", "/article/list"));// 적용 제외 경로
 	}
