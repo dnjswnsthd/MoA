@@ -3,6 +3,7 @@ package com.moa.model;
 /**
  * 멘티 Dto 구현
  * MemberDto 상속 받아 구현
+ * 
  * @author 조석준
  * 작성일 : 2021-01-26
  */
