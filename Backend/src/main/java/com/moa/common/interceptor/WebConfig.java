@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 	// 예외 처리할 path 작성
-	private static final String[] INCLUDE_PATHS = { "/user/confirm/**", "/error/**" };
+	private static final String[] INCLUDE_PATHS = { "" };
 
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
