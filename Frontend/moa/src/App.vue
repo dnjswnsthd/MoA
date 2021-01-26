@@ -7,24 +7,31 @@
 </template>
 
 <script>
-
-import NavHeader from "@/components/common/Header.vue";
-import NavFooter from "@/components/common/Footer.vue";
-import NavHeader from "@/components/common/MainHeader.vue";
+import NavHeader from '@/components/common/Header.vue';
+import NavFooter from '@/components/common/Footer.vue';
+// import NavHeader from "@/components/common/MainHeader.vue";
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-   NavHeader,
-   NavFooter
+    NavHeader,
+    NavFooter,
   },
 };
 </script>
 <style>
-    *{
-      margin:0;padding:0;
-    }
-    img{display:block;}
-    ul,li{list-style:none;}
-    a{text-decoration:none;}
+* {
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
 </style>
