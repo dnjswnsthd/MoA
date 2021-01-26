@@ -37,7 +37,7 @@ public class SwaggerConfiguration {
 				.responseModel(new ModelRef("Error")).build());
 		responseMessages.add(new ResponseMessageBuilder().code(404).message("페이지를 찾을 수 없습니다 !!!").build());
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).groupName(version).select()
-				.apis(RequestHandlerSelectors.basePackage("com.ssafy.board.controller")).paths(postPaths()).build()
+				.apis(RequestHandlerSelectors.basePackage("com.moa.controller")).paths(postPaths()).build()
 				.useDefaultResponseMessages(false).globalResponseMessage(RequestMethod.GET, responseMessages);
 	}
 
