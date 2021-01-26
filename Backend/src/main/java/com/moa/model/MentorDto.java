@@ -13,7 +13,7 @@ public class MentorDto extends MemberDto {
 	// 능력치
 	private int leadership;		// 리더쉽
 	private int morality;		// 도덕성 
-	private int positive;		// 
+	private int positiveness;	// 적극성 
 	private int reliability;	// 신뢰성
 	private int professional;	// 전문성
 	// getter, setter
@@ -42,10 +42,10 @@ public class MentorDto extends MemberDto {
 		this.morality = morality;
 	}
 	public int getPositive() {
-		return positive;
+		return positiveness;
 	}
-	public void setPositive(int positive) {
-		this.positive = positive;
+	public void setPositive(int positiveness) {
+		this.positiveness = positiveness;
 	}
 	public int getReliability() {
 		return reliability;
