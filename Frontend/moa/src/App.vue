@@ -10,6 +10,8 @@
 
 import NavHeader from "@/components/common/Header.vue";
 import NavFooter from "@/components/common/Footer.vue";
+import NavHeader from "@/components/common/MainHeader.vue";
+
 export default {
   name: "App",
   components: {
