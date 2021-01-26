@@ -7,6 +7,13 @@ import org.springframework.stereotype.Service;
 import com.moa.model.MemberDto;
 import com.moa.model.mapper.MemberMapper;
 
+/**
+ * 2021-01-26
+ * 로그인 서비스 구현 - id, pw 필수 검사
+ * 
+ * @author Team Together
+ */
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
