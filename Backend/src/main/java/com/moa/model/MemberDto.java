@@ -3,6 +3,7 @@ package com.moa.model;
 /**
  * Member Dto 구현
  * 멘토, 멘티가 가질 수 있는 공통 속성 정의
+ * 
  * @author 조석준
  * 작성일 : 2021-01-26
  */
