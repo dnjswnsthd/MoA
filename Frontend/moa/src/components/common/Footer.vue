@@ -1,0 +1,5 @@
+<template>
+    <footer>
+        <p>푸터입니다.</p>
+    </footer>
+</template>
