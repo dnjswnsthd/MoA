@@ -1,5 +1,5 @@
 <template>
-    <header >
+    <header>
         <v-container class="col-8">
             <v-row>
                 <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
@@ -35,24 +35,10 @@
 
 <script>
 export default {
-    name: "Header"
+    name: "MainHeader"
 }
 </script>
 
 <style>
-    .width-120 {
-        width: 120px;
-    }
-    .height-70 {
-        height: 70px;
-    }
-    .centerText {
-        text-align: center;
-    }
-    header .container .row li {
-        line-height: 70px;
-    }
-    header .container .row li a {
-        color: black;
-    }
+
 </style>
