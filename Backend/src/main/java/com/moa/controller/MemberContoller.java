@@ -78,7 +78,25 @@ public class MemberContoller {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	
-	
-	
+	@ApiOperation(value = "회원 가입(멘토, 멘티)", notes = "멘토의 회원 가입 결과를 반환한다.", response = Map.class)
+	@PostMapping("/join")
+	public ResponseEntity<Map<String, Object>> join(
+			@RequestBody @ApiParam(value = "멘토 회원 가입에 필요한 회원 정보", required = true) Map<String, String> param) {
+		System.out.println(param);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			if(memberService.checkId(param.get("id"))) {
+				
+			}
+		} catch(Exception e) {
+			
+		}
+		
+		resultMap.put("message", SUCCESS);
+		status = HttpStatus.ACCEPTED;
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
 }
