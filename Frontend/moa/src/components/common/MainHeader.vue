@@ -5,26 +5,42 @@
                 <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
-                    <router-link to="/foo">펀딩 오픈</router-link>
-                    </li>
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/foo">My Page</router-link>
-                    </li>
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/foo">로그아웃</router-link>
-                    </li>
-            </v-row>          
-        </v-container>
+                        <div class="text-center">
+                            <v-dialog
+                            v-model="dialog"
+                            width="500"
+                            >
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn class="button"
+                                v-bind="attrs"
+                                v-on="on"
+                                >
+                                회원가입
+                                </v-btn>
+                            </template>
 
-        <v-container class="col-8">
-            <v-row>
-                <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
-                <v-spacer></v-spacer>                
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/foo">회원가입</router-link>
+                            <SignUp></SignUp>
+                            </v-dialog>
+                        </div>
                     </li>
                     <li class="width-120 centerText height-70">
-                    <router-link to="/foo">로그인</router-link>
+                        <div class="text-center">
+                            <v-dialog
+                            v-model="dialog"
+                            width="500"
+                            >
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn class="button"
+                                v-bind="attrs"
+                                v-on="on"
+                                >
+                                Login
+                                </v-btn>
+                            </template>
+
+                            <login></login>
+                            </v-dialog>
+                        </div>
                     </li>
             </v-row>          
         </v-container>
@@ -34,11 +50,25 @@
 </template>
 
 <script>
-export default {
-    name: "MainHeader"
-}
+import Login from '@/components/member/Login.vue';
+import SignUp from '@/components/member/SignUp.vue';
+
+ export default {
+    data () {
+      return {
+        dialog: false,
+      }
+    },
+    components:{
+        Login,
+        SignUp
+    }
+  }
 </script>
 
 <style>
-
+ .button{
+     background-color:white;
+     color:black;
+ }
 </style>

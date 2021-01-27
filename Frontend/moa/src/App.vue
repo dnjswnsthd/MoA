@@ -1,21 +1,20 @@
 <template>
   <v-app>
-    <nav-header></nav-header>
+    <router-view name="header"></router-view>
     <router-view></router-view>
     <nav-footer></nav-footer>
   </v-app>
 </template>
 
 <script>
-import NavHeader from '@/components/common/Header.vue';
-import NavFooter from '@/components/common/Footer.vue';
-// import NavHeader from "@/components/common/MainHeader.vue";
+import NavFooter from "@/components/common/Footer.vue";
+
 
 export default {
   name: 'App',
   components: {
-    NavHeader,
-    NavFooter,
+   NavFooter
+
   },
 };
 </script>
