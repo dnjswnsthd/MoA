@@ -38,7 +38,8 @@ footer .row div{
         text-align:center;
     }
     footer .row div:nth-child(3) p{
-        height:100%; line-height:120px;
+        width:100%;
+        height:100%;
          margin:0;
         text-align:center;
         font-size:60px;
