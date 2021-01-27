@@ -28,6 +28,9 @@ import io.swagger.annotations.ApiParam;
  * 로그인 메소드 구현
  *  - jwt를 통해 세션 유지
  *  - 성공, 실패 여부를 message를 통해 front단에 전달
+ *  2021-01-27
+ *  아이디 중복 검사 method 구현
+ *  회원가입 method 구현
  * 
  * @author Team Together
  */
@@ -81,7 +84,7 @@ public class MemberContoller {
 	}
 	
 	@ApiOperation(value = "ID 중복 검사", notes = "입력한 아이디가 존재하는지 검사하여 ", response = Map.class)
-	@GetMapping("/join/idchk/{id}")
+	@GetMapping("/join/{id}")
 	public ResponseEntity<Map<String, Object>> idChk(
 			@PathVariable("id") @ApiParam(value = "중복 확인할 아이디", required = true) String id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -107,19 +110,18 @@ public class MemberContoller {
 	@ApiOperation(value = "회원 가입(멘토, 멘티)", notes = "멘토의 회원 가입 결과를 반환한다.", response = Map.class)
 	@PostMapping("/join")
 	public ResponseEntity<Map<String, Object>> join(
-			@RequestBody @ApiParam(value = "멘토 회원 가입에 필요한 회원 정보", required = true) Map<String, String> param) {
-		System.out.println(param);
+			@RequestBody @ApiParam(value = "멘토 회원 가입에 필요한 회원 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		
 		try {
-			
+			memberService.join(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
 		} catch(Exception e) {
-			
+			resultMap.put("massage", FAIL);
+			status = HttpStatus.ACCEPTED;
 		}
-		
-		resultMap.put("message", SUCCESS);
-		status = HttpStatus.ACCEPTED;
 		
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
