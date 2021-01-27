@@ -1,24 +1,70 @@
 <template>
-<v-card>
-                                <v-card-title class="headline grey lighten-2">
-                                Privacy Policy
-                                </v-card-title>
+    <v-card>
+        <v-card-title class="headline grey lighten-2">
+                로그인
+        </v-card-title>
 
-                                <v-card-text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </v-card-text>
+        <v-row>
+        <form class="col-11 formBox">
+               <v-text-field label="ID" type="text" class="col-8"></v-text-field>
+               <v-text-field label="PW" type="password" class="col-8"></v-text-field>
+               <v-btn class="col-4">Login</v-btn>
+        </form>
+        </v-row>
 
-                                <v-divider></v-divider>
+        <v-card-actions>
+        <v-spacer></v-spacer>
+        
+            <v-btn
+                color="primary"
+                text
+                @click="openFindPassword"
+            >
+            비밀번호 찾기
+            </v-btn>
+            <v-btn
+                color="primary"
+                text
+                @click="openJoin"
+            >
+            회원가입
+            </v-btn>
+            </v-card-actions>
 
-                                <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    color="primary"
-                                    text
-                                    @click="dialog = false"
-                                >
-                                    I accept
-                                </v-btn>
-                                </v-card-actions>
-                            </v-card>
+            <v-card v-if="dialogFindPassword">
+                <find-password></find-password>
+            </v-card>
+            <v-card v-else-if="dialogJoin">
+                <join></join>
+            </v-card>
+        </v-card>
 </template>
+<script>
+import FindPassword from "@/components/member/FindPassword.vue";
+import Join from "@/components/member/Join.vue";
+export default {
+    data(){
+        return{
+            dialogLogin:true,
+            dialogFindPassword:false,
+            dialogJoin:false,
+        }
+    },
+    methods:{
+        openFindPassword(){
+            this.dialogLogin="false";
+            this.dialogFindPassword="true";
+            this.dialogJoin="false";
+        },
+        openJoin(){
+            this.dialogLogin="false";
+            this.dialogJoin="true";
+            this.dialogFindPassword="false";
+        }
+    },
+    components:{
+        FindPassword,
+        Join,
+    }
+}
+</script>
