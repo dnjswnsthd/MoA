@@ -1,5 +1,7 @@
 package com.moa.model.service;
 
+import java.sql.SQLException;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +37,10 @@ public class MemberServiceImpl implements MemberService {
             return false;
         return true;
 	}
-
+	
+	public MemberDto memberUpdate(MemberDto memberDto) throws SQLException {
+		//회원정보 수정은 이미 로그인이 된 상태로 진행 가능
+		sqlSession.getMapper(MemberMapper.class).memberUpdate(memberDto);
+		return sqlSession.getMapper(MemberMapper.class).memberSearch(memberDto);
+	}
 }
