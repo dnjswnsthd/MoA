@@ -7,7 +7,7 @@
                     <li class="width-120 centerText height-70">
                         <div class="text-center">
                             <v-dialog
-                            v-model="dialog"
+                            v-model="dialogJoin"
                             width="500"
                             >
                             <template v-slot:activator="{ on, attrs }">
@@ -18,15 +18,15 @@
                                 회원가입
                                 </v-btn>
                             </template>
-
-                            <SignUp></SignUp>
+                            
+                            <join></join>
                             </v-dialog>
                         </div>
                     </li>
                     <li class="width-120 centerText height-70">
                         <div class="text-center">
                             <v-dialog
-                            v-model="dialog"
+                            v-model="dialogLogin"
                             width="500"
                             >
                             <template v-slot:activator="{ on, attrs }">
@@ -51,17 +51,19 @@
 
 <script>
 import Login from '@/components/member/Login.vue';
-import SignUp from '@/components/member/SignUp.vue';
+import Join from '@/components/member/Join.vue';
 
  export default {
     data () {
       return {
-        dialog: false,
+        dialogLogin: false,
+        dialogJoin: false,
+        dialogFindPassword: false,
       }
     },
     components:{
         Login,
-        SignUp
+        Join
     }
   }
 </script>
