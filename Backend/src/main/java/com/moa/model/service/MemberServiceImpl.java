@@ -30,7 +30,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean checkId(String id) {
-		return sqlSession.getMapper(MemberMapper.class).checkId(id);
+		if(sqlSession.getMapper(MemberMapper.class).checkId(id) == null)
+            return false;
+        return true;
 	}
 
 }
