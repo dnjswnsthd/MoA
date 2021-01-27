@@ -1,0 +1,82 @@
+<template>
+    <v-card>
+            <v-card-title class="headline grey lighten-2">
+                <div>
+                    <img src="@/assets/images/main/logo.png">
+                </div>
+                <h1 class="joinTitle">회원 가입</h1>
+            </v-card-title>
+            <v-tabs>
+                <v-tab @click="openMentor">멘토</v-tab>
+                <v-tab @click="openMentee">멘티</v-tab>
+            </v-tabs>
+           <form class="col-12 formBox">
+               <v-row>
+               <v-text-field label="ID" type="text"></v-text-field>
+               <button class="idCheckBtn">중복체크</button>
+               </v-row>
+               <v-text-field label="PW" type="password"></v-text-field>
+               <v-text-field label="PW" type="password"></v-text-field>
+               <v-text-field label="Name" type="text"></v-text-field>
+               <v-text-field label="Age" type="number"></v-text-field>
+               <v-text-field label="major" type="text"></v-text-field>
+               <v-text-field label="phone" type="tel"></v-text-field>
+               <v-text-field label="favorite 1" type="text"></v-text-field>
+               <v-text-field label="favorite 2" type="text"></v-text-field>
+               <v-text-field label="favorite 3" type="text"></v-text-field>
+               <v-textarea label="introduce" solo></v-textarea>
+           </form>
+            
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="primary"
+                text
+                @click="dialogJoin = false"
+                >
+                초기화
+            </v-btn>
+            <v-btn
+                color="primary"
+                text
+                @click="dialogJoin = false"
+                >
+                가입하기
+            </v-btn>
+        </v-card-actions>
+    </v-card>
+    
+</template>
+<script>
+  export default {
+    data () {
+      return {
+        dialogMentor: false,
+        dialogMentee: false,
+      }
+    },
+    methods:{
+        openMentor(){
+            this.dialogMentor = true;
+            this.dialogMentee = false;
+        },
+        openMentee(){
+            this.dialogMentor = false;
+            this.dialogMentee = true;
+        }
+    }
+  }
+</script>
+<style>
+    .formBox{
+        margin:0 auto;
+    }
+    .idCheckBtn{
+    
+    line-height: 20px;
+    padding: 8px 0 8px;
+    max-width: 100%;
+    min-width: 0px;
+    width: 80px;
+    }
+</style>
