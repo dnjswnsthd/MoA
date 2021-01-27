@@ -29,8 +29,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean checkId(String id) {
-		if(sqlSession.getMapper(MemberMapper.class).checkId(id) == null)
+	public boolean idChk(String id) {
+		// 중복된 아이디가 존재할 경우
+		if(sqlSession.getMapper(MemberMapper.class).idChk(id) > 0)
             return false;
         return true;
 	}
