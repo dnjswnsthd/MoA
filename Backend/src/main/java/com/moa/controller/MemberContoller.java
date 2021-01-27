@@ -3,6 +3,7 @@ package com.moa.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,7 +128,7 @@ public class MemberContoller {
 	}
 	
 	@ApiOperation(value = "회원 정보 수정", notes = "회원 정보를 수정하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
-	@GetMapping("/update/")
+	@Update("/update/")
 	public ResponseEntity<Map<String, Object>> memberUpdate(
 			@RequestBody @ApiParam(value = "본인 확인용 pw", required = true) MemberDto memberDto){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
