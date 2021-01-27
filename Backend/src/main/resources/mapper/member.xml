@@ -3,10 +3,38 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.moa.model.mapper.MemberMapper">
-	<!-- 2021-01-26 로그인 sql문 작성 -->
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
 		select id, name
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
+	
+	<!-- ID 중복 검사 -->
+	<select id="checkId" resultType="int" parameterType="String">
+		select count(*) from member where id=#{id}
+	</select>
+	
+	<!-- member join -->
+	<!--  회원가입 -->
+	
+	<insert id="join" parameterType="MemberDto"">
+		insert into member
+		(id,pw,name,age,major,status,phone,favorite_1,favorite_2,favorite_3,number_of_project,point,introduce)
+		values
+		(#{id},#{pw},#{name},#{age},#{major},#{status},#{phone},#{favorite_1},#{favorite_2},#{favorite_3},#{number_of_project},#{point},#{introduce})
+		<if test='status !=0'>
+			<if test='status ==1'>
+			insert into mentor
+			(id,leadership,career,exp,morality,positiveness,reliability,professional)
+			values
+			(#{id},#{leadership},#{career},#{exp},#{morality},#{positiveness},#{reliability},#{professional})
+			</if>
+		</if>
+		<if test='status ==2'>
+			insert into mentee
+			(id,skill,communication,responsibility,performance,positiveness,leadership)
+			values
+			(#{id},#{skill},#{communication},#{responsibility},#{performance},#{positiveness},#{leadership})
+			</if>
+	</insert>
 </mapper>
