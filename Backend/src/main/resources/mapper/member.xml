@@ -3,22 +3,19 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.moa.model.mapper.MemberMapper">
-	
-	<select id="login" parameterType="MemberDto"
-		resultType="MemberDto">
+	<!-- member login -->
+	<select id="login" parameterType="MemberDto" resultType="MemberDto">
 		select id, name
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
-
+	
+	
 	<!-- ID 중복 검사 -->
 	<select id="idChk" resultType="int" parameterType="String">
-		select
-		count(*)
-		from member
-		where id= #{id}
+		select count(*) from member where id=#{id}
 	</select>
-
+	
 	<!-- member join -->
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="Map">
@@ -38,5 +35,35 @@
 		insert into mentee(id, skill)
 		values(#{id}, #{skill})
 	</insert>
-
+	
+	<!--  member search -->
+	<select id="memberSearch" parameterType="MemberDto" resultType="MemberDto">
+		select id
+		from member
+		where id = #{id} and pw = #{pw}
+	</select>
+	
+	
+	<!--  member update -->
+	<update id="memberUpdate" parameterType="MemberDto">
+		update member set
+		pw = #{pw},
+		name = #{name},
+		age = #{age},
+		major = #{major},
+		phone = #{phone},
+		favorite_1 = #{favorite_1},
+		favorite_2 = #{favorite_2},
+		favorite_3 = #{favorite_3},
+		introduce = #{introduce}
+		where id = #{id}
+	</update>
+	
+	
+	<!-- member delete -->
+	<delete id="delete" parameterType="String">
+		delete from member
+		where id = #{id} 
+	</delete>
+	
 </mapper>

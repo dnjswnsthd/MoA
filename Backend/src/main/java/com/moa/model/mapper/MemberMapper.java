@@ -20,4 +20,7 @@ public interface MemberMapper {
 
 	public void joinMentor(Map<String, Object> param) throws SQLException;
 	public void joinMentee(Map<String, Object> param) throws SQLException;
+	
+	public void memberUpdate(MemberDto memberDto) throws SQLException;
+	public MemberDto memberSearch(MemberDto memberDto) throws SQLException;
 }
