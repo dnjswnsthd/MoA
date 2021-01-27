@@ -1,16 +1,26 @@
 <template>
     <v-card>
-        <v-card-title class="headline grey lighten-2">
-                로그인
-        </v-card-title>
+        <div>
+            
+        <v-spacer></v-spacer>
+        <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="loginImg">
+        <v-spacer></v-spacer>
 
+        <h2 class="titleText grey lighten-2">로그인</h2>
+    </div>
+    <div class="loginWidth">
         <v-row>
-        <form class="col-11 formBox">
-               <v-text-field label="ID" type="text" class="col-8"></v-text-field>
-               <v-text-field label="PW" type="password" class="col-8"></v-text-field>
-               <v-btn class="col-4">Login</v-btn>
+        <form class="col-10 formBox">
+        <v-spacer></v-spacer>
+            <v-text-field label="ID" type="text" class="col-8"></v-text-field>
+        <v-spacer></v-spacer>
+            <v-text-field label="PW" type="password" class="col-8"></v-text-field>  
+        <v-spacer></v-spacer>      
         </form>
+            <v-btn class="col-4">Login</v-btn>
         </v-row>
+    </div>
+        
 
         <v-card-actions>
         <v-spacer></v-spacer>
@@ -68,3 +78,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .loginImg {
+        width: 450px;
+        height: 100x;
+    }
+    .loginWidth {
+        width: 450px;
+        margin: 0 auto;
+    }
+</style>
