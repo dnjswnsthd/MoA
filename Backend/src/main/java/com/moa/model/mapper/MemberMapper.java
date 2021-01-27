@@ -12,4 +12,5 @@ import com.moa.model.MemberDto;
  */
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
+	public boolean checkId(String id);
 }

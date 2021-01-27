@@ -28,4 +28,9 @@ public class MemberServiceImpl implements MemberService {
 		return sqlSession.getMapper(MemberMapper.class).login(memberDto);
 	}
 
+	@Override
+	public boolean checkId(String id) {
+		return sqlSession.getMapper(MemberMapper.class).checkId(id);
+	}
+
 }
