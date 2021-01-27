@@ -14,6 +14,7 @@
                 <div class="col-2">
                     <p>Together</p>
                 </div>
+                
             </v-row>
         </v-container>
     </footer>
@@ -40,7 +41,7 @@ footer .row div{
     footer .row div:nth-child(3) p{
         width:100%;
         height:100%;
-         margin:0;
+        margin:0;
         text-align:center;
         font-size:60px;
         
@@ -48,5 +49,7 @@ footer .row div{
 
     .height-150{
         height:150px;
+    
     }
+    
 </style>
