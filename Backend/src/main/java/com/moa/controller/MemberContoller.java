@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,6 +80,30 @@ public class MemberContoller {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "ID 중복 검사", notes = "입력한 아이디가 존재하는지 검사하여 ", response = Map.class)
+	@GetMapping("/join/idchk/{id}")
+	public ResponseEntity<Map<String, Object>> idChk(
+			@PathVariable("id") @ApiParam(value = "중복 확인할 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			if(memberService.idChk(id)) { // 아이디가 중복 되지 않을 경우
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.ACCEPTED;
+			}
+		} catch(Exception e) {
+			logger.error("중복 확인 실패 : {}", e);
+			resultMap.put("massage", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 	@ApiOperation(value = "회원 가입(멘토, 멘티)", notes = "멘토의 회원 가입 결과를 반환한다.", response = Map.class)
 	@PostMapping("/join")
 	public ResponseEntity<Map<String, Object>> join(
@@ -87,9 +113,7 @@ public class MemberContoller {
 		HttpStatus status = null;
 		
 		try {
-			if(memberService.checkId(param.get("id"))) {
-				
-			}
+			
 		} catch(Exception e) {
 			
 		}
