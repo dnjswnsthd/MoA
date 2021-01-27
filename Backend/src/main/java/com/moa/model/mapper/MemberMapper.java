@@ -13,4 +13,6 @@ import com.moa.model.MemberDto;
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
 	public int idChk(String id);
+	public void memberUpdate(MemberDto memberDto) throws SQLException;
+	public MemberDto memberSearch(MemberDto memberDto) throws SQLException;
 }
