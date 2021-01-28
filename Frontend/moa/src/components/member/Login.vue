@@ -28,24 +28,24 @@
             <v-btn
                 color="primary"
                 text
-                @click="openFindPassword"
             >
+            <router-link to="/findpassword">
             비밀번호 찾기
+            </router-link>
             </v-btn>
             <v-btn
                 color="primary"
                 text
-                @click="openJoin"
             >
+            <router-link to="/join">
             회원가입
+            </router-link>
             </v-btn>
             </v-card-actions>
         </v-card>
 </template>
 <script>
 
-export default {
-}
 </script>
 
 <style scoped>
