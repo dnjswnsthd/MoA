@@ -7,7 +7,7 @@
                     <img
                         src="@/assets/images/main/logo.png"
                         alt="로고"
-                        style="width: 150px; height: 60px;"
+                        style="width: 150px; height: 70px;"
                     />
                     </router-link>
                 </div>
@@ -77,15 +77,6 @@
 
 <script>
 
- export default {
-    data () {
-      return {
-        dialogLogin: false,
-        dialogJoin: false,
-        dialogFindPassword: false,
-      }
-    },
-  }
 </script>
 
 <style>
