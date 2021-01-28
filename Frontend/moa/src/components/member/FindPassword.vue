@@ -11,24 +11,12 @@
         <!-- <v-card-title class="headline grey lighten-2 titleText">
             비밀번호 찾기
         </v-card-title> -->
-<<<<<<< HEAD
-    <div class="findPasswordWidth">
-        <v-row>
-        <form class="col-9 formBox">
-            <v-row>
-                <v-text-field label="ID" type="text" class="idbox"></v-text-field>
-                <button class="idchkbox">체크</button>
-            </v-row>
-        </form>
-        </v-row>
-=======
     <div class="height-100">
         
             <form class="formBox">
                 <v-text-field label="ID" type="text" class="idBox"></v-text-field>
             </form>
         
->>>>>>> d8bfec8caef06504cd2345364181f3b4f42ad9c9
     </div>
         <div>
         <v-row>
@@ -71,40 +59,8 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
-<style>
-    .findPasswordImg {
-        margin: 0 auto;
-        width: 450px;
-        height: 100x;
-    }
-    form {
-        width: 450px;
-    }
-    .findPasswordWidth {
-        width: 450px;
-        margin: 0 auto;
-    }
-    .lineBox{
-        width: 350px;
-        height:10px;
-        background-color:#ddd;
-        margin:0 auto;
-        border-radius: 20px;
-    }
-    .idbox{
-        width:60%;
-    }
-    .idchkbox{
-        width:40%;
-    }
-    .formBox{
-        margin:20px auto;
-    }
-=======
 <style scoped>
 .cardBox {
   margin: 10.5rem auto;
 }
->>>>>>> d8bfec8caef06504cd2345364181f3b4f42ad9c9
 </style>
