@@ -4,7 +4,8 @@
         <v-spacer></v-spacer>
         <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="findPasswordImg">
         <v-spacer></v-spacer>
-        <h2 class="titleText grey lighten-2">비밀번호 찾기</h2>
+        <h2 class="centerText">비밀번호 찾기</h2>
+        <div class="lineBox"></div>
     </div>
     
         <!-- <v-card-title class="headline grey lighten-2 titleText">
@@ -13,7 +14,10 @@
     <div class="findPasswordWidth">
         <v-row>
         <form class="col-9 formBox">
-            <v-text-field label="ID" type="text" class="col-8"></v-text-field>
+             <v-row>
+                 <v-text-field label="ID" type="text" class="idbox"></v-text-field>
+                 <button class="idchkbox">체크</button>
+             </v-row>
         </form>
         </v-row>
     </div>
@@ -58,9 +62,6 @@ export default {
 </script>
 
 <style>
-    .titleText {
-        text-align: center;
-    }
     .findPasswordImg {
         margin: 0 auto;
         width: 450px;
@@ -72,5 +73,22 @@ export default {
     .findPasswordWidth {
         width: 450px;
         margin: 0 auto;
+    }
+    .lineBox{
+        width: 350px;
+        height:10px;
+        background-color:#ddd;
+        margin:0 auto;
+        border-radius: 20px;
+    }
+    .idbox{
+        width:60%;
+    }
+    .idchkbox{
+        width:40%;
+    }
+    .formBox{
+        margin:20px auto;
+
     }
 </style>
