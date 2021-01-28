@@ -20,7 +20,7 @@
             <v-row>
                 <div>
                     <router-link to="/">
-                    <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;">
+                    <img src="@/assets/images/main/logo(Bg).png" alt="로고" style="width: 150px; height: 60px;">
                     </router-link>
                     </div>
                 <v-spacer></v-spacer>               
