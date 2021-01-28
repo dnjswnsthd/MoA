@@ -1,30 +1,30 @@
 <template>
-    <v-card >
-        <div class="loginSize">
+    <div class="cardBox">
+        <div>
             <div>
-                
-            <v-spacer></v-spacer>
-            <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="loginImg">
-            <v-spacer></v-spacer>
-
-            <h2 class="titleText">로그인</h2>
-            <div class="lineBox"></div>
+                <v-spacer></v-spacer>
+                <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="memberFormLogo">
+                <v-spacer></v-spacer>
+                <h2 class="centerText">로그인</h2>
+                <!-- <div class="lineBox"></div> -->
             </div>
-            <div class="loginWidth">
-                <v-row>
-                <form class="col-10 formBox">
-                <v-spacer></v-spacer>
-                    <v-text-field label="ID" type="text" class="col-8"></v-text-field>
-                <v-spacer></v-spacer>
-                    <v-text-field label="PW" type="password" class="col-8"></v-text-field>  
-                <v-spacer></v-spacer>      
+
+            <div>
+                 
+                <form class="col-12 formBox">
+                
+                    <v-text-field label="ID" type="text" class="col-12"></v-text-field>
+                
+                    <v-text-field label="PW" type="password" class="col-12"></v-text-field>  
+                
                 </form>
-                    <v-btn class="col-4 loginMargin">Login</v-btn>
-                </v-row>
+                <div class="fullWidth">
+                    <button class="loginBtn col-4">Login</button>
+                </div>
             </div>
         
 
-        <v-card-actions>
+        <v-card-actions class="cardActionBox">
         <v-spacer></v-spacer>
         
             <v-btn
@@ -45,34 +45,14 @@
             </v-btn>
             </v-card-actions>
         </div>
-        </v-card>
+        </div>
 </template>
 <script>
 
 </script>
 
 <style scoped>
-    .loginImg {
-        width: 450px;
-        height: 100x;
-        margin: 0 auto;
-    }
-    .loginWidth {
-        width: 450px;
-        margin: 0 auto;
-    }
-    .loginSize {
-        width: 800px;
-        margin: 0 auto;
-    }
-    .loginMargin {
-        margin: 0 auto;
-    }
-    .lineBox{
-        width: 350px;
-        height:10px;
-        background-color:#ddd;
-        margin:0 auto;
-        border-radius: 20px;
-    }
+.cardBox {
+  margin: 7.5rem auto;
+}
 </style>
