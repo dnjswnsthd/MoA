@@ -44,7 +44,9 @@ export default {
 </script>
 
 <style>
-    
+header{
+    border-bottom:1px solid black;
+}
     header .container .row li {
         line-height: 70px;
     }
