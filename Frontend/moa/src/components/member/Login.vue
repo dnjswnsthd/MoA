@@ -1,25 +1,27 @@
 <template>
-    <v-card>
-        <div>
-            
-        <v-spacer></v-spacer>
-        <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="loginImg">
-        <v-spacer></v-spacer>
+    <v-card >
+        <div class="loginSize">
+            <div>
+                
+            <v-spacer></v-spacer>
+            <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="loginImg">
+            <v-spacer></v-spacer>
 
-        <h2 class="titleText grey lighten-2">로그인</h2>
-    </div>
-    <div class="loginWidth">
-        <v-row>
-        <form class="col-10 formBox">
-        <v-spacer></v-spacer>
-            <v-text-field label="ID" type="text" class="col-8"></v-text-field>
-        <v-spacer></v-spacer>
-            <v-text-field label="PW" type="password" class="col-8"></v-text-field>  
-        <v-spacer></v-spacer>      
-        </form>
-            <v-btn class="col-4">Login</v-btn>
-        </v-row>
-    </div>
+            <h2 class="titleText">로그인</h2>
+            <div class="lineBox"></div>
+            </div>
+            <div class="loginWidth">
+                <v-row>
+                <form class="col-10 formBox">
+                <v-spacer></v-spacer>
+                    <v-text-field label="ID" type="text" class="col-8"></v-text-field>
+                <v-spacer></v-spacer>
+                    <v-text-field label="PW" type="password" class="col-8"></v-text-field>  
+                <v-spacer></v-spacer>      
+                </form>
+                    <v-btn class="col-4 loginMargin">Login</v-btn>
+                </v-row>
+            </div>
         
 
         <v-card-actions>
@@ -42,6 +44,7 @@
             </router-link>
             </v-btn>
             </v-card-actions>
+        </div>
         </v-card>
 </template>
 <script>
@@ -52,9 +55,24 @@
     .loginImg {
         width: 450px;
         height: 100x;
+        margin: 0 auto;
     }
     .loginWidth {
         width: 450px;
         margin: 0 auto;
+    }
+    .loginSize {
+        width: 800px;
+        margin: 0 auto;
+    }
+    .loginMargin {
+        margin: 0 auto;
+    }
+    .lineBox{
+        width: 350px;
+        height:10px;
+        background-color:#ddd;
+        margin:0 auto;
+        border-radius: 20px;
     }
 </style>
