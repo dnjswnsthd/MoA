@@ -20,4 +20,5 @@ export default {
 </script>
 <style>
 @import './assets/css/reset.css';
+@import './assets/css/member.css';
 </style>
