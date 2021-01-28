@@ -19,32 +19,5 @@ export default {
 };
 </script>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  font-family:'Wemakeprice-Bold';
-}
-img {
-  display: block;
-}
-ul,
-li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-
-@font-face {
-    font-family: 'Wemakeprice-Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Wemakeprice-Bold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-        @font-face {
-    font-family: 'TmoneyRoundWindExtraBold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@import './assets/css/reset.css';
 </style>

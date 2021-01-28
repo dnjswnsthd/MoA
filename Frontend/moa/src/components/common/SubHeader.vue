@@ -44,15 +44,7 @@ export default {
 </script>
 
 <style>
-    .width-120 {
-        width: 120px;
-    }
-    .height-70 {
-        height: 70px;
-    }
-    .centerText {
-        text-align: center;
-    }
+    
     header .container .row li {
         line-height: 70px;
     }
