@@ -1,0 +1,31 @@
+@charset "utf-8";
+.memberFormLogo {
+  width: 100%;
+  margin: 0 auto;
+}
+.cardBox {
+  width: 450px;
+  border: none;
+}
+.lineBox {
+  width: 100%;
+  height: 5px;
+  background-color: #ddd;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.formBox {
+  width: 100%;
+  margin: 25px auto;
+}
+
+.idBox {
+  width: 100%;
+  margin: 0 auto;
+}
+.loginBtn {
+  display: block;
+  margin: 0 auto;
+  background-color: #eee;
+}
