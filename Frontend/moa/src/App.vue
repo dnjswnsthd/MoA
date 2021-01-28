@@ -13,7 +13,7 @@ import NavFooter from "@/components/common/Footer.vue";
 export default {
   name: 'App',
   components: {
-   NavFooter
+  NavFooter
 
   },
 };
