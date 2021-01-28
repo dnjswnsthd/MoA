@@ -3,15 +3,16 @@ package com.moa.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,18 +24,6 @@ import com.moa.model.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
-/**
- * 2021-01-26
- * 로그인 메소드 구현
- *  - jwt를 통해 세션 유지
- *  - 성공, 실패 여부를 message를 통해 front단에 전달
- *  2021-01-27
- *  아이디 중복 검사 method 구현
- *  회원가입 method 구현
- * 
- * @author Team Together
- */
 
 @Api("MemberController v0.1")
 @RestController
@@ -128,7 +117,7 @@ public class MemberContoller {
 	}
 	
 	@ApiOperation(value = "회원 정보 수정", notes = "회원 정보를 수정하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
-	@Update("/update/")
+	@PutMapping("/update")
 	public ResponseEntity<Map<String, Object>> memberUpdate(
 			@RequestBody @ApiParam(value = "본인 확인용 pw", required = true) MemberDto memberDto){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -146,4 +135,32 @@ public class MemberContoller {
 			}
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
+	
+	@ApiOperation(value = "비밀번호 찾기", notes = "입력한 아이디를 확인하여 임시 비밀번호를 만들어 이메일로 전송하여준다.", response = Map.class)
+	@PutMapping("/findpw/{email}")
+	@Transactional	// 트랜젝션 설정
+	public ResponseEntity<Map<String, Object>> findPassword(
+			@PathVariable @ApiParam(value = "비밀번호 찾을 이메일", required = true) String email) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			// 데이터베이스에 이메일이 존재해야 임시 비밀번호를 생성
+			if(!memberService.idChk(email)) {
+				memberService.updateTempPassword(email);
+				resultMap.put("massage", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			} else {
+				resultMap.put("massage", FAIL);		// 이메일이 존재하지 않는 경우
+				status = HttpStatus.ACCEPTED;
+			}
+		} catch (Exception e) {
+			logger.error("비밀번호 찾기 실패 : {}", e);
+			resultMap.put("massage", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 }
