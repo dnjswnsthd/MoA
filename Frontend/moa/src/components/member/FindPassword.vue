@@ -32,17 +32,19 @@
             <v-btn
                 color="primary"
                 text
-                @click="dialogLogin = false"
             >
+            <router-link to="/join">
             회원가입
+            </router-link>
             </v-btn>
         <v-spacer></v-spacer>
             <v-btn
                 color="primary"
                 text
-                @click="dialogLogin = false"
             >
+            <router-link to="/login">
             로그인
+            </router-link>
             </v-btn>
         <v-spacer></v-spacer>
             </v-card-actions>
