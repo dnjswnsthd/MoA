@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import com.moa.model.MemberDto;
-ㄴ
+
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
 
