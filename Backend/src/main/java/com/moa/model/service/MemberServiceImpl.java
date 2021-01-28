@@ -1,27 +1,27 @@
 package com.moa.model.service;
 
-import java.util.Map;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.moa.model.MemberDto;
 import com.moa.model.mapper.MemberMapper;
-
-/**
- * 2021-01-26 로그인 서비스 구현 - id, pw 필수 검사
- * 2021-01-27 멘토와 멘티 구분하여 회원가입 및 아이디 중복 검사 구현
- * 
- * @author Team Together
- */
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Autowired
+	JavaMailSender javaMailSender;
 
 	/**
 	 * 로그인 method
@@ -36,6 +36,7 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		return sqlSession.getMapper(MemberMapper.class).login(memberDto);
 	}
+
 	/**
 	 * 아이디 중복 확인을 위한 method
 	 * 
@@ -49,24 +50,91 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		return true;
 	}
+
 	/**
-	 * 회원 가입을 위한 method
-	 * status를 확인하여 멘토인지 멘티인지 구분하여 회원가입 실행
+	 * 회원 가입을 위한 method status를 확인하여 멘토인지 멘티인지 구분하여 회원가입 실행
 	 * 
 	 * @param param : 회원가입 정보가 포함된 Map 객체
 	 */
 	@Override
 	public void join(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(MemberMapper.class).join(param);
-		if ((int) param.get("status") == 1)			// 멘토 일 경우
+		if ((int) param.get("status") == 1) // 멘토 일 경우
 			sqlSession.getMapper(MemberMapper.class).joinMentor(param);
-		else if ((int) param.get("status") == 2)	// 멘티 일 경우
+		else if ((int) param.get("status") == 2) // 멘티 일 경우
 			sqlSession.getMapper(MemberMapper.class).joinMentee(param);
 	}
-	
+
 	public MemberDto memberUpdate(MemberDto memberDto) throws SQLException {
-		//회원정보 수정은 이미 로그인이 된 상태로 진행 가능
+		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdate(memberDto);
 		return sqlSession.getMapper(MemberMapper.class).memberSearch(memberDto);
+	}
+
+	/**
+	 * 임시 비밀번호를 생성하여 임시 비밀번호로 바꾸어 준다
+	 * 
+	 * @param email : 비밀번호 찾을 이메일(ID)
+	 */
+	@Override
+	public void updateTempPassword(String email) throws Exception {
+		String tempPassword = getRandomPassword(10);	// 임시 비밀번호 생성
+		// xml에서 활용하기 위하여 Map 객체에 담아 준다
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", email);
+		map.put("pw", tempPassword);
+		// 임시 비밀번호로 변경 실시
+		sqlSession.getMapper(MemberMapper.class).updateTempPassword(map);
+		// 임시 비밀번호를 메일로 발송
+		send(email, tempPassword);
+	}
+	/**
+	 * 임시 비밀번호 생성
+	 * 
+	 * @param len : 임시 비밀번호의 길이
+	 * @return 생성한 임시 비밀번호 리턴
+	 */
+	public String getRandomPassword(int len) {
+		char[] charSet = new char[] {	// 이중 랜덤으로 10개를 선택하여 임시 비밀번호 생성
+				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				'A', 'B', 'C', 'D', 'E', 'F','G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 
+				'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+				'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+		};
+		
+		int idx = 0;
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random());	// 62 * 생선된 난수를 int로 추출(소숫점 제거)
+			sb.append(charSet[idx]);
+		}
+		
+		return sb.toString();
+	}
+	/**
+	 * 이메일로 임시 비밀번호 발송
+	 * 
+	 * @param email 비밀번호 발송할 이메일 주소
+	 * @param tempPassword 전송할 임시 비밀번호
+	 */
+	public void send(String email, String tempPassword) {
+		sendMail(email, tempPassword);
+	}
+	
+	/**
+	 * 간단한 내용으로 임시 비밀번호 전송
+	 * 
+	 * @param email 비밀번호를 발송할 이메일 주소
+	 * @param tempPassword 전송할 임시 비밀번호
+	 */
+	@Async
+	public void sendMail(String email, String tempPassword) {
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+		simpleMessage.setTo(email);
+		simpleMessage.setSubject("MoA 사이트 임시 비밀번호");
+		simpleMessage.setText("임시 비밀번호: " + tempPassword);
+		javaMailSender.send(simpleMessage);
 	}
 }

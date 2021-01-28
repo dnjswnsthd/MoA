@@ -4,13 +4,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 import com.moa.model.MemberDto;
-
-/**
- * 2021-01-26 로그인 맵퍼 구현 - member.xml과 연동
- * 2021-01-27 회원가입, 아이디 중복 체크 구현
- * 
- * @author Team Together
- */
+ㄴ
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
 
@@ -23,4 +17,6 @@ public interface MemberMapper {
 	
 	public void memberUpdate(MemberDto memberDto) throws SQLException;
 	public MemberDto memberSearch(MemberDto memberDto) throws SQLException;
+
+	public void updateTempPassword(Map<String, String> map) throws SQLException;
 }
