@@ -7,8 +7,8 @@
                 <h1 class="joinTitle">회원 가입</h1>
             </v-card-title>
             <v-tabs>
-                <v-tab @click="openMentor">멘토</v-tab>
-                <v-tab @click="openMentee">멘티</v-tab>
+                <v-tab>멘토</v-tab>
+                <v-tab>멘티</v-tab>
             </v-tabs>
            <form class="col-12 formBox">
                <v-row>
@@ -32,14 +32,12 @@
             <v-btn
                 color="primary"
                 text
-                @click="dialogJoin = false"
                 >
                 초기화
             </v-btn>
             <v-btn
                 color="primary"
                 text
-                @click="dialogJoin = false"
                 >
                 가입하기
             </v-btn>
@@ -48,24 +46,6 @@
     
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        dialogMentor: false,
-        dialogMentee: false,
-      }
-    },
-    methods:{
-        openMentor(){
-            this.dialogMentor = true;
-            this.dialogMentee = false;
-        },
-        openMentee(){
-            this.dialogMentor = false;
-            this.dialogMentee = true;
-        }
-    }
-  }
 </script>
 <style>
     .formBox{
