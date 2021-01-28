@@ -3,68 +3,41 @@
         <v-container class="col-8">
             <v-row>
                 <div>
+                    <router-link to="/">
                     <img
                         src="@/assets/images/main/logo.png"
                         alt="로고"
                         style="width: 150px; height: 60px;"
                     />
+                    </router-link>
                 </div>
                 <v-spacer></v-spacer>
                 <li class="width-120 centerText height-70">
-                <div class="text-center">
-                    <v-dialog
-                            v-model="dialogJoin"
-                            width="500"
-                            >
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="button"
-                                v-bind="attrs"
-                                v-on="on"
-                                >
-                                회원가입
-                                </v-btn>
-                            </template>
-                            
-                            <join></join>
-                            </v-dialog>
-                </div>
+                    <router-link to="/join">회원가입</router-link>
                 </li> 
                 <li class="width-120 centerText height-70">
-                <div class="text-center">
-                    <v-dialog
-                            v-model="dialogLogin"
-                            width="500"
-                            >
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="button"
-                                v-bind="attrs"
-                                v-on="on"
-                                >
-                                Login
-                                </v-btn>
-                            </template>
-
-                            <login></login>
-                            </v-dialog>
-                </div>                                                   
+                    <router-link to="/login">로그인</router-link>                         
                 </li>
             </v-row>
             <div class="headerPadding">
-                <div style="margin: 0 auto;">
+                <div>
                 <v-row>
-                    <div class="searchBarDiv">
+                    
+                    <div class="col-6">
                         <h1 class="headerH1">
                             "최고의 팀"
                             <br>꾸려보고 싶은가요?
                         </h1>
                     </div>
-                    <v-spacer></v-spacer>
-                    <div class="searchBarDiv">
-                        <input type="text" class="searchBar"><v-icon id="viconColor">mdi-magnify</v-icon>
-                    </div>               
+                    
+                    <div class="searchBar col-6">
+                        <input type="text" class="col-11">
+                        <button class="col-1 searchIcon"><v-icon>mdi-magnify</v-icon></button>
+                    </div>   
+                            
                     </v-row>
                 </div>
-            <v-spacer></v-spacer>
+            
             </div>
         </v-container>
         <div class="headerPadding">
@@ -103,8 +76,6 @@
 </template>
 
 <script>
-import Login from '@/components/member/Login.vue';
-import Join from '@/components/member/Join.vue';
 
  export default {
     data () {
@@ -114,10 +85,6 @@ import Join from '@/components/member/Join.vue';
         dialogFindPassword: false,
       }
     },
-    components: {
-        Login,
-        Join
-    }
   }
 </script>
 
@@ -128,23 +95,35 @@ import Join from '@/components/member/Join.vue';
     }
     .searchBar {
         box-sizing:border-box;
-        border-radius: 5px;
+        border-radius: 1.3rem;
         border: white 3px solid;
-        width: 350px;
-        height: 45px;
-        margin: 0 auto;
-        color: white;
+        background-color:rgba(255,255,255,0.5);
+        /* background-color:rgba(255,255,255,1); */
+        height:80px;
+        margin:20px auto;
+    }
+    .searchBar input{
+        padding:0; height:100%;
+        margin:0 auto;
+        color: #000;
         font-weight: bold;
         font-size: 25px;
-        display: flex;
+        display:inline-block;
+        
+    }
+    .searchBar .searchIcon{
+        width:100%; height:100%;
+        padding:0;
+    }
+    .searchBar .searchIcon i{
+        color:white;
     }
     .headerH1 {
         color: white;
     }
-
     .backgroundImg {
         background-image: url('../../assets/images/main/mainBg.jpg');
-        background-size: 100% 100%;
+        background-size: 100% 120%;
     }
     /* header .container .row .row div div .v-icon {
         color : white;
@@ -155,8 +134,7 @@ import Join from '@/components/member/Join.vue';
         box-sizing: border-box;
         word-break: break-all;
         background-color: white;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
+        border-radius: 50px 50px 0px 0px;
         line-height: 1.8;
     }
     .mainCategory {
@@ -164,15 +142,9 @@ import Join from '@/components/member/Join.vue';
         width: 100px;
         height: 80px;
     }
-    #viconColor {
-        color: white;
-    }
+    
     .headerPadding {
         padding-top: 150px;
     }
-    .searchBarDiv {
-        width:400px;
-        display: flex;   
-    }
-    .searchBarDiv{}
+
 </style>
