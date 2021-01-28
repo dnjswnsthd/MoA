@@ -14,10 +14,10 @@
     <div class="findPasswordWidth">
         <v-row>
         <form class="col-9 formBox">
-             <v-row>
-                 <v-text-field label="ID" type="text" class="idbox"></v-text-field>
-                 <button class="idchkbox">체크</button>
-             </v-row>
+            <v-row>
+                <v-text-field label="ID" type="text" class="idbox"></v-text-field>
+                <button class="idchkbox">체크</button>
+            </v-row>
         </form>
         </v-row>
     </div>
@@ -89,6 +89,5 @@ export default {
     }
     .formBox{
         margin:20px auto;
-
     }
 </style>
