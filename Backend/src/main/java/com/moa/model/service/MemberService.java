@@ -11,4 +11,6 @@ public interface MemberService {
 	public void join(Map<String, Object> param) throws Exception;
 
 	public MemberDto memberUpdate(MemberDto memberDto) throws Exception;
+
+	public void updateTempPassword(String email) throws Exception;
 }
