@@ -3,12 +3,14 @@ import VueRouter from "vue-router";
 
 
 import Main from "@/components/views/Main.vue";
-import MyPage from "@/components/member/MyPage.vue";
 import FundingOpen from "@/components/funding/FundingOpen.vue";
 import MainHeader from "@/components/common/MainHeader.vue";
 import SubHeader from "@/components/common/SubHeader.vue";
 
-
+import Login from "@/components/member/Login.vue";
+import Join from "@/components/member/Join.vue";
+import FindPassword from "@/components/member/FindPassword.vue";
+import MyPage from "@/components/member/MyPage.vue";
 
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
@@ -22,7 +24,22 @@ export default new VueRouter({
       components: {default: Main, header: MainHeader}
     },
     {
-      path: "/MyPage",
+      path: "/login",
+      name: "Login",
+      components: {default: Login, header: SubHeader}
+    },
+    {
+      path: "/join",
+      name: "Join",
+      components: {default: Join, header: SubHeader}
+    },
+    {
+      path: "/findpassword",
+      name: "FindPassword",
+      components: {default: FindPassword, header: SubHeader}
+    },
+    {
+      path: "/mypage",
       name: "MyPage",
       components: {default: MyPage, header: SubHeader}
     },
