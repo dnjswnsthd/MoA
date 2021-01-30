@@ -46,10 +46,4 @@ footer .row div{
         font-size:60px;
         
     }
-
-    .height-150{
-        height:150px;
-    
-    }
-    
 </style>
