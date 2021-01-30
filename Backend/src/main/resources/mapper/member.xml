@@ -59,11 +59,15 @@
 		where id = #{id}
 	</update>
 	
-	
 	<!-- member delete -->
 	<delete id="delete" parameterType="String">
 		delete from member
 		where id = #{id} 
 	</delete>
-	
+	<!-- 임시 비밀번호로 비밀번호를 바꾸기 -->
+	<update id="updateTempPassword" parameterType="Map">
+		update member set
+		pw = #{pw}
+		where id = #{id}
+	</update>
 </mapper>

@@ -33,6 +33,9 @@ a {
 .width-50 {
   width: 50px;
 }
+.width-80 {
+  width: 80px;
+}
 .width-100 {
   width: 100px;
 }
@@ -41,6 +44,9 @@ a {
 }
 .width-200 {
   width: 200px;
+}
+.width-230 {
+  width: 230px;
 }
 .width-250 {
   width: 250px;
@@ -89,6 +95,9 @@ a {
 }
 .width-1000 {
   width: 1000px;
+}
+.width-1200 {
+  width: 1200px;
 }
 .fullWidth {
   width: 100%;
