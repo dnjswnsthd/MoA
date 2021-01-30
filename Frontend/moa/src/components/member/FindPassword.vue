@@ -11,21 +11,22 @@
         <!-- <v-card-title class="headline grey lighten-2 titleText">
             비밀번호 찾기
         </v-card-title> -->
-    <div class="height-100">
-        
-            <form class="formBox">
-                <v-text-field label="ID" type="text" class="idBox"></v-text-field>
-            </form>
-        
-    </div>
-        <div>
-        <v-row>
-        <v-spacer></v-spacer>
-            <v-btn>이메일로 찾기</v-btn>
-        <v-spacer></v-spacer>
-            <v-btn>휴대폰번호로 찾기</v-btn>
-        <v-spacer></v-spacer>
-        </v-row>
+        <div class="height-100">
+            
+                <form class="formBox">
+                    <v-text-field label="ID" type="text" class="idBox"></v-text-field>
+                </form>
+            
+        </div>
+
+        <div class="certificationBox">
+            <v-row>
+                <v-spacer></v-spacer>
+                    <v-btn>이메일로 찾기</v-btn>
+                <v-spacer></v-spacer>
+                    <v-btn>휴대폰번호로 찾기</v-btn>
+                <v-spacer></v-spacer>
+            </v-row>
         </div>
 
 
@@ -62,5 +63,8 @@ export default {
 <style scoped>
 .cardBox {
   margin: 10.5rem auto;
+}
+.certificationBox{
+    margin:20px auto;
 }
 </style>
