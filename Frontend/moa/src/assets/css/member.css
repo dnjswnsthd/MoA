@@ -29,3 +29,10 @@
   margin: 0 auto;
   background-color: #eee;
 }
+
+.mypagePoint {
+  margin: auto 0;
+  /* border: black 2px solid; */
+  width: 180px;
+
+}
