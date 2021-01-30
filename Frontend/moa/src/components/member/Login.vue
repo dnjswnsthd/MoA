@@ -5,7 +5,7 @@
                 <v-spacer></v-spacer>
                 <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="memberFormLogo">
                 <v-spacer></v-spacer>
-                <h2 class="centerText">로그인</h2>
+                <h2 class="centerText loginTitle">로그인</h2>
                 <!-- <div class="lineBox"></div> -->
             </div>
 
@@ -52,6 +52,9 @@
 
 <style scoped>
 .cardBox {
-  margin: 7.5rem auto;
+  margin: 6.5rem auto;
+}
+.loginTitle{
+    margin:20px auto;
 }
 </style>
