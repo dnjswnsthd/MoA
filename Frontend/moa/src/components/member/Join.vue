@@ -1,35 +1,116 @@
 <template>
-    <v-card>
-        <div class="joinMargin">
-            <img src="@/assets/images/main/logo(Bg).png">
-        </div>
-        <div class="centerText">
-            <v-card-title >                
-                <h1 class="joinMargin">회원 가입</h1>
-            </v-card-title>
-        </div>
-        <div class="lineBox"></div>
+    <div class="cardBox">
+        <div>
+                <v-spacer></v-spacer>
+                <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="memberFormLogo">
+                <v-spacer></v-spacer>
+                <h2 class="centerText loginTitle">회원가입</h2>
+                <!-- <div class="lineBox"></div> -->
+            </div>
+        
+        
             <v-tabs>
-                <v-tab>멘토</v-tab>
-                <v-tab>멘티</v-tab>
+                <v-tab @click="openMentor">멘토</v-tab>
+                <v-tab @click="openMentee">멘티</v-tab>
             </v-tabs>
-            <form class="col-12 formBox">
+
+            <form class="formBox" v-if="mentorForm">
                 <v-row>
-                <v-text-field label="ID" type="text"></v-text-field>
-                <button class="idCheckBtn">중복체크</button>
+                    <v-text-field label="멘토ID" type="text" required></v-text-field>
+                    <button class="checkBtn">중복체크</button>
                 </v-row>
-                <v-text-field label="PW" type="password"></v-text-field>
-                <v-text-field label="PW" type="password"></v-text-field>
-                <v-text-field label="Name" type="text"></v-text-field>
-                <v-text-field label="Age" type="number"></v-text-field>
-                <v-text-field label="major" type="text"></v-text-field>
-                <v-text-field label="phone" type="tel"></v-text-field>
-                <v-text-field label="favorite 1" type="text"></v-text-field>
-                <v-text-field label="favorite 2" type="text"></v-text-field>
-                <v-text-field label="favorite 3" type="text"></v-text-field>
-                <v-textarea label="introduce" solo></v-textarea>
+
+                <v-row>                  
+                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="Name" type="name" required></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-text-field label="Age" type="number" required></v-text-field>
+                </v-row>
+                
+                <v-row>
+                    <v-text-field label="major" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="phone" type="tel" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 1" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 2" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 3" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-textarea label="introduce" solo></v-textarea>
+                    
+                </v-row>
+                
+                
             </form>
             
+            <form class="formBox" v-else-if="menteeForm">
+                <v-row>
+                    <v-text-field label="멘티ID" type="text" required></v-text-field>
+                    <button class="checkBtn">중복체크</button>
+                </v-row>
+
+                <v-row>                  
+                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="Name" type="name" required></v-text-field>
+                    <v-spacer></v-spacer>
+                    <v-text-field label="Age" type="number" required></v-text-field>
+                </v-row>
+                
+                <v-row>
+                    <v-text-field label="major" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="phone" type="tel" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 1" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 2" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-text-field label="favorite 3" type="text" required></v-text-field>
+                    <div class="checkBtn"></div>
+                </v-row>
+                <v-row>
+                    <v-textarea label="introduce" solo></v-textarea>
+                    
+                </v-row>
+                
+                
+            </form>
+
+
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -45,32 +126,43 @@
                 가입하기
             </v-btn>
         </v-card-actions>
-    </v-card>
+    </div>
     
 </template>
-<script>
-</script>
-<style>
+ <script>
+ export default {
+     data(){
+         return{
+             mentorForm: true,
+             menteeForm: false,
+         }
+     },
+     methods:{
+         openMentor(){
+             this.mentorForm= true,
+             this.menteeForm= false
+         },
+         openMentee(){
+             this.mentorForm= false,
+             this.menteeForm= true
+         }
+     }
+ }
+ </script>
+<style scoped>
+.cardBox{
+    margin: 0 auto;
+}
     .formBox{
-        margin:0 auto;
+        padding:0;
     }
-    .idCheckBtn{
+    .checkBtn{
     
     line-height: 20px;
     padding: 8px 0 8px;
     max-width: 100%;
     min-width: 0px;
     width: 80px;
-    }
-    .joinMargin {
-        margin: 0 auto;
-    }
-    .joinLinebox {
-        width: 350px;
-        height:10px;
-        background-color:#ddd;
-        margin:0 auto;
-        border-radius: 30px;
     }
 
 </style>
