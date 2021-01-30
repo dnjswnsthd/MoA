@@ -1,13 +1,10 @@
 <template>
     <div class="cardBox">
-        <div>
-            <v-row class="width-1000">
-            <v-spacer></v-spacer>
-            <h1>내 정보</h1>
-            <v-spacer></v-spacer>
-            <p class="myPoint centerText">포인트: 100,000</p>
-            </v-row>
-        </div>
+            
+            
+            <h1 class="width-1000 centerText">내 정보</h1>
+            
+            <p class="myPoint rightText">포인트: 100,000</p>
 
         <form class="width-1000">
             <v-row class="width-1000" >
