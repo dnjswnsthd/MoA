@@ -22,7 +22,9 @@
 <style>
 
 footer{
-    background-color:lightslategrey;
+    /* background-color:#401B7B; */
+    background:linear-gradient(to right, #401B7B, #d68ddf);
+    color:white;
 }
 footer .row div{
     height:100%;
