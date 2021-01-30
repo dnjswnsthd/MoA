@@ -26,13 +26,24 @@
 }
 .loginBtn {
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: #eee;
 }
 
-.mypagePoint {
-  margin: auto 0;
+.myPoint {
+  height: 48px;
+  font-size: 16px;
+  line-height: 48px;
+  margin: 0;
   /* border: black 2px solid; */
-  width: 180px;
+}
 
+.btnBox {
+  margin: 25px auto;
+}
+
+.projectBox {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid black;
 }
