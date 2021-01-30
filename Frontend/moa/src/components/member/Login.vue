@@ -9,14 +9,12 @@
                 <!-- <div class="lineBox"></div> -->
             </div>
 
-            <div>
-                 
+            <div>                
                 <form class="col-12 formBox">
                 
                     <v-text-field label="ID" type="text" class="col-12"></v-text-field>
                 
                     <v-text-field label="PW" type="password" class="col-12"></v-text-field>  
-                
                 </form>
                 <div class="fullWidth">
                     <button class="loginBtn col-4">Login</button>

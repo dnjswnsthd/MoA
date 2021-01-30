@@ -3,7 +3,7 @@
         <v-container class="col-8">
             <v-row>
                 <div>
-                    <router-link to="/">
+                    <router-link to="/main">
                     <img
                         src="@/assets/images/main/logo.png"
                         alt="로고"
