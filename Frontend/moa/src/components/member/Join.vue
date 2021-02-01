@@ -14,134 +14,74 @@
                 <v-tab @click="openMentee">멘티</v-tab>
             </v-tabs>
 
-            <form class="formBox" v-if="mentorForm">
+            <form class="formBox">
                 <v-row>
-                    <v-text-field label="멘토ID" type="text" required></v-text-field>
+                    <v-text-field label="ID" type="text" required v-model="member.id"></v-text-field>
                     <button class="checkBtn">중복체크</button>
                 </v-row>
 
                 <v-row>                  
-                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <v-text-field label="Password" type="password" required v-model="member.pw"></v-text-field>
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-text-field label="PW" type="password" required></v-text-field>
+                    <v-text-field label="Password Confirm" type="password" required></v-text-field>
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-text-field label="Name" type="name" required></v-text-field>
+                    <v-text-field label="Name" type="name" required v-model="member.name"></v-text-field>
                     <v-spacer></v-spacer>
-                    <v-text-field label="Age" type="number" required></v-text-field>
+                    <v-text-field label="Age" type="number" required v-model="member.age"></v-text-field>
                 </v-row>
                 
                 <v-row>
-                    <v-text-field label="major" type="text" required></v-text-field>
+                    <v-text-field label="major" type="text" required v-model="member.major"></v-text-field>
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-text-field label="phone" type="tel" required></v-text-field>
+                    <v-text-field label="phone" type="tel" required v-model="member.phone"></v-text-field>
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-select
-                        :items="selectItems"
+                    <v-text-field
                         label="선호 분야"
                         dense
                         solo
                         class="width-50"
-                    ></v-select>
-                    <v-select
-                        :items="selectItems"
+                        v-model="member.favorite_1"
+                    ></v-text-field>
+                    <v-text-field
                         label="선호 분야"
                         dense
                         solo
                         class="width-50 mx-10"
-                    ></v-select>
-                    <v-select
-                        :items="selectItems"
+                        v-model="member.favorite_2"
+                    ></v-text-field>
+                    <v-text-field
                         label="선호 분야"
                         dense
                         solo
                         class="width-50"
-                    ></v-select>
+                        v-model="member.favorite_3"
+                    ></v-text-field>
+                </v-row>
+
+                <v-row>
+                    <v-textarea label="introduce" solo v-model="member.introduce"></v-textarea>
+                    
                 </v-row>
                
-                <v-row>
-                    <v-textarea label="career" solo></v-textarea>
+                <v-row v-if="mentorForm">
+                    <v-textarea label="career" solo v-model="member.career"></v-textarea>
                     
                 </v-row>
-                <v-row>
-                    <v-textarea label="introduce" solo></v-textarea>
+                <v-row v-else-if="menteeForm">
+                    <v-textarea label="skill" solo v-model="member.skill"></v-textarea>
                     
                 </v-row>
-                
                 
             </form>
             
-            <form class="formBox" v-else-if="menteeForm">
-                <v-row>
-                    <v-text-field label="멘티ID" type="text" required></v-text-field>
-                    <button class="checkBtn">중복체크</button>
-                </v-row>
-
-                <v-row>                  
-                    <v-text-field label="PW" type="password" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-text-field label="PW" type="password" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-text-field label="Name" type="name" required></v-text-field>
-                    <v-spacer></v-spacer>
-                    <v-text-field label="Age" type="number" required></v-text-field>
-                </v-row>
-                
-                <v-row>
-                    <v-text-field label="major" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-text-field label="phone" type="tel" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-select
-                        :items="selectItems"
-                        label="선호 분야"
-                        dense
-                        solo
-                        class="width-50"
-                    ></v-select>
-                    <v-select
-                        :items="selectItems"
-                        label="선호 분야"
-                        dense
-                        solo
-                        class="width-50 mx-10"
-                    ></v-select>
-                    <v-select
-                        :items="selectItems"
-                        label="선호 분야"
-                        dense
-                        solo
-                        class="width-50"
-                    ></v-select>
-                </v-row>
-                <v-row>
-                    <v-textarea label="skill" solo></v-textarea>
-                    
-                </v-row>
-                <v-row>
-                    <v-textarea label="introduce" solo></v-textarea>
-                    
-                </v-row>
-                
-                
-            </form>
-
-
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
@@ -153,6 +93,7 @@
             <v-btn
                 color="primary"
                 text
+                @click="join"
                 >
                 가입하기
             </v-btn>
@@ -160,27 +101,57 @@
     </div>
     
 </template>
- <script>
- export default {
-     data(){
-         return{
-             mentorForm: true,
-             menteeForm: false,
-             selectItems: ['디자인', 'IT·프로그래밍', '번역·통역', '영상·사진·음향', '운세·상담', '마케팅'],
-         }
-     },
-     methods:{
-         openMentor(){
-             this.mentorForm= true,
-             this.menteeForm= false
-         },
-         openMentee(){
-             this.mentorForm= false,
-             this.menteeForm= true
-         }
-     }
- }
- </script>
+<script>
+import http from "@/util/http-common";
+export default {
+    data(){
+        return{
+            mentorForm: true,
+            menteeForm: false,
+            // selectItems: ['디자인', 'IT·프로그래밍', '번역·통역', '영상·사진·음향', '운세·상담', '마케팅'],
+            member: {
+                id: '',
+                pw: '',
+                name: '',
+                age: Number,
+                major:'',
+                status:1,
+                phone:'',
+                favorite_1:'',
+                favorite_2:'',
+                favorite_3:'',
+                career:'',
+                skill:'',
+                introduce:'',
+            },
+        }
+    },
+    methods:{
+        openMentor(){
+            this.mentorForm= true,
+            this.menteeForm= false,
+            this.member.status=1
+        },
+        openMentee(){
+            this.mentorForm= false,
+            this.menteeForm= true,
+            this.member.status=2
+        },
+        join(){
+            let data = this.member;
+            console.log(data);
+                http.post(`member/join`,data)
+                .then(()=>{
+                    alert('회원가입 성공!');
+                    location.href = '/';
+                }).catch(()=>{
+                    alert('회원가입 실패!');
+                });
+            }
+
+        }
+}
+</script>
 <style scoped>
 .cardBox{
     margin: 0 auto;
