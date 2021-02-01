@@ -13,4 +13,7 @@ public interface MemberService {
 	public MemberDto memberUpdate(MemberDto memberDto) throws Exception;
 
 	public void updateTempPassword(String email) throws Exception;
+
+	public Object memberInfo(String id) throws Exception;
+
 }
