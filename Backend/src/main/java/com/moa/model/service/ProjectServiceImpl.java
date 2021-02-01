@@ -17,5 +17,7 @@ public class ProjectServiceImpl implements ProjectService {
 		sqlSession.getMapper(ProjectMapper.class).create(project);	
 	}
 
-
+	public ProjectDto projectInfo(String id) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).projectInfo(id);
+	}
 }
