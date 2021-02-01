@@ -77,12 +77,16 @@
 		where id = #{id}
 	</select>
 	<select id="mentorInfo" parameterType="String" resultType = "MentorDto">
-		select *
+		select member.id, member.name, member.age, member.major, member.status, member.phone,
+		member.favorite_1, member.favorite_2, member.favorite_3, member.number_of_project, member.point, member.introduce,
+		mentor.career, mentor.exp, mentor.morality, mentor.positiveness, mentor.reliability, mentor.professional, mentor.leadership
 		from member inner join mentor on member.id = mentor.id
 		where member.id = #{id}
 	</select>
 	<select id="menteeInfo" parameterType="String" resultType = "MenteeDto">
-		select *
+		select member.id, member.name, member.age, member.major, member.status, member.phone,
+		member.favorite_1, member.favorite_2, member.favorite_3, member.number_of_project, member.point, member.introduce,
+		mentee.skill, mentee.communication, mentee.responsibility, mentee.performance, mentee.positiveness, mentee.leadership
 		from member inner join mentee on member.id = mentee.id
 		where member.id = #{id}
 	</select>
