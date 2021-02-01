@@ -137,4 +137,8 @@ public class MemberServiceImpl implements MemberService {
 		simpleMessage.setText("임시 비밀번호: " + tempPassword);
 		javaMailSender.send(simpleMessage);
 	}
+	
+	public void delete(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).delete(param);
+	}
 }
