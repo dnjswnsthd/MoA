@@ -3,6 +3,8 @@ package com.moa.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,6 @@ public class MemberContoller {
 				String token = jwtService.create("id", loginMember.getId(), "access-token");
 				logger.debug("로그인 토큰 정보 : {}", token);	// server side log
 				resultMap.put("access-token", token);	// access-token 전달
-				resultMap.put("memberInfo", loginMember);
 				resultMap.put("message", SUCCESS);		// "성공" 메세지 전달
 				status = HttpStatus.ACCEPTED;
 			} else {	// 로그인 정보가 존재하지 않는 경우
@@ -159,6 +160,43 @@ public class MemberContoller {
 			logger.error("비밀번호 찾기 실패 : {}", e);
 			resultMap.put("massage", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	@ApiOperation(value = "내 정보 보기", notes = "로그인 후 마이 페이지에서 정보를 보기 위하여 멤버 관련 모든 데이터를 전송하여준다.", response = Map.class)
+	@GetMapping("/mypage/{id}")
+	public ResponseEntity<Map<String, Object>> memberInfo(@PathVariable("id") @ApiParam(value = "정보를 불러올 아이디", required = true)String id){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			Object memberInfo = memberService.memberInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("memberInfo", memberInfo);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			logger.error("정보조회 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴 결과 메세지를 반환한다.", response = Map.class)
+	@PostMapping("/delete")
+	public ResponseEntity<Map<String, Object>> delete(
+			@RequestBody @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) Map<String, Object> param){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			//Database에서 아이디 비밀번호 일치 여부 확인
+			memberService.delete(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
 		}
 		
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
