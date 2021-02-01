@@ -83,9 +83,12 @@ export default {
           if (response.data.message === 'success') {
               console.log('여기까지옴2');
             let token = response.data['access-token'];
+            // let id = response.data['memberInfo.id'];
             this.$store.commit('setIsLogined', true);
+            this.$store.commit('setMemberInfo', response.data.memberInfo);
             localStorage.setItem('access-token', token);
-            this.$store.dispatch('GET_MEMBER_INFO', token);
+            // localStorage.setItem('id', id);
+            // this.$store.dispatch('GET_MEMBER_INFO', token);
             this.$router.push('/');
           } else {
             this.isLoginError = true;
