@@ -70,10 +70,12 @@
             </v-row>
             <v-row class="width-1000" >
             <v-spacer></v-spacer>
-            <v-text-field label="펀딩액" type="text" class="width-250"></v-text-field>
+            <v-text-field label="펀딩액" type="text" class="width-130"></v-text-field>
             <v-spacer></v-spacer>
-            <v-text-field label="모집기간" type="date" class="width-250"></v-text-field>
+            <v-text-field label="모집기간" type="date" class="width-100"></v-text-field>
             <v-spacer></v-spacer>
+            <v-text-field label="진행기간(단위: 주)" type="number" class="width-100"></v-text-field>
+            <v-spacer></v-spacer>          
             </v-row>
             </form>
         </div>

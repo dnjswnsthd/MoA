@@ -156,9 +156,9 @@ CREATE TABLE `project` (
   `funding_cost` int NOT NULL,
   `description` varchar(128) NOT NULL,
   `mentor_chk` varchar(10) NOT NULL,
-  `deadline` date DEFAULT NULL,
+  `deadline` date NOT NULL,
   PRIMARY KEY (`project_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +167,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES (1,'웹페이지 만들자','2020-02-06','2020-02-25','프로그래밍',5,100000,'ㅎㅇㅎㅇㅎㅇ','멘토필요','2020-02-05');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,6 +201,33 @@ LOCK TABLES `sprint` WRITE;
 /*!40000 ALTER TABLE `sprint` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sprint` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `waiting_project`
+--
+
+DROP TABLE IF EXISTS `waiting_project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `waiting_project` (
+  `project_num` int NOT NULL,
+  `id` varchar(45) NOT NULL,
+  KEY `waitingprojecttomember_idx` (`id`),
+  KEY `waitingprojecttoprject_idx` (`project_num`),
+  CONSTRAINT `watingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `watingprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `waiting_project`
+--
+
+LOCK TABLES `waiting_project` WRITE;
+/*!40000 ALTER TABLE `waiting_project` DISABLE KEYS */;
+INSERT INTO `waiting_project` VALUES (1,'song@naver.com'),(1,'dnjswns@naver.com');
+/*!40000 ALTER TABLE `waiting_project` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -210,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-01 16:33:05
+-- Dump completed on 2021-02-01 18:44:12
