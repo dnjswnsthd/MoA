@@ -105,6 +105,7 @@ public class MemberContoller {
 			@RequestBody @ApiParam(value = "멘토 회원 가입에 필요한 회원 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
+		System.out.println(param.get("status"));
 		
 		try {
 			memberService.join(param);
@@ -112,7 +113,7 @@ public class MemberContoller {
 			status = HttpStatus.ACCEPTED;
 		} catch(Exception e) {
 			resultMap.put("massage", FAIL);
-			status = HttpStatus.ACCEPTED;
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
