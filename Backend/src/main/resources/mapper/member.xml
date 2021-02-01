@@ -70,4 +70,19 @@
 		pw = #{pw}
 		where id = #{id}
 	</update>
+	<select id="getStatus" parameterType="String" resultType = "Integer">
+		select status
+		from member
+		where id = #{id}
+	</select>
+	<select id="mentorInfo" parameterType="String" resultType = "MentorDto">
+		select *
+		from member inner join mentor on member.id = mentor.id
+		where member.id = #{id}
+	</select>
+	<select id="menteeInfo" parameterType="String" resultType = "MenteeDto">
+		select *
+		from member inner join mentee on member.id = mentee.id
+		where member.id = #{id}
+	</select>
 </mapper>
