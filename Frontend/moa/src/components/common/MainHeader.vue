@@ -1,7 +1,7 @@
 <template>
     <header class="backgroundImg">
         <v-container class="col-8">
-            <v-row v-if="memberInfo !== null">
+            <v-row v-if="isLogin !== false">
                 <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
@@ -100,8 +100,10 @@ export default {
       this.$store
         .dispatch('LOGOUT')
         .then(() => {
-          // this.$router.push({ name: "" });
-          if (this.$route.path !== '/') this.$router.replace('/');
+          
+          if (this.$route.path !== '/'){
+            this.$router.replace('/');
+          }
         })
         .catch(() => {
           console.log('로그아웃 문제!!!');
