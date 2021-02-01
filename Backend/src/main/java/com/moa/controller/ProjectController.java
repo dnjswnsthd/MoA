@@ -46,5 +46,23 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	//펀딩 신청 컨트롤러
+	@ApiOperation(value = "펀딩 신청 대기", notes = "펀딩 신청 후 수락까지 대기 중 DB에 상태 저장을 위함.", response = Map.class)
+	@PostMapping("/waiting")
+	public ResponseEntity<Map<String, Object>> waiting(
+			@RequestBody @ApiParam(value = "펀딩 신청  후 대기중인 내역 DB에 추가 ") Map<String, Object> param){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.waiting(param);
+			resultMap.put("messagae", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity <Map<String,Object>>(resultMap, status);
+	}
+	
 	
 }
