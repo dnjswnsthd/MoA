@@ -203,29 +203,30 @@ LOCK TABLES `sprint` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `wating_project`
+-- Table structure for table `waiting_project`
 --
 
-DROP TABLE IF EXISTS `wating_project`;
+DROP TABLE IF EXISTS `waiting_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `wating_project` (
+CREATE TABLE `waiting_project` (
   `project_num` int NOT NULL,
   `id` varchar(45) NOT NULL,
-  KEY `watingprojecttomember_idx` (`id`),
-  KEY `watingprojecttoprject_idx` (`project_num`),
+  KEY `waitingprojecttomember_idx` (`id`),
+  KEY `waitingprojecttoprject_idx` (`project_num`),
   CONSTRAINT `watingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
   CONSTRAINT `watingprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wating_project`
+-- Dumping data for table `waiting_project`
 --
 
-LOCK TABLES `wating_project` WRITE;
-/*!40000 ALTER TABLE `wating_project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `wating_project` ENABLE KEYS */;
+LOCK TABLES `waiting_project` WRITE;
+/*!40000 ALTER TABLE `waiting_project` DISABLE KEYS */;
+INSERT INTO `waiting_project` VALUES (1,'song@naver.com'),(1,'dnjswns@naver.com');
+/*!40000 ALTER TABLE `waiting_project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -237,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-01 18:10:31
+-- Dump completed on 2021-02-01 18:44:12
