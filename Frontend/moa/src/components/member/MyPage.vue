@@ -74,7 +74,6 @@
 
 
         <div class="projectBox">
-           
                 <v-tabs
       color="deep-purple accent-4"
       left
@@ -108,7 +107,6 @@
     </v-tabs>
 
             </div>
-       
     </div>     
 </template>
 
