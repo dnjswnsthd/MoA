@@ -6,37 +6,50 @@
 	<!-- project create -->
 	<!-- 펀딩 오픈 -->
 	<insert id="create" parameterType="Map">
-		insert into project(project_name, start_date, end_date, category, participants, funding_cost, description, mentor_chk, deadline)
+		insert into
+		project(project_name, start_date, end_date, category, participants,
+		funding_cost, description, mentor_chk, deadline)
 		values
-		(#{project_name}, #{start_date}, #{end_date}, #{category}, #{participants}, #{funding_cost}, #{description}, #{mentor_chk}, #{deadline})
+		(#{project_name}, #{start_date}, #{end_date}, #{category},
+		#{participants}, #{funding_cost}, #{description}, #{mentor_chk},
+		#{deadline})
 	</insert>
-	
+
 	<!-- project search -->
 	<!-- 진행중인 프로젝트 조회 -->
-	<select id="projectInfo" parameterType="String" resultType="ProjectDto">
-		select project.project_num, project.project_name, project.start_date,
-		project.end_date, project.category, project.participants, project.funding_cost,
-		project.description, project.mentor_chk
-		from member_project inner join project on member_project.project_num = project.project_num
-		where member_project.id = #{id}
+	<select id="projectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from member_project inner join project on
+		member_project.project_num = project.project_num
+		where
+		member_project.id = #{id}
 	</select>
-	
+
 	<!-- waiting project -->
 	<!-- 프로젝트 신청 후 대기 -->
 	<insert id="waiting" parameterType="Map">
-		insert into waiting_project(project_num, id)
+		insert into
+		waiting_project(project_num, id)
 		values
 		(#{project_num}, #{id})
 	</insert>
 	<!-- 허가 시 member_project에 추가 -->
 	<insert id="projectAppend" parameterType="Map">
-		insert into member_project(project_num, id)
+		insert into
+		member_project(project_num, id)
 		values
 		(#{project_num}, #{id})
 	</insert>
 	<!-- 허가 시 waiting_project에서 삭제 -->
-	<delete id = "watingDelete" parameterType="Map">
-		delete from waiting_project
+	<delete id="watingDelete" parameterType="Map">
+		delete from
+		waiting_project
 		where project_num = #{project_num} and id = #{id}
 	</delete>
 </mapper>
