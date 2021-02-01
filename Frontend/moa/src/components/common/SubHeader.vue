@@ -1,7 +1,7 @@
 <template>
     <header >
-        <!-- <v-container class="col-8">
-            <v-row>
+        <v-container class="col-8">
+             <v-row v-if="memberInfo !== null">
                 <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
@@ -10,40 +10,55 @@
                     <li class="width-120 centerText height-70">
                     <router-link to="/MyPage">My Page</router-link>
                     </li>
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/foo">로그아웃</router-link>
+                    <li class="width-120 centerText height-70" @click.prevent="onClickLogout">
+                    LOGOUT
                     </li>
-            </v-row>          
-        </v-container> -->
-
-        <v-container class="col-8">
-            <v-row>
+            </v-row>
+            <v-row v-else>
                 <div>
                     <router-link to="/">
-                    <img src="@/assets/images/main/logo(Bg).png" alt="로고" style="width: 150px; height: 60px;">
+                    <img
+                        src="@/assets/images/main/logo.png"
+                        alt="로고"
+                        style="width: 150px; height: 70px;"
+                    />
                     </router-link>
-                    </div>
+                </div>
                 <v-spacer></v-spacer>
-                    <li class="width-120 centerText height-70">
+                <li class="width-120 centerText height-70">
                     <router-link to="/join">회원가입</router-link>
-                    </li>               
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/mypage">My Page</router-link>
-                    </li>
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/login">로그인</router-link>
-                    </li>
-            </v-row>          
+                </li> 
+                <li class="width-120 centerText height-70">
+                    <router-link to="/login">로그인</router-link>                         
+                </li>
+            </v-row>               
         </v-container>
+
+        
     </header>
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 
 export default {
-    name: "Header"
-}
+  computed: {
+    ...mapState(['memberInfo', 'isLogin']),
+  },
+  methods: {
+    onClickLogout() {
+      this.$store
+        .dispatch('LOGOUT')
+        .then(() => {
+          // this.$router.push({ name: "" });
+          if (this.$route.path !== '/') this.$router.replace('/');
+        })
+        .catch(() => {
+          console.log('로그아웃 문제!!!');
+        });
+    },
+  },
+};
 </script>
 
 <style>
