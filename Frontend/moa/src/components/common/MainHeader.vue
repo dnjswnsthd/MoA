@@ -12,7 +12,7 @@
         <li class="width-120 centerText height-70">
           <router-link to="/MyPage">My Page</router-link>
         </li>
-        <li class="width-120 centerText height-70" @click.prevent="onClickLogout">
+        <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
           LOGOUT
         </li>
       </v-row>
@@ -172,5 +172,8 @@ export default {
 
 .headerPadding {
   padding-top: 150px;
+}
+.logoutBtn{
+    cursor:pointer;
 }
 </style>

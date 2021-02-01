@@ -5,7 +5,7 @@
         <div>
           <router-link to="/">
             <img
-              src="@/assets/images/main/logo.png"
+              src="@/assets/images/main/logo(Bg).png"
               alt="로고"
               style="width: 150px; height: 60px;"
             />
@@ -18,7 +18,7 @@
         <li class="width-120 centerText height-70">
           <router-link to="/MyPage">My Page</router-link>
         </li>
-        <li class="width-120 centerText height-70" @click.prevent="onClickLogout">
+        <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
           LOGOUT
         </li>
       </v-row>
@@ -26,7 +26,7 @@
         <div>
           <router-link to="/">
             <img
-              src="@/assets/images/main/logo.png"
+              src="@/assets/images/main/logo(Bg).png"
               alt="로고"
               style="width: 150px; height: 70px;"
             />
