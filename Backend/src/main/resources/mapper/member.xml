@@ -5,7 +5,8 @@
 <mapper namespace="com.moa.model.mapper.MemberMapper">
 	<!-- member login -->
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
-		select id, name
+		select id, name, age, major, status, phone, favorite_1, favorite_2,
+		favorite_3, number_of_project, point, introduce
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
