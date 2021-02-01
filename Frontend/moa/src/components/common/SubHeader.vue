@@ -1,7 +1,7 @@
 <template>
     <header >
         <v-container class="col-8">
-             <v-row v-if="memberInfo !== null">
+            <v-row v-if="memberInfo !== null">
                 <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
