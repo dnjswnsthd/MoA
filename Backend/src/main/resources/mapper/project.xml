@@ -18,4 +18,15 @@
 		values
 		(#{project_num}, #{id})
 	</insert>
+	<!-- 허가 시 member_project에 추가 -->
+	<insert id="projectAppend" parameterType="Map">
+		insert into member_project(project_num, id)
+		values
+		(#{project_num}, #{id})
+	</insert>
+	<!-- 허가 시 waiting_project에서 삭제 -->
+	<delete id = "watingDelete" parameterType="Map">
+		delete from waiting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
 </mapper>
