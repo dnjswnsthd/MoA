@@ -5,7 +5,7 @@
 <mapper namespace="com.moa.model.mapper.MemberMapper">
 	<!-- member login -->
 	<select id="login" parameterType="MemberDto" resultType="MemberDto">
-		select id, name
+		select id
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
@@ -42,7 +42,6 @@
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
-	
 	
 	<!--  member update -->
 	<update id="memberUpdate" parameterType="MemberDto">
