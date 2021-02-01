@@ -43,16 +43,32 @@
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-text-field label="favorite 1" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50"
+                    ></v-select>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50 mx-10"
+                    ></v-select>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50"
+                    ></v-select>
                 </v-row>
+               
                 <v-row>
-                    <v-text-field label="favorite 2" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-text-field label="favorite 3" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
+                    <v-textarea label="career" solo></v-textarea>
+                    
                 </v-row>
                 <v-row>
                     <v-textarea label="introduce" solo></v-textarea>
@@ -91,16 +107,31 @@
                     <div class="checkBtn"></div>
                 </v-row>
                 <v-row>
-                    <v-text-field label="favorite 1" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50"
+                    ></v-select>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50 mx-10"
+                    ></v-select>
+                    <v-select
+                        :items="selectItems"
+                        label="선호 분야"
+                        dense
+                        solo
+                        class="width-50"
+                    ></v-select>
                 </v-row>
                 <v-row>
-                    <v-text-field label="favorite 2" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
-                </v-row>
-                <v-row>
-                    <v-text-field label="favorite 3" type="text" required></v-text-field>
-                    <div class="checkBtn"></div>
+                    <v-textarea label="skill" solo></v-textarea>
+                    
                 </v-row>
                 <v-row>
                     <v-textarea label="introduce" solo></v-textarea>
@@ -135,6 +166,7 @@
          return{
              mentorForm: true,
              menteeForm: false,
+             selectItems: ['디자인', 'IT·프로그래밍', '번역·통역', '영상·사진·음향', '운세·상담', '마케팅'],
          }
      },
      methods:{
