@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.moa.model.MemberDto;
+import com.moa.model.MentorDto;
 import com.moa.model.mapper.MemberMapper;
 
 @Service
@@ -137,4 +138,17 @@ public class MemberServiceImpl implements MemberService {
 		simpleMessage.setText("임시 비밀번호: " + tempPassword);
 		javaMailSender.send(simpleMessage);
 	}
+
+	@Override
+	public Object memberInfo(String id) throws Exception {
+		int status = sqlSession.getMapper(MemberMapper.class).getStatus(id);
+		Object member = null;
+		if(status == 1) 
+			member = sqlSession.getMapper(MemberMapper.class).mentorInfo(id);
+		else
+			member = sqlSession.getMapper(MemberMapper.class).menteeInfo(id);
+		
+		return member;
+	}
+
 }
