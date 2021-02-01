@@ -1,9 +1,22 @@
 <template>
     <header class="backgroundImg">
         <v-container class="col-8">
-            <v-row>
+            <v-row v-if="memberInfo !== null">
+                <div><img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;"></div>
+                <v-spacer></v-spacer>                
+                    <li class="width-120 centerText height-70">
+                    <router-link to="/FundingOpen">펀딩 오픈</router-link>
+                    </li>
+                    <li class="width-120 centerText height-70">
+                    <router-link to="/MyPage">My Page</router-link>
+                    </li>
+                    <li class="width-120 centerText height-70" @click.prevent="onClickLogout">
+                    LOGOUT
+                    </li>
+            </v-row>
+            <v-row v-else>
                 <div>
-                    <router-link to="/main">
+                    <router-link to="/">
                     <img
                         src="@/assets/images/main/logo.png"
                         alt="로고"
@@ -18,7 +31,7 @@
                 <li class="width-120 centerText height-70">
                     <router-link to="/login">로그인</router-link>                         
                 </li>
-            </v-row>
+            </v-row>          
             <div class="headerPadding">
                 <div>
                 <v-row>
@@ -76,7 +89,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 
+export default {
+  computed: {
+    ...mapState(['memberInfo', 'isLogin']),
+  },
+  methods: {
+    onClickLogout() {
+      this.$store
+        .dispatch('LOGOUT')
+        .then(() => {
+          // this.$router.push({ name: "" });
+          if (this.$route.path !== '/') this.$router.replace('/');
+        })
+        .catch(() => {
+          console.log('로그아웃 문제!!!');
+        });
+    },
+  },
+};
 </script>
 
 <style>

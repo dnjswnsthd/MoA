@@ -13,12 +13,26 @@
 
                 <form class="col-12 formBox">
                 
-                    <v-text-field label="ID" type="text" class="col-12"></v-text-field>
-                
-                    <v-text-field label="PW" type="password" class="col-12"></v-text-field>  
+                    <v-text-field 
+                        id="memberId"
+                        v-model="member.id"
+                        required
+                        label="ID" 
+                        type="text" 
+                        class="col-12" 
+                        @keyup.enter="confirm"></v-text-field>
+
+                    <v-text-field  
+                        id="memberPw"
+                        v-model="member.pw"
+                        required 
+                        label="PW" 
+                        type="password" 
+                        class="col-12"
+                        @keyup.enter="confirm"></v-text-field>  
                 </form>
                 <div class="fullWidth">
-                    <button class="loginBtn col-4">Login</button>
+                    <button class="loginBtn col-4" @click="confirm">Login</button>
                 </div>
             </div>
         
@@ -47,7 +61,45 @@
         </div>
 </template>
 <script>
-
+import { login } from '@/api/user.js';
+export default {
+  data() {
+    return {
+      member: {
+        id: '',
+        pw: '',
+      },
+      isLoginError: false,
+    };
+  },
+   methods: {
+    confirm() {
+      localStorage.setItem('access-token', '');
+      console.log('클릭');
+      login(
+        this.member,
+        (response) => {
+          console.log(response);
+          if (response.data.message === 'success') {
+              console.log('여기까지옴2');
+            let token = response.data['access-token'];
+            this.$store.commit('setIsLogined', true);
+            localStorage.setItem('access-token', token);
+            this.$store.dispatch('GET_MEMBER_INFO', token);
+            this.$router.push('/');
+          } else {
+            this.isLoginError = true;
+          }
+        },
+        (error) => {
+          console.error(error);
+          alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+        }
+      );
+    },
+    
+  },
+}
 </script>
 
 <style scoped>
