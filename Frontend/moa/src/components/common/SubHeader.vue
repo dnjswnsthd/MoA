@@ -45,12 +45,16 @@ export default {
   computed: {
     ...mapState(['memberInfo', 'isLogin']),
   },
+  created() {
+    if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
+  },
   methods: {
     onClickLogout() {
       this.$store
         .dispatch('LOGOUT')
         .then(() => {
           // this.$router.push({ name: "" });
+
           if (this.$route.path !== '/') this.$router.replace('/');
         })
         .catch(() => {
@@ -62,13 +66,13 @@ export default {
 </script>
 
 <style>
-header{
-    border-bottom:1px solid black;
+header {
+  border-bottom: 1px solid black;
 }
-    header .container .row li {
-        line-height: 70px;
-    }
-    header .container .row li a {
-        color: black;
-    }
+header .container .row li {
+  line-height: 70px;
+}
+header .container .row li a {
+  color: black;
+}
 </style>
