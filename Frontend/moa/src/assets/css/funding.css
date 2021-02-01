@@ -1,0 +1,20 @@
+.fundingCategory {
+    text-align: center;
+    width: 100px;
+    height: 80px;
+}
+
+.fundingMargin {
+    margin: 0 auto;
+}
+
+.fundingBox {
+    width: 750px;
+    height: 400px;
+    border: 1px solid black;
+}
+
+.fundingContent {
+    margin-left: 80px;
+    padding: 10px;
+}
