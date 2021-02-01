@@ -13,9 +13,10 @@ public interface MemberMapper {
 	public int idChk(String id) throws SQLException;
 
 	public void join(Map<String, Object> param) throws SQLException;
-
 	public void joinMentor(Map<String, Object> param) throws SQLException;
 	public void joinMentee(Map<String, Object> param) throws SQLException;
+	
+	public void delete(Map<String, Object> param) throws SQLException;
 	
 	public void memberUpdate(MemberDto memberDto) throws SQLException;
 	public MemberDto memberSearch(MemberDto memberDto) throws SQLException;
