@@ -11,6 +11,16 @@
 		(#{project_name}, #{start_date}, #{end_date}, #{category}, #{participants}, #{funding_cost}, #{description}, #{mentor_chk}, #{deadline})
 	</insert>
 	
+	<!-- project search -->
+	<!-- 진행중인 프로젝트 조회 -->
+	<select id="projectInfo" parameterType="String" resultType="ProjectDto">
+		select project.project_num, project.project_name, project.start_date,
+		project.end_date, project.category, project.participants, project.funding_cost,
+		project.description, project.mentor_chk
+		from member_project inner join project on member_project.project_num = project.project_num
+		where member_project.id = #{id}
+	</select>
+	
 	<!-- waiting project -->
 	<!-- 프로젝트 신청 후 대기 -->
 	<insert id="waiting" parameterType="Map">
