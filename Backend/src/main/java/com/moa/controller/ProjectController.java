@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,25 @@ public class ProjectController {
 		}
 		return new ResponseEntity <Map<String,Object>>(resultMap, status);
 	}
+	
+	//신청 허가 컨트롤러(허가 하면 각각 대기에선 삭제 프로젝트 목록에서는 추가 됩니다.)
+	@ApiOperation(value = "신청 허가", notes = "신청 허가 후 waiting_project에선 삭제하고  project_member 테이블에 추가", response = Map.class)
+	@PutMapping("/permission")
+	public ResponseEntity<Map<String, Object>> permissiont(
+			@RequestBody @ApiParam(value = "신청 허가 됬을 경우 DB 상태 처리") Map<String, Object> param){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.permission(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity <Map<String,Object>>(resultMap, status);
+	}
+	
 	
 	
 }
