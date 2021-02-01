@@ -3,7 +3,9 @@
     <v-container class="col-8">
       <v-row v-if="isLogin !== false">
         <div>
-          <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;" />
+          <router-link to="/">
+            <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;" />          
+          </router-link>
         </div>
         <v-spacer></v-spacer>
         <li class="width-120 centerText height-70">
@@ -12,7 +14,7 @@
         <li class="width-120 centerText height-70">
           <router-link to="/MyPage">My Page</router-link>
         </li>
-        <li class="width-120 centerText height-70" @click.prevent="onClickLogout">
+        <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
           LOGOUT
         </li>
       </v-row>
@@ -172,5 +174,8 @@ export default {
 
 .headerPadding {
   padding-top: 150px;
+}
+.logoutBtn{
+    cursor:pointer;
 }
 </style>
