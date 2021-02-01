@@ -58,7 +58,6 @@ public class MemberContoller {
 				String token = jwtService.create("id", loginMember.getId(), "access-token");
 				logger.debug("로그인 토큰 정보 : {}", token);	// server side log
 				resultMap.put("access-token", token);	// access-token 전달
-				resultMap.put("memberInfo", loginMember);
 				resultMap.put("message", SUCCESS);		// "성공" 메세지 전달
 				status = HttpStatus.ACCEPTED;
 			} else {	// 로그인 정보가 존재하지 않는 경우
