@@ -3,7 +3,9 @@
     <v-container class="col-8">
       <v-row v-if="isLogin !== false">
         <div>
-          <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;" />
+          <router-link to="/">
+            <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;" />          
+          </router-link>
         </div>
         <v-spacer></v-spacer>
         <li class="width-120 centerText height-70">
