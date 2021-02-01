@@ -22,7 +22,7 @@
                 <div>
                     <router-link to="/">
                     <img
-                        src="@/assets/images/main/logo.png"
+                        src="@/assets/images/main/logo(Bg).png"
                         alt="로고"
                         style="width: 150px; height: 70px;"
                     />
