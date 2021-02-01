@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Autowired
 	JavaMailSender javaMailSender;
 
@@ -79,7 +79,7 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	@Override
 	public void updateTempPassword(String email) throws Exception {
-		String tempPassword = getRandomPassword(10);	// 임시 비밀번호 생성
+		String tempPassword = getRandomPassword(10); // 임시 비밀번호 생성
 		// xml에서 활용하기 위하여 Map 객체에 담아 준다
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", email);
@@ -89,6 +89,7 @@ public class MemberServiceImpl implements MemberService {
 		// 임시 비밀번호를 메일로 발송
 		send(email, tempPassword);
 	}
+
 	/**
 	 * 임시 비밀번호 생성
 	 * 
@@ -96,38 +97,36 @@ public class MemberServiceImpl implements MemberService {
 	 * @return 생성한 임시 비밀번호 리턴
 	 */
 	public String getRandomPassword(int len) {
-		char[] charSet = new char[] {	// 이중 랜덤으로 10개를 선택하여 임시 비밀번호 생성
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'A', 'B', 'C', 'D', 'E', 'F','G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 
-				'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-				'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-		};
-		
+		char[] charSet = new char[] { // 이중 랜덤으로 10개를 선택하여 임시 비밀번호 생성
+				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+				'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+				'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+
 		int idx = 0;
 		StringBuffer sb = new StringBuffer();
-		
-		for(int i = 0; i < len; i++) {
-			idx = (int) (charSet.length * Math.random());	// 62 * 생선된 난수를 int로 추출(소숫점 제거)
+
+		for (int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random()); // 62 * 생선된 난수를 int로 추출(소숫점 제거)
 			sb.append(charSet[idx]);
 		}
-		
+
 		return sb.toString();
 	}
+
 	/**
 	 * 이메일로 임시 비밀번호 발송
 	 * 
-	 * @param email 비밀번호 발송할 이메일 주소
+	 * @param email        비밀번호 발송할 이메일 주소
 	 * @param tempPassword 전송할 임시 비밀번호
 	 */
 	public void send(String email, String tempPassword) {
 		sendMail(email, tempPassword);
 	}
-	
+
 	/**
 	 * 간단한 내용으로 임시 비밀번호 전송
 	 * 
-	 * @param email 비밀번호를 발송할 이메일 주소
+	 * @param email        비밀번호를 발송할 이메일 주소
 	 * @param tempPassword 전송할 임시 비밀번호
 	 */
 	@Async
@@ -139,19 +138,28 @@ public class MemberServiceImpl implements MemberService {
 		javaMailSender.send(simpleMessage);
 	}
 
+	/**
+	 * status를 먼저 가져와 멘토인지 멘티인지 확인하여 정보를 가져온다
+	 * 
+	 * @param id 내 정보를 가져올 아이디
+	 */
 	@Override
 	public Object memberInfo(String id) throws Exception {
 		int status = sqlSession.getMapper(MemberMapper.class).getStatus(id);
 		Object member = null;
-		if(status == 1) 
+		if (status == 1)
 			member = sqlSession.getMapper(MemberMapper.class).mentorInfo(id);
 		else
 			member = sqlSession.getMapper(MemberMapper.class).menteeInfo(id);
-		
+
 		return member;
 	}
 
-	
+	/**
+	 * ID와 비밀번호가 맞아야만 회원탈퇴 가능
+	 * 
+	 * @param param 탈퇴활 아이디와 비밀번호를 포함한 정보
+	 */
 	public void delete(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(MemberMapper.class).delete(param);
 	}
