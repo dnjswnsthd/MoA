@@ -1,5 +1,7 @@
 package com.moa.model.service;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void create(ProjectDto project) throws Exception{
 		sqlSession.getMapper(ProjectMapper.class).create(project);	
+	}
+
+	@Override
+	public void waiting(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).waiting(param);
+		
 	}
 
 
