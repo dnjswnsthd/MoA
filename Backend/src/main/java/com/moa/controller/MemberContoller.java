@@ -182,4 +182,24 @@ public class MemberContoller {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴 결과 메세지를 반환한다.", response = Map.class)
+	@PostMapping("/delete")
+	public ResponseEntity<Map<String, Object>> delete(
+			@RequestBody @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) Map<String, Object> param){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			//Database에서 아이디 비밀번호 일치 여부 확인
+			memberService.delete(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 }

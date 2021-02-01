@@ -151,4 +151,8 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
+	
+	public void delete(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).delete(param);
+	}
 }
