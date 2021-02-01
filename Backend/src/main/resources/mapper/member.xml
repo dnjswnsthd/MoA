@@ -4,18 +4,19 @@
 
 <mapper namespace="com.moa.model.mapper.MemberMapper">
 	<!-- member login -->
-	<select id="login" parameterType="MemberDto" resultType="MemberDto">
+	<select id="login" parameterType="MemberDto"
+		resultType="MemberDto">
 		select id
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
-	
-	
+
 	<!-- ID 중복 검사 -->
 	<select id="idChk" resultType="int" parameterType="String">
-		select count(*) from member where id=#{id}
+		select
+		count(*) from member where id=#{id}
 	</select>
-	
+
 	<!-- member join -->
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="Map">
@@ -23,71 +24,99 @@
 		(id,pw,name,age,major,status,phone,favorite_1,favorite_2,favorite_3,introduce)
 		values
 		(#{id},#{pw},#{name},#{age},#{major},#{status},#{phone},#{favorite_1},#{favorite_2},#{favorite_3},#{introduce})
-
 	</insert>
+
 	<!-- 멘토일 경우 추가되는 정보 insert -->
 	<insert id="joinMentor" parameterType="Map">
-		insert into mentor(id, career)
+		insert into mentor(id,
+		career)
 		values(#{id}, #{career})
 	</insert>
+
 	<!-- 멘티일 경우 추가되는 정보 insert -->
 	<insert id="joinMentee" parameterType="Map">
-		insert into mentee(id, skill)
+		insert into mentee(id,
+		skill)
 		values(#{id}, #{skill})
 	</insert>
-	
-	<!--  member search -->
-	<select id="memberSearch" parameterType="MemberDto" resultType="MemberDto">
+
+	<!-- member search -->
+	<select id="memberSearch" parameterType="MemberDto"
+		resultType="MemberDto">
 		select id
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
-	
-	<!--  member update -->
+
+	<!-- member update -->
 	<update id="memberUpdate" parameterType="MemberDto">
 		update member set
-		pw = #{pw},
+		pw =
+		#{pw},
 		name = #{name},
 		age = #{age},
 		major = #{major},
 		phone = #{phone},
 		favorite_1 = #{favorite_1},
 		favorite_2 = #{favorite_2},
-		favorite_3 = #{favorite_3},
+		favorite_3 =
+		#{favorite_3},
 		introduce = #{introduce}
 		where id = #{id}
 	</update>
-	
+
 	<!-- member delete -->
-	<!-- member 삭제를 하면 Cascade 를 통해 mentor와  mentee 도 함께 삭제 된다. -->
+	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
 	<delete id="delete" parameterType="String">
 		delete from member
-		where id = #{id} and pw = {pw}
+		where id =
+		#{id} and pw = {pw}
 	</delete>
-	
+
 	<!-- 임시 비밀번호로 비밀번호를 바꾸기 -->
 	<update id="updateTempPassword" parameterType="Map">
 		update member set
 		pw = #{pw}
 		where id = #{id}
 	</update>
-	<select id="getStatus" parameterType="String" resultType = "Integer">
+
+	<!-- #{id}를 가진 멤버가 멘토인지 멘티인지를 구분하기 위한 status를 반환 -->
+	<select id="getStatus" parameterType="String"
+		resultType="Integer">
 		select status
 		from member
 		where id = #{id}
 	</select>
-	<select id="mentorInfo" parameterType="String" resultType = "MentorDto">
-		select member.id, member.name, member.age, member.major, member.status, member.phone,
-		member.favorite_1, member.favorite_2, member.favorite_3, member.number_of_project, member.point, member.introduce,
-		mentor.career, mentor.exp, mentor.morality, mentor.positiveness, mentor.reliability, mentor.professional, mentor.leadership
-		from member inner join mentor on member.id = mentor.id
+
+	<!-- id를 통해 멘토 정보를 조인하여 가지고 온다 -->
+	<select id="mentorInfo" parameterType="String"
+		resultType="MentorDto">
+		select member.id, member.name, member.age, member.major,
+		member.status, member.phone,
+		member.favorite_1, member.favorite_2,
+		member.favorite_3, member.number_of_project, member.point,
+		member.introduce,
+		mentor.career, mentor.exp, mentor.morality,
+		mentor.positiveness, mentor.reliability, mentor.professional,
+		mentor.leadership
+		from member inner join mentor on member.id =
+		mentor.id
 		where member.id = #{id}
 	</select>
-	<select id="menteeInfo" parameterType="String" resultType = "MenteeDto">
-		select member.id, member.name, member.age, member.major, member.status, member.phone,
-		member.favorite_1, member.favorite_2, member.favorite_3, member.number_of_project, member.point, member.introduce,
-		mentee.skill, mentee.communication, mentee.responsibility, mentee.performance, mentee.positiveness, mentee.leadership
-		from member inner join mentee on member.id = mentee.id
+
+	<!-- id를 통해 멘티 정보를 조인하여 가지고 온다 -->
+	<select id="menteeInfo" parameterType="String"
+		resultType="MenteeDto">
+		select member.id, member.name, member.age, member.major,
+		member.status, member.phone,
+		member.favorite_1, member.favorite_2,
+		member.favorite_3, member.number_of_project, member.point,
+		member.introduce,
+		mentee.skill, mentee.communication,
+		mentee.responsibility, mentee.performance, mentee.positiveness,
+		mentee.leadership
+		from member inner join mentee on member.id =
+		mentee.id
 		where member.id = #{id}
 	</select>
 </mapper>

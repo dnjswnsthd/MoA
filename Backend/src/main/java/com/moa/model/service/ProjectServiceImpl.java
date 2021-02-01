@@ -15,25 +15,25 @@ public class ProjectServiceImpl implements ProjectService {
 	private SqlSession sqlSession;
 
 	@Override
-	public void create(ProjectDto project) throws Exception{
-		sqlSession.getMapper(ProjectMapper.class).create(project);	
+	public void create(ProjectDto project) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).create(project);
 	}
+
 	@Override
 	public ProjectDto projectInfo(String id) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).projectInfo(id);
 	}
+
 	@Override
 	public void waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
-		
 	}
 
 	@Override
 	public void permission(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).watingDelete(param);
 		sqlSession.getMapper(ProjectMapper.class).projectAppend(param);
-		
-	}
 
+	}
 
 }
