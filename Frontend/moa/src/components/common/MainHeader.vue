@@ -62,27 +62,27 @@
           <v-spacer></v-spacer>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">디자인</router-link>
+            <router-link to="/fundinglist">디자인</router-link>
           </div>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">IT·프로그래밍</router-link>
+            <router-link to="/fundinglist">IT·프로그래밍</router-link>
           </div>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">번역·통역</router-link>
+            <router-link to="/fundinglist">번역·통역</router-link>
           </div>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">영상·사진·음향</router-link>
+            <router-link to="/fundinglist">영상·사진·음향</router-link>
           </div>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">운세·상담</router-link>
+            <router-link to="/fundinglist">운세·상담</router-link>
           </div>
           <div class="col-2 mainCategory">
             <v-icon class="viconColor">mdi-share-variant</v-icon><br />
-            <router-link to="/">마케팅</router-link>
+            <router-link to="/fundinglist">마케팅</router-link>
           </div>
           <v-spacer></v-spacer>
         </v-row>
