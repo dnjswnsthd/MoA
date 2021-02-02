@@ -30,7 +30,23 @@
 		where
 		member_project.id = #{id}
 	</select>
-
+	
+	<!-- waiting project search -->
+	<!-- 진행중인 프로젝트 조회 -->
+	<select id="waitingProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from waiting_project inner join project on
+		waiting_project.project_num = project.project_num
+		where
+		waiting_project.id = #{id}
+	</select>
+	
 	<!-- waiting project -->
 	<!-- 프로젝트 신청 후 대기 -->
 	<insert id="waiting" parameterType="Map">

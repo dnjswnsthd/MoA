@@ -10,6 +10,8 @@ public interface ProjectMapper {
 	void create(ProjectDto project) throws SQLException;
 
 	public ProjectDto projectInfo(String id) throws SQLException;
+	
+	public ProjectDto waitingProjectInfo(String id) throws SQLException;
 
 	void waiting(Map<String, Object> param) throws SQLException;
 
