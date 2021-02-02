@@ -11,14 +11,14 @@ pipeline {
             }
             options {skipDefaultCheckout(false)}
             steps {
-                sh 'mvn -B -DskipTests -f <your-pom.xml-directory> clean package'
+                sh 'mvn -B -DskipTests -f <./Backend/> clean package'
             }
         }
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t <front-image-name>:latest <front dockerfile path>'
-                sh 'docker build -t <back-image-name>:latest <back dockerfile path>'
+                sh 'docker build -t <front-image-name>:latest <./Frontend/moa/>'
+                sh 'docker build -t <back-image-name>:latest <./Backend/>'
             }
         }
         stage('Docker run') {
