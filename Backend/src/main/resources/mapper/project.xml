@@ -52,4 +52,10 @@
 		waiting_project
 		where project_num = #{project_num} and id = #{id}
 	</delete>
+	
+	<delete id="denial" parameterType="Map">
+		delete from
+		waiting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
 </mapper>

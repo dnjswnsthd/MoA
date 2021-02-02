@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,7 +87,7 @@ public class ProjectController {
 	 */
 	@ApiOperation(value = "신청 허가", notes = "신청 허가 후 waiting_project에선 삭제하고  project_member 테이블에 추가", response = Map.class)
 	@PutMapping("/permission")
-	public ResponseEntity<Map<String, Object>> permissiont(
+	public ResponseEntity<Map<String, Object>> permission(
 			@RequestBody @ApiParam(value = "신청 허가 됬을 경우 DB 상태 처리") Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
@@ -125,5 +126,27 @@ public class ProjectController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-
+	
+	/**
+	 * 신청 거부 컨트롤러(거부 하면  대기 Table에서 삭제 합니다.)
+	 * 
+	 * @param param 거부할 프로젝트 번호와 신청자의 아이디 정보
+	 * @return 성공 실패 메시지 전달
+	 */
+	@ApiOperation(value = "신청 거절", notes = "신청 거절 됬을 경우 waiting_project db에서 삭제함.", response = Map.class)
+	@DeleteMapping("/denial")
+	public ResponseEntity<Map<String, Object>> denial(
+			@RequestBody @ApiParam(value = "신청 거절 됬을 경우 DB 상태 처리") Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.denial(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }

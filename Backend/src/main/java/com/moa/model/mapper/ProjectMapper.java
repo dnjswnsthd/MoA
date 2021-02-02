@@ -13,8 +13,11 @@ public interface ProjectMapper {
 
 	void waiting(Map<String, Object> param) throws SQLException;
 
-	void watingDelete(Map<String, Object> param);
+	void watingDelete(Map<String, Object> param) throws SQLException;
 
-	void projectAppend(Map<String, Object> param);
+	void projectAppend(Map<String, Object> param) throws SQLException;
+
+	void denial(Map<String, Object> param) throws SQLException;
+	
 
 }
