@@ -11,14 +11,14 @@ pipeline {
             }
             options {skipDefaultCheckout(false)}
             steps {
-                sh 'mvn -B -DskipTests -f /var/jenkins_home/workspace/test/Backend/pom.xml clean package'
+                sh 'mvn -B -DskipTests -f ./Backend/pom.xml clean package'
             }
         }
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t moafront:latest /var/jenkins_home/workspace/test/Frontend/moa/Dockerfile'
-                sh 'docker build -t moaback:latest /var/jenkins_home/workspace/test/Backend/Dockerfile'
+                sh 'docker build -t moafront:latest /var/jenkins_home/workspace/test/Frontend/moa'
+                sh 'docker build -t moaback:latest /var/jenkins_home/workspace/test/Backend'
             }
         }
         stage('Docker run') {
