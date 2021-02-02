@@ -18,7 +18,7 @@
                         v-model="member.id"
                         required
                         label="ID" 
-                        type="text" 
+                        type="email" 
                         class="col-12" 
                         @keyup.enter="confirm"></v-text-field>
 

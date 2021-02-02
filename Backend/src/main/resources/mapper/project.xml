@@ -30,7 +30,39 @@
 		where
 		member_project.id = #{id}
 	</select>
-
+	
+	<!-- waiting project search -->
+	<!-- 진행중인 프로젝트 조회 -->
+	<select id="waitingProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from waiting_project inner join project on
+		waiting_project.project_num = project.project_num
+		where
+		waiting_project.id = #{id}
+	</select>
+	
+	<!-- complete project search -->
+	<!-- 종료된 프로젝트 조회 -->
+	<select id="completeProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from complete_project inner join project on
+		complete_project.project_num = project.project_num
+		where
+		complete_project.id = #{id}
+	</select>
+	
 	<!-- waiting project -->
 	<!-- 프로젝트 신청 후 대기 -->
 	<insert id="waiting" parameterType="Map">
@@ -57,5 +89,19 @@
 		delete from
 		waiting_project
 		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
+	<!--  펀딩 종료 후 complete_project로 데이터 삽입 -->
+	<insert id="memberToComplete" parameterType="Map">
+		insert into complete_project(project_num,id)
+		select project_num, id
+		from member_project
+		where project_num = #{project_num}
+	</insert>
+	
+	<!--  펀딩 종료 후 진행중인 프로젝트 내용 삭제 -->
+	<delete id="deleteMemberProject" parameterType="Map">
+		delete from member_project
+		where project_num = #{project_num}
 	</delete>
 </mapper>
