@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.model.mapper.SprintMapper">
+	<insert id="add" parameterType="Map">
+		insert into
+		sprint(sprint_name, sprint_status, sprint_subject, sprint_description, sprint_start_date, sprint_end_date, project_num)
+		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num})
+	</insert>
+</mapper>
