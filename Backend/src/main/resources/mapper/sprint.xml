@@ -8,4 +8,10 @@
 		sprint(sprint_name, sprint_status, sprint_subject, sprint_description, sprint_start_date, sprint_end_date, project_num)
 		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num})
 	</insert>
+	
+	<update id="modify" parameterType="Integer">
+		update sprint
+		set sprint_status = #{sprint_status}
+		where sprint_num = #{sprint_num}
+	</update>
 </mapper>
