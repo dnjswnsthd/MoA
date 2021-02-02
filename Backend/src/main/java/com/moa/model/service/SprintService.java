@@ -10,4 +10,6 @@ public interface SprintService {
 
 	public void modify(SprintDto sprintDto) throws Exception;
 
+	public void delete(int sprint_num) throws Exception;
+
 }

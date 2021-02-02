@@ -9,9 +9,14 @@
 		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num})
 	</insert>
 	
-	<update id="modify" parameterType="Integer">
+	<update id="modify" parameterType="SprintDto">
 		update sprint
 		set sprint_status = #{sprint_status}
 		where sprint_num = #{sprint_num}
 	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from sprint
+		where sprint_num = #{sprint_num}
+	</delete>
 </mapper>

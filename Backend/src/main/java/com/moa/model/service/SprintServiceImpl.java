@@ -21,8 +21,12 @@ public class SprintServiceImpl implements SprintService {
 
 	@Override
 	public void modify(SprintDto sprintDto) throws Exception {
-		sqlSession.getMapper(SprintMapper.class).modify(sprintDto);
-		
+		sqlSession.getMapper(SprintMapper.class).modify(sprintDto);	
 	}
 
+	@Override
+	public void delete(int sprint_num) throws Exception {
+		sqlSession.getMapper(SprintMapper.class).delete(sprint_num);
+	}
+	
 }
