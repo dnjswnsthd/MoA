@@ -1,8 +1,9 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: localhost    Database: moa
+-- Host: 127.0.0.1    Database: moa
 -- ------------------------------------------------------
 -- Server version	8.0.22
+-- 2021_02_02 complete_project 추가
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +15,32 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `complete_project`
+--
+
+DROP TABLE IF EXISTS `complete_project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `complete_project` (
+  `project_num` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(45) NOT NULL,
+  KEY `completeprojecttomember` (`id`),
+  KEY `completeprojecttoprject` (`project_num`),
+  CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `completeprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `complete_project`
+--
+
+LOCK TABLES `complete_project` WRITE;
+/*!40000 ALTER TABLE `complete_project` DISABLE KEYS */;
+/*!40000 ALTER TABLE `complete_project` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `member`
@@ -238,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-01 18:44:12
+-- Dump completed on 2021-02-02 13:50:35
