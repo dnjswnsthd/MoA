@@ -9,10 +9,10 @@
                   </div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
-                    <router-link to="/FundingOpen">펀딩 오픈</router-link>
+                    <router-link to="/fundingopen">펀딩 오픈</router-link>
                     </li>
                     <li class="width-120 centerText height-70">
-                    <router-link to="/MyPage">My Page</router-link>
+                    <router-link to="/mypage">My Page</router-link>
                     </li>
                     <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
                     LOGOUT

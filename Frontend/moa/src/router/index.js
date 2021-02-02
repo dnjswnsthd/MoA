@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 
 
 import Main from "@/components/views/Main.vue";
-import FundingOpen from "@/components/funding/FundingOpen.vue";
 import MainHeader from "@/components/common/MainHeader.vue";
 import SubHeader from "@/components/common/SubHeader.vue";
 
@@ -13,6 +12,8 @@ import FindPassword from "@/components/member/FindPassword.vue";
 import MyPage from "@/components/member/MyPage.vue";
 import FundingList from "@/components/funding/FundingList.vue";
 
+import FundingOpen from "@/components/funding/FundingOpen.vue";
+import FundingDetail from "@/components/funding/FundingDetail.vue";
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
 
@@ -45,15 +46,22 @@ export default new VueRouter({
       components: {default: MyPage, header: SubHeader}
     },
     {
-      path: "/FundingOpen",
+      path: "/fundingopen",
       name: "FundingOpen",
       components: {default: FundingOpen, header: SubHeader}
     },
     {
+<<<<<<< HEAD
       path: "/FundingList",
       name: "FundingList",
       components: {default: FundingList, header: SubHeader}
     },
+=======
+      path: "/fundingdetail",
+      name: "FundingDetail",
+      components: {default: FundingDetail, header: SubHeader}
+    }
+>>>>>>> b66c311477649028b54557be8314e647a7425c5f
     
   ]
 });
