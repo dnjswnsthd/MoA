@@ -1,5 +1,5 @@
 <template>
-  <header class="backgroundImg">
+  <header class="backgroundImg height-550">
     <v-container class="col-8">
       <v-row v-if="isLogin !== false">
         <div>
@@ -53,9 +53,11 @@
           </v-row>
         </div>
       </div>
+      <div class="mt-10" style="opacity:0.5;">
+        <img src="@/assets/images/main/logo.png" alt="로고">
+      </div>
     </v-container>
-    <div class="headerPadding">
-      <v-container class="col-9 headerMenu">
+    <div class="categoryMenu col-8">
         <v-row>
           <v-spacer></v-spacer>
           <div class="col-2 mainCategory">
@@ -84,7 +86,6 @@
           </div>
           <v-spacer></v-spacer>
         </v-row>
-      </v-container>
     </div>
   </header>
 </template>
@@ -117,6 +118,7 @@ export default {
 </script>
 
 <style>
+
 .button {
   background-color: white;
   color: black;
@@ -151,21 +153,14 @@ export default {
   color: white;
 }
 .backgroundImg {
+  position:relative;
   background-image: url('../../assets/images/main/mainBg.jpg');
-  background-size: 100% 120%;
+  background-size: 100% 100%;
 }
 /* header .container .row .row div div .v-icon {
         color : white;
     } */
-.headerMenu {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  word-break: break-all;
-  background-color: white;
-  border-radius: 50px 50px 0px 0px;
-  line-height: 1.8;
-}
+
 .mainCategory {
   text-align: center;
   width: 100px;
@@ -173,7 +168,23 @@ export default {
 }
 
 .headerPadding {
-  padding-top: 150px;
+  padding-top: 50px;
+}
+
+.categoryMenu{
+  position:absolute;
+  left:50%;
+  margin-left:-640px;
+  bottom:0;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  word-break: break-all;
+  background-color: white;
+  border-radius: 50px 50px 0px 0px;
+  line-height: 1.8;
+
 }
 .logoutBtn{
     cursor:pointer;
