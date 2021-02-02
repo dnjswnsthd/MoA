@@ -36,4 +36,10 @@ public class ProjectServiceImpl implements ProjectService {
 
 	}
 
+	@Override
+	public void denial(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).denial(param);
+		
+	}
+
 }

@@ -12,5 +12,6 @@ public interface ProjectService {
 	public void waiting(Map<String, Object> param) throws Exception;
 
 	public void permission(Map<String, Object> param) throws Exception;
+	public void denial(Map<String, Object> param) throws Exception;
 
 }
