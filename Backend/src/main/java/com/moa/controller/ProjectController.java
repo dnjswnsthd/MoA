@@ -115,7 +115,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신이 참여하고 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto projectInfo = projectService.projectInfo(id);
+			ProjectDto[] projectInfo = projectService.projectInfo(id);
 			resultMap.put("message", SUCCESS);
 			resultMap.put("projectInfo", projectInfo);
 			status = HttpStatus.ACCEPTED;
@@ -140,7 +140,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신이 참여 대기하고 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto waitingProjectInfo = projectService.waitingProjectInfo(id);
+			ProjectDto[] waitingProjectInfo = projectService.waitingProjectInfo(id);
 			resultMap.put("message", SUCCESS);
 			resultMap.put("waitingProjectInfo", waitingProjectInfo);
 			status = HttpStatus.ACCEPTED;
@@ -165,7 +165,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신의 종료 된 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto completeProjectInfo = projectService.completeProjectInfo(id);
+			ProjectDto[] completeProjectInfo = projectService.completeProjectInfo(id);
 			resultMap.put("message", SUCCESS);
 			resultMap.put("completeProjectInfo", completeProjectInfo);
 			status = HttpStatus.ACCEPTED;

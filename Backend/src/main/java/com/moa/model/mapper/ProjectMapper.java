@@ -9,11 +9,11 @@ public interface ProjectMapper {
 
 	void create(ProjectDto project) throws SQLException;
 
-	public ProjectDto projectInfo(String id) throws SQLException;
+	public ProjectDto[] projectInfo(String id) throws SQLException;
 	
-	public ProjectDto waitingProjectInfo(String id) throws SQLException;
+	public ProjectDto[] waitingProjectInfo(String id) throws SQLException;
 	
-	public ProjectDto completeProjectInfo(String id) throws SQLException;
+	public ProjectDto[] completeProjectInfo(String id) throws SQLException;
 	
 	void memberToComplete(int project_num) throws SQLException;
 	
