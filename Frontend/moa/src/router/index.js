@@ -51,17 +51,15 @@ export default new VueRouter({
       components: {default: FundingOpen, header: SubHeader}
     },
     {
-<<<<<<< HEAD
-      path: "/FundingList",
+      path: "/fundinglist",
       name: "FundingList",
       components: {default: FundingList, header: SubHeader}
     },
-=======
+    {
       path: "/fundingdetail",
       name: "FundingDetail",
       components: {default: FundingDetail, header: SubHeader}
-    }
->>>>>>> b66c311477649028b54557be8314e647a7425c5f
+    },
     
   ]
 });
