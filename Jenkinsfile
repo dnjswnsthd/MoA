@@ -11,7 +11,7 @@ pipeline {
             }
             options {skipDefaultCheckout(false)}
             steps {
-                sh 'mvn -B -DskipTests -f ./var/jenkins_home/workspace/test/Backend/pom.xml clean package'
+                sh 'mvn -B -DskipTests -f /var/jenkins_home/workspace/test/Backend/pom.xml clean package'
             }
         }
         stage('Docker build') {
