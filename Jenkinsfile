@@ -11,7 +11,7 @@ pipeline {
             }
             options {skipDefaultCheckout(false)}
             steps {
-                sh 'mvn -B -DskipTests -f <./Backend/> clean package'
+                sh 'mvn -B -DskipTests -f ./Backend/ clean package'
             }
         }
         stage('Docker build') {
