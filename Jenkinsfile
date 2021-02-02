@@ -17,8 +17,8 @@ pipeline {
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t moafront:latest ./Frontend/moa/Dockerfile'
-                sh 'docker build -t moaback:latest ./Backend/Dockerfile'
+                sh 'docker build -t moafront:latest ~/s04p13d111/Frontend/moa/Dockerfile'
+                sh 'docker build -t moaback:latest ~/s04p13d111/Backend/Dockerfile'
             }
         }
         stage('Docker run') {
