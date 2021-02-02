@@ -11,6 +11,7 @@ import Login from "@/components/member/Login.vue";
 import Join from "@/components/member/Join.vue";
 import FindPassword from "@/components/member/FindPassword.vue";
 import MyPage from "@/components/member/MyPage.vue";
+import FundingList from "@/components/funding/FundingList.vue";
 
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
@@ -47,7 +48,12 @@ export default new VueRouter({
       path: "/FundingOpen",
       name: "FundingOpen",
       components: {default: FundingOpen, header: SubHeader}
-    }
+    },
+    {
+      path: "/FundingList",
+      name: "FundingList",
+      components: {default: FundingList, header: SubHeader}
+    },
     
   ]
 });
