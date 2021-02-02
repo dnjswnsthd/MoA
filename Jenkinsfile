@@ -17,7 +17,7 @@ pipeline {
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t moafront:latest /var/jenkins_home/workspace/test/Frontend/moa'
+                sh 'docker build -t moafront:latest /var/jenkins_home/workspace/test/Frontend'
                 sh 'docker build -t moaback:latest /var/jenkins_home/workspace/test/Backend'
             }
         }
