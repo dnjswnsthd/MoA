@@ -3,7 +3,7 @@
         <div class="progressing">
             <h2>진행중인 팀 펀딩</h2>
             <div>
-                <v-row class="fundingRow my-10">
+                <v-row class="fundingRow my-10 col-12">
                     <v-spacer></v-spacer>
                     <div class="funding funding01 col-3 height-300">
                         <div class="invisibleBox">
@@ -36,8 +36,8 @@
                     </div>
                     <v-spacer></v-spacer>
                 </v-row>
-                <v-row class="fundingRow my-10">
-                    <v-spacer></v-spacer>
+                <v-row class="fundingRow my-10 col-12">
+                     <v-spacer></v-spacer>
                     <div class="funding funding03 col-3 height-300">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
@@ -67,16 +67,16 @@
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
                     </div>
-                    <v-spacer></v-spacer>
+                     <v-spacer></v-spacer>
                 </v-row>
             </div>
         </div>
         <div>
             <h2>멘토 랭킹</h2>
             <div>
-                <v-row class="fundingRow my-10">
-                    <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                <v-row class="fundingRow my-10 col-12">
+                    <!-- <v-spacer></v-spacer> -->
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
                             <div class="halfHeight">
                                 <p class="centerText" style="font-size:20px">디자인</p>
@@ -137,9 +137,8 @@
                         </v-col>
                     </div>
                     <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
-                            
                             <div class="halfHeight">
                                 <p class="centerText" style="font-size:20px">IT·프로그래밍</p>
                             </div>
@@ -199,7 +198,7 @@
                         </v-col>
                     </div>
                     <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
                             
                             <div class="halfHeight">
@@ -260,11 +259,11 @@
                             </v-row>
                         </v-col>
                     </div>
-                    <v-spacer></v-spacer>
+                    <!-- <v-spacer></v-spacer> -->
                 </v-row>
-                <v-row class="fundingRow my-10">
-                    <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                <v-row class="fundingRow my-10 col-12">
+                    <!-- <v-spacer></v-spacer> -->
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
                             
                             <div class="halfHeight">
@@ -326,7 +325,7 @@
                         </v-col>
                     </div>
                     <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
                             
                             <div class="halfHeight">
@@ -388,7 +387,7 @@
                         </v-col>
                     </div>
                     <v-spacer></v-spacer>
-                    <div class="col-3 height-300">
+                    <div class="col-4 height-300">
                         <v-col class="rankingBox">
                             <div class="halfHeight">
                                 <p class="centerText" style="font-size:20px">마케팅</p>
@@ -448,22 +447,28 @@
                             </v-row>
                         </v-col>
                     </div>
-                    <v-spacer></v-spacer>
+                    <!-- <v-spacer></v-spacer> -->
                 </v-row>
             </div>
         </div>
     </v-container>
 </template>
 <style scoped>
+.progressing p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+}
 .fundingRow{
     margin:0 auto;
 }
+
     .funding{
         padding:0;
         background-size:100% 100%;
         background-position:center;
-        border-radius:20px;
-        
+        border-radius:20px; 
     }
     .funding:hover .invisibleBox{
         transition:all 0.4s;
