@@ -6,12 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.moa.model.ProjectDto;
+import com.moa.model.SprintDto;
 import com.moa.model.service.SprintService;
 
 import io.swagger.annotations.Api;
@@ -51,4 +54,52 @@ public class SprintController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	/**
+	 * 스프린트 상태 변경
+	 * 
+	 * @param sprintDto 변경할 sprint의 num과 status
+	 * @return 변경 '성공' or '실패' 메시지
+	 */
+	@ApiOperation(value = "스프린트 상태 변경", notes = "스프린트 상태 변경 결과 메시지를 반환한다.", response = Map.class)
+	@PutMapping("/modify")
+	public ResponseEntity<Map<String, Object>> modify(
+			@RequestBody @ApiParam(value = "상태를 변경하고 싶은  스프린트의 기본키", required = true)SprintDto sprintDto){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			sprintService.modify(sprintDto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	/**
+	 * 
+	 * 스프린트 삭제
+	 * 
+	 * @param sprint_num
+	 * @return 삭제 '성공' or '실패' 메시지
+	 */
+	@ApiOperation(value = "스프린트 삭제", notes = "스프린트  삭제 변경 결과 메시지를 반환한다.", response = Map.class)
+	@DeleteMapping("/delete/{sprint_num}")
+	public ResponseEntity<Map<String, Object>> delete(
+			@PathVariable("sprint_num") @ApiParam(value = "스프린트 삭제에 필요한 기본키", required = true)int sprint_num){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			sprintService.delete(sprint_num);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 }
