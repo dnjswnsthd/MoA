@@ -1,49 +1,44 @@
 <template>
-    <footer class="height-150">
-        <v-container class="col-12 height-150">
-            <v-row class="height-150">
-                <div class="col-2">
-                    <img src='@/assets/images/main/logo.png' alt="푸터로고">
+    <footer class="height-70">
+        <div class="height-70 col-8 centerContent">
+            <v-row class="height-70">
+                <div>
+                    <img src='@/assets/images/main/logo.png' alt="푸터로고" style="width:50%;  height:70px;">
                 </div>
-                <div class="col-8">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
-                    <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. </p>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                </div>
-                <div class="col-2">
-                    <p>Together</p>
+                <div class="contactBox width-1000 py-5">
+                    <p class="col-4"><v-icon style="color:#fff;">mdi-home</v-icon> 구미시 진평동 초록빌라 102호</p>
+                    <p class="col-4"> <v-icon style="color:#fff;">mdi-phone</v-icon> : 010-1234-5678</p>
+                    <p class="col-4"> <v-icon style="color:#fff;">mdi-email</v-icon> : ssafy@ssafy.com</p>
                 </div>
                 
             </v-row>
-        </v-container>
+        </div>
     </footer>
 </template>
-<style>
+<style scoped>
 
 footer{
     /* background-color:#401B7B; */
     background:linear-gradient(to right, #401B7B, #d68ddf);
-    color:white;
+    color:#fff;
 }
+
 footer .row div{
     height:100%;
 }
     footer .row div:first-child img{
         margin:0 auto;
     }
-    footer .row div:nth-child(2) p{
-        margin:0; 
-        font-size:16px;
-        line-height:32px;
+    .contactBox{
+        color:#fff;
         text-align:center;
+        font-weight: 900;
+        font-size:18px;
     }
-    footer .row div:nth-child(3) p{
-        width:100%;
-        height:100%;
-        margin:0;
-        text-align:center;
-        font-size:60px;
-        
+    .contactBox p{
+        padding:0; margin:0;
+        display:inline-block;
     }
+    
+    
 </style>
