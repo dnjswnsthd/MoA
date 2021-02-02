@@ -126,6 +126,31 @@ public class ProjectController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	/**
+	 * 자신이 대기중인 펀딩의 정보를 모두 가지고 온다
+	 * 
+	 * @param id	자신의 아이디 정보
+	 * @return	자신이 대기하고 있는 펀딩의 정보와 '성공' 메세지
+	 */
+	@ApiOperation(value = "대기 중인 펀딩 정보 보기", notes = "마이 페이지에서 유저의 대기중인 펀딩 정보 보기", response = Map.class)
+	@GetMapping("/waiting/{id}")
+	public ResponseEntity<Map<String, Object>> waitingProjectInfo(
+			@PathVariable("id") @ApiParam(value = "대기 중인 펀딩 정보를 불러올 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			// DB 에서 ID를 통해 자신이 참여 대기하고 있는 프로젝트의 정보를 가지고 온다
+			ProjectDto waitingProjectInfo = projectService.waitingProjectInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("waitingProjectInfo", waitingProjectInfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 	
 	/**
 	 * 신청 거부 컨트롤러(거부 하면  대기 Table에서 삭제 합니다.)

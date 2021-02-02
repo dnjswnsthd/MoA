@@ -23,7 +23,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public ProjectDto projectInfo(String id) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).projectInfo(id);
 	}
-
+	
+	@Override
+	public ProjectDto waitingProjectInfo(String id) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).waitingProjectInfo(id);
+	}
+	
 	@Override
 	public void waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
