@@ -30,9 +30,9 @@ import io.swagger.annotations.ApiParam;
 @Api("MemberController v0.1")
 @RestController
 @RequestMapping("/member")
-public class MemberContoller {
+public class MemberController {
 	// Server side log를 위한 객체 생성
-	public static final Logger logger = LoggerFactory.getLogger(MemberContoller.class);
+	public static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
