@@ -12,4 +12,6 @@ public interface SprintService {
 
 	public void delete(int sprint_num) throws Exception;
 
+	public SprintDto[] search(int project_num);
+
 }

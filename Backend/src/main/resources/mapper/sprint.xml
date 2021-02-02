@@ -19,4 +19,10 @@
 		delete from sprint
 		where sprint_num = #{sprint_num}
 	</delete>
+	
+	<select id="search" parameterType="Integer" resultType="SprintDto">
+		select *
+		from sprint
+		where project_num = #{project_num}
+	</select>
 </mapper>

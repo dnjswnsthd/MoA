@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -101,5 +102,30 @@ public class SprintController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	/**
+	 * 
+	 * 스프린트 조회
+	 * @param project_num
+	 * @return 프로젝트의 스프린트 정보와 '성공' 메시지 
+	 */
+	@ApiOperation(value = "프로젝트의 스프린트 정보 보기", notes= "project에 포함된 스프린트 정보 보기", response = Map.class)
+	@GetMapping("/search/{project_num}")
+	public ResponseEntity<Map<String, Object>> search(
+			@PathVariable("project_num") @ApiParam(value = "스프린트 조회를 위한 프로젝트 기본키", required = true)int project_num){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			SprintDto [] sprintList = sprintService.search(project_num);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("sprintList", sprintList);
+			status = HttpStatus.ACCEPTED;
+		}catch (Exception e) {
+			resultMap.put("messgae", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 	
 }
