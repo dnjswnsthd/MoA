@@ -2,10 +2,10 @@
     <footer class="height-70">
         <div class="height-70 col-8 centerContent">
             <v-row class="height-70">
-                <div>
-                    <img src='@/assets/images/main/logo.png' alt="푸터로고" style="width:50%;  height:70px;">
+                <div class="col-2">
+                    <img src='@/assets/images/main/logo.png' alt="푸터로고" style="width:100%;  height:100%;">
                 </div>
-                <div class="contactBox width-1000 py-5">
+                <div class="contactBox py-5 col-10">
                     <p class="col-4"><v-icon style="color:#fff;">mdi-home</v-icon> 구미시 진평동 초록빌라 102호</p>
                     <p class="col-4"> <v-icon style="color:#fff;">mdi-phone</v-icon> : 010-1234-5678</p>
                     <p class="col-4"> <v-icon style="color:#fff;">mdi-email</v-icon> : ssafy@ssafy.com</p>
