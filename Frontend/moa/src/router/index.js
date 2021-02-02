@@ -10,10 +10,10 @@ import Login from "@/components/member/Login.vue";
 import Join from "@/components/member/Join.vue";
 import FindPassword from "@/components/member/FindPassword.vue";
 import MyPage from "@/components/member/MyPage.vue";
-import FundingList from "@/components/funding/FundingList.vue";
 
 import FundingOpen from "@/components/funding/FundingOpen.vue";
 import FundingDetail from "@/components/funding/FundingDetail.vue";
+import FundingList from "@/components/funding/FundingList.vue";
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
 
