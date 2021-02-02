@@ -151,7 +151,31 @@ public class ProjectController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+	/**
+	 * 자신의 종료된 펀딩의 정보를 모두 가지고 온다
+	 * 
+	 * @param id	자신의 아이디 정보
+	 * @return	자신의 종료 된  펀딩의 정보와 '성공' 메세지
+	 */
+	@ApiOperation(value = "종료 된 펀딩 정보 보기", notes = "마이 페이지에서 유저의 종료 된 펀딩 정보 보기", response = Map.class)
+	@GetMapping("/complete/{id}")
+	public ResponseEntity<Map<String, Object>> completeProjectInfo(
+			@PathVariable("id") @ApiParam(value = "종료 된 펀딩 정보를 불러올 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			// DB 에서 ID를 통해 자신의 종료 된 있는 프로젝트의 정보를 가지고 온다
+			ProjectDto completeProjectInfo = projectService.completeProjectInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("completeProjectInfo", completeProjectInfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 	/**
 	 * 신청 거부 컨트롤러(거부 하면  대기 Table에서 삭제 합니다.)
 	 * 

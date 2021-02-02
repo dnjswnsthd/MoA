@@ -30,6 +30,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
+	public ProjectDto completeProjectInfo(String id) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).completeProjectInfo(id);
+	}
+	
+	@Override
 	public void waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
 	}
