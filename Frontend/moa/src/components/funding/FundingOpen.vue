@@ -1,7 +1,7 @@
 <template>
     <div class="width-1000 centerContent">
         <h1>펀딩오픈</h1>
-        <div class="width-1000 fundingMargin fundingPadding">
+        <div class="width-1000 centerContent fundingPadding">
             <h2>카테고리</h2> 
             <ul class="fundingPadding_2">
                 <v-row>
@@ -9,7 +9,7 @@
                 <li>
                     <div class="fundingCategory">
                         <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">디자인</p>
+                        <p class="centerContent">디자인</p>
                     </div>      
                 </li>
                 <v-spacer></v-spacer>
@@ -117,6 +117,10 @@ export default {
     name: "FundingOpen"
 }
 </script>
+padding margin
+
+
+
 
 <style>
     .fundingPadding {
