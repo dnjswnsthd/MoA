@@ -20,6 +20,4 @@ public interface ProjectMapper {
 	void projectAppend(Map<String, Object> param) throws SQLException;
 
 	void denial(Map<String, Object> param) throws SQLException;
-	
-
 }
