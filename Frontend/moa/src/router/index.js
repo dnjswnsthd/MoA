@@ -10,10 +10,10 @@ import Login from "@/components/member/Login.vue";
 import Join from "@/components/member/Join.vue";
 import FindPassword from "@/components/member/FindPassword.vue";
 import MyPage from "@/components/member/MyPage.vue";
-import FundingList from "@/components/funding/FundingList.vue";
 
 import FundingOpen from "@/components/funding/FundingOpen.vue";
 import FundingDetail from "@/components/funding/FundingDetail.vue";
+import FundingList from "@/components/funding/FundingList.vue";
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
 
@@ -51,17 +51,15 @@ export default new VueRouter({
       components: {default: FundingOpen, header: SubHeader}
     },
     {
-<<<<<<< HEAD
-      path: "/FundingList",
-      name: "FundingList",
-      components: {default: FundingList, header: SubHeader}
-    },
-=======
       path: "/fundingdetail",
       name: "FundingDetail",
       components: {default: FundingDetail, header: SubHeader}
+    },
+    {
+      path: "/fundinglist",
+      name: "FundingList",
+      components: {default: FundingList, header: SubHeader}
     }
->>>>>>> b66c311477649028b54557be8314e647a7425c5f
     
   ]
 });
