@@ -49,7 +49,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void denial(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).denial(param);
-		
+	}
+	
+	@Override
+	public void end(int project_num) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).memberToComplete(project_num);
+		sqlSession.getMapper(ProjectMapper.class).deleteMemberProject(project_num);
 	}
 
 }
