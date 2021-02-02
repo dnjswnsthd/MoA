@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,7 +87,7 @@ public class ProjectController {
 	 */
 	@ApiOperation(value = "신청 허가", notes = "신청 허가 후 waiting_project에선 삭제하고  project_member 테이블에 추가", response = Map.class)
 	@PutMapping("/permission")
-	public ResponseEntity<Map<String, Object>> permissiont(
+	public ResponseEntity<Map<String, Object>> permission(
 			@RequestBody @ApiParam(value = "신청 허가 됬을 경우 DB 상태 처리") Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
@@ -114,7 +115,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신이 참여하고 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto projectInfo = projectService.projectInfo(id);
+			ProjectDto[] projectInfo = projectService.projectInfo(id);
 			resultMap.put("message", SUCCESS);
 			resultMap.put("projectInfo", projectInfo);
 			status = HttpStatus.ACCEPTED;
@@ -125,5 +126,100 @@ public class ProjectController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	/**
+	 * 자신이 대기중인 펀딩의 정보를 모두 가지고 온다
+	 * 
+	 * @param id	자신의 아이디 정보
+	 * @return	자신이 대기하고 있는 펀딩의 정보와 '성공' 메세지
+	 */
+	@ApiOperation(value = "대기 중인 펀딩 정보 보기", notes = "마이 페이지에서 유저의 대기중인 펀딩 정보 보기", response = Map.class)
+	@GetMapping("/waiting/{id}")
+	public ResponseEntity<Map<String, Object>> waitingProjectInfo(
+			@PathVariable("id") @ApiParam(value = "대기 중인 펀딩 정보를 불러올 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			// DB 에서 ID를 통해 자신이 참여 대기하고 있는 프로젝트의 정보를 가지고 온다
+			ProjectDto[] waitingProjectInfo = projectService.waitingProjectInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("waitingProjectInfo", waitingProjectInfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
 
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	/**
+	 * 자신의 종료된 펀딩의 정보를 모두 가지고 온다
+	 * 
+	 * @param id	자신의 아이디 정보
+	 * @return	자신의 종료 된  펀딩의 정보와 '성공' 메세지
+	 */
+	@ApiOperation(value = "종료 된 펀딩 정보 보기", notes = "마이 페이지에서 유저의 종료 된 펀딩 정보 보기", response = Map.class)
+	@GetMapping("/complete/{id}")
+	public ResponseEntity<Map<String, Object>> completeProjectInfo(
+			@PathVariable("id") @ApiParam(value = "종료 된 펀딩 정보를 불러올 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			// DB 에서 ID를 통해 자신의 종료 된 있는 프로젝트의 정보를 가지고 온다
+			ProjectDto[] completeProjectInfo = projectService.completeProjectInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("completeProjectInfo", completeProjectInfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	/**
+	 * 신청 거부 컨트롤러(거부 하면  대기 Table에서 삭제 합니다.)
+	 * 
+	 * @param param 거부할 프로젝트 번호와 신청자의 아이디 정보
+	 * @return 성공 실패 메시지 전달
+	 */
+	@ApiOperation(value = "신청 거절", notes = "신청 거절 됬을 경우 waiting_project db에서 삭제함.", response = Map.class)
+	@DeleteMapping("/denial")
+	public ResponseEntity<Map<String, Object>> denial(
+			@RequestBody @ApiParam(value = "신청 거절 됬을 경우 DB 상태 처리") Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.denial(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	/**
+	 * 프로젝트 종료 컨트롤러
+	 * 
+	 * @param project	종료 할 프로젝트의 정보가 담긴 Dto
+	 * @return	성공 실패 메시지 전달
+	 */
+	@ApiOperation(value = "펀딩 종료", notes = "펀딩 종료 결과 메시지를 반환한다.", response = Map.class)
+	@PostMapping("/end/{project_num}")
+	public ResponseEntity<Map<String, Object>> end(
+			@PathVariable("project_num") @ApiParam(value = "종료 된 펀딩 정보를 불러올 프로젝트 번호", required = true) int project_num) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+
+		try {
+			projectService.end(project_num);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 }
