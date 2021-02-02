@@ -16,10 +16,10 @@
 
             <form class="formBox">
                 <v-row>
-                    <v-text-field label="ID" type="text" required v-model="member.id"></v-text-field>
+                    <v-text-field label="ID" type="email" required v-model="member.id"></v-text-field>
                     <button class="checkBtn">중복체크</button>
                 </v-row>
-
+                <div class="error-text" v-if="error.email">{{error.email}}</div>
                 <v-row>                  
                     <v-text-field label="Password" type="password" required v-model="member.pw"></v-text-field>
                     <div class="checkBtn"></div>
@@ -103,9 +103,12 @@
 </template>
 <script>
 import http from "@/util/http-common";
+import PV from "password-validator";
+import * as EmailValidator from "email-validator";
 export default {
     data(){
         return{
+            passwordSchema: new PV(),
             mentorForm: true,
             menteeForm: false,
             // selectItems: ['디자인', 'IT·프로그래밍', '번역·통역', '영상·사진·음향', '운세·상담', '마케팅'],
@@ -124,9 +127,52 @@ export default {
                 skill:'',
                 introduce:'',
             },
+            error: {
+                email: false,
+                passowrd: false
+            },
+            email:"",
+            password:"",
+        }
+    },
+    created(){
+        this.component = this;
+
+        this.passwordSchema
+        .is()
+        .min(8)
+        .is()
+        .max(100)
+        .has()
+        .digits()
+        .has()
+        .letters();
+    },
+    watch:{
+        password: function(){
+            this.checkForm();
+        },
+        email: function(){
+            this.checkForm();
         }
     },
     methods:{
+        checkForm() {
+            if (this.email.length >= 0 && !EmailValidator.validate(this.email))
+                this.error.email = "이메일 형식이 아닙니다.";
+            else this.error.email = false;
+            if (
+                this.password.length >= 0 &&
+                !this.passwordSchema.validate(this.password)
+            )
+                this.error.password = "영문,숫자 포함 8 자리이상이어야 합니다.";
+            else this.error.password = false;
+            let isSubmit = true;
+            Object.values(this.error).map(v => {
+                if (v) isSubmit = false;
+            });
+            this.isSubmit = isSubmit;
+            },
         openMentor(){
             this.mentorForm= true,
             this.menteeForm= false,
