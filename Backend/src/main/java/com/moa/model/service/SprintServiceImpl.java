@@ -28,5 +28,10 @@ public class SprintServiceImpl implements SprintService {
 	public void delete(int sprint_num) throws Exception {
 		sqlSession.getMapper(SprintMapper.class).delete(sprint_num);
 	}
+
+	@Override
+	public SprintDto[] search(int project_num) {
+		return sqlSession.getMapper(SprintMapper.class).search(project_num);
+	}
 	
 }

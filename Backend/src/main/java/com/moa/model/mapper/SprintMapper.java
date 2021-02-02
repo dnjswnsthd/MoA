@@ -10,4 +10,6 @@ public interface SprintMapper {
 	void modify(SprintDto sprintDto);
 
 	void delete(int sprint_num);
+
+	SprintDto[] search(int project_num);
 }
