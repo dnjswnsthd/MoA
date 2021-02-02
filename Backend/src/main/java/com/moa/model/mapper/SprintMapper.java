@@ -8,4 +8,6 @@ public interface SprintMapper {
 	void add(Map<String, Object> param);
 
 	void modify(SprintDto sprintDto);
+
+	void delete(int sprint_num);
 }
