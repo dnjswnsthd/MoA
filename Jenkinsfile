@@ -17,25 +17,25 @@ pipeline {
         stage('Docker build') {
             agent any
             steps {
-                sh 'docker build -t MoaFront:latest ./Frontend/moa/Dockerfile'
-                sh 'docker build -t MoaBack:latest ./Backend/Dockerfile'
+                sh 'docker build -t moafront:latest ./Frontend/moa/Dockerfile'
+                sh 'docker build -t moaback:latest ./Backend/Dockerfile'
             }
         }
         stage('Docker run') {
             agent any
             steps {
-                sh 'docker ps -f name=MoaFront -q \
+                sh 'docker ps -f name=moafront -q \
                   | xargs --no-run-if-empty docker container stop'
-                sh 'docker ps -f name=MoaBack -q \
+                sh 'docker ps -f name=moaback -q \
                   | xargs --no-run-if-empty docker container stop'
-                sh 'docker container ls -a -f name=MoaFront -q \
+                sh 'docker container ls -a -f name=moafront -q \
                   | xargs -r docker container rm'
-                sh 'docker container ls -a -f name=MoaBack -q \
+                sh 'docker container ls -a -f name=moaback -q \
                   | xargs -r docker container rm'
                 sh 'docker images -f dangling=true && \
                     docker rmi $(docker images -f "dangling=true" -q)'
-                sh 'docker run -d --name MoaFront -p 80:80 MoaFront:latest'
-                sh 'docker run -d --name MoaBack -p 8080:8080 MoaBack:latest'
+                sh 'docker run -d --name moafront -p 80:80 moafront:latest'
+                sh 'docker run -d --name moaback -p 8080:8080 moaback:latest'
             }
         }
     }
