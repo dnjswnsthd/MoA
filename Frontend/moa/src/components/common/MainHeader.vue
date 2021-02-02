@@ -1,5 +1,5 @@
 <template>
-  <header class="backgroundImg height-550">
+  <header class="backgroundImg">
     <v-container class="col-8">
       <v-row v-if="isLogin !== false">
         <div>
@@ -153,7 +153,7 @@ export default {
   color: white;
 }
 .backgroundImg {
-  position:relative;
+  
   background-image: url('../../assets/images/main/mainBg.jpg');
   background-size: 100% 100%;
 }
@@ -172,11 +172,6 @@ export default {
 }
 
 .categoryMenu{
-  position:absolute;
-  left:50%;
-  margin-left:-640px;
-  bottom:0;
-
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -184,6 +179,8 @@ export default {
   background-color: white;
   border-radius: 50px 50px 0px 0px;
   line-height: 1.8;
+  margin: 0 auto;
+  margin-top:100px;
 
 }
 .logoutBtn{
