@@ -198,4 +198,28 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	/**
+	 * 프로젝트 종료 컨트롤러
+	 * 
+	 * @param project	종료 할 프로젝트의 정보가 담긴 Dto
+	 * @return	성공 실패 메시지 전달
+	 */
+	@ApiOperation(value = "펀딩 종료", notes = "펀딩 종료 결과 메시지를 반환한다.", response = Map.class)
+	@PostMapping("/end/{project_num}")
+	public ResponseEntity<Map<String, Object>> end(
+			@PathVariable("project_num") @ApiParam(value = "종료 된 펀딩 정보를 불러올 프로젝트 번호", required = true) int project_num) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+
+		try {
+			projectService.end(project_num);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 }

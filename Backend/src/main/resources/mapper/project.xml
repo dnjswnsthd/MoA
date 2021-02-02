@@ -90,4 +90,18 @@
 		waiting_project
 		where project_num = #{project_num} and id = #{id}
 	</delete>
+	
+	<!--  펀딩 종료 후 complete_project로 데이터 삽입 -->
+	<insert id="memberToComplete" parameterType="Map">
+		insert into complete_project(project_num,id)
+		select project_num, id
+		from member_project
+		where project_num = #{project_num}
+	</insert>
+	
+	<!--  펀딩 종료 후 진행중인 프로젝트 내용 삭제 -->
+	<delete id="deleteMemberProject" parameterType="Map">
+		delete from member_project
+		where project_num = #{project_num}
+	</delete>
 </mapper>
