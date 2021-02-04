@@ -6,7 +6,7 @@ import com.moa.model.ProjectDto;
 
 public interface ProjectService {
 
-	public void create(ProjectDto project) throws Exception;
+	public void create(Map<String, Object> param) throws Exception;
 	public ProjectDto[] projectInfo(String id) throws Exception;
 	public ProjectDto[] waitingProjectInfo(String id) throws Exception;
 	public ProjectDto[] completeProjectInfo(String id) throws Exception;
