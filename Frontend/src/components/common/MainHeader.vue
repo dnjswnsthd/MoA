@@ -185,7 +185,7 @@ export default {
   border-radius: 50px 50px 0px 0px;
   line-height: 1.8;
   margin: 0 auto;
-  margin-top:2  00px;
+  margin-top:200px;
 
 }
 .logoutBtn{
