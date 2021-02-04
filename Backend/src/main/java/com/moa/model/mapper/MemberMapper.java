@@ -18,7 +18,7 @@ public interface MemberMapper {
 
 	public void joinMentee(Map<String, Object> param) throws SQLException;
 
-	public void delete(Map<String, Object> param) throws SQLException;
+	public void delete(String id) throws SQLException;
 
 	public void memberUpdate(MemberDto memberDto) throws SQLException;
 
