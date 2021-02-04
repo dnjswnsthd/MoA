@@ -15,8 +15,9 @@ public class ProjectServiceImpl implements ProjectService {
 	private SqlSession sqlSession;
 
 	@Override
-	public void create(ProjectDto project) throws Exception {
-		sqlSession.getMapper(ProjectMapper.class).create(project);
+	public void create(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).createProject(param);
+		sqlSession.getMapper(ProjectMapper.class).appendProject(param);
 	}
 
 	@Override
@@ -32,6 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectDto[] completeProjectInfo(String id) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).completeProjectInfo(id);
+	}
+	
+	@Override
+	public ProjectDto[] interestingProjectInfo(String id) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).interestingProjectInfo(id);
 	}
 	
 	@Override
@@ -54,6 +60,16 @@ public class ProjectServiceImpl implements ProjectService {
 	public void end(int project_num) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).memberToComplete(project_num);
 		sqlSession.getMapper(ProjectMapper.class).deleteMemberProject(project_num);
+	}
+	
+	@Override
+	public void interesting(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).interesting(param);
+	}
+	
+	@Override
+	public void interestingDelete(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).interestingDelete(param);
 	}
 
 }

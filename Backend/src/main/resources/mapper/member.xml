@@ -64,6 +64,13 @@
 		introduce = #{introduce}
 		where id = #{id}
 	</update>
+	
+	<!-- member update point -->
+	<update id="memberUpdatePoint" parameterType="MemberDto">
+		update member set
+		point = #{point}
+		where id = #{id}
+	</update>
 
 	<!-- member delete -->
 	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
@@ -118,5 +125,12 @@
 		from member inner join mentee on member.id =
 		mentee.id
 		where member.id = #{id}
+	</select>
+	
+	<!-- pw 검사 -->
+	<select id="pwcheck" parameterType="String" resultType="String">
+		select pw
+		from member
+		where id = #{id}
 	</select>
 </mapper>

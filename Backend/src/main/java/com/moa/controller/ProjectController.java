@@ -35,18 +35,18 @@ public class ProjectController {
 	/**
 	 * 펀딩 오픈 컨트롤러
 	 * 
-	 * @param project	오픈할 프로젝트의 정보가 담긴 Dto
+	 * @param param 프로젝트 정보와 member id
 	 * @return	오픈 '성공' or '실패' 메시지
 	 */
 	@ApiOperation(value = "펀딩 생성", notes = "펀딩 생성 결과 메시지를 반환한다.", response = Map.class)
 	@PostMapping("/create")
 	public ResponseEntity<Map<String, Object>> create(
-			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) ProjectDto project) {
+			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 
 		try {
-			projectService.create(project);
+			projectService.create(param);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
@@ -221,5 +221,73 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+	/**
+	 * 관심 펀딩 등록 컨트롤러
+	 * 
+	 * @param param	등록한 펀딩의 프로젝트 번호와 사용자의 아이디 정보
+	 * @return	등록 '성공' or '실패' 메시지 전달
+	 */
+	@ApiOperation(value = "관심 펀딩 등록", notes = "등록 후  DB에 상태 저장.", response = Map.class)
+	@PostMapping("/interesting")
+	public ResponseEntity<Map<String, Object>> interesting(
+			@RequestBody @ApiParam(value = "등록  후  DB에 추가 ") Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.interesting(param);
+			resultMap.put("messagae", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	/**
+	 * 자신의 관심 펀딩의 정보를 모두 가지고 온다
+	 * 
+	 * @param id	자신의 아이디 정보
+	 * @return	자신의 종료 된  펀딩의 정보와 '성공' 메세지
+	 */
+	@ApiOperation(value = "관심 펀딩 정보 보기", notes = "마이 페이지에서 유저의 관심 펀딩 정보 보기", response = Map.class)
+	@GetMapping("/interesting/{id}")
+	public ResponseEntity<Map<String, Object>> interestingProjectInfo(
+			@PathVariable("id") @ApiParam(value = "관심 펀딩 정보를 불러올 아이디", required = true) String id) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		try {
+			// DB 에서 ID를 통해 자신의 관심 등록 된 프로젝트의 정보를 가지고 온다
+			ProjectDto[] interestingProjectInfo = projectService.interestingProjectInfo(id);
+			resultMap.put("message", SUCCESS);
+			resultMap.put("interestingProjectInfo", interestingProjectInfo);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	/**
+	 * 관심 펀딩 삭제 컨트롤러
+	 * 
+	 * @param param	삭제할 관심 펀딩의 프로젝트 번호와 사용자의 아이디 정보
+	 * @return	삭제 '성공' or '실패' 메시지 전달
+	 */
+	@ApiOperation(value = "관심 펀딩 삭제", notes = "관심 펀딩 DB 데이터 삭제.", response = Map.class)
+	@PostMapping("/interestingDelete")
+	public ResponseEntity<Map<String, Object>> interestingDelete(
+			@RequestBody @ApiParam(value = "DB에서 삭제 ") Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.interestingDelete(param);
+			resultMap.put("messagae", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }

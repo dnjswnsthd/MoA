@@ -7,13 +7,17 @@ import com.moa.model.ProjectDto;
 
 public interface ProjectMapper {
 
-	void create(ProjectDto project) throws SQLException;
+	void createProject(Map<String, Object> param) throws SQLException;
+	
+	void appendProject(Map<String, Object> param) throws SQLException;
 
 	public ProjectDto[] projectInfo(String id) throws SQLException;
 	
 	public ProjectDto[] waitingProjectInfo(String id) throws SQLException;
 	
 	public ProjectDto[] completeProjectInfo(String id) throws SQLException;
+	
+	public ProjectDto[] interestingProjectInfo(String id) throws SQLException;
 	
 	void memberToComplete(int project_num) throws SQLException;
 	
@@ -26,4 +30,8 @@ public interface ProjectMapper {
 	void projectAppend(Map<String, Object> param) throws SQLException;
 
 	void denial(Map<String, Object> param) throws SQLException;
+	
+	void interesting(Map<String, Object> param) throws SQLException;
+	
+	void interestingDelete(Map<String, Object> param) throws SQLException;
 }
