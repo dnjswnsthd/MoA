@@ -19,4 +19,6 @@ public interface MemberService {
 
 	public Object memberInfo(String id) throws Exception;
 
+	public boolean pwcheck(String id, String pw);
+
 }

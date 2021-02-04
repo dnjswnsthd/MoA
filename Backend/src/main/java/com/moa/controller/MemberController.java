@@ -99,6 +99,35 @@ public class MemberController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "PW 확인", notes = "내 정보 변경시 비밀번호 검사", response = Map.class)
+	@PostMapping("/pwcheck")
+	public ResponseEntity<Map<String, Object>> pwcheck(
+			@RequestBody @ApiParam(value = "내 정보 변경시 비밀번호 검사를 위한 id, pw", required = true)MemberDto memberDto){
+		System.out.println(memberDto.getId());
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		String id = memberDto.getId();
+		String pw = memberDto.getPw();
+		System.out.println(id);
+		try {
+			if(memberService.pwcheck(id, pw)) {//pw가 맞으면
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.ACCEPTED;
+			}
+			
+		}catch(Exception e) {
+			logger.error("비밀번호 확인 실패  : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
+	
+	
 	@ApiOperation(value = "회원 가입(멘토, 멘티)", notes = "멘토의 회원 가입 결과를 반환한다.", response = Map.class)
 	@PostMapping("/join")
 	public ResponseEntity<Map<String, Object>> join(
