@@ -35,6 +35,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
+	public ProjectDto[] interestingProjectInfo(String id) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).interestingProjectInfo(id);
+	}
+	
+	@Override
 	public void waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
 	}
@@ -54,6 +59,11 @@ public class ProjectServiceImpl implements ProjectService {
 	public void end(int project_num) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).memberToComplete(project_num);
 		sqlSession.getMapper(ProjectMapper.class).deleteMemberProject(project_num);
+	}
+	
+	@Override
+	public void interesting(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).interesting(param);
 	}
 
 }
