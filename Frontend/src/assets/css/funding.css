@@ -18,3 +18,13 @@
     margin-left: 80px;
     padding: 10px;
 }
+
+.scheduleList {
+    border: 2px solid #B39DDB;
+}
+
+.sceduleBorder {
+    border-bottom: 2px solid #AB47BC;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
