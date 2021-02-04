@@ -5,7 +5,7 @@
 <mapper namespace="com.moa.model.mapper.ProjectMapper">
 	<!-- project create -->
 	<!-- 펀딩 오픈 -->
-	<insert id="create" parameterType="Map">
+	<insert id="createProject" parameterType="Map">
 		insert into
 		project(project_name, start_date, end_date, category, participants,
 		funding_cost, description, mentor_chk, deadline)
@@ -13,6 +13,13 @@
 		(#{project_name}, #{start_date}, #{end_date}, #{category},
 		#{participants}, #{funding_cost}, #{description}, #{mentor_chk},
 		#{deadline})
+	</insert>
+	
+	<!-- project create했을때 프로젝트랑 멤버 id 추가-->
+	<!-- 펀딩 오픈 시 project_member db에 추가 -->
+	<insert id="appendProject" parameterType="Map">
+		insert into
+		member_project(select last_insert_id(), #{id})
 	</insert>
 
 	<!-- project search -->
