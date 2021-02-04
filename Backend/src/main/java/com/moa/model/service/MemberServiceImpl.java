@@ -160,8 +160,8 @@ public class MemberServiceImpl implements MemberService {
 	 * @param param 탈퇴활 아이디와 비밀번호를 포함한 정보
 	 */
 	@Override
-	public void delete(Map<String, Object> param) throws Exception {
-		sqlSession.getMapper(MemberMapper.class).delete(param);
+	public void delete(String id) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).delete(id);
 	}
 
 	/**
@@ -172,11 +172,10 @@ public class MemberServiceImpl implements MemberService {
 	public boolean pwcheck(String id, String pw) throws Exception {
 		if (sqlSession.getMapper(MemberMapper.class).pwcheck(id).equals(pw))
 			return true;
-		else
-			return false;
+		else return false;
 	}
-
-	@Override
+		
+	
 	public void memberUpdatePoint(MemberDto memberDto) throws SQLException {
 		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdatePoint(memberDto);
