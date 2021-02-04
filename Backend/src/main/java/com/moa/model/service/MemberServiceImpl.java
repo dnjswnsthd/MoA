@@ -160,8 +160,8 @@ public class MemberServiceImpl implements MemberService {
 	 * @param param 탈퇴활 아이디와 비밀번호를 포함한 정보
 	 */
 	@Override
-	public void delete(Map<String, Object> param) throws Exception {
-		sqlSession.getMapper(MemberMapper.class).delete(param);
+	public void delete(String id) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).delete(id);
 	}
 
 	/**
