@@ -137,4 +137,12 @@
 		interesting_project.id = #{id}
 	</select>
 	
+	<!-- interestingDelete project -->
+	<!-- 관심 프로젝트 삭제 -->
+	<delete id="interestingDelete" parameterType="Map">
+		delete from
+		interesting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
 </mapper>
