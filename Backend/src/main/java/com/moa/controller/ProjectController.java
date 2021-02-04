@@ -35,18 +35,18 @@ public class ProjectController {
 	/**
 	 * 펀딩 오픈 컨트롤러
 	 * 
-	 * @param project	오픈할 프로젝트의 정보가 담긴 Dto
+	 * @param param 프로젝트 정보와 member id
 	 * @return	오픈 '성공' or '실패' 메시지
 	 */
 	@ApiOperation(value = "펀딩 생성", notes = "펀딩 생성 결과 메시지를 반환한다.", response = Map.class)
 	@PostMapping("/create")
 	public ResponseEntity<Map<String, Object>> create(
-			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) ProjectDto project) {
+			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 
 		try {
-			projectService.create(project);
+			projectService.create(param);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {

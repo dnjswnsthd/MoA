@@ -15,8 +15,9 @@ public class ProjectServiceImpl implements ProjectService {
 	private SqlSession sqlSession;
 
 	@Override
-	public void create(ProjectDto project) throws Exception {
-		sqlSession.getMapper(ProjectMapper.class).create(project);
+	public void create(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).createProject(param);
+		sqlSession.getMapper(ProjectMapper.class).appendProject(param);
 	}
 
 	@Override
