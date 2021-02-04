@@ -27,59 +27,57 @@
     </v-sheet>
     </v-carousel-item>
 </v-carousel>
-<ul class="fundingPadding_2">
+<ul class="fundingListPadding_2">
     <v-row>
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>
-        <img class="width-80 height-80 fundingMargin" src="@/assets/category/design.png" alt="디자인">
+        <img class="width-40 height-40 fundingMargin" src="@/assets/category/design.png" alt="디자인">
         <router-link to="/">디자인</router-link>    
     </li>
     </div>
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>
-        <img class="width-80 height-80 fundingMargin" src="@/assets/category/computer.png" alt="IT·프로그래밍">
+        <img class="width-40 height-40 fundingMargin" src="@/assets/category/computer.png" alt="IT·프로그래밍">
         <router-link to="/">IT·프로그래밍</router-link>    
     </li>
     </div>
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>
-        <img class="width-80 height-80 fundingMargin" src="@/assets/category/translate.png" alt="번역·통역">
+        <img class="width-40 height-40 fundingMargin" src="@/assets/category/translate.png" alt="번역·통역">
         <router-link to="/">번역·통역</router-link>    
     </li>
     </div>
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>
-            <img class="width-80 height-80 fundingMargin" src="@/assets/category/video.png" alt="영상·사진·음향">
+            <img class="width-40 height-40 fundingMargin" src="@/assets/category/video.png" alt="영상·사진·음향">
             <router-link to="/">영상·사진·음향</router-link>    
     </li>
     </div>
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>      
-            <img class="width-80 height-80 fundingMargin" src="@/assets/category/777.png" alt="운세·상담">
+            <img class="width-40 height-40 fundingMargin" src="@/assets/category/777.png" alt="운세·상담">
             <router-link to="/">운세·상담</router-link>            
     </li>
     </div> 
     <v-spacer></v-spacer>
     <div class="fundingCategory fundingMargin">
     <li>
-            <img class="width-80 height-80 fundingMargin" src="@/assets/category/marketing.png" alt="마케팅">
+            <img class="width-40 height-40 fundingMargin" src="@/assets/category/marketing.png" alt="마케팅">
             <router-link to="/">마케팅</router-link>    
     </li>
     </div>
     <v-spacer></v-spacer>
     </v-row>
 </ul>
-<br><br>
 <v-divider></v-divider>
-    <div class="pt-8">
+    <div class="pt-2">
         <h2>당신의 취향을 저격할 프로젝트</h2>
-        <br>
-        <v-row>
+        <v-row class="pt-5"> 
         <v-spacer></v-spacer>
         <div class="width-250">
             <img src="" alt="예시">
