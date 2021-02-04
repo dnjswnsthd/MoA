@@ -214,13 +214,13 @@ public class MemberController {
 	@ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴 결과 메세지를 반환한다.", response = Map.class)
 	@DeleteMapping("/delete")
 	public ResponseEntity<Map<String, Object>> delete(
-			@RequestBody @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) Map<String, Object> param){
+			@PathVariable @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) String id){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		
 		try {
 			//Database에서 아이디 비밀번호 일치 여부 확인
-			memberService.delete(param);
+			memberService.delete(id);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch(Exception e) {
