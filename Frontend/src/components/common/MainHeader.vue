@@ -40,7 +40,7 @@
         <div>
           <v-row>
             <div class="col-6">
-              <h1 class="headerH1 cookie">
+              <h1 class="headerH1 cookie pl-10">
                 "최고의 팀"
                 <br />꾸려보고 싶은가요?
               </h1>
@@ -53,7 +53,7 @@
           </v-row>
         </div>
       </div>
-      <div class="mt-10" style="opacity:0.5;">
+      <div class="bgLogo" style="opacity:0.5;">
         <img src="@/assets/images/main/logo.png" alt="로고">
       </div>
     </v-container>
@@ -87,6 +87,17 @@
           <v-spacer></v-spacer>
         </v-row>
     </div>
+    <div class="mal">
+        <img src="../../assets/images/main/mal.png" alt="말풍선">
+    </div>
+    <div class="mal2">
+        <img src="../../assets/images/main/mal.png" alt="말풍선">
+    </div>
+    <div class="mal3">
+        <img src="../../assets/images/main/mal.png" alt="말풍선">
+    </div>
+
+       
   </header>
 </template>
 
@@ -153,6 +164,7 @@ export default {
   color: white;
 }
 .headerH1 {
+  font-size:45px;
   color: white;
   font-family: 'CookieRunOTF-BOLD';
 }
@@ -161,6 +173,7 @@ export default {
   background-attachment: fixed;
   background-position:center;
   background-size:cover;
+  position:relative;
 }
 /* header .container .row .row div div .v-icon {
         color : white;
@@ -185,11 +198,57 @@ export default {
   border-radius: 50px 50px 0px 0px;
   line-height: 1.8;
   margin: 0 auto;
-  margin-top:200px;
+  margin-top:330px;
 
 }
 .logoutBtn{
     cursor:pointer;
+}
+
+        .mal{         
+            animation-name:moving;
+            animation-duration:2s;
+            animation-iteration-count:infinite;
+            animation-direction: noraml;
+            position:absolute;
+            top:50%;    right:13%;
+            width:50px; height:50px;
+        }
+        .mal img{
+            width:100%;height:100%;
+        }
+        .mal2{
+            animation-name:moving;
+            animation-duration:2s;
+            animation-iteration-count:infinite;
+            animation-direction: noraml;
+            position:absolute;
+            top:45%;    left:45%;
+            width:60px; height:60px;
+        }
+        .mal2 img{
+            width:100%;height:100%;
+        }
+        .mal3{
+            animation-name:moving;
+            animation-duration:2s;
+            animation-iteration-count:infinite;
+            animation-direction: noraml;
+            position:absolute;
+            bottom:35%;    right:22%;
+            width:80px; height:80px;
+        }
+        .mal3 img{
+            width:100%;height:100%;
+        }
+        @keyframes moving{
+            0%{transform:translateY(0px); }
+            50%{transform:translateY(20px); }
+            100%{transform:translateY(0px);}
+        }
+.bgLogo{
+  position:absolute;
+  top:55%; left:20%;
 }
 
 </style>
