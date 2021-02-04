@@ -167,7 +167,7 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	/**
-	 * 
+	 * @param id, pw 비교할 pw와 정보 변경을 하려는 id
 	 * 
 	 */
 	@Override
@@ -175,8 +175,9 @@ public class MemberServiceImpl implements MemberService {
 		if(sqlSession.getMapper(MemberMapper.class).pwcheck(id).equals(pw))
 			return true;
 		else return false;
+	}
 		
-	
+	@Override
 	public void memberUpdatePoint(MemberDto memberDto) throws SQLException {
 		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdatePoint(memberDto);
