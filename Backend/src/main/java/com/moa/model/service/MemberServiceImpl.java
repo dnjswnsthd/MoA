@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.moa.model.MemberDto;
-import com.moa.model.MentorDto;
 import com.moa.model.mapper.MemberMapper;
 
 @Service
@@ -165,14 +164,13 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class).delete(param);
 	}
 
-	
 	/**
-	 * 
+	 * @param id, pw 비교할 pw와 정보 변경을 하려는 id
 	 * 
 	 */
 	@Override
-	public boolean pwcheck(String id,String pw) {
-		if(sqlSession.getMapper(MemberMapper.class).pwcheck(id).equals(pw))
+	public boolean pwcheck(String id, String pw) throws Exception {
+		if (sqlSession.getMapper(MemberMapper.class).pwcheck(id).equals(pw))
 			return true;
 		else return false;
 	}
