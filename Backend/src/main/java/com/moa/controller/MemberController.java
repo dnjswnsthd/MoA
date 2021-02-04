@@ -214,7 +214,7 @@ public class MemberController {
 	@ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴 결과 메세지를 반환한다.", response = Map.class)
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Map<String, Object>> delete(
-			@PathVariable @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) String id){
+			@PathVariable("id") @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) String id){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		
