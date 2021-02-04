@@ -217,7 +217,6 @@ export default {
             http
               .delete('/member/delete',{
                 id: this.memberInfo.id,
-                pw: this.password,
               })
               .then(()=>{
                 this.$store.dispatch('LOGOUT')
