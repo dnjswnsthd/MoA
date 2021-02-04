@@ -15,6 +15,8 @@ public interface ProjectMapper {
 	
 	public ProjectDto[] completeProjectInfo(String id) throws SQLException;
 	
+	public ProjectDto[] interestingProjectInfo(String id) throws SQLException;
+	
 	void memberToComplete(int project_num) throws SQLException;
 	
 	void deleteMemberProject(int project_num) throws SQLException;
@@ -26,4 +28,6 @@ public interface ProjectMapper {
 	void projectAppend(Map<String, Object> param) throws SQLException;
 
 	void denial(Map<String, Object> param) throws SQLException;
+	
+	void interesting(Map<String, Object> param) throws SQLException;
 }
