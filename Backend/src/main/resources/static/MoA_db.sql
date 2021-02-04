@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `moa` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `moa`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: moa
@@ -19,17 +21,15 @@
 -- Table structure for table `complete_project`
 --
 
-USE moa;
-
 DROP TABLE IF EXISTS `complete_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `complete_project` (
   `project_num` int NOT NULL AUTO_INCREMENT,
   `id` varchar(45) NOT NULL,
-  KEY `completeprojecttomember` (`id`),
   KEY `completeprojecttoprject` (`project_num`),
-  CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  KEY `completeprojecttomember` (`id`),
+  CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `completeprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,9 +54,9 @@ DROP TABLE IF EXISTS `interesting_project`;
 CREATE TABLE `interesting_project` (
   `project_num` int NOT NULL AUTO_INCREMENT,
   `id` varchar(45) NOT NULL,
-  KEY `interestingprojecttomember` (`id`),
   KEY `interestingprojecttoprject` (`project_num`),
-  CONSTRAINT `interestingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  KEY `interestingprojecttomember` (`id`),
+  CONSTRAINT `interestingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `interestingprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +67,7 @@ CREATE TABLE `interesting_project` (
 
 LOCK TABLES `interesting_project` WRITE;
 /*!40000 ALTER TABLE `interesting_project` DISABLE KEYS */;
-INSERT INTO `interesting_project` VALUES (1,'song@naver.com'),(1,'orange5413@naver.com'),(2,'orange5414@naver.com'),(2,'orange5413@naver.com');
+INSERT INTO `interesting_project` VALUES (1,'song@naver.com'),(1,'orange5413@naver.com'),(2,'orange5413@naver.com');
 /*!40000 ALTER TABLE `interesting_project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('dnjswns@naver.com','dnjswns1','won',26,'design',2,'010-2853-1234','web','aric','mohavi',0,0,'ㅎㅇㅎㅇㅎㅇ'),('dnjswnsthd@naver.com','dnjswns2','Song',26,'Computer',0,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ'),('orange5413@naver.com','ssafy','yoon',30,'computer',1,'010-1234-1234','A','B','C',0,0,'introduce'),('orange5414@naver.com','ssafy','yoon',30,'computer',2,'010-1234-1234','A','B','C',0,0,'introduce'),('song@naver.com','dnjswns1','Song',26,'Computer',1,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ');
+INSERT INTO `member` VALUES ('dnjswns@naver.com','dnjswns1','won',26,'design',2,'010-2853-1234','web','aric','mohavi',0,0,'ㅎㅇㅎㅇㅎㅇ'),('dnjswnsthd@naver.com','dnjswns2','Song',26,'Computer',0,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ'),('orange5413@naver.com','ssafy','yoon',30,'computer',1,'010-1234-1234','A','B','C',0,1000000,'introduce'),('orange5414@naver.com','ssafy','yoon',30,'computer',2,'010-1234-1234','A','B','C',0,12345,'introduce'),('song@naver.com','dnjswns1','Song',26,'Computer',1,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `member_project` (
   `id` varchar(30) NOT NULL,
   KEY `member_projecttomember_idx` (`id`),
   KEY `member_projecttoproject_idx` (`project_num`),
-  CONSTRAINT `member_projecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `member_projecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `member_projecttoproject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -270,7 +270,7 @@ CREATE TABLE `waiting_project` (
   `id` varchar(45) NOT NULL,
   KEY `waitingprojecttomember_idx` (`id`),
   KEY `waitingprojecttoprject_idx` (`project_num`),
-  CONSTRAINT `watingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `watingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `watingprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -294,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-04 14:07:53
+-- Dump completed on 2021-02-04 18:56:22
