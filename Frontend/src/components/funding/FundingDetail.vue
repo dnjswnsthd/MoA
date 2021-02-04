@@ -117,7 +117,7 @@
                         </v-list>
                     </v-menu>
                     
-                    <v-btn style="margin-left:20px;">일정 관리</v-btn>
+                    <v-btn style="margin-left:20px;" @click="moveSchedule">일정 관리</v-btn>
                     </v-toolbar>
                 </v-sheet>
                 <v-sheet height="600">
@@ -264,6 +264,9 @@
       },
       rnd (a, b) {
         return Math.floor((b - a + 1) * Math.random()) + a
+      },
+      moveSchedule(){
+        this.$router.push('/schedule');
       },
     },
   }
