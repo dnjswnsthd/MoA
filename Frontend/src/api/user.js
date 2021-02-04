@@ -20,14 +20,14 @@ function login(member, success, fail) {
     .catch(fail);
 }
 
-// async function findById(id, success, fail) {
-//   http.defaults.headers["access-token"] = window.localStorage.getItem(
-//     "access-token"
-//   );
-//   await http
-//     .get(`/member/info/${id}`)
-//     .then(success)
-//     .catch(fail);
-// }
+async function findById(id, success, fail) {
+  http.defaults.headers["access-token"] = window.localStorage.getItem(
+    "access-token"
+  );
+  await http
+    .get(`/member/mypage/${id}`)
+    .then(success)
+    .catch(fail);
+}
 
-export { login };
+export { login, findById };
