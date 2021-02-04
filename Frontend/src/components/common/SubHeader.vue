@@ -9,12 +9,12 @@
                   </div>
                 <v-spacer></v-spacer>                
                     <li class="width-120 centerText height-70">
-                    <router-link to="/fundingopen">펀딩 오픈</router-link>
+                    <router-link to="/fundingopen" class="cookie">펀딩 오픈</router-link>
                     </li>
                     <li class="width-120 centerText height-70">
-                    <router-link to="/mypage">My Page</router-link>
+                    <router-link to="/mypage" class="cookie">My Page</router-link>
                     </li>
-                    <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
+                    <li class="width-120 centerText height-70 logoutBtn cookie" @click.prevent="onClickLogout">
                     LOGOUT
                     </li>
             </v-row>
@@ -30,10 +30,10 @@
                 </div>
                 <v-spacer></v-spacer>
                 <li class="width-120 centerText height-70">
-                    <router-link to="/join">회원가입</router-link>
+                    <router-link to="/join" class="cookie">회원가입</router-link>
                 </li> 
                 <li class="width-120 centerText height-70">
-                    <router-link to="/login">로그인</router-link>                         
+                    <router-link to="/login" class="cookie">로그인</router-link>                         
                 </li>
             </v-row>               
         </v-container>

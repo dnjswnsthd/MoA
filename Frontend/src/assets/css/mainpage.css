@@ -1,5 +1,10 @@
 @charset "utf-8";
-
+.mainTitle {
+  margin: 0 auto;
+  padding-bottom: 5px;
+  width: 20%;
+  border-bottom: 1px solid #1976d2;
+}
 .funding {
   padding: 0;
   background-size: 100% 100%;
