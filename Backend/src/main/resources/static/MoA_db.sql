@@ -29,7 +29,7 @@ CREATE TABLE `complete_project` (
   `id` varchar(45) NOT NULL,
   KEY `completeprojecttoprject` (`project_num`),
   KEY `completeprojecttomember` (`id`),
-  CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `completeprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -118,7 +118,7 @@ CREATE TABLE `member_project` (
   `id` varchar(30) NOT NULL,
   KEY `member_projecttomember_idx` (`id`),
   KEY `member_projecttoproject_idx` (`project_num`),
-  CONSTRAINT `member_projecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `member_projecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`) ON DELETE CASCADE,
   CONSTRAINT `member_projecttoproject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -294,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-04 18:39:46
+-- Dump completed on 2021-02-04 18:56:22
