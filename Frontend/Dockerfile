@@ -1,5 +1,5 @@
 FROM node:lts-alpine as build-stage
-WORKDIR /homepage
+WORKDIR /moa
 COPY package*.json ./
 
 RUN npm install
@@ -8,8 +8,8 @@ RUN npm run build
 
 FROM nginx:stable-alpine as production-stage
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./nginx/homepage.conf /etc/nginx/conf.d/homepage.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-COPY --from=build-stage ./homepage/dist /usr/share/nginx/html/homepage
-EXPOSE 80
+COPY --from=build-stage ./moa/dist /usr/share/nginx/html
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
