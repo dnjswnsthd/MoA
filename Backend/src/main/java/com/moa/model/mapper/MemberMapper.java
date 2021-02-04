@@ -22,6 +22,8 @@ public interface MemberMapper {
 
 	public void memberUpdate(MemberDto memberDto) throws SQLException;
 
+	public void memberUpdatePoint(MemberDto memberDto) throws SQLException;
+	
 	public MemberDto memberSearch(MemberDto memberDto) throws SQLException;
 
 	public void updateTempPassword(Map<String, String> map) throws SQLException;
@@ -33,5 +35,7 @@ public interface MemberMapper {
 	public MenteeDto menteeInfo(String id) throws SQLException;
 
 	public int getStatus(String id) throws SQLException;
+
+	public String pwcheck(String id);
 
 }

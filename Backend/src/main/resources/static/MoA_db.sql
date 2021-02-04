@@ -3,7 +3,6 @@
 -- Host: 127.0.0.1    Database: moa
 -- ------------------------------------------------------
 -- Server version	8.0.22
--- 2021_02_02 complete_project 추가
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,6 +19,8 @@
 -- Table structure for table `complete_project`
 --
 
+USE moa;
+
 DROP TABLE IF EXISTS `complete_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -30,7 +31,7 @@ CREATE TABLE `complete_project` (
   KEY `completeprojecttoprject` (`project_num`),
   CONSTRAINT `completeprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
   CONSTRAINT `completeprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +40,35 @@ CREATE TABLE `complete_project` (
 
 LOCK TABLES `complete_project` WRITE;
 /*!40000 ALTER TABLE `complete_project` DISABLE KEYS */;
+INSERT INTO `complete_project` VALUES (1,'song@naver.com'),(1,'dnjswnsthd@naver.com'),(1,'dnjswns@naver.com');
 /*!40000 ALTER TABLE `complete_project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `interesting_project`
+--
+
+DROP TABLE IF EXISTS `interesting_project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `interesting_project` (
+  `project_num` int NOT NULL AUTO_INCREMENT,
+  `id` varchar(45) NOT NULL,
+  KEY `interestingprojecttomember` (`id`),
+  KEY `interestingprojecttoprject` (`project_num`),
+  CONSTRAINT `interestingprojecttomember` FOREIGN KEY (`id`) REFERENCES `member` (`id`),
+  CONSTRAINT `interestingprojecttoprject` FOREIGN KEY (`project_num`) REFERENCES `project` (`project_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `interesting_project`
+--
+
+LOCK TABLES `interesting_project` WRITE;
+/*!40000 ALTER TABLE `interesting_project` DISABLE KEYS */;
+INSERT INTO `interesting_project` VALUES (1,'song@naver.com'),(1,'orange5413@naver.com'),(2,'orange5414@naver.com'),(2,'orange5413@naver.com');
+/*!40000 ALTER TABLE `interesting_project` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -73,7 +102,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES ('dnjswns@naver.com','dnjswns1','won',26,'design',2,'010-2853-1234','web','aric','mohavi',0,0,'ㅎㅇㅎㅇㅎㅇ'),('dnjswnsthd@naver.com','dnjswns2','Song',26,'Computer',0,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ'),('song@naver.com','dnjswns1','Song',26,'Computer',1,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ');
+INSERT INTO `member` VALUES ('dnjswns@naver.com','dnjswns1','won',26,'design',2,'010-2853-1234','web','aric','mohavi',0,0,'ㅎㅇㅎㅇㅎㅇ'),('dnjswnsthd@naver.com','dnjswns2','Song',26,'Computer',0,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ'),('orange5413@naver.com','ssafy','yoon',30,'computer',1,'010-1234-1234','A','B','C',0,0,'introduce'),('orange5414@naver.com','ssafy','yoon',30,'computer',2,'010-1234-1234','A','B','C',0,0,'introduce'),('song@naver.com','dnjswns1','Song',26,'Computer',1,'010-2853-3195','Spring','Vue','DB',0,0,'ㅎㅇㅎㅇ');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +214,7 @@ CREATE TABLE `project` (
   `mentor_chk` varchar(10) NOT NULL,
   `deadline` date NOT NULL,
   PRIMARY KEY (`project_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +223,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES (1,'웹페이지 만들자','2020-02-06','2020-02-25','프로그래밍',5,100000,'ㅎㅇㅎㅇㅎㅇ','멘토필요','2020-02-05');
+INSERT INTO `project` VALUES (1,'웹페이지 만들자','2020-02-06','2020-02-25','프로그래밍',5,100000,'ㅎㅇㅎㅇㅎㅇ','멘토필요','2020-02-05'),(2,'2번','2021-01-01','2021-01-14','프로그래밍',5,100000,'테스트','테스트','2021-01-10'),(3,'3번','2021-02-01','2021-02-14','부우자 되기',5,1000000,'조준형의 부우자 프로젝트','조준형','2021-02-10');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,7 +281,7 @@ CREATE TABLE `waiting_project` (
 
 LOCK TABLES `waiting_project` WRITE;
 /*!40000 ALTER TABLE `waiting_project` DISABLE KEYS */;
-INSERT INTO `waiting_project` VALUES (1,'song@naver.com'),(1,'dnjswns@naver.com');
+INSERT INTO `waiting_project` VALUES (1,'song@naver.com'),(1,'dnjswns@naver.com'),(2,'dnjswns@naver.com');
 /*!40000 ALTER TABLE `waiting_project` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -265,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-02 13:50:35
+-- Dump completed on 2021-02-04 14:07:53
