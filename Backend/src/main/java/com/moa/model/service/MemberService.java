@@ -11,7 +11,7 @@ public interface MemberService {
 
 	public void join(Map<String, Object> param) throws Exception;
 
-	public void delete(Map<String, Object> param) throws Exception;
+	public void delete(String id) throws Exception;
 
 	public MemberDto memberUpdate(MemberDto memberDto) throws Exception;
 	
