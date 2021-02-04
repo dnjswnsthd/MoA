@@ -21,7 +21,7 @@
         justify="center"
         >
         <div class="display-3">
-            {{ slide }} Slide
+            {{ slide }} 
         </div>
         </v-row>
     </v-sheet>
@@ -80,26 +80,35 @@
         <v-row class="pt-5"> 
         <v-spacer></v-spacer>
         <div class="width-250">
-            <img src="" alt="예시">
+            <img src="@/assets/images/funding/fox.jpg" class="width-250 height-200" alt="예시">
+            <br>
             <div>
                 <v-progress-linear
                 color="#CE93D8"
                 buffer-value="0"
-                value="20"
+                value="80"
                 stream
                 ></v-progress-linear>
             </div>
             <ul class="pt-4">
                 <v-row>
-                    <li>펀딩 제목</li>
-                    <li>|</li>
-                    <li>펀딩 카테고리</li>
+                    <li>사막여우 보호 프로젝트</li>
+                    <p> | </p>
+                    <li>카테고리 : 마케팅</li>
+                </v-row>
+            </ul>
+            <ul class="pt-4">
+                <v-row>
+                    <li>기간 : ~2/15</li>
+                    <li> | </li>
+                    <li>담당자 : 조준형</li>
                 </v-row>
             </ul>
         </div>
         <v-spacer></v-spacer>
         <div class="width-250">
-            <img src="" alt="예시">
+            <img src="@/assets/images/funding/tarocard.jpg" class="width-250 height-200" alt="예시">
+            <br>
             <div>
                 <v-progress-linear
                 color="#CE93D8"
@@ -109,28 +118,43 @@
                 ></v-progress-linear>
             <ul class="pt-4">
                 <v-row>
-                    <li>펀딩 제목</li>
-                    <li>|</li>
-                    <li>펀딩 카테고리</li>
+                    <li>좀 더 색다른 타로카드</li>
+                    <p> | </p>
+                    <li>카테고리 : 운세·상담</li>
+                </v-row>
+            </ul>
+            <ul class="pt-4">
+                <v-row>
+                    <li>기간 : ~2/18</li>
+                    <li> | </li>
+                    <li>담당자 : 조준형</li>
                 </v-row>
             </ul>
             </div>
         </div>
         <v-spacer></v-spacer>
         <div class="width-250">
-            <img src="" alt="예시">
+            <img src="@/assets/images/funding/translate.jpg" class="width-250 height-200" alt="예시">
+            <br>
             <div>
                 <v-progress-linear
                 color="#CE93D8"
                 buffer-value="0"
-                value="20"
+                value="40"
                 stream
                 ></v-progress-linear>
-                <ul class="pt-4">
+            <ul class="pt-4">
                 <v-row>
-                    <li>펀딩 제목</li>
-                    <li>|</li>
-                    <li>펀딩 카테고리</li>
+                    <li>쉽게 시작하는 통역</li>
+                    <p> | </p>
+                    <li>카테고리 : 번역·통역</li>
+                </v-row>
+            </ul>
+            <ul class="pt-4">
+                <v-row>
+                    <li>기간 : ~2/22</li>
+                    <li> | </li>
+                    <li>담당자 : 조준형</li>
                 </v-row>
             </ul>
             </div>
@@ -139,6 +163,7 @@
         <br><br><br><br><br>
         </v-row>
     </div>
+    <br><br>
 </div>
 </template>
 
@@ -155,11 +180,11 @@ export default {
         'deep-purple accent-4',
         ],
         slides: [
-        'First',
-        'Second',
-        'Third',
-        'Fourth',
-        'Fifth',
+        '반응형 웹 디자인',
+        '오늘의 운세는?',
+        '골목 시장 상권 살리기',
+        '디자이너를 위한 프로젝트',
+        '모바일 앱 제작',
         ],
     }
     }
