@@ -215,20 +215,19 @@ export default {
         .then((response)=>{
           if(response.data.message=='success'){
             http
-              .delete('/member/delete',{
-                id: this.memberInfo.id,
-              })
+              .delete(`/member/delete/${this.memberInfo.id}`)
               .then(()=>{
+                console.log("@@@");
                 this.$store.dispatch('LOGOUT')
                 .then(() => {
                   // this.$router.push({ name: "" });
-                                  alert('삭제 성공!');
+                  
+                  alert('삭제 성공!');
                   if (this.$route.path !== '/') this.$router.replace('/');
                 })
                 .catch(() => {
                   console.log('로그아웃 문제!!!');
                 });
-
               })
               .catch(()=>{
                 alert('삭제 실패!');
