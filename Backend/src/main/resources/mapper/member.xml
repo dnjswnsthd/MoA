@@ -64,6 +64,13 @@
 		introduce = #{introduce}
 		where id = #{id}
 	</update>
+	
+	<!-- member update point -->
+	<update id="memberUpdatePoint" parameterType="MemberDto">
+		update member set
+		point = #{point}
+		where id = #{id}
+	</update>
 
 	<!-- member delete -->
 	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
