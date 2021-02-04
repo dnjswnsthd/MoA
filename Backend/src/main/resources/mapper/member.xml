@@ -72,7 +72,7 @@
 
 	<!-- member delete -->
 	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="Map">
 		delete from member
 		where id =
 		#{id}
