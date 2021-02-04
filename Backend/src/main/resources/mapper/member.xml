@@ -119,4 +119,11 @@
 		mentee.id
 		where member.id = #{id}
 	</select>
+	
+	<!-- pw 검사 -->
+	<select id="pwcheck" parameterType="String" resultType="String">
+		select pw
+		from member
+		where id = #{id}
+	</select>
 </mapper>

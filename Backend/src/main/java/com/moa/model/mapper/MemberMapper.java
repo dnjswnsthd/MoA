@@ -34,4 +34,6 @@ public interface MemberMapper {
 
 	public int getStatus(String id) throws SQLException;
 
+	public String pwcheck(String id);
+
 }
