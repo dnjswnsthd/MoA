@@ -9,12 +9,12 @@
         </div>
         <v-spacer></v-spacer>
         <li class="width-120 centerText height-70">
-          <router-link to="/fundingopen">펀딩 오픈</router-link>
+          <router-link to="/fundingopen" style="color:#fff;" class="cookie">펀딩 오픈</router-link>
         </li>
         <li class="width-120 centerText height-70">
-          <router-link to="/mypage">My Page</router-link>
+          <router-link to="/mypage" style="color:#fff;" class="cookie">My Page</router-link>
         </li>
-        <li class="width-120 centerText height-70 logoutBtn" @click.prevent="onClickLogout">
+        <li class="width-120 centerText height-70 logoutBtn cookie" @click.prevent="onClickLogout" style="color:#fff;">
           LOGOUT
         </li>
       </v-row>
@@ -30,17 +30,17 @@
         </div>
         <v-spacer></v-spacer>
         <li class="width-120 centerText height-70">
-          <router-link to="/join">회원가입</router-link>
+          <router-link to="/join" style="color:#fff;" class="cookie">회원가입</router-link>
         </li>
         <li class="width-120 centerText height-70">
-          <router-link to="/login">로그인</router-link>
+          <router-link to="/login" style="color:#fff;" class="cookie">로그인</router-link>
         </li>
       </v-row>
       <div class="headerPadding">
         <div>
           <v-row>
             <div class="col-6">
-              <h1 class="headerH1">
+              <h1 class="headerH1 cookie">
                 "최고의 팀"
                 <br />꾸려보고 싶은가요?
               </h1>
@@ -61,27 +61,27 @@
         <v-row>
           <v-spacer></v-spacer>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/design.png" alt="디자인">
             <router-link to="/fundinglist">디자인</router-link>
           </div>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/computer.png" alt="디자인">
             <router-link to="/fundinglist">IT·프로그래밍</router-link>
           </div>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/translate.png" alt="디자인">
             <router-link to="/fundinglist">번역·통역</router-link>
           </div>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/video.png" alt="디자인">
             <router-link to="/fundinglist">영상·사진·음향</router-link>
           </div>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/777.png" alt="디자인">
             <router-link to="/fundinglist">운세·상담</router-link>
           </div>
           <div class="col-2 mainCategory">
-            <v-icon class="viconColor">mdi-share-variant</v-icon><br />
+            <img class="width-40 height-40 centerContent" src="@/assets/category/marketing.png" alt="디자인">
             <router-link to="/fundinglist">마케팅</router-link>
           </div>
           <v-spacer></v-spacer>
@@ -119,6 +119,9 @@ export default {
 
 <style>
 
+.cookie{
+  font-family: 'CookieRunOTF-Bold';
+}
 .button {
   background-color: white;
   color: black;
@@ -151,10 +154,11 @@ export default {
 }
 .headerH1 {
   color: white;
+  font-family: 'CookieRunOTF-BOLD';
 }
 .backgroundImg {
   
-  background-image: url('../../assets/images/main/mainBg.jpg');
+  background-image: url('../../assets/images/main/bg05.png');
   background-size: 100% 100%;
 }
 /* header .container .row .row div div .v-icon {
@@ -186,4 +190,5 @@ export default {
 .logoutBtn{
     cursor:pointer;
 }
+
 </style>
