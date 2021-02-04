@@ -1,51 +1,39 @@
 <template>
     <div class="width-1000 centerContent">
         <h1>펀딩오픈</h1>
-        <div class="width-1000 centerContent fundingPadding">
-            <h2>카테고리</h2> 
-            <ul class="fundingPadding_2">
+        <div class="width-1000 centerContent px-10 py-10">
+            <h2 class="pl-20">카테고리</h2> 
+            <ul class="px-20 py-20">
                 <v-row>
-                <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="centerContent">디자인</p>
-                    </div>      
+                
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="centerContent">디자인</p>
                 </li>
                 <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">IT·프로그래밍</p>
-                    </div>      
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="fundingMargin">IT·프로그래밍</p>
                 </li>
                 <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">번역·통역</p>
-                    </div>      
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="fundingMargin">번역·통역</p>
                 </li>
                 <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">영상·사진·음향</p>
-                    </div>      
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="fundingMargin">영상·사진·음향</p>
                 </li>
                 <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">운세·상담</p>
-                    </div>      
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="fundingMargin">운세·상담</p>
                 </li>
                 <v-spacer></v-spacer>
-                <li>
-                    <div class="fundingCategory">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon><br>
-                        <p class="fundingMargin">마케팅</p>
-                    </div>      
+                <li class="my-10">
+                    <v-icon class="viconColor">mdi-share-variant</v-icon><br>
+                    <p class="fundingMargin">마케팅</p>
                 </li>
                 <v-spacer></v-spacer>
                 </v-row>
@@ -83,7 +71,7 @@
             <v-spacer></v-spacer>
                 <h3>세부내용</h3> 
                 <v-spacer></v-spacer>
-                <div class="fundingPadding fundingMargin">
+                <div class="px-10 py-10 fundingMargin">
                 <input type="text" class="fundingBox">
                 </div>
                 <v-spacer></v-spacer>
@@ -117,16 +105,7 @@ export default {
     name: "FundingOpen"
 }
 </script>
-padding margin
-
-
-
 
 <style>
-    .fundingPadding {
-        padding: 10px;
-    }
-    .fundingPadding_2 {
-        padding: 20px;
-    }
+
 </style> 
