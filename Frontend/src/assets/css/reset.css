@@ -2,7 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Wemakeprice-Bold';
+  font-family: 'Bazzi';
 }
 img {
   display: block;
@@ -12,7 +12,22 @@ li {
   list-style: none;
 }
 a {
+  color: rgba(148, 0, 211, 1);
   text-decoration: none;
+}
+@font-face {
+  font-family: 'CookieRunOTF-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bazzi';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -29,7 +44,9 @@ a {
   font-weight: normal;
   font-style: normal;
 }
-
+.width-40 {
+  width: 40px;
+}
 .width-50 {
   width: 50px;
 }
@@ -105,7 +122,9 @@ a {
 .fullWidth {
   width: 100%;
 }
-
+.height-40 {
+  width: 40px;
+}
 .height-50 {
   height: 50px;
 }
@@ -192,4 +211,3 @@ a {
 .centerContent {
   margin: 0 auto;
 }
-

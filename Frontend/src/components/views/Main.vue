@@ -1,8 +1,8 @@
 <template>
     <v-container class="col-8">
-        <div class="progressing">
-            <h2>진행중인 팀 펀딩</h2>
-            <div>
+        <div class="progressing mt-10">
+            <h2 class="centerText mainTitle">진행중인 팀 펀딩</h2>
+            <div class="mt-10">
                 <v-row class="centerContent my-10 col-12">
                     <v-spacer></v-spacer>
                     <div class="funding funding01 col-3 height-300">
@@ -84,9 +84,9 @@
             </div>
         </div>
         <div>
-            <h2>멘토 랭킹</h2>
-            <div>
-                <v-row class="fundingRow my-10 col-12">
+            <h2 class="centerText mainTitle">멘토 랭킹</h2>
+            <div class="mt-10">
+                <v-row class="fundingRow col-12">
                     <!-- <v-spacer></v-spacer> -->
                     <div class="col-4 height-300">
                         <v-col class="rankingBox">
