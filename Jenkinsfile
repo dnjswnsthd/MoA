@@ -34,7 +34,7 @@ pipeline {
                   | xargs -r docker container rm'
                 sh 'docker images -f dangling=true && \
                     docker rmi $(docker images -f "dangling=true" -q)'
-                sh 'docker run -d --name moafront -p 8080:8080 moafront:latest'
+                sh 'docker run -d --name moafront -p 80:80 moafront:latest'
                 sh 'docker run -d --name moaback -p 8000:8000 moaback:latest'
             }
         }
