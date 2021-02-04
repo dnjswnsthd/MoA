@@ -176,5 +176,9 @@ public class MemberServiceImpl implements MemberService {
 			return true;
 		else return false;
 		
+	
+	public void memberUpdatePoint(MemberDto memberDto) throws SQLException {
+		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
+		sqlSession.getMapper(MemberMapper.class).memberUpdatePoint(memberDto);
 	}
 }

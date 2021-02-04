@@ -111,4 +111,38 @@
 		delete from member_project
 		where project_num = #{project_num}
 	</delete>
+	
+	<!-- interesting project -->
+	<!-- 관심 프로젝트 등록 -->
+	<insert id="interesting" parameterType="Map">
+		insert into
+		interesting_project(project_num, id)
+		values
+		(#{project_num}, #{id})
+	</insert>
+	
+	<!-- interesting project search -->
+	<!-- 관심 프로젝트 조회 -->
+	<select id="interestingProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from interesting_project inner join project on
+		interesting_project.project_num = project.project_num
+		where
+		interesting_project.id = #{id}
+	</select>
+	
+	<!-- interestingDelete project -->
+	<!-- 관심 프로젝트 삭제 -->
+	<delete id="interestingDelete" parameterType="Map">
+		delete from
+		interesting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
 </mapper>

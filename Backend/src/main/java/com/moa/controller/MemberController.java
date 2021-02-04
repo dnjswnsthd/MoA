@@ -232,4 +232,24 @@ public class MemberController {
 		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "회원 포인트 수정", notes = "회원 포인트를 갱신하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
+	@PutMapping("/updatepoint")
+	public ResponseEntity<Map<String, Object>> memberUpdatePoint(
+			@RequestBody @ApiParam(value = "멤머 Dto 값", required = true) MemberDto memberDto){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			//업데이트 데이터 전송시 updateMember 활용.
+			memberService.memberUpdatePoint(memberDto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		
+		} catch(Exception e) {
+				logger.error("수정 실패 : {}", e);
+				resultMap.put("massage", e.getMessage());
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+	
 }
