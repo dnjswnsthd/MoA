@@ -32,4 +32,6 @@ public interface ProjectMapper {
 	void denial(Map<String, Object> param) throws SQLException;
 	
 	void interesting(Map<String, Object> param) throws SQLException;
+	
+	void interestingDelete(Map<String, Object> param) throws SQLException;
 }

@@ -66,5 +66,10 @@ public class ProjectServiceImpl implements ProjectService {
 	public void interesting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).interesting(param);
 	}
+	
+	@Override
+	public void interestingDelete(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).interestingDelete(param);
+	}
 
 }
