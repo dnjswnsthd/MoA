@@ -157,9 +157,10 @@ export default {
   font-family: 'CookieRunOTF-BOLD';
 }
 .backgroundImg {
-  
-  background-image: url('../../assets/images/main/bg05.png');
-  background-size: 100% 100%;
+  background-image: url('../../assets/images/main/bg_6.jpg');
+  background-attachment: fixed;
+  background-position:center;
+  background-size:cover;
 }
 /* header .container .row .row div div .v-icon {
         color : white;
@@ -184,7 +185,7 @@ export default {
   border-radius: 50px 50px 0px 0px;
   line-height: 1.8;
   margin: 0 auto;
-  margin-top:100px;
+  margin-top:200px;
 
 }
 .logoutBtn{
