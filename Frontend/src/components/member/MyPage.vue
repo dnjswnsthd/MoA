@@ -1,35 +1,35 @@
 <template>
     <div class="cardBox">
             <h1 class="width-1000 centerText">내 정보</h1>
-            <p class="myPoint rightText">포인트: 100,000</p>
+            <p class="myPoint rightText">포인트: {{memberInfo.point}}</p>
 
         <form class="width-1000">
             <v-row class="width-1000" >
                 <v-spacer></v-spacer>
-                <v-text-field label="ID" type="text" class="width-700"></v-text-field>
+                <v-text-field label="ID" type="text" class="width-700" v-model="memberInfo.id" readonly></v-text-field>
                 <v-spacer></v-spacer>
             </v-row>
         
             <v-row class="width-1000" >
             <v-spacer></v-spacer>
-            <v-text-field label="NAME" type="text" class="width-250"></v-text-field>
+            <v-text-field label="NAME" type="text" class="width-250" v-model="memberInfo.name" readonly></v-text-field>
             <v-spacer></v-spacer>
-            <v-text-field label="AGE" type="text" class="width-250"></v-text-field> 
+            <v-text-field label="AGE" type="text" class="width-250" v-model="memberInfo.age" readonly></v-text-field> 
             <v-spacer></v-spacer>
             </v-row>
         
             <v-row class="width-1000">
                 <v-spacer></v-spacer>
-                <v-text-field label="MAJOR" type="text" class="width-700"></v-text-field>
+                <v-text-field label="MAJOR" type="text" class="width-700" v-model="memberInfo.major" ></v-text-field>
                 <v-spacer></v-spacer>
             </v-row>
             <v-row class="width-1000">
                 <v-spacer></v-spacer>
-                <v-text-field label="favorite 1" type="text" class="width-100"></v-text-field>
+                <v-text-field label="favorite 1" type="text" class="width-100" v-model="memberInfo.favorite_1"></v-text-field>
                 <v-spacer></v-spacer>
-                <v-text-field label="favorite 2" type="text" class="width-100"></v-text-field>
+                <v-text-field label="favorite 2" type="text" class="width-100" v-model="memberInfo.favorite_2"></v-text-field>
                 <v-spacer></v-spacer>
-                <v-text-field label="favorite 3" type="text" class="width-100"></v-text-field>
+                <v-text-field label="favorite 3" type="text" class="width-100" v-model="memberInfo.favorite_3"></v-text-field>
                 <v-spacer></v-spacer>
             </v-row>
         </form>
@@ -47,24 +47,95 @@
                 </v-btn>
                 <v-spacer></v-spacer>
                 
-                <v-btn
+                <!-- <v-btn
                 color="primary"
                 text
                 >
-                <router-link to="/">
                 내 정보 변경
-                </router-link>
-                </v-btn>
-                
-                <v-spacer></v-spacer>
-                <v-btn
-                color="primary"
-                text
+                </v-btn> -->
+                <v-dialog
+                  v-model="modifyDialog"
+                  persistent
+                  max-width="290"
                 >
-                <router-link to="/">
-                탈퇴하기
-                </router-link>
-                </v-btn>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="primary"
+                      text
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      내 정보 변경
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">
+                      비밀번호 확인
+                    </v-card-title>
+                    <v-card-text>
+                      <v-text-field label="Password" type="password" class="width-700" v-model="password"></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="modifyDialog = false"
+                      >
+                        취소
+                      </v-btn>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="modifyMember"
+                      >
+                        변경
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-spacer></v-spacer>
+                <v-dialog
+                  v-model="deleteDialog"
+                  persistent
+                  max-width="290"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="primary"
+                      text
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      탈퇴 하기
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">
+                      비밀번호 확인
+                    </v-card-title>
+                    <v-card-text>
+                      <v-text-field label="Password" type="password" class="width-700" v-model="password"></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="deleteDialog = false"
+                      >
+                        취소
+                      </v-btn>
+                      <v-btn
+                        color="green darken-1"
+                        text
+                        @click="deleteMember"
+                      >
+                        탈퇴
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
                 <v-spacer></v-spacer>
             </v-row>
         </div>
@@ -109,8 +180,105 @@
 
 
 <script>
+import http from '@/util/http-common';
+import { mapState } from 'vuex';
 export default {
-    name: "MyPage"
+  computed: {
+    ...mapState(['memberInfo', 'isLogin']),
+  },
+  data() {
+    return {
+      modifyDialog: false,
+      deleteDialog: false,
+      password:'',
+    };
+  },
+  created() {
+    http
+      .get(`/member/mypage/${this.memberInfo.id}`)
+      .then(({ data }) => {
+        this.member = data;
+      })
+      .catch(() => {
+        alert('에러가 발생하였습니다.');
+      });
+  },
+  methods: {
+    deleteMember() {
+      
+      this.deleteDialog = false;
+      http
+        .post('/member/pwcheck',{
+          id: this.memberInfo.id,
+          pw: this.password,
+        })
+        .then((response)=>{
+          if(response.data.message=='success'){
+            http
+              .delete(`/member/delete/${this.memberInfo.id}`)
+              .then(()=>{
+                console.log("@@@");
+                this.$store.dispatch('LOGOUT')
+                .then(() => {
+                  // this.$router.push({ name: "" });
+                  
+                  alert('삭제 성공!');
+                  if (this.$route.path !== '/') this.$router.replace('/');
+                })
+                .catch(() => {
+                  console.log('로그아웃 문제!!!');
+                });
+              })
+              .catch(()=>{
+                alert('삭제 실패!');
+              })
+          }
+        })
+        .catch(()=>{
+          alert('에러 발생!');
+        })
+    },
+   
+    modifyMember() {
+      this.modifyDialog = false;
+      console.log('1');
+      http
+        .post('/member/pwcheck',{
+          id: this.memberInfo.id,
+          pw: this.password,
+        })
+        .then((response)=>{
+          console.log('2');
+          console.log(response);
+          if(response.data.message=='success'){
+            console.log('4');
+            http
+              .put('/member/update',{
+                id: this.memberInfo.id,
+                name: this.memberInfo.name,
+                age: this.memberInfo.age,
+                major: this.memberInfo.major,
+                phone: this.memberInfo.phone,
+                favorite_1: this.memberInfo.favorite_1,
+                favorite_2: this.memberInfo.favorite_2,
+                favorite_3: this.memberInfo.favorite_3,
+                introduce: this.memberInfo.introduce,
+              })
+              .then(()=>{
+                alert('수정 성공!');
+              })
+              .catch(()=>{
+                alert('수정 실패!');
+              })
+          }
+        })
+        .catch(()=>{
+          console.log('3');
+          alert('에러 발생!');
+        })
+    },
+
+  },
 }
 </script>
 
