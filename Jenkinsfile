@@ -34,8 +34,15 @@ pipeline {
                   | xargs -r docker container rm'
                 sh 'docker images -f dangling=true && \
                     docker rmi $(docker images -f "dangling=true" -q)'
-                sh 'docker run -d --name moafront -p 80:80 moafront:latest'
-                sh 'docker run -d --name moaback -p 8000:8000 moaback:latest'
+                sh 'docker run -d --name moafront \
+                    -p 80:80 \
+                    -p 443:443 \
+                    -v /home/ubuntu/sslkey/:/var/jenkins_home/workspace/test/sslkey/ \
+                    --network moa \
+                    moafront:latest'
+                sh 'docker run -d --name moaback \
+                --network moa \
+                moaback:latest'
             }
         }
     }
