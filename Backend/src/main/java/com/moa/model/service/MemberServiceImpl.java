@@ -175,6 +175,7 @@ public class MemberServiceImpl implements MemberService {
 		if(sqlSession.getMapper(MemberMapper.class).pwcheck(id).equals(pw))
 			return true;
 		else return false;
+	}
 		
 	
 	public void memberUpdatePoint(MemberDto memberDto) throws SQLException {

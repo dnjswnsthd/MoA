@@ -51,8 +51,6 @@
 	<!-- member update -->
 	<update id="memberUpdate" parameterType="MemberDto">
 		update member set
-		pw =
-		#{pw},
 		name = #{name},
 		age = #{age},
 		major = #{major},
@@ -77,7 +75,7 @@
 	<delete id="delete" parameterType="String">
 		delete from member
 		where id =
-		#{id} and pw = {pw}
+		#{id} and pw = #{pw}
 	</delete>
 
 	<!-- 임시 비밀번호로 비밀번호를 바꾸기 -->
