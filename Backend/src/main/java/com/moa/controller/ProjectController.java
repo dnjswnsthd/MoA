@@ -268,4 +268,26 @@ public class ProjectController {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	/**
+	 * 관심 펀딩 등록 컨트롤러
+	 * 
+	 * @param param	등록한 펀딩의 프로젝트 번호와 사용자의 아이디 정보
+	 * @return	등록 '성공' or '실패' 메시지 전달
+	 */
+	@ApiOperation(value = "관심 펀딩 삭제", notes = "관심 펀딩 DB 데이터 삭제.", response = Map.class)
+	@PostMapping("/interestingDelete")
+	public ResponseEntity<Map<String, Object>> interestingDelete(
+			@RequestBody @ApiParam(value = "등록  후  DB에 추가 ") Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.interestingDelete(param);
+			resultMap.put("messagae", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }
