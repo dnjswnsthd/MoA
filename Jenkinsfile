@@ -37,7 +37,7 @@ pipeline {
                 sh 'docker run -d --name moafront \
                     -p 80:80 \
                     -p 443:443 \
-                    -v ../../../sslkey:/var/jenkins_home/workspace/test/sslkey \
+                    -v /home/ubuntu/sslkey:/var/jenkins_home/workspace/test/sslkey \
                     --network moa \
                     moafront:latest'
                 sh 'docker run -d --name moaback \
