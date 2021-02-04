@@ -3,19 +3,22 @@
         <div class="progressing">
             <h2>진행중인 팀 펀딩</h2>
             <div>
-                <v-row class="fundingRow my-10 col-12">
+                <v-row class="centerContent my-10 col-12">
                     <v-spacer></v-spacer>
                     <div class="funding funding01 col-3 height-300">
-                        <div class="invisibleBox">
-                            <p>가보자가보자!</p>
-                            <p>4명</p>
-                            <p>팀장 : 준형갓</p>
-                            <p>Mentor : MasterSIFU</p>
-                            <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
-                        </div>
+                        <router-link to="/fundingdetail">
+                            <div class="invisibleBox">
+                                <p>가보자가보자!</p>
+                                <p>4명</p>
+                                <p>팀장 : 준형갓</p>
+                                <p>Mentor : MasterSIFU</p>
+                                <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
+                            </div>
+                        </router-link>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="funding funding02 col-3 height-300">
+                        <router-link to="/fundingdetail">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
                             <p>4명</p>
@@ -23,9 +26,11 @@
                             <p>Mentor : MasterSIFU</p>
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
+                        </router-link>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="funding funding03 col-3 height-300">
+                        <router-link to="/fundingdetail">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
                             <p>4명</p>
@@ -33,12 +38,14 @@
                             <p>Mentor : MasterSIFU</p>
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
+                        </router-link>
                     </div>
                     <v-spacer></v-spacer>
                 </v-row>
-                <v-row class="fundingRow my-10 col-12">
+                <v-row class="centerContent my-10 col-12">
                      <v-spacer></v-spacer>
                     <div class="funding funding03 col-3 height-300">
+                        <router-link to="/fundingdetail">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
                             <p>4명</p>
@@ -46,9 +53,11 @@
                             <p>Mentor : MasterSIFU</p>
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
+                        </router-link>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="funding funding01 col-3 height-300">
+                        <router-link to="/fundingdetail">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
                             <p>4명</p>
@@ -56,9 +65,11 @@
                             <p>Mentor : MasterSIFU</p>
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
+                        </router-link>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="funding funding02 col-3 height-300">
+                        <router-link to="/fundingdetail">
                          <div class="invisibleBox">
                             <p>가보자가보자!</p>
                             <p>4명</p>
@@ -66,6 +77,7 @@
                             <p>Mentor : MasterSIFU</p>
                             <p class="shorthand">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the</p>
                         </div>
+                        </router-link>
                     </div>
                      <v-spacer></v-spacer>
                 </v-row>
@@ -451,54 +463,9 @@
                 </v-row>
             </div>
         </div>
+        
     </v-container>
 </template>
 <style scoped>
-
-.fundingRow{
-    margin:0 auto;
-}
-
-    .funding{
-        padding:0;
-        background-size:100% 100%;
-        background-position:center;
-        border-radius:20px; 
-    }
-    .funding:hover .invisibleBox{
-        transition:all 0.4s;
-        opacity:1;
-    }
-    .funding01{
-        background:url('../../assets/images/main/sample01.jpg');
-        
-    }
-    .funding02{
-        background:url('../../assets/images/main/sample02.jpg');
-    }   
-    .funding03{
-        background:url('../../assets/images/main/sample03.jpg');
-    }       
-    .rankingBox{
-        font-size:12px;
-    }  
-    .rankingBox p{
-        line-height:30px;
-    }
-    .invisibleBox{
-        padding:10px;
-        width:100%; height:100%;
-        background-color:rgba(0,0,0,0.5);
-        color:#fff;
-        opacity:0;
-        border-radius:20px;
-    }
-    .shorthand{
-         display:-webkit-box; 
-            word-wrap:break-word; 
-            -webkit-line-clamp:5; 
-            -webkit-box-orient:vertical; 
-            overflow:hidden; 
-            text-overflow:ellipsis;  
-    }
+@import '../../assets/css/mainpage.css';
 </style>

@@ -14,6 +14,7 @@ import MyPage from "@/components/member/MyPage.vue";
 import FundingOpen from "@/components/funding/FundingOpen.vue";
 import FundingDetail from "@/components/funding/FundingDetail.vue";
 import FundingList from "@/components/funding/FundingList.vue";
+import Schedule from "@/components/funding/Schedule.vue";
 // import Sub from "@/views/Sub.vue";
 Vue.use(VueRouter);
 
@@ -60,6 +61,10 @@ export default new VueRouter({
       name: "FundingDetail",
       components: {default: FundingDetail, header: SubHeader}
     },
-    
+    {
+      path: "/schedule",
+      name: "Schedule",
+      components: {default: Schedule, header: SubHeader}
+    },
   ]
 });
