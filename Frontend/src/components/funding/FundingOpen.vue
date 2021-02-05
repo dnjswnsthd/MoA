@@ -15,43 +15,6 @@
               <p>{{ category.name }}</p>
             </li>
           </div>
-
-          <!-- <div class="fundingCategory fundingMargin">
-                    
-                    <li @click="categoryProgramming">
-                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/computer.png" alt="IT·프로그래밍">
-                        <p>{{category.name}}</p>    
-                    </li>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <div class="fundingCategory fundingMargin">
-                    <li @click="categoryTranslate">
-                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/translate.png" alt="번역·통역">
-                        <p>번역·통역</p>    
-                    </li>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <div class="fundingCategory fundingMargin">
-                    <li @click="categoryMedia">
-                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/video.png" alt="영상·사진·음향">
-                        <p>영상·사진·음향</p>    
-                    </li>
-                    </div>
-                    <v-spacer></v-spacer>
-                    <div class="fundingCategory fundingMargin">
-                    <li @click="categoryLucky">      
-                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/777.png" alt="운세·상담">
-                        <p>운세·상담</p>            
-                    </li>
-                    </div> 
-                    <v-spacer></v-spacer>
-                    <div class="fundingCategory fundingMargin">
-                    <li @click="categoryMarketing">
-                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/marketing.png" alt="마케팅">
-                        <p>마케팅</p>
-                    </li>
-                    </div>
-                    <v-spacer></v-spacer> -->
         </v-row>
       </ul>
     </div>
@@ -202,13 +165,17 @@ export default {
     },
     openFunding() {
       this.project.leader = this.memberInfo.id;
+      let data = this.project;
       http
-        .post('/project/create', {
-          project: this.project,
-        })
-        .then(() => {
-          alert('추가 성공!');
-          this.$router.push({ name: 'Main' });
+        .post('/project/create', data)
+        .then((response) => {
+          if (response.data.message == 'success') {
+            alert('추가 성공!');
+            this.$router.push({ name: 'Main' });
+          } else {
+            console.log(this.project);
+            alert('추가 실패!');
+          }
         })
         .catch(() => {
           alert('추가 실패!');

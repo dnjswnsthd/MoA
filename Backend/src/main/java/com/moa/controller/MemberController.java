@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moa.model.MemberDto;
+import com.moa.model.RankDto;
 import com.moa.model.service.JwtServiceImpl;
 import com.moa.model.service.MemberService;
 
@@ -37,10 +39,10 @@ public class MemberController {
 	private static final String FAIL = "fail";
 
 	@Autowired
-	private JwtServiceImpl jwtService;	// 로그인 토큰 생성을 위한 service
-	
+	private JwtServiceImpl jwtService; // 로그인 토큰 생성을 위한 service
+
 	@Autowired
-	private MemberService memberService;	// 데이터베이스에 로그인 시도를 위한 service
+	private MemberService memberService; // 데이터베이스에 로그인 시도를 위한 service
 
 	@ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
 	@PostMapping("/login")
@@ -49,20 +51,20 @@ public class MemberController {
 		// 결과 저장할 Map 객체
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		try {
 			// Database에서 아이디와 비밀번호를 통해 로그인 정보 찾기
 			MemberDto loginMember = memberService.login(memberDto);
-			
-			if(loginMember != null) { // 로그인 정보가 존재하는 경우
+
+			if (loginMember != null) { // 로그인 정보가 존재하는 경우
 				// (key, data, subject)
 				String token = jwtService.create("id", loginMember.getId(), "access-token");
-				logger.debug("로그인 토큰 정보 : {}", token);	// server side log
-				resultMap.put("access-token", token);	// access-token 전달
-				resultMap.put("message", SUCCESS);		// "성공" 메세지 전달
+				logger.debug("로그인 토큰 정보 : {}", token); // server side log
+				resultMap.put("access-token", token); // access-token 전달
+				resultMap.put("message", SUCCESS); // "성공" 메세지 전달
 				status = HttpStatus.ACCEPTED;
-			} else {	// 로그인 정보가 존재하지 않는 경우
-				resultMap.put("massage", FAIL);		// "실패" 메세지 전달
+			} else { // 로그인 정보가 존재하지 않는 경우
+				resultMap.put("massage", FAIL); // "실패" 메세지 전달
 				status = HttpStatus.ACCEPTED;
 			}
 		} catch (Exception e) {
@@ -70,38 +72,38 @@ public class MemberController {
 			resultMap.put("massage", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
+
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "ID 중복 검사", notes = "입력한 아이디가 존재하는지 검사하여 ", response = Map.class)
 	@GetMapping("/join/{id}")
 	public ResponseEntity<Map<String, Object>> idChk(
 			@PathVariable("id") @ApiParam(value = "중복 확인할 아이디", required = true) String id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		try {
-			if(memberService.idChk(id)) { // 아이디가 중복 되지 않을 경우
+			if (memberService.idChk(id)) { // 아이디가 중복 되지 않을 경우
 				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} else {
 				resultMap.put("message", FAIL);
 				status = HttpStatus.ACCEPTED;
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("중복 확인 실패 : {}", e);
 			resultMap.put("massage", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "PW 확인", notes = "내 정보 변경시 비밀번호 검사", response = Map.class)
 	@PostMapping("/pwcheck")
 	public ResponseEntity<Map<String, Object>> pwcheck(
-			@RequestBody @ApiParam(value = "내 정보 변경시 비밀번호 검사를 위한 id, pw", required = true)MemberDto memberDto){
+			@RequestBody @ApiParam(value = "내 정보 변경시 비밀번호 검사를 위한 id, pw", required = true) MemberDto memberDto) {
 		System.out.println(memberDto.getId());
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
@@ -109,24 +111,22 @@ public class MemberController {
 		String pw = memberDto.getPw();
 		System.out.println(id);
 		try {
-			if(memberService.pwcheck(id, pw)) {//pw가 맞으면
+			if (memberService.pwcheck(id, pw)) {// pw가 맞으면
 				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
-			}else {
+			} else {
 				resultMap.put("message", FAIL);
 				status = HttpStatus.ACCEPTED;
 			}
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			logger.error("비밀번호 확인 실패  : {}", e);
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
-	
-	
+
 	@ApiOperation(value = "회원 가입(멘토, 멘티)", notes = "멘토의 회원 가입 결과를 반환한다.", response = Map.class)
 	@PostMapping("/join")
 	public ResponseEntity<Map<String, Object>> join(
@@ -134,55 +134,55 @@ public class MemberController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		System.out.println(param.get("status"));
-		
+
 		try {
 			memberService.join(param);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			resultMap.put("massage", FAIL);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "회원 정보 수정", notes = "회원 정보를 수정하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
 	@PutMapping("/update")
 	public ResponseEntity<Map<String, Object>> memberUpdate(
-			@RequestBody @ApiParam(value = "본인 확인용 pw", required = true) MemberDto memberDto){
+			@RequestBody @ApiParam(value = "본인 확인용 pw", required = true) MemberDto memberDto) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
-			//업데이트 데이터 전송시 updateMember 활용.
+			// 업데이트 데이터 전송시 updateMember 활용.
 			MemberDto updateMember = memberService.memberUpdate(memberDto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-		
-		} catch(Exception e) {
-				logger.error("수정 실패 : {}", e);
-				resultMap.put("massage", e.getMessage());
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		} catch (Exception e) {
+			logger.error("수정 실패 : {}", e);
+			resultMap.put("massage", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "비밀번호 찾기", notes = "입력한 아이디를 확인하여 임시 비밀번호를 만들어 이메일로 전송하여준다.", response = Map.class)
 	@PutMapping("/findpw/{email}")
-	@Transactional	// 트랜젝션 설정
+	@Transactional // 트랜젝션 설정
 	public ResponseEntity<Map<String, Object>> findPassword(
 			@PathVariable @ApiParam(value = "비밀번호 찾을 이메일", required = true) String email) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		try {
 			// 데이터베이스에 이메일이 존재해야 임시 비밀번호를 생성
-			if(!memberService.idChk(email)) {
+			if (!memberService.idChk(email)) {
 				memberService.updateTempPassword(email);
 				resultMap.put("massage", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} else {
-				resultMap.put("massage", FAIL);		// 이메일이 존재하지 않는 경우
+				resultMap.put("massage", FAIL); // 이메일이 존재하지 않는 경우
 				status = HttpStatus.ACCEPTED;
 			}
 		} catch (Exception e) {
@@ -190,12 +190,14 @@ public class MemberController {
 			resultMap.put("massage", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+
 	@ApiOperation(value = "내 정보 보기", notes = "로그인 후 마이 페이지에서 정보를 보기 위하여 멤버 관련 모든 데이터를 전송하여준다.", response = Map.class)
 	@GetMapping("/mypage/{id}")
-	public ResponseEntity<Map<String, Object>> memberInfo(@PathVariable("id") @ApiParam(value = "정보를 불러올 아이디", required = true)String id){
+	public ResponseEntity<Map<String, Object>> memberInfo(
+			@PathVariable("id") @ApiParam(value = "정보를 불러올 아이디", required = true) String id) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		try {
@@ -203,52 +205,71 @@ public class MemberController {
 			resultMap.put("message", SUCCESS);
 			resultMap.put("memberInfo", memberInfo);
 			status = HttpStatus.ACCEPTED;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("정보조회 실패 : {}", e);
 			resultMap.put("message", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "회원 탈퇴", notes = "회원 탈퇴 결과 메세지를 반환한다.", response = Map.class)
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Map<String, Object>> delete(
-			@PathVariable("id") @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) String id){
+			@PathVariable("id") @ApiParam(value = "회원 탈퇴시 비밀번호 필요", required = true) String id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+
 		try {
-			//Database에서 아이디 비밀번호 일치 여부 확인
+			// Database에서 아이디 비밀번호 일치 여부 확인
 			memberService.delete(id);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			resultMap.put("message", FAIL);
 			status = HttpStatus.ACCEPTED;
 		}
-		
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@ApiOperation(value = "회원 포인트 수정", notes = "회원 포인트를 갱신하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
 	@PutMapping("/updatepoint")
 	public ResponseEntity<Map<String, Object>> memberUpdatePoint(
-			@RequestBody @ApiParam(value = "멤머 Dto 값", required = true) MemberDto memberDto){
+			@RequestBody @ApiParam(value = "멤머 Dto 값", required = true) MemberDto memberDto) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
-			//업데이트 데이터 전송시 updateMember 활용.
+			// 업데이트 데이터 전송시 updateMember 활용.
 			memberService.memberUpdatePoint(memberDto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-		
-		} catch(Exception e) {
-				logger.error("수정 실패 : {}", e);
-				resultMap.put("massage", e.getMessage());
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}
-		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+
+		} catch (Exception e) {
+			logger.error("수정 실패 : {}", e);
+			resultMap.put("massage", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
+	@ApiOperation(value = "멘토 랭킹 정보", notes = "멘토의 경험치, 도덕성, 신뢰성, 적극성, 전문성, 리더쉽 순으로 정렬된 리스트를 제공", response = Map.class)
+	@GetMapping("/rank")
+	public ResponseEntity<Map<String, Object>> getRanking() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			List<List<RankDto>> list = memberService.getRanking();
+			System.out.println(list);
+			resultMap.put("list", list);
+			resultMap.put("massage", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }
