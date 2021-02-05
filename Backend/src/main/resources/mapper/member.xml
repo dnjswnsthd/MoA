@@ -133,43 +133,43 @@
 	
 	<!-- 멘토 랭킹 가져오기 -->
 	<!-- 경험치 랭킹 -->
-	<select id="getRankingExp" resultType="MentorDto">
-		select member.id, mentor.exp
+	<select id="getRankingExp" resultType="RankDto">
+		select member.id, mentor.exp as score
 		from member inner join mentor on member.id = mentor.id
 		order by exp desc
 		limit 5;
 	</select>
 	<!-- 도덕성 랭킹 -->
-	<select id="getRankingMorality" resultType="MentorDto">
-		select member.id, mentor.morality
+	<select id="getRankingMorality" resultType="RankDto">
+		select member.id, mentor.morality as score
 		from member inner join mentor on member.id = mentor.id
 		order by morality desc
 		limit 5;
 	</select>
 	<!-- 적극성 랭킹 -->
-	<select id="getRankingPositiveness" resultType="MentorDto">
-		select member.id, mentor.positiveness
+	<select id="getRankingPositiveness" resultType="RankDto">
+		select member.id, mentor.positiveness as score
 		from member inner join mentor on member.id = mentor.id
 		order by positiveness desc
 		limit 5;
 	</select>
 	<!-- 신뢰도 랭킹 -->
-	<select id="getRankingReliability" resultType="MentorDto">
-		select member.id, mentor.reliability
+	<select id="getRankingReliability" resultType="RankDto">
+		select member.id, mentor.reliability as score
 		from member inner join mentor on member.id = mentor.id
 		order by reliability desc
 		limit 5;
 	</select>
 	<!-- 전문성 랭킹 -->
-	<select id="getRankingProfessional" resultType="MentorDto">
-		select member.id, mentor.professional
+	<select id="getRankingProfessional" resultType="RankDto">
+		select member.id, mentor.professional as score
 		from member inner join mentor on member.id = mentor.id
 		order by professional desc
 		limit 5;
 	</select>
 	<!-- 리더쉽 랭킹 -->
-	<select id="getRankingLeadership" resultType="MentorDto">
-		select member.id, mentor.leadership
+	<select id="getRankingLeadership" resultType="RankDto">
+		select member.id, mentor.leadership as score
 		from member inner join mentor on member.id = mentor.id
 		order by leadership desc
 		limit 5;

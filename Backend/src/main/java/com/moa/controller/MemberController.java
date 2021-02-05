@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moa.model.MemberDto;
-import com.moa.model.MentorDto;
+import com.moa.model.RankDto;
 import com.moa.model.service.JwtServiceImpl;
 import com.moa.model.service.MemberService;
 
@@ -260,7 +260,7 @@ public class MemberController {
 		HttpStatus status = null;
 		
 		try {
-			List<List<MentorDto>> list = memberService.getRanking();
+			List<List<RankDto>> list = memberService.getRanking();
 			System.out.println(list);
 			resultMap.put("list", list);
 			resultMap.put("massage", SUCCESS);

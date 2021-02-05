@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.moa.model.MemberDto;
-import com.moa.model.MentorDto;
+import com.moa.model.RankDto;
 import com.moa.model.mapper.MemberMapper;
 
 @Service
@@ -191,8 +191,8 @@ public class MemberServiceImpl implements MemberService {
 	 *  @return	경험치, 도덕성, 적극성, 신뢰성, 전문성, 리더쉽에 대한 랭킹 정보를 담은 Map
 	 */
 	@Override
-	public List<List<MentorDto>> getRanking() throws Exception {
-		List<List<MentorDto>> list = new ArrayList<List<MentorDto>>();
+	public List<List<RankDto>> getRanking() throws Exception {
+		List<List<RankDto>> list = new ArrayList<List<RankDto>>();
 		list.add(sqlSession.getMapper(MemberMapper.class).getRankingExp());
 		list.add(sqlSession.getMapper(MemberMapper.class).getRankingMorality());
 		list.add(sqlSession.getMapper(MemberMapper.class).getRankingPositiveness());
