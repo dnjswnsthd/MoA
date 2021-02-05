@@ -1,5 +1,6 @@
 package com.moa.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.moa.model.ProjectDto;
@@ -21,5 +22,6 @@ public interface ProjectService {
 	
 	public void permission(Map<String, Object> param) throws Exception;
 	public void denial(Map<String, Object> param) throws Exception;
+	public List<ProjectDto> getFundingList() throws Exception;
 
 }
