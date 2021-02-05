@@ -1,45 +1,51 @@
 <template>
     <div class="width-1000 centerContent">
         <h1>펀딩오픈</h1>
-        <div class="width-1000 centerContent px-10 py-10">
-            <h2 class="pl-20">카테고리</h2>
-            <ul class="px-20 py-20">
+        <div class="width-1000 centerContent pt-3">
+            <h2>카테고리</h2>
+            <ul class="pt-5">
                 <v-row>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="centerContent">디자인</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/design.png" alt="디자인">
+                        <router-link to="/">디자인</router-link>    
                     </li>
+                    </div>
                     <v-spacer></v-spacer>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="fundingMargin">IT·프로그래밍</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/computer.png" alt="IT·프로그래밍">
+                        <router-link to="/">IT·프로그래밍</router-link>    
                     </li>
+                    </div>
                     <v-spacer></v-spacer>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="fundingMargin">번역·통역</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/translate.png" alt="번역·통역">
+                        <router-link to="/">번역·통역</router-link>    
                     </li>
+                    </div>
                     <v-spacer></v-spacer>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="fundingMargin">영상·사진·음향</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/video.png" alt="영상·사진·음향">
+                        <router-link to="/">영상·사진·음향</router-link>    
                     </li>
+                    </div>
                     <v-spacer></v-spacer>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="fundingMargin">운세·상담</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>      
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/777.png" alt="운세·상담">
+                        <router-link to="/">운세·상담</router-link>            
                     </li>
+                    </div> 
                     <v-spacer></v-spacer>
-                    <li class="my-10">
-                        <v-icon class="viconColor">mdi-share-variant</v-icon
-                        ><br />
-                        <p class="fundingMargin">마케팅</p>
+                    <div class="fundingCategory fundingMargin">
+                    <li>
+                        <img class="width-40 height-40 fundingMargin" src="@/assets/category/marketing.png" alt="마케팅">
+                        <router-link to="/">마케팅</router-link>    
                     </li>
+                    </div>
                     <v-spacer></v-spacer>
                 </v-row>
             </ul>
