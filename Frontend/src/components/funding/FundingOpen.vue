@@ -206,9 +206,13 @@ export default {
         .post('/project/create', {
           project: this.project,
         })
-        .then(() => {
-          alert('추가 성공!');
-          this.$router.push({ name: 'Main' });
+        .then((response) => {
+          if (response.data.message == 'success') {
+            alert('추가 성공!');
+            this.$router.push({ name: 'Main' });
+          } else {
+            alert('추가 실패!');
+          }
         })
         .catch(() => {
           alert('추가 실패!');
