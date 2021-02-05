@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-
 import Main from "@/components/views/Main.vue";
 import MainHeader from "@/components/common/MainHeader.vue";
 import SubHeader from "@/components/common/SubHeader.vue";
@@ -24,47 +23,47 @@ export default new VueRouter({
     {
       path: "/",
       name: "Main",
-      components: {default: Main, header: MainHeader}
+      components: { default: Main, header: MainHeader }
     },
     {
       path: "/login",
       name: "Login",
-      components: {default: Login, header: SubHeader}
+      components: { default: Login, header: SubHeader }
     },
     {
       path: "/join",
       name: "Join",
-      components: {default: Join, header: SubHeader}
+      components: { default: Join, header: SubHeader }
     },
     {
       path: "/findpassword",
       name: "FindPassword",
-      components: {default: FindPassword, header: SubHeader}
+      components: { default: FindPassword, header: SubHeader }
     },
     {
       path: "/mypage",
       name: "MyPage",
-      components: {default: MyPage, header: SubHeader}
+      components: { default: MyPage, header: SubHeader }
     },
     {
       path: "/fundingopen",
       name: "FundingOpen",
-      components: {default: FundingOpen, header: SubHeader}
+      components: { default: FundingOpen, header: SubHeader }
     },
     {
       path: "/fundinglist",
       name: "FundingList",
-      components: {default: FundingList, header: SubHeader}
+      components: { default: FundingList, header: SubHeader }
     },
     {
       path: "/fundingdetail",
       name: "FundingDetail",
-      components: {default: FundingDetail, header: SubHeader}
+      components: { default: FundingDetail, header: SubHeader }
     },
     {
       path: "/schedule",
       name: "Schedule",
-      components: {default: Schedule, header: SubHeader}
-    },
+      components: { default: Schedule, header: SubHeader }
+    }
   ]
 });
