@@ -4,17 +4,27 @@
       <v-row v-if="isLogin !== false">
         <div>
           <router-link to="/">
-            <img src="@/assets/images/main/logo.png" alt="로고" style="width: 150px; height: 60px;" />          
+            <img
+              src="@/assets/images/main/logo.png"
+              alt="로고"
+              style="width: 150px; height: 60px;"
+            />
           </router-link>
         </div>
         <v-spacer></v-spacer>
-        <li class="width-120 centerText height-70">
-          <router-link to="/fundingopen" style="color:#fff;" class="cookie">펀딩 오픈</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectOpButton = true" @mouseout="selectOpButton = false">
+          <router-link v-if="selectOpButton==true" to="/fundingopen" style="color:#ffce55;" class="cookie">펀딩 오픈</router-link>
+          <router-link v-else to="/fundingopen" style="color:#fff;" class="cookie">펀딩 오픈</router-link>
         </li>
-        <li class="width-120 centerText height-70">
-          <router-link to="/mypage" style="color:#fff;" class="cookie">My Page</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectMyButton = true" @mouseout="selectMyButton = false">
+          <router-link v-if="selectMyButton==true" to="/mypage" style="color:#ffce55;" class="cookie">My Page</router-link>
+          <router-link v-else to="/mypage" style="color:#fff;" class="cookie">My Page</router-link>
         </li>
-        <li class="width-120 centerText height-70 logoutBtn cookie" @click.prevent="onClickLogout" style="color:#fff;">
+        <li
+          class="width-120 centerText height-70 logoutBtn cookie"
+          @click.prevent="onClickLogout"
+          style="color:#fff;"
+        >
           LOGOUT
         </li>
       </v-row>
@@ -29,11 +39,13 @@
           </router-link>
         </div>
         <v-spacer></v-spacer>
-        <li class="width-120 centerText height-70">
-          <router-link to="/join" style="color:#fff;" class="cookie">회원가입</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectSgButton = true" @mouseout="selectSgButton = false">
+          <router-link v-if="selectSgButton==true" to="/join" style="color:#ffce55;" class="cookie">회원가입</router-link>
+          <router-link v-else to="/join" style="color:#fff;" class="cookie">회원가입</router-link>
         </li>
-        <li class="width-120 centerText height-70">
-          <router-link to="/login" style="color:#fff;" class="cookie">로그인</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectLgButton = true" @mouseout="selectLgButton = false">
+          <router-link v-if="selectLgButton==true" to="/login" style="color:#ffce55;" class="cookie">로그인</router-link>
+          <router-link v-else to="/login" style="color:#fff;" class="cookie">로그인</router-link>
         </li>
       </v-row>
       <div class="headerPadding">
@@ -48,56 +60,92 @@
 
             <div class="searchBar col-6">
               <input type="text" class="col-11" />
-              <button class="col-1 searchIcon"><v-icon>mdi-magnify</v-icon></button>
+              <button class="col-1 searchIcon">
+                <v-icon>mdi-magnify</v-icon>
+              </button>
             </div>
           </v-row>
         </div>
       </div>
       <div class="bgLogo" style="opacity:0.5;">
-        <img src="@/assets/images/main/logo.png" alt="로고">
+        <img src="@/assets/images/main/logo.png" alt="로고" />
       </div>
     </v-container>
     <div class="categoryMenu col-8">
-        <v-row>
-          <v-spacer></v-spacer>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/design.png" alt="디자인">
-            <router-link to="/fundinglist">디자인</router-link>
-          </div>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/computer.png" alt="디자인">
-            <router-link to="/fundinglist">IT·프로그래밍</router-link>
-          </div>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/translate.png" alt="디자인">
-            <router-link to="/fundinglist">번역·통역</router-link>
-          </div>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/video.png" alt="디자인">
-            <router-link to="/fundinglist">영상·사진·음향</router-link>
-          </div>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/777.png" alt="디자인">
-            <router-link to="/fundinglist">운세·상담</router-link>
-          </div>
-          <div class="col-2 mainCategory">
-            <img class="width-40 height-40 centerContent" src="@/assets/category/marketing.png" alt="디자인">
-            <router-link to="/fundinglist">마케팅</router-link>
-          </div>
-          <v-spacer></v-spacer>
-        </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showDgImg = afterDgImg"
+          @mouseout="showDgImg = beforeDgImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent " :src="showDgImg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">디자인</router-link>
+        </div>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showItImg = afterItImg"
+          @mouseout="showItImg = beforeItImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent" :src="showItImg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">IT·프로그래밍</router-link>
+        </div>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showTrImg = afterTrImg"
+          @mouseout="showTrImg = beforeTrImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent" :src="showTrImg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">번역·통역</router-link>
+        </div>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showVdImg = afterVdImg"
+          @mouseout="showVdImg = beforeVdImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent" :src="showVdImg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">영상·사진·음향</router-link>
+        </div>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showCsImg = afterCsImg"
+          @mouseout="showCsImg = beforeCsImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent" :src="showCsImg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">운세·상담</router-link>
+        </div>
+        <div
+          class="col-2 mainCategory"
+          @mouseover="showMkmg = afterMkImg"
+          @mouseout="showMkmg = beforeMkImg"
+        >
+          <router-link to="/fundinglist"
+            ><img class="width-40 height-40 centerContent" :src="showMkmg" alt="디자인"
+          /></router-link>
+          <router-link to="/fundinglist">마케팅</router-link>
+        </div>
+        <v-spacer></v-spacer>
+      </v-row>
     </div>
     <div class="mal">
-        <img src="../../assets/images/main/mal.png" alt="말풍선">
+      <img src="../../assets/images/main/mal.png" alt="말풍선" />
     </div>
     <div class="mal2">
-        <img src="../../assets/images/main/mal.png" alt="말풍선">
+      <img src="../../assets/images/main/mal.png" alt="말풍선" />
     </div>
     <div class="mal3">
-        <img src="../../assets/images/main/mal.png" alt="말풍선">
+      <img src="../../assets/images/main/mal.png" alt="말풍선" />
     </div>
-
-       
   </header>
 </template>
 
@@ -107,6 +155,32 @@ import { mapState } from 'vuex';
 export default {
   computed: {
     ...mapState(['memberInfo', 'isLogin']),
+  },
+  data() {
+    return {
+      selectOpButton: false,
+      selectMyButton: false,
+      selectSgButton: false,
+      selectLgButton: false,
+      showDgImg: require('@/assets/category/design.png'),
+      showItImg: require('@/assets/category/computer.png'),
+      showTrImg: require('@/assets/category/translate.png'),
+      showVdImg: require('@/assets/category/video.png'),
+      showCsImg: require('@/assets/category/777.png'),
+      showMkmg: require('@/assets/category/marketing.png'),
+      beforeDgImg: [require('@/assets/category/design.png')],
+      afterDgImg: [require('@/assets/category/design(c).png')],
+      beforeItImg: [require('@/assets/category/computer.png')],
+      afterItImg: [require('@/assets/category/computer(c).png')],
+      beforeTrImg: [require('@/assets/category/translate.png')],
+      afterTrImg: [require('@/assets/category/translate(c).png')],
+      beforeVdImg: [require('@/assets/category/video.png')],
+      afterVdImg: [require('@/assets/category/video(c).png')],
+      beforeCsImg: [require('@/assets/category/777.png')],
+      afterCsImg: [require('@/assets/category/777(c).png')],
+      beforeMkImg: [require('@/assets/category/marketing.png')],
+      afterMkImg: [require('@/assets/category/marketing(c).png')],
+    };
   },
   created() {
     if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
@@ -129,8 +203,7 @@ export default {
 </script>
 
 <style>
-
-.cookie{
+.cookie {
   font-family: 'CookieRunOTF-Bold';
 }
 .button {
@@ -164,16 +237,16 @@ export default {
   color: white;
 }
 .headerH1 {
-  font-size:45px;
+  font-size: 45px;
   color: white;
   font-family: 'CookieRunOTF-BOLD';
 }
 .backgroundImg {
   background-image: url('../../assets/images/main/bg_6.jpg');
   background-attachment: fixed;
-  background-position:center;
-  background-size:cover;
-  position:relative;
+  background-position: center;
+  background-size: cover;
+  position: relative;
 }
 /* header .container .row .row div div .v-icon {
         color : white;
@@ -189,7 +262,7 @@ export default {
   padding-top: 50px;
 }
 
-.categoryMenu{
+.categoryMenu {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -198,57 +271,71 @@ export default {
   border-radius: 50px 50px 0px 0px;
   line-height: 1.8;
   margin: 0 auto;
-  margin-top:330px;
-
+  margin-top: 330px;
 }
-.logoutBtn{
-    cursor:pointer;
-}
-
-        .mal{         
-            animation-name:moving;
-            animation-duration:2s;
-            animation-iteration-count:infinite;
-            animation-direction: noraml;
-            position:absolute;
-            top:50%;    right:13%;
-            width:50px; height:50px;
-        }
-        .mal img{
-            width:100%;height:100%;
-        }
-        .mal2{
-            animation-name:moving;
-            animation-duration:2s;
-            animation-iteration-count:infinite;
-            animation-direction: noraml;
-            position:absolute;
-            top:45%;    left:45%;
-            width:60px; height:60px;
-        }
-        .mal2 img{
-            width:100%;height:100%;
-        }
-        .mal3{
-            animation-name:moving;
-            animation-duration:2s;
-            animation-iteration-count:infinite;
-            animation-direction: noraml;
-            position:absolute;
-            bottom:35%;    right:22%;
-            width:80px; height:80px;
-        }
-        .mal3 img{
-            width:100%;height:100%;
-        }
-        @keyframes moving{
-            0%{transform:translateY(0px); }
-            50%{transform:translateY(20px); }
-            100%{transform:translateY(0px);}
-        }
-.bgLogo{
-  position:absolute;
-  top:55%; left:20%;
+.logoutBtn {
+  cursor: pointer;
 }
 
+.mal {
+  animation-name: moving;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: noraml;
+  position: absolute;
+  top: 50%;
+  right: 13%;
+  width: 50px;
+  height: 50px;
+}
+.mal img {
+  width: 100%;
+  height: 100%;
+}
+.mal2 {
+  animation-name: moving;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: noraml;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 60px;
+  height: 60px;
+}
+.mal2 img {
+  width: 100%;
+  height: 100%;
+}
+.mal3 {
+  animation-name: moving;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: noraml;
+  position: absolute;
+  bottom: 35%;
+  right: 22%;
+  width: 80px;
+  height: 80px;
+}
+.mal3 img {
+  width: 100%;
+  height: 100%;
+}
+@keyframes moving {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.bgLogo {
+  position: absolute;
+  top: 55%;
+  left: 20%;
+}
 </style>

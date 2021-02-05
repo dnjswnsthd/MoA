@@ -1,6 +1,5 @@
 import http from "@/util/http-common";
 
-
 // const config = {
 //   headers: { "access-token": localStorage.getItem("access-token") }
 // };
