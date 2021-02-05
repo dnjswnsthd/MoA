@@ -19,7 +19,7 @@
 	<!-- 펀딩 오픈 시 project_member db에 추가 -->
 	<insert id="appendProject" parameterType="Map">
 		insert into
-		member_project(select last_insert_id(), #{id})
+		member_project(select last_insert_id(), #{leader})
 	</insert>
 
 	<!-- project search -->
