@@ -1,7 +1,9 @@
 package com.moa.model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +14,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.moa.model.MemberDto;
+import com.moa.model.MentorDto;
 import com.moa.model.mapper.MemberMapper;
 
 @Service
@@ -165,8 +168,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	/**
-	 * @param id, pw 비교할 pw와 정보 변경을 하려는 id
+	 * 입력한 아이디와 비밀번호를 확인하여 맞는지 알려준다
 	 * 
+	 * @param id, pw 비교할 pw와 정보 변경을 하려는 id
 	 */
 	@Override
 	public boolean pwcheck(String id, String pw) throws Exception {
@@ -175,9 +179,27 @@ public class MemberServiceImpl implements MemberService {
 		else return false;
 	}
 		
-	
+	@Override
 	public void memberUpdatePoint(MemberDto memberDto) throws SQLException {
 		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdatePoint(memberDto);
+	}
+
+	/**
+	 * 멘토의 각종 능력치에 대한 랭킹 정보 제공
+	 * 
+	 *  @return	경험치, 도덕성, 적극성, 신뢰성, 전문성, 리더쉽에 대한 랭킹 정보를 담은 Map
+	 */
+	@Override
+	public List<List<MentorDto>> getRanking() throws Exception {
+		List<List<MentorDto>> list = new ArrayList<List<MentorDto>>();
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingExp());
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingMorality());
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingPositiveness());
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingReliability());
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingProfessional());
+		list.add(sqlSession.getMapper(MemberMapper.class).getRankingLeadership());
+		
+		return list;
 	}
 }
