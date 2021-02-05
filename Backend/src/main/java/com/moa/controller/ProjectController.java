@@ -45,7 +45,6 @@ public class ProjectController {
 			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-
 		try {
 			projectService.create(param);
 			resultMap.put("message", SUCCESS);
