@@ -9,18 +9,16 @@
 <script>
 import NavFooter from "@/components/common/Footer.vue";
 
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
-  NavFooter
-
+    NavFooter
   }
 };
 </script>
 <style>
-@import './assets/css/reset.css';
-@import './assets/css/member.css';
-@import './assets/css/funding.css';
-@import './assets/css/fundingdetail.css';
+@import "./assets/css/reset.css";
+@import "./assets/css/member.css";
+@import "./assets/css/funding.css";
+@import "./assets/css/fundingdetail.css";
 </style>
