@@ -1,6 +1,7 @@
 package com.moa.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -288,6 +289,26 @@ public class ProjectController {
 			resultMap.put("message", FAIL);
 			status = HttpStatus.ACCEPTED;
 		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@ApiOperation(value = "진행 중인 펀딩 목록", notes = "진행 중인 펀딩 최신 순으로 6개를 제공")
+	@GetMapping("/fundingList")
+	public ResponseEntity<Map<String, Object>> getFundingList() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			List<ProjectDto> list = projectService.getFundingList();
+			System.out.println(list);
+			resultMap.put("list", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 }
