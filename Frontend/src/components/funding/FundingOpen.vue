@@ -52,6 +52,7 @@
                         label="제목"
                         type="text"
                         class="width-700"
+                        v-bind="project.project_name"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
@@ -61,6 +62,7 @@
                         label="인원"
                         type="number"
                         class="width-700"
+                         v-bind="project.participants"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
@@ -70,6 +72,7 @@
                         label="멘토"
                         type="text"
                         class="width-700"
+                         v-bind="project.mentor_chk"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
@@ -79,18 +82,21 @@
                         label="펀딩액"
                         type="text"
                         class="width-130"
+                        v-bind="project.funding_cost"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="모집기간"
                         type="date"
                         class="width-100"
+                        v-bind="project.deadline"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="진행기간(단위: 주)"
                         type="number"
                         class="width-100"
+                        v-bind="project.end_date"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
@@ -101,7 +107,7 @@
             <h3>세부내용</h3>
             <v-spacer></v-spacer>
             <div class="py-10 fundingMargin">
-                <input type="text" class="fundingBox" />
+                <input type="text" class="fundingBox"  v-bind="project.description"/>
             </div>
             <v-spacer></v-spacer>
         </div>
@@ -123,7 +129,18 @@
 
 <script>
 export default {
-    name: "FundingOpen",
+    project:{
+        category:'',
+        project_name:'',
+        participants:'',
+        mentor_chk:'',
+        funding_cost:'',
+        deadline:'',
+        start_date:'',
+        end_date:'',
+        description:'',
+
+    }
 };
 </script>
 
