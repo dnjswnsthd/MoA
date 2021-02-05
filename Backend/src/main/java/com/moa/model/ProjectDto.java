@@ -25,7 +25,15 @@ public class ProjectDto {
 	String mentor_chk;
 	@ApiModelProperty(value = "펀딩 마감")
 	String deadline;
+	@ApiModelProperty(value = "팀장")
+	String leader;
 	
+	public String getLeader() {
+		return leader;
+	}
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
 	public int getProject_num() {
 		return project_num;
 	}
