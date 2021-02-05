@@ -1,71 +1,77 @@
 <template>
-    <header >
-        <v-container class="col-8">
-            <v-row v-if="isLogin !== false">
-                <div>
-                  <router-link to="/">
-                    <img src="@/assets/images/main/logo(Bg).png" alt="로고" style="width: 150px; height: 60px;">
-                  </router-link>
-                  </div>
-                <v-spacer></v-spacer>                
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/fundingopen" class="cookie">펀딩 오픈</router-link>
-                    </li>
-                    <li class="width-120 centerText height-70">
-                    <router-link to="/mypage" class="cookie">My Page</router-link>
-                    </li>
-                    <li class="width-120 centerText height-70 logoutBtn cookie" @click.prevent="onClickLogout">
-                    LOGOUT
-                    </li>
-            </v-row>
-            <v-row v-else>
-                <div>
-                    <router-link to="/">
-                    <img
-                        src="@/assets/images/main/logo(Bg).png"
-                        alt="로고"
-                        style="width: 150px; height: 70px;"
-                    />
-                    </router-link>
-                </div>
-                <v-spacer></v-spacer>
-                <li class="width-120 centerText height-70">
-                    <router-link to="/join" class="cookie">회원가입</router-link>
-                </li> 
-                <li class="width-120 centerText height-70">
-                    <router-link to="/login" class="cookie">로그인</router-link>                         
-                </li>
-            </v-row>               
-        </v-container>
-
-        
-    </header>
+  <header>
+    <v-container class="col-8">
+      <v-row v-if="isLogin !== false">
+        <div>
+          <router-link to="/">
+            <img
+              src="@/assets/images/main/logo(Bg).png"
+              alt="로고"
+              style="width: 150px; height: 60px;"
+            />
+          </router-link>
+        </div>
+        <v-spacer></v-spacer>
+        <li class="width-120 centerText height-70">
+          <router-link to="/fundingopen" class="cookie">펀딩 오픈</router-link>
+        </li>
+        <li class="width-120 centerText height-70">
+          <router-link to="/mypage" class="cookie">My Page</router-link>
+        </li>
+        <li
+          class="width-120 centerText height-70 logoutBtn cookie"
+          @click.prevent="onClickLogout"
+        >
+          LOGOUT
+        </li>
+      </v-row>
+      <v-row v-else>
+        <div>
+          <router-link to="/">
+            <img
+              src="@/assets/images/main/logo(Bg).png"
+              alt="로고"
+              style="width: 150px; height: 70px;"
+            />
+          </router-link>
+        </div>
+        <v-spacer></v-spacer>
+        <li class="width-120 centerText height-70">
+          <router-link to="/join" class="cookie">회원가입</router-link>
+        </li>
+        <li class="width-120 centerText height-70">
+          <router-link to="/login" class="cookie">로그인</router-link>
+        </li>
+      </v-row>
+    </v-container>
+  </header>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(['memberInfo', 'isLogin']),
+    ...mapState(["memberInfo", "isLogin"])
   },
   created() {
-    if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
+    if (localStorage.getItem("access-token") != null)
+      this.$store.commit("setIsLogined", true);
   },
   methods: {
     onClickLogout() {
       this.$store
-        .dispatch('LOGOUT')
+        .dispatch("LOGOUT")
         .then(() => {
           // this.$router.push({ name: "" });
 
-          if (this.$route.path !== '/') this.$router.replace('/');
+          if (this.$route.path !== "/") this.$router.replace("/");
         })
         .catch(() => {
-          console.log('로그아웃 문제!!!');
+          console.log("로그아웃 문제!!!");
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

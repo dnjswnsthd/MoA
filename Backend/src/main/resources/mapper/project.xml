@@ -8,11 +8,11 @@
 	<insert id="createProject" parameterType="Map">
 		insert into
 		project(project_name, start_date, end_date, category, participants,
-		funding_cost, description, mentor_chk, deadline)
+		funding_cost, description, mentor_chk, deadline, leader)
 		values
 		(#{project_name}, #{start_date}, #{end_date}, #{category},
 		#{participants}, #{funding_cost}, #{description}, #{mentor_chk},
-		#{deadline})
+		#{deadline}, #{leader})
 	</insert>
 	
 	<!-- project create했을때 프로젝트랑 멤버 id 추가-->
