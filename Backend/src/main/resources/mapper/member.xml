@@ -130,4 +130,49 @@
 		from member
 		where id = #{id}
 	</select>
+	
+	<!-- 멘토 랭킹 가져오기 -->
+	<!-- 경험치 랭킹 -->
+	<select id="getRankingExp" resultType="MentorDto">
+		select member.id, mentor.exp
+		from member inner join mentor on member.id = mentor.id
+		order by exp desc
+		limit 5;
+	</select>
+	<!-- 도덕성 랭킹 -->
+	<select id="getRankingMorality" resultType="MentorDto">
+		select member.id, mentor.morality
+		from member inner join mentor on member.id = mentor.id
+		order by morality desc
+		limit 5;
+	</select>
+	<!-- 적극성 랭킹 -->
+	<select id="getRankingPositiveness" resultType="MentorDto">
+		select member.id, mentor.positiveness
+		from member inner join mentor on member.id = mentor.id
+		order by positiveness desc
+		limit 5;
+	</select>
+	<!-- 신뢰도 랭킹 -->
+	<select id="getRankingReliability" resultType="MentorDto">
+		select member.id, mentor.reliability
+		from member inner join mentor on member.id = mentor.id
+		order by reliability desc
+		limit 5;
+	</select>
+	<!-- 전문성 랭킹 -->
+	<select id="getRankingProfessional" resultType="MentorDto">
+		select member.id, mentor.professional
+		from member inner join mentor on member.id = mentor.id
+		order by professional desc
+		limit 5;
+	</select>
+	<!-- 리더쉽 랭킹 -->
+	<select id="getRankingLeadership" resultType="MentorDto">
+		select member.id, mentor.leadership
+		from member inner join mentor on member.id = mentor.id
+		order by leadership desc
+		limit 5;
+	</select>
+	
 </mapper>
