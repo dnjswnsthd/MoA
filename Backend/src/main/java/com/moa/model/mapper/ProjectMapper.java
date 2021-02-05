@@ -1,6 +1,7 @@
 package com.moa.model.mapper;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import com.moa.model.ProjectDto;
@@ -34,4 +35,6 @@ public interface ProjectMapper {
 	void interesting(Map<String, Object> param) throws SQLException;
 	
 	void interestingDelete(Map<String, Object> param) throws SQLException;
+
+	List<ProjectDto> getFundingList() throws SQLException;
 }
