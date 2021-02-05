@@ -5,19 +5,19 @@
       <div class="mt-10">
         <v-row class="centerContent my-10 col-12 mx-4">
           <v-col
-            v-for="(funding, index) in fundings"
+            v-for="(funding, index) in fundingDatas"
             :key="index"
             class="funding funding01 col-3 height-300 my-5 mx-12"
-            :id="funding"
+            :id="fundings[`${Math.floor(Math.random() * 3)}`]"
           >
             <router-link to="/fundingdetail">
               <div class="invisibleBox">
-                <p>{{ fundingDatas[index].project_name }}</p>
-                <p>{{ fundingDatas[index].participants }}명</p>
+                <p>{{ funding.project_name }}</p>
+                <p>{{ funding.participants }}명</p>
                 <p>팀장 : 조준형</p>
-                <p>Mentor : {{ fundingDatas[index].mentorName }}</p>
+                <p>Mentor : {{ funding.mentorName }}</p>
                 <p class="shorthand">
-                  {{ fundingDatas[index].description }}
+                  {{ funding.description }}
                 </p>
               </div>
             </router-link>
@@ -30,19 +30,11 @@
       <div class="mt-10">
         <v-row class="fundingRow col-12 mx-1 ">
           <!-- <v-spacer></v-spacer> -->
-          <div
-            class="col-4 height-300"
-            v-for="rankName in rankings"
-            :key="rankName"
-          >
+          <div class="col-4 height-300" v-for="(rankName, index) in rankings" :key="index">
             <div class="halfHeight">
               <p class="centerText" style="font-size:20px">{{ rankName }}</p>
             </div>
-            <v-col
-              class="rankingBox"
-              v-for="(rankData, index) in rankDatas"
-              :key="index"
-            >
+            <v-col class="rankingBox" v-for="(rankData, index) in rankDatas[index]" :key="index">
               <v-row class="halfHeight mx-2">
                 <v-col class="centerText col-2"> {{ index + 1 }}위 </v-col>
                 <v-col class="centerText col-7">
@@ -61,89 +53,38 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
+
 export default {
+  created() {
+    http
+      .get(`project/fundingList`)
+      .then(({ data }) => {
+        this.fundingDatas = data.list;
+      })
+      .catch(() => {
+        alert(`프로젝트 정보 가져오기 실패`);
+      });
+    http
+      .get(`member/rank`)
+      .then(({ data }) => {
+        this.rankDatas = data.list;
+      })
+      .catch(() => {
+        alert(`랭킹 정보 가져오기 실패`);
+      });
+  },
   data() {
     return {
-      fundings: [
-        "funding01",
-        "funding02",
-        "funding03",
-        "funding03",
-        "funding01",
-        "funding02"
-      ],
-      fundingDatas: [
-        {
-          project_name: "가보자 가보자!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        },
-        {
-          project_name: "가보자 가보자!!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        },
-        {
-          project_name: "가보자 가보자!!!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        },
-        {
-          project_name: "가보자 가보자!!!!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        },
-        {
-          project_name: "가보자 가보자!!!!!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        },
-        {
-          project_name: "가보자 가보자!!!!!!",
-          participants: 4,
-          mentorName: "MasterSIFU",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the"
-        }
-      ],
-      rankings: ["경험치", "도덕성", "적극성", "신뢰도", "전문성", "리더쉽"],
-      rankDatas: [
-        {
-          id: "song@naver.com",
-          score: 10000
-        },
-        {
-          id: "junhyung@naver.com",
-          score: 9000
-        },
-        {
-          id: "minju1004@naver.com",
-          score: 8000
-        },
-        {
-          id: "junoh31@naver.com",
-          score: 7000
-        },
-        {
-          id: "seok29@naver.com",
-          score: 6000
-        }
-      ]
+      fundings: ['funding01', 'funding02', 'funding03', 'funding03', 'funding01', 'funding02'],
+      fundingDatas: [],
+      rankings: ['경험치', '도덕성', '적극성', '신뢰도', '전문성', '리더쉽'],
+      rankDatas: [],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
-@import "../../assets/css/mainpage.css";
+@import '../../assets/css/mainpage.css';
 </style>

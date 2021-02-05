@@ -7,11 +7,7 @@
     <div class="col-8 centerContent px-10 py-10">
       <v-row style="background-color:#eee;">
         <div class="col-6" style="background-color:#fff;">
-          <img
-            src="@/assets/images/main/sample01.jpg"
-            alt="샘플이미지"
-            class="projectImg"
-          />
+          <img src="@/assets/images/main/sample01.jpg" alt="샘플이미지" class="projectImg" />
         </div>
         <v-spacer></v-spacer>
         <div class="col-6">
@@ -40,30 +36,23 @@
       </v-row>
       <v-row class="explainBox my-10">
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+          a galley of type and scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting, remaining essentially
+          unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
         </p>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+          a galley of type and scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting, remaining essentially
+          unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum.
         </p>
-        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> -->
-        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> -->
-        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> -->
       </v-row>
     </div>
     <div class="col-8 centerContent">
@@ -71,12 +60,7 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat>
-              <v-btn
-                outlined
-                class="mr-4"
-                color="grey darken-2"
-                @click="setToday"
-              >
+              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
                 Today
               </v-btn>
               <v-btn fab text small color="grey darken-2" @click="prev">
@@ -95,12 +79,7 @@
               <v-spacer></v-spacer>
               <v-menu bottom right>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    outlined
-                    color="grey darken-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
+                  <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
                     <span>{{ typeToLabel[type] }}</span>
                     <v-icon right>
                       mdi-menu-down
@@ -123,9 +102,7 @@
                 </v-list>
               </v-menu>
 
-              <v-btn style="margin-left:20px;" @click="moveSchedule"
-                >일정 관리</v-btn
-              >
+              <v-btn style="margin-left:20px;" @click="moveSchedule">일정 관리</v-btn>
             </v-toolbar>
           </v-sheet>
           <v-sheet height="600">
@@ -152,9 +129,7 @@
                   <v-btn icon>
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
-                  <v-toolbar-title
-                    v-html="selectedEvent.name"
-                  ></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-btn icon>
                     <v-icon>mdi-heart</v-icon>
@@ -182,37 +157,20 @@
 <script>
 export default {
   data: () => ({
-    focus: "",
-    type: "month",
+    focus: '',
+    type: 'month',
     typeToLabel: {
-      month: "Month",
-      week: "Week",
-      day: "Day",
-      "4day": "4 Days"
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
+      '4day': '4 Days',
     },
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
     events: [],
-    colors: [
-      "blue",
-      "indigo",
-      "deep-purple",
-      "cyan",
-      "green",
-      "orange",
-      "grey darken-1"
-    ],
-    names: [
-      "Meeting",
-      "Holiday",
-      "PTO",
-      "Travel",
-      "Event",
-      "Birthday",
-      "Conference",
-      "Party"
-    ]
+    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
   }),
   mounted() {
     this.$refs.calendar.checkChange();
@@ -220,13 +178,13 @@ export default {
   methods: {
     viewDay({ date }) {
       this.focus = date;
-      this.type = "day";
+      this.type = 'day';
     },
     getEventColor(event) {
       return event.color;
     },
     setToday() {
-      this.focus = "";
+      this.focus = '';
     },
     prev() {
       this.$refs.calendar.prev();
@@ -272,7 +230,7 @@ export default {
           start: first,
           end: second,
           color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay
+          timed: !allDay,
         });
       }
 
@@ -282,11 +240,11 @@ export default {
       return Math.floor((b - a + 1) * Math.random()) + a;
     },
     moveSchedule() {
-      this.$router.push("/schedule");
-    }
-  }
+      this.$router.push('/schedule');
+    },
+  },
 };
 </script>
 <style scoped>
-@import "../../assets/css/fundingdetail.css";
+@import '../../assets/css/fundingdetail.css';
 </style>
