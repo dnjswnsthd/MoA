@@ -1,5 +1,6 @@
 package com.moa.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -70,6 +71,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void interestingDelete(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).interestingDelete(param);
+	}
+
+	@Override
+	public List<ProjectDto> getFundingList() throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).getFundingList();
 	}
 
 }
