@@ -12,11 +12,13 @@
           </router-link>
         </div>
         <v-spacer></v-spacer>
-        <li class="width-120 centerText height-70">
-          <router-link to="/fundingopen" style="color:#fff;" class="cookie">펀딩 오픈</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectOpButton = true" @mouseout="selectOpButton = false">
+          <router-link v-if="selectOpButton==true" to="/fundingopen" style="color:#ffce55;" class="cookie">펀딩 오픈</router-link>
+          <router-link v-else to="/fundingopen" style="color:#fff;" class="cookie">펀딩 오픈</router-link>
         </li>
-        <li class="width-120 centerText height-70">
-          <router-link to="/mypage" style="color:#fff;" class="cookie">My Page</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectMyButton = true" @mouseout="selectMyButton = false">
+          <router-link v-if="selectMyButton==true" to="/mypage" style="color:#ffce55;" class="cookie">My Page</router-link>
+          <router-link v-else to="/mypage" style="color:#fff;" class="cookie">My Page</router-link>
         </li>
         <li
           class="width-120 centerText height-70 logoutBtn cookie"
@@ -37,11 +39,13 @@
           </router-link>
         </div>
         <v-spacer></v-spacer>
-        <li class="width-120 centerText height-70">
-          <router-link to="/join" style="color:#fff;" class="cookie">회원가입</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectSgButton = true" @mouseout="selectSgButton = false">
+          <router-link v-if="selectSgButton==true" to="/join" style="color:#ffce55;" class="cookie">회원가입</router-link>
+          <router-link v-else to="/join" style="color:#fff;" class="cookie">회원가입</router-link>
         </li>
-        <li class="width-120 centerText height-70">
-          <router-link to="/login" style="color:#fff;" class="cookie">로그인</router-link>
+        <li class="width-120 centerText height-70" @mouseover="selectLgButton = true" @mouseout="selectLgButton = false">
+          <router-link v-if="selectLgButton==true" to="/login" style="color:#ffce55;" class="cookie">로그인</router-link>
+          <router-link v-else to="/login" style="color:#fff;" class="cookie">로그인</router-link>
         </li>
       </v-row>
       <div class="headerPadding">
@@ -154,6 +158,10 @@ export default {
   },
   data() {
     return {
+      selectOpButton: false,
+      selectMyButton: false,
+      selectSgButton: false,
+      selectLgButton: false,
       showDgImg: require('@/assets/category/design.png'),
       showItImg: require('@/assets/category/computer.png'),
       showTrImg: require('@/assets/category/translate.png'),
