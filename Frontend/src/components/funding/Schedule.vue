@@ -69,22 +69,30 @@
             active-class="success"
             show-arrows
           >
-            <v-slide-item class="mr-5" v-for="index in 5" :key="index">
-              <schedule-card :index="index" :item="item"></schedule-card>
-            </v-slide-item>
+          
+            <draggable class="mr-5" v-for="index in 5" :key="index">
+            
+               <schedule-card :index="index" :item="item" ></schedule-card>
+           
+            </draggable>
           </v-slide-group>
         </v-sheet>
+        <rawDisplayer class="mr-5" :value="index"/>
+         <rawDisplayer class="mr-5" :value="index"/>
       </div>
     </div>
+  
   </div>
 </template>
 
 <script>
 import ScheduleCard from "./ScheduleCard.vue";
+import draggable from "vuedraggable";
 
 export default {
   components: {
-    ScheduleCard
+    ScheduleCard,
+    draggable
   },
   data() {
     return {
