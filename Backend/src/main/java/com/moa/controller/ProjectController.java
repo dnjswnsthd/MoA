@@ -45,7 +45,6 @@ public class ProjectController {
 			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-
 		try {
 			projectService.create(param);
 			resultMap.put("message", SUCCESS);
@@ -292,7 +291,7 @@ public class ProjectController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	@ApiOperation(value = "진행 중인 펀딩 목록", notes = "진행 중인 펀딩 최신 순으로 6개를 제공")
+	@ApiOperation(value = "진행 중인 펀딩 목록", notes = "진행 중인 펀딩 최신 순으로 6개를 제공", response = Map.class)
 	@GetMapping("/fundingList")
 	public ResponseEntity<Map<String, Object>> getFundingList() {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
