@@ -300,7 +300,6 @@ public class ProjectController {
 		
 		try {
 			List<ProjectDto> list = projectService.getFundingList();
-			System.out.println(list);
 			resultMap.put("list", list);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
