@@ -1,5 +1,8 @@
 package com.moa.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * Member Dto 구현
  * 멘토, 멘티가 가질 수 있는 공통 속성 정의
@@ -7,24 +10,38 @@ package com.moa.model;
  * @author 조석준
  * 작성일 : 2021-01-26
  */
+@ApiModel(value = "회원정보", description = "관리자, 멘토, 멘티의 상세 정보")
 public class MemberDto {
+	@ApiModelProperty(value = "아이디(이메일 형식)")
 	private String id;
+	@ApiModelProperty(value = "비밀번호")
 	private String pw;
+	@ApiModelProperty(value = "이름")
 	private String name;
+	@ApiModelProperty(value = "나이")
 	private int age;
+	@ApiModelProperty(value = "전공분야")
 	private String major;
 	// 0 : 관리자		1 : 멘토		2 : 멘티
+	@ApiModelProperty(value = "상태(0: 관리자, 1: 멘토, 2:멘티")
 	private int status;
+	@ApiModelProperty(value = "폰 번호")
 	private String phone;
 	// 관심 분야  1, 2, 3
+	@ApiModelProperty(value = "관심분야 1")
 	private String favorite_1;
+	@ApiModelProperty(value = "관심분야 2")
 	private String favorite_2;
+	@ApiModelProperty(value = "관심분야 3")
 	private String favorite_3;
 	// 참여한 프로젝트 수 
+	@ApiModelProperty(value = "참여한 프로젝트 수")
 	private int numberOfProject;
 	// 가지고 있는 포인트
+	@ApiModelProperty(value = "가지고 있는 포인트(펀딩에 사용)")
 	private int point;
 	// 자기 소개
+	@ApiModelProperty(value = "자기소개")
 	private String introduce;
 	// getter, setter
 	public String getId() {
