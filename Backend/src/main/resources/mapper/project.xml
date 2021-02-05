@@ -145,4 +145,12 @@
 		where project_num = #{project_num} and id = #{id}
 	</delete>
 	
+	<!-- getFundingList -->
+	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
+	<select id="getFundingList" resultType="ProjectDto">
+		SELECT * FROM project p 
+		ORDER BY start_date DESC 
+		limit 6;
+	</select>
+	
 </mapper>
