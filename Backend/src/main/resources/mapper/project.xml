@@ -8,11 +8,11 @@
 	<insert id="createProject" parameterType="Map">
 		insert into
 		project(project_name, start_date, end_date, category, participants,
-		funding_cost, description, mentor_chk, deadline)
+		funding_cost, description, mentor_chk, deadline, leader)
 		values
 		(#{project_name}, #{start_date}, #{end_date}, #{category},
 		#{participants}, #{funding_cost}, #{description}, #{mentor_chk},
-		#{deadline})
+		#{deadline}, #{leader})
 	</insert>
 	
 	<!-- project create했을때 프로젝트랑 멤버 id 추가-->
@@ -144,5 +144,13 @@
 		interesting_project
 		where project_num = #{project_num} and id = #{id}
 	</delete>
+	
+	<!-- getFundingList -->
+	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
+	<select id="getFundingList" resultType="ProjectDto">
+		SELECT * FROM project p 
+		ORDER BY start_date DESC 
+		limit 6;
+	</select>
 	
 </mapper>
