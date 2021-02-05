@@ -1,5 +1,8 @@
 package com.moa.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 멘토 Dto 작성
  * MemberDto 상속 받아 구현
@@ -7,14 +10,22 @@ package com.moa.model;
  * @author 조석준
  * 작성일 : 2021-01-26
  */
+@ApiModel(value = "멘토 정보", description = "멘토의 경력, 경험치, 능력치 정보")
 public class MentorDto extends MemberDto {
+	@ApiModelProperty(value = "경력")
 	private String career;
+	@ApiModelProperty(value = "경험치")
 	private int exp;
 	// 능력치
+	@ApiModelProperty(value = "리더십")
 	private int leadership;		// 리더쉽
+	@ApiModelProperty(value = "도덕성")
 	private int morality;		// 도덕성
+	@ApiModelProperty(value = "적극성")
 	private int positiveness;	// 적극성
+	@ApiModelProperty(value = "신뢰성")
 	private int reliability;	// 신뢰성
+	@ApiModelProperty(value = "전문성")
 	private int professional;	// 전문성
 	// getter, setter
 	public String getCareer() {

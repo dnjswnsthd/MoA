@@ -1,13 +1,25 @@
 package com.moa.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "스프린트 정보", description = "스프린트의 상세 정보")
 public class SprintDto {
+	@ApiModelProperty(value = "스프린트 번호")
 	int sprint_num;
+	@ApiModelProperty(value = "스프린트 명")
 	String sprint_name;
+	@ApiModelProperty(value = "상태(1,2,3)")
 	int sprint_status;
+	@ApiModelProperty(value = "스프린트 주제?")
 	String sprint_subject;
+	@ApiModelProperty(value = "설명")
 	String description;
+	@ApiModelProperty(value = "스프린트 시작 날짜")
 	String start_date;
+	@ApiModelProperty(value = "스프린트 종료 날짜")
 	String end_date;
+	@ApiModelProperty(value = "프로젝트 번호")
 	int project_num;
 	public int getSprint_num() {
 		return sprint_num;
