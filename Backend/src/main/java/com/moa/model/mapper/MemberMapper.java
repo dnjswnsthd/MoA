@@ -1,11 +1,13 @@
 package com.moa.model.mapper;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import com.moa.model.MemberDto;
 import com.moa.model.MenteeDto;
 import com.moa.model.MentorDto;
+import com.moa.model.RankDto;
 
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
@@ -36,6 +38,13 @@ public interface MemberMapper {
 
 	public int getStatus(String id) throws SQLException;
 
-	public String pwcheck(String id);
+	public String pwcheck(String id) throws SQLException;
+	// 랭킹 관련 Mapper
+	public List<RankDto> getRankingExp() throws SQLException;
+	public List<RankDto> getRankingMorality() throws SQLException;
+	public List<RankDto> getRankingPositiveness() throws SQLException;
+	public List<RankDto> getRankingReliability() throws SQLException;
+	public List<RankDto> getRankingProfessional() throws SQLException;
+	public List<RankDto> getRankingLeadership() throws SQLException;
 
 }
