@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false, // 로그인 여부
-    memberInfo: null,
+    memberInfo: null
   },
   mutations: {
     setIsLogined(state, isLogin) {
@@ -17,7 +17,6 @@ export default new Vuex.Store({
     setMemberInfo(state, memberInfo) {
       state.isLogin = true;
       state.memberInfo = memberInfo;
-      
     },
     logout(state) {
       state.isLogin = false;
@@ -27,10 +26,10 @@ export default new Vuex.Store({
   actions: {
     async GET_MEMBER_INFO({ commit }, token) {
       let decode = jwt_decode(token);
-      
+
       await findById(
         decode.id,
-        (response) => {
+        response => {
           if (response.data.message === "success") {
             commit("setMemberInfo", response.data.memberInfo);
             // router.push("/");
@@ -39,7 +38,7 @@ export default new Vuex.Store({
             console.log("유저 정보 없음!!");
           }
         },
-        (error) => {
+        error => {
           console.log(error);
         }
       );
