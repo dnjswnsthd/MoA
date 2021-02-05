@@ -1,15 +1,29 @@
 package com.moa.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "프로젝트 정보", description = "프로젝트의 상세 정보")
 public class ProjectDto {
+	@ApiModelProperty(value = "프로젝트 번호")
 	int project_num;
+	@ApiModelProperty(value = "프로젝트 명")
 	String project_name;
+	@ApiModelProperty(value = "프로젝트 시작 날짜")
 	String start_date;
+	@ApiModelProperty(value = "프로젝트 마감 날짜")
 	String end_date;
+	@ApiModelProperty(value = "프로젝트 분류")
 	String category;
+	@ApiModelProperty(value = "참가자 수")
 	int Participants;
+	@ApiModelProperty(value = "펀딩 금액")
 	int funding_cost;
+	@ApiModelProperty(value = "설명")
 	String description;
+	@ApiModelProperty(value = "멘토 여부")
 	String mentor_chk;
+	@ApiModelProperty(value = "펀딩 마감")
 	String deadline;
 	
 	public int getProject_num() {
