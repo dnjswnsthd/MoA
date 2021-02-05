@@ -19,7 +19,7 @@
 	<!-- 펀딩 오픈 시 project_member db에 추가 -->
 	<insert id="appendProject" parameterType="Map">
 		insert into
-		member_project(select last_insert_id(), #{id})
+		member_project(select last_insert_id(), #{leader})
 	</insert>
 
 	<!-- project search -->
@@ -148,7 +148,8 @@
 	<!-- getFundingList -->
 	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
 	<select id="getFundingList" resultType="ProjectDto">
-		SELECT * FROM project p 
+		SELECT project_name, participants, leader, mentor_chk, description 
+		FROM project p 
 		ORDER BY start_date DESC 
 		limit 6;
 	</select>
