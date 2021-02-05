@@ -7,6 +7,7 @@ import java.util.Map;
 import com.moa.model.MemberDto;
 import com.moa.model.MenteeDto;
 import com.moa.model.MentorDto;
+import com.moa.model.RankDto;
 
 public interface MemberMapper {
 	public MemberDto login(MemberDto memberDto) throws SQLException;
@@ -39,11 +40,11 @@ public interface MemberMapper {
 
 	public String pwcheck(String id) throws SQLException;
 	// 랭킹 관련 Mapper
-	public List<MentorDto> getRankingExp() throws SQLException;
-	public List<MentorDto> getRankingMorality() throws SQLException;
-	public List<MentorDto> getRankingPositiveness() throws SQLException;
-	public List<MentorDto> getRankingReliability() throws SQLException;
-	public List<MentorDto> getRankingProfessional() throws SQLException;
-	public List<MentorDto> getRankingLeadership() throws SQLException;
+	public List<RankDto> getRankingExp() throws SQLException;
+	public List<RankDto> getRankingMorality() throws SQLException;
+	public List<RankDto> getRankingPositiveness() throws SQLException;
+	public List<RankDto> getRankingReliability() throws SQLException;
+	public List<RankDto> getRankingProfessional() throws SQLException;
+	public List<RankDto> getRankingLeadership() throws SQLException;
 
 }
