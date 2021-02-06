@@ -42,14 +42,18 @@ public class ProjectController {
 	@ApiOperation(value = "펀딩 생성", notes = "펀딩 생성 결과 메시지를 반환한다.", response = Map.class)
 	@PostMapping("/create")
 	public ResponseEntity<Map<String, Object>> create(
-			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) Map<String, Object> param) {
+			@RequestBody @ApiParam(value = "펀딩 생성에 필요한 정보", required = true) ProjectDto param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
+		
+		System.out.println(param);
+		
 		try {
 			projectService.create(param);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			resultMap.put("message", FAIL);
 			status = HttpStatus.ACCEPTED;
 		}
@@ -62,7 +66,7 @@ public class ProjectController {
 	 * @param param	신청한 펀딩의 프로젝트 번호와 신청자의 아이디 정보
 	 * @return	신청 '성공' or '실패' 메시지 전달
 	 */
-	@ApiOperation(value = "펀딩 신청 대기", notes = "펀딩 신청 후 수락까지 대기 중 DB에 상태 저장을 위함.", response = Map.class)
+	@ApiOperation(value = "펀딩 신청 대기", notes = "펀딩 신청 후 수락까지 대기 중 DB에 상태	 저장을 위함.", response = Map.class)
 	@PostMapping("/waiting")
 	public ResponseEntity<Map<String, Object>> waiting(
 			@RequestBody @ApiParam(value = "펀딩 신청  후 대기중인 내역 DB에 추가 ") Map<String, Object> param) {
