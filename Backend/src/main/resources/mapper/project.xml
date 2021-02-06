@@ -157,7 +157,7 @@
 	<select id="getFundingDetail" resultType="ProjectDto">
 		select *
 		from project
-		where id = #{id}
+		where project_num = #{project_num}
 	</select>
 	
 </mapper>
