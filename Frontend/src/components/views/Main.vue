@@ -9,7 +9,7 @@
                         :key="index"
                         class="funding col-3 my-5 mx-12"
                     >
-                        <div @click="goDetail({{funding.project_num}})">
+                        <div @click="goDetail(funding.project_num)">
                             <img
                                 src="@/assets/images/funding/fox.jpg"
                                 class="fullWidth"
