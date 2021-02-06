@@ -12,13 +12,11 @@
                     >
                         <router-link to="/fundingdetail">
                             <div class="invisibleBox">
-                                <p>{{ funding.project_name }}</p>
-                                <p>{{ funding.participants }}명</p>
-                                <p>{{ funding.leader }}</p>
-                                <p>Mentor : {{ funding.mentorName }}</p>
-                                <p class="shorthand">
-                                    {{ funding.description }}
-                                </p>
+                                <p>프로젝트 이름 : {{ funding.project_name }}</p>
+                                <p>참가인원 : {{ funding.participants }}명</p>
+                                <p>팀장 : {{ funding.leader }}</p>
+                                <p>멘토 : {{ funding.mentor_chk }}</p>
+                                <p class="shorthand">설명 : {{ funding.description }}</p>
                             </div>
                         </router-link>
                     </v-col>
