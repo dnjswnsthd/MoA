@@ -5,7 +5,7 @@
 <mapper namespace="com.moa.model.mapper.ProjectMapper">
 	<!-- project create -->
 	<!-- 펀딩 오픈 -->
-	<insert id="createProject" parameterType="Map">
+	<insert id="createProject" parameterType="ProjectDto">
 		insert into
 		project(project_name, start_date, end_date, category, participants,
 		funding_cost, description, mentor_chk, deadline, leader)
@@ -148,7 +148,7 @@
 	<!-- getFundingList -->
 	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
 	<select id="getFundingList" resultType="ProjectDto">
-		SELECT project_name, participants, leader, mentor_chk, description 
+		SELECT project_num, category, project_name, participants, leader, mentor_chk, description, start_date, end_date, deadline
 		FROM project p 
 		ORDER BY start_date DESC 
 		limit 6;
