@@ -309,6 +309,7 @@ public class ProjectController {
 		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
 	@ApiOperation(value = "펀딩 세부 정보 보기", notes = "펀딩 세부 정보를 가져옴", response = Map.class)
 	@GetMapping("/fundingDetail")
 	public ResponseEntity<Map<String, Object>> getFundingDetail(
