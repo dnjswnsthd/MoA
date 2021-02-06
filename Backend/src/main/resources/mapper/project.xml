@@ -154,7 +154,7 @@
 		limit 6;
 	</select>
 	
-	<select id="getFundingDetail" resultType="ProjectDto">
+	<select id="getFundingDetail" parameterType="Integer" resultType="ProjectDto">
 		select *
 		from project
 		where project_num = #{project_num}
