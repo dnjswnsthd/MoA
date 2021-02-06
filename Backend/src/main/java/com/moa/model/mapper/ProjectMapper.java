@@ -8,9 +8,9 @@ import com.moa.model.ProjectDto;
 
 public interface ProjectMapper {
 
-	void createProject(Map<String, Object> param) throws SQLException;
+	void createProject(ProjectDto param) throws SQLException;
 	
-	void appendProject(Map<String, Object> param) throws SQLException;
+	void appendProject(ProjectDto param) throws SQLException;
 
 	public ProjectDto[] projectInfo(String id) throws SQLException;
 	
