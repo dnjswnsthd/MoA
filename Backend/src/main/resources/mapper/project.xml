@@ -156,7 +156,7 @@
 	<!-- getFundingDetail -->
 	<!-- 프로젝트 넘버로 상세 정보를 가져온다. -->
 	<select id="getFundingDetail" parameterType="Integer" resultType="ProjectDto">
-		select project_name
+		select *
 		from project
 		where project_num = #{project_num}
 	</select> 
