@@ -57,9 +57,9 @@ export default new VueRouter({
       components: { default: FundingList, header: SubHeader }
     },
     {
-      path: "/fundingdetail",
+      path: "/fundingdetail/:pn",
       name: "FundingDetail",
-      components: { default: FundingDetail, header: SubHeader }
+      components: { default: FundingDetail, header: SubHeader },
     },
     {
       path: "/schedule",
