@@ -150,7 +150,7 @@
 	<select id="getFundingList" resultType="ProjectDto">
 		SELECT category, project_name, participants, leader, mentor_chk, description, start_date, end_date, deadline
 		FROM project p 
-		ORDER BY start_date ASC 
+		ORDER BY start_date DESC 
 		limit 6;
 	</select>
 	<!-- getFundingDetail -->
