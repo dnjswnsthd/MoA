@@ -155,9 +155,9 @@
 	</select>
 	
 	<select id="getFundingDetail" parameterType="Integer" resultType="ProjectDto">
-		select *
+		select project_name
 		from project
 		where project_num = #{project_num}
-	</select>
+	</select> 
 	
 </mapper>
