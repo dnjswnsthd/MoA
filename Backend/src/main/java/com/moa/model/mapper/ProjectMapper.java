@@ -37,4 +37,6 @@ public interface ProjectMapper {
 	void interestingDelete(Map<String, Object> param) throws SQLException;
 
 	List<ProjectDto> getFundingList() throws SQLException;
+
+	ProjectDto getFundingDetail(int project_num) throws SQLException;
 }
