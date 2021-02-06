@@ -29,28 +29,37 @@
         </div>
         <div class="cardBox">
             <form class="width-1000">
-                <v-row class="width-1000">
+                <v-row class="col-12">
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="제목"
                         type="text"
-                        class="width-700"
                         v-model="project.project_name"
+                        class="width-500"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
+
                 <v-row class="width-1000">
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="인원"
                         type="number"
-                        class="width-700"
                         v-model="project.participants"
+                        suffix="명"
+                        style="width:5px;"
+                    >
+                    </v-text-field>
+
+                    <v-text-field
+                        label="펀딩액"
+                        type="number"
+                        v-model="project.funding_cost"
+                        suffix="원"
+                        class="mx-10"
+                        style="width:5px;"
                     ></v-text-field>
-                    <v-spacer></v-spacer>
-                </v-row>
-                <v-row class="width-1000">
-                    <v-spacer></v-spacer>
+
                     <v-radio-group v-model="project.mentor_chk" row>
                         멘토
                         <v-radio value="필요있음" label="필요있음"></v-radio>
@@ -58,48 +67,36 @@
                     </v-radio-group>
                     <v-spacer></v-spacer>
                 </v-row>
-                <v-row class="width-1000">
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="펀딩액"
-                        type="number"
-                        class="width-130"
-                        v-model="project.funding_cost"
-                    ></v-text-field>
+
+                <v-row class="col-12">
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="모집기간"
                         type="date"
                         class="width-100"
                         v-model="project.deadline"
+                        style="width:80px;"
                     ></v-text-field>
-                    <v-spacer></v-spacer>
-                </v-row>
-                <v-row class="width-1000">
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="프로젝트 Start"
-                        type="date"
-                        class="width-130"
-                        v-model="project.start_date"
-                    ></v-text-field>
-                    <v-spacer></v-spacer>
+
                     <v-text-field
                         label="프로젝트 End"
                         type="date"
-                        class="width-130"
+                        class="width-130 ml-15"
                         v-model="project.end_date"
                     ></v-text-field>
                     <v-spacer></v-spacer>
                 </v-row>
             </form>
         </div>
-        <div class="width-700 fundingContent">
-            <v-spacer></v-spacer>
-            <h3>세부내용</h3>
-            <v-spacer></v-spacer>
+        <div class="col-10 fundingContent">
             <div class="py-10 fundingMargin">
-                <input type="text" class="fundingBox" v-model="project.description" />
+                <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
+                <v-textarea
+                    outlined
+                    name="input-12-4"
+                    label="세부내용"
+                    v-model="project.description"
+                ></v-textarea>
             </div>
             <v-spacer></v-spacer>
         </div>
@@ -128,6 +125,15 @@ export default {
     },
     created() {
         this.project.leader = this.memberInfo.id;
+
+        let today = new Date();
+
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
+
+        this.project.start_date = year + '-' + month + '-' + date;
+        console.log(this.project.start_date);
     },
     data() {
         return {
