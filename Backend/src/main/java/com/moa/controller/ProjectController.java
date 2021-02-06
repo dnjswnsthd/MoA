@@ -311,14 +311,14 @@ public class ProjectController {
 	}
 	
 	@ApiOperation(value = "펀딩 세부 정보 보기", notes = "펀딩 세부 정보를 가져옴", response = Map.class)
-	@GetMapping("/fundingDetail")
+	@GetMapping("/fundingDetail/{project_num}")
 	public ResponseEntity<Map<String, Object>> getFundingDetail(
 			@PathVariable("project_num") @ApiParam(value = "펀딩 세부 정보를 보기 위한 project_num", required = true) int project_num){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
-			ProjectDto projectDto = projectService.getFundingDetail(project_num);
-			resultMap.put("project", projectDto);
+			ProjectDto detail = projectService.getFundingDetail(project_num);
+			resultMap.put("project", detail);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 			
