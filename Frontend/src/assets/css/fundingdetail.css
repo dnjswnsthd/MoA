@@ -1,22 +1,30 @@
 @charset "utf-8";
 .banner {
-  height: 100px;
-  /* background-color: ; */
+    height: 100px;
+    /* background-color: ; */
 }
 .banner p {
-  display: block;
-  color: rgba(148, 0, 211, 1);
-  font-size: 36px;
-  line-height: 100px;
+    display: block;
+    color: black;
+    font-size: 36px;
+    line-height: 100px;
+}
+.projectImgBox {
+    width: 70%;
+    height: 70%;
+    margin: 15%;
 }
 .projectImg {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
 }
 .btnList {
-  text-align: center;
+    text-align: center;
 }
 .explainBox {
-  background-color: lightgoldenrodyellow;
+    background-color: white;
+    color: black;
+    font-size: 20px;
 }
-

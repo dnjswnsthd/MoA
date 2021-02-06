@@ -1,6 +1,6 @@
 <template>
     <div class="width-1000 centerContent">
-        <h1>펀딩오픈</h1>
+        <p class="pageTitle">펀딩오픈</p>
         <div class="width-1000 centerContent pt-3">
             <h2>카테고리</h2>
             <ul class="pt-5">
@@ -100,16 +100,16 @@
             </div>
             <v-spacer></v-spacer>
         </div>
-        <div class="height-50">
+        <div class="height-50 mb-15">
             <v-row>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" text class="width-100">
+                <div class="fundingBtn">
                     취소하기
-                </v-btn>
+                </div>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="openFunding">
+                <div @click="openFunding" class="fundingBtn">
                     오픈하기
-                </v-btn>
+                </div>
                 <v-spacer></v-spacer>
             </v-row>
         </div>
