@@ -1,65 +1,81 @@
 <template>
     <div class="">
-        <div class="banner col-8 centerContent">
-            <p class="pl-5">IT.프로그래밍</p>
+        <div class="banner col-6 centerContent">
+            <p class="pl-5 pageTitle">
+                {{ project.category }}
+            </p>
         </div>
 
-        <div class="col-8 centerContent px-10 py-10">
-            <v-row style="background-color:#eee;">
-                <div class="col-6" style="background-color:#fff;">
-                    <img
-                        src="@/assets/images/main/sample01.jpg"
-                        alt="샘플이미지"
-                        class="projectImg"
-                    />
+        <div class="col-6  centerContent px-10 py-10">
+            <v-row>
+                <div class="col-6">
+                    <div class="projectImgBox">
+                        <img
+                            src="@/assets/category/marketing(c).png"
+                            alt="샘플이미지"
+                            class="projectImg"
+                        />
+                    </div>
                 </div>
                 <v-spacer></v-spacer>
                 <div class="col-6">
-                    <v-col style="background-color:#fff;">
+                    <v-col
+                        style="background-color:#fff; font-size: 20px; margin:20% auto 10% auto;"
+                    >
                         <v-spacer></v-spacer>
-                        <p>{{ 가보자가보자 }}</p>
+                        <p>제목 : {{ project.project_name }}</p>
                         <v-spacer></v-spacer>
-                        <p>2021.01.18 ~ 2021.02.28</p>
+                        <p>프로젝트 일정 : {{ project.start_date }} ~ {{ project.end_date }}</p>
                         <v-spacer></v-spacer>
-                        <p>10000 <span>* 4명</span></p>
+                        <p>펀딩 금액 : {{ project.funding_cost }}원</p>
+                        <p>참가 인원 : {{ project.participants }}명</p>
                         <v-spacer></v-spacer>
-                        <p>Mentor : <span>MasterSIFU</span></p>
+                        <p>
+                            Mentor : <span>{{ project.mentor_chk }}</span>
+                        </p>
                         <v-spacer></v-spacer>
                     </v-col>
-                    <div class="centerText" @click="fundingApply">
-                        펀딩하기
-                    </div>
-                    <v-row class="col-12 btnList" style="margin:0; padding:0;">
-                        <div class="col-4">대기 목록</div>
-                        <v-spacer></v-spacer>
-                        <div class="col-4">공유 하기</div>
-                        <v-spacer></v-spacer>
-                        <div class="col-4">관심 등록</div>
-                    </v-row>
                 </div>
             </v-row>
-            <v-row class="explainBox my-10">
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen
-                    book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                    recently with desktop publishing software like Aldus PageMaker including
-                    versions of Lorem Ipsum.
-                </p>
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen
-                    book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                    recently with desktop publishing software like Aldus PageMaker including
-                    versions of Lorem Ipsum.
-                </p>
+            <v-row class="col-12 btnList" style="margin:0; padding:0;">
+                <v-spacer></v-spacer>
+                <div class="col-3" @click="fundingApply">
+                    <p class="fundingBtn">
+                        펀딩하기
+                    </p>
+                </div>
+                <v-spacer></v-spacer>
+                <div class="col-3">
+                    <p class="fundingBtn">
+                        대기 목록
+                    </p>
+                </div>
+                <v-spacer></v-spacer>
+                <div class="col-3">
+                    <p class="fundingBtn">
+                        공유 하기
+                    </p>
+                </div>
+                <v-spacer></v-spacer>
+                <div class="col-3">
+                    <p class="fundingBtn">
+                        관심 등록
+                    </p>
+                </div>
+                <v-spacer></v-spacer>
             </v-row>
+            <v-col class="explainBox my-10">
+                <p style="text-decoration : underline overline; text-underline-position : under">
+                    상세 설명
+                </p>
+
+                <v-textarea
+                    solo
+                    name="input-7-4"
+                    v-model="project.description"
+                    readonly
+                ></v-textarea>
+            </v-col>
         </div>
         <div class="col-8 centerContent">
             <v-row class="fill-height">
@@ -179,19 +195,30 @@ export default {
         events: [],
         colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
         names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-        project: {
-            project_num: '',
-        },
+        project: {},
+        project_num: '',
     }),
     computed: {
         ...mapState(['memberInfo']),
     },
-    created() {
-        http.get(`project/fundingList/${this.project.project_num}`);
-    },
     mounted() {
         this.$refs.calendar.checkChange();
+
+        console.log(this.project_num);
     },
+    created() {
+        this.project_num = this.$route.params.pn;
+        http.get(`project/fundingDetail/${this.project_num}`)
+            .then((response) => {
+                if (response.data.message == 'success') {
+                    this.project = response.data.project;
+                } else {
+                    alert('정보조회실패');
+                }
+            })
+            .catch(() => {});
+    },
+
     methods: {
         viewDay({ date }) {
             this.focus = date;
