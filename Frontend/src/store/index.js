@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLogin: false, // 로그인 여부
-    memberInfo: null
+    memberInfo: null,
   },
   mutations: {
     setIsLogined(state, isLogin) {
