@@ -15,6 +15,7 @@
     "jwt-decode": "^3.1.2",
     "password-validator": "^5.1.1",
     "vue": "^2.6.11",
+    "vue-drag-drop": "^1.1.4",
     "vue-draggable": "^2.0.6",
     "vue-router": "^3.2.0",
     "vue3-apexcharts": "^1.2.1",
