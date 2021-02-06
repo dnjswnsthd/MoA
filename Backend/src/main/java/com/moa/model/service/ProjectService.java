@@ -23,5 +23,6 @@ public interface ProjectService {
 	public void permission(Map<String, Object> param) throws Exception;
 	public void denial(Map<String, Object> param) throws Exception;
 	public List<ProjectDto> getFundingList() throws Exception;
+	public ProjectDto getFundingDetail(int project_num) throws Exception;
 
 }
