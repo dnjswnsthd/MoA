@@ -8,7 +8,7 @@
                     <div
                         class="fundingCategory fundingMargin"
                         v-for="category in categories"
-                        :key="category"
+                        :key="category.id"
                     >
                         <div :id="category.value" @click="categorySelect(category.name)">
                             <img
@@ -62,7 +62,7 @@
                     <v-spacer></v-spacer>
                     <v-text-field
                         label="펀딩액"
-                        type="text"
+                        type="number"
                         class="width-130"
                         v-model="project.funding_cost"
                     ></v-text-field>
@@ -126,14 +126,17 @@ export default {
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
     },
+    created() {
+        this.project.leader = this.memberInfo.id;
+    },
     data() {
         return {
             project: {
                 category: '',
                 project_name: '',
-                participants: '',
+                participants: Number,
                 mentor_chk: '',
-                funding_cost: '',
+                funding_cost: Number,
                 deadline: '',
                 start_date: '',
                 end_date: '',
@@ -142,36 +145,42 @@ export default {
             },
             categories: [
                 {
+                    id: 0,
                     img: require('@/assets/category/design.png'),
                     afterImg: require('@/assets/category/design(c).png'),
                     name: '디자인',
                     value: 'design',
                 },
                 {
+                    id: 1,
                     img: require('@/assets/category/computer.png'),
                     afterImg: require('@/assets/category/computer(c).png'),
                     name: 'IT·프로그래밍',
                     value: 'computer',
                 },
                 {
+                    id: 2,
                     img: require('@/assets/category/translate.png'),
                     afterImg: require('@/assets/category/translate(c).png'),
                     name: '번역·통역',
                     value: 'translate',
                 },
                 {
+                    id: 3,
                     img: require('@/assets/category/video.png'),
                     afterImg: require('@/assets/category/video(c).png'),
                     name: '영상·사진·음향',
                     value: 'video',
                 },
                 {
+                    id: 4,
                     img: require('@/assets/category/lucky.png'),
                     afterImg: require('@/assets/category/lucky(c).png'),
                     name: '운세·상담',
                     value: 'lucky',
                 },
                 {
+                    id: 5,
                     img: require('@/assets/category/marketing.png'),
                     afterImg: require('@/assets/category/marketing(c).png'),
                     name: '마케팅',
@@ -196,13 +205,15 @@ export default {
             }
         },
         openFunding() {
-            this.project.leader = this.memberInfo.id;
-            http.post('/project/create', {
-                project: this.project,
-            })
-                .then(() => {
-                    alert('추가 성공!');
-                    this.$router.push({ name: 'Main' });
+            http.post('/project/create', this.project)
+                .then((response) => {
+                    console.log(response);
+                    if (response.data.message == 'success') {
+                        alert('추가 성공!');
+                        this.$router.push({ name: 'Main' });
+                    } else {
+                        alert('추가실패!');
+                    }
                 })
                 .catch(() => {
                     alert('추가 실패!');
