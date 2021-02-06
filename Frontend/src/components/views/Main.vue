@@ -26,8 +26,8 @@
                             <div>
                                 <v-progress-linear
                                     color="#CE93D8"
-                                    buffer-value="0"
-                                    value="50"
+                                    buffer-value="funding.start_date"
+                                    value="funding.ending_date"
                                     stream
                                 ></v-progress-linear>
                             </div>

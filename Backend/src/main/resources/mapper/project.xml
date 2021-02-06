@@ -148,7 +148,7 @@
 	<!-- getFundingList -->
 	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
 	<select id="getFundingList" resultType="ProjectDto">
-		SELECT project_name, participants, leader, mentor_chk, description 
+		SELECT category, project_name, participants, leader, mentor_chk, description, start_date, end_date, deadline
 		FROM project p 
 		ORDER BY start_date DESC 
 		limit 6;
