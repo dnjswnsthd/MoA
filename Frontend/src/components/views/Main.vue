@@ -35,16 +35,21 @@
                                 <v-row>
                                     <li>프로젝트 이름 : {{ funding.project_name }}</li>
                                     <v-spacer></v-spacer>
-                                    <li>참가인원 : {{ funding.participants }}</li>
-                                    <v-spacer></v-spacer>
+                                    <li>카테고리 : {{ funding.category }}</li>
                                 </v-row>
                             </ul>
                             <ul class="pt-4">
                                 <v-row>
-                                    <li>종료 일자 : ~ {{ funding.end_date }}</li>
-                                    <li>|</li>
-                                    <li>팀장 : {{ funding.leader }}</li>
+                                    <li>시작 일자 : ~ {{ funding.start_date }}</li>
+                                    <v-spacer></v-spacer>
+                                    <li>참가인원 : {{ funding.participants }}</li>
                                 </v-row>
+                            </ul>
+                            <ul class="pt-4">
+                                <li>종료 일자 : ~ {{ funding.end_date }}</li>
+                            </ul>
+                            <ul class="pt-4">
+                                <li>팀장 : {{ funding.leader }}</li>
                             </ul>
                         </router-link>
                     </v-col>
