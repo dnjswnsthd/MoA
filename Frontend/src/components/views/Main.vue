@@ -7,16 +7,9 @@
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
-                        class="funding col-3 height-300 my-5 mx-12"
+                        class="funding col-3 my-5 mx-12"
                     >
-                        <router-link to="/fundingdetail">
-                            <!-- <div class="invisibleBox">
-                                <p>프로젝트 이름 : {{ funding.project_name }}</p>
-                                <p>참가인원 : {{ funding.participants }}명</p>
-                                <p>팀장 : {{ funding.leader }}</p>
-                                <p>멘토 : {{ funding.mentor_chk }}</p>
-                                <p class="shorthand">설명 : {{ funding.description }}</p>
-                            </div> -->
+                        <div @click="goDetail({{funding.project_num}})">
                             <img
                                 src="@/assets/images/funding/fox.jpg"
                                 class="fullWidth"
@@ -26,32 +19,24 @@
                             <div>
                                 <v-progress-linear
                                     color="#CE93D8"
-                                    buffer-value="funding.start_date"
-                                    value="funding.ending_date"
+                                    :value="dategap[index]"
                                     stream
                                 ></v-progress-linear>
                             </div>
-                            <ul class="pt-4">
-                                <v-row>
-                                    <li>프로젝트 이름 : {{ funding.project_name }}</li>
-                                    <v-spacer></v-spacer>
-                                    <li>카테고리 : {{ funding.category }}</li>
-                                </v-row>
-                            </ul>
-                            <ul class="pt-4">
-                                <v-row>
-                                    <li>시작 일자 : ~ {{ funding.start_date }}</li>
-                                    <v-spacer></v-spacer>
-                                    <li>참가인원 : {{ funding.participants }}</li>
-                                </v-row>
-                            </ul>
-                            <ul class="pt-4">
-                                <li>종료 일자 : ~ {{ funding.end_date }}</li>
-                            </ul>
-                            <ul class="pt-4">
+                            <ul>
+                                <li class="shorthand" style="color:#ab47bc; font-weight:900">
+                                    프로젝트 이름 : {{ funding.project_name }}
+                                </li>
+
+                                <li>카테고리 : {{ funding.category }}</li>
+                                <li>
+                                    <p class="pdate">신청마감 : {{ funding.deadline }}</p>
+
+                                    <p class="pdate">플젝마감 : {{ funding.end_date }}</p>
+                                </li>
                                 <li>팀장 : {{ funding.leader }}</li>
                             </ul>
-                        </router-link>
+                        </div>
                     </v-col>
                 </v-row>
             </div>
@@ -96,9 +81,42 @@ import http from '@/util/http-common';
 
 export default {
     created() {
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
+
+        let current = year + '-' + month + '-' + date;
+        // let end_day = today.getTime(this.fundingDatas.end_date);
+        // let start_day = today.getTime(this.fundingDatas.start_date);
+        // let gap = end_day - start_day;
+        // let res = Math.ceil(gap / (1000 * 60 * 60 * 24));
+        // console.log(res);
+
         http.get(`project/fundingList`)
             .then(({ data }) => {
                 this.fundingDatas = data.list;
+
+                for (var i = 0; i < 6; i++) {
+                    let startdate = new Date(this.fundingDatas[i].start_date);
+                    let deadline = new Date(this.fundingDatas[i].deadline);
+                    let ttoday = new Date(current);
+                    // let gap = (today.getTime(this.fundingDatas[i].end_date) - today.getTime(this.fundingDatas[i].start_date)) / (1000 * 60 * 60 * 24);
+                    let gap = Math.ceil(
+                        (deadline.getTime() - startdate.getTime()) / (1000 * 60 * 60 * 24)
+                    );
+                    let gap2 = Math.ceil(
+                        (deadline.getTime() - ttoday.getTime()) / (1000 * 60 * 60 * 24)
+                    );
+
+                    let result = 100 - Math.ceil((gap / gap2) * 100);
+                    console.log('gap : ' + gap);
+                    console.log(gap2);
+                    console.log('result : ' + result);
+                    // let res = Math.ceil(gap );
+                    this.dategap[i] = result;
+                    // console.log(res);
+                }
             })
             .catch(() => {
                 alert(`프로젝트 정보 가져오기 실패`);
@@ -124,11 +142,30 @@ export default {
             fundingDatas: [],
             rankings: ['경험치', '도덕성', '적극성', '신뢰도', '전문성', '리더쉽'],
             rankDatas: [],
+            dategap: [],
+            project_num: '',
         };
+    },
+    methods: {
+        goDetail(project_num) {
+            console.log('index : ' + project_num);
+            // this.project_num = this.fundingDatas[index].project_num;
+            // console.log(this.project_num);
+            this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
+        },
     },
 };
 </script>
 
 <style scoped>
 @import '../../assets/css/mainpage.css';
+ul,
+li {
+    padding: 5px;
+}
+.pdate {
+    width: 50%;
+    margin: 0;
+    float: left;
+}
 </style>
