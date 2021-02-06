@@ -7,17 +7,45 @@
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
-                        class="funding funding01 col-3 height-300 my-5 mx-12"
-                        :id="fundings[`${Math.floor(Math.random() * 3)}`]"
+                        class="funding col-3 height-300 my-5 mx-12"
                     >
                         <router-link to="/fundingdetail">
-                            <div class="invisibleBox">
+                            <!-- <div class="invisibleBox">
                                 <p>프로젝트 이름 : {{ funding.project_name }}</p>
                                 <p>참가인원 : {{ funding.participants }}명</p>
                                 <p>팀장 : {{ funding.leader }}</p>
                                 <p>멘토 : {{ funding.mentor_chk }}</p>
                                 <p class="shorthand">설명 : {{ funding.description }}</p>
+                            </div> -->
+                            <img
+                                src="@/assets/images/funding/fox.jpg"
+                                class="fullWidth"
+                                alt="예시"
+                            />
+                            <br />
+                            <div>
+                                <v-progress-linear
+                                    color="#CE93D8"
+                                    buffer-value="0"
+                                    value="50"
+                                    stream
+                                ></v-progress-linear>
                             </div>
+                            <ul class="pt-4">
+                                <v-row>
+                                    <li>프로젝트 이름 : {{ funding.project_name }}</li>
+                                    <v-spacer></v-spacer>
+                                    <li>참가인원 : {{ funding.participants }}</li>
+                                    <v-spacer></v-spacer>
+                                </v-row>
+                            </ul>
+                            <ul class="pt-4">
+                                <v-row>
+                                    <li>종료 일자 : ~ {{ funding.end_date }}</li>
+                                    <li>|</li>
+                                    <li>팀장 : {{ funding.leader }}</li>
+                                </v-row>
+                            </ul>
                         </router-link>
                     </v-col>
                 </v-row>

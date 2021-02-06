@@ -179,13 +179,15 @@ export default {
         events: [],
         colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
         names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-        project: {},
+        project: {
+            project_num: '',
+        },
     }),
     computed: {
         ...mapState(['memberInfo']),
     },
     created() {
-        http.get(`project/fundingList/`);
+        http.get(`project/fundingList/${this.project.project_num}`);
     },
     mounted() {
         this.$refs.calendar.checkChange();
