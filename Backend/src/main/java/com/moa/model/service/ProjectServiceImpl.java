@@ -78,4 +78,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return sqlSession.getMapper(ProjectMapper.class).getFundingList();
 	}
 
+	@Override
+	public ProjectDto getFundingDetail(int project_num) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).getFundingDetail(project_num);
+	}
+
 }

@@ -10,19 +10,16 @@
                         v-for="category in categories"
                         :key="category"
                     >
-                        <div
-                            :id="category.value"
-                            @click="categorySelect(category.name)"
-                        >
+                        <div :id="category.value" @click="categorySelect(category.name)">
                             <img
                                 class="width-40 height-40 centerContent "
                                 :src="category.img"
-                                alt="디자인"
+                                :alt="category.name"
                             />
                             <img
                                 class="width-40 height-40 centerContent "
                                 :src="category.afterImg"
-                                alt="디자인"
+                                :alt="category.name"
                             />
                         </div>
                         <p>{{ category.name }}</p>
@@ -102,11 +99,7 @@
             <h3>세부내용</h3>
             <v-spacer></v-spacer>
             <div class="py-10 fundingMargin">
-                <input
-                    type="text"
-                    class="fundingBox"
-                    v-model="project.description"
-                />
+                <input type="text" class="fundingBox" v-model="project.description" />
             </div>
             <v-spacer></v-spacer>
         </div>
