@@ -28,7 +28,7 @@
             <v-select :items="items" v-if="modifyDialog" label="상 태 "></v-select>
             <p v-if="!modifyDialog">할일</p>
             <v-list-item-subtitle>
-                Greyhound divisely hello coldly fonwderfully
+               {{ sprint.description }}
             </v-list-item-subtitle>
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -53,7 +53,9 @@ export default {
             items: ['할 일', '진행 중', '완료'],
             modifyDialog: false,
         };
+       
     },
+    
     props: {
         index: Number,
         sprint: Object,

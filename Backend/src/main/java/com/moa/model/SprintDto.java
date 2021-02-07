@@ -14,7 +14,7 @@ public class SprintDto {
 	@ApiModelProperty(value = "스프린트 주제?")
 	String sprint_subject;
 	@ApiModelProperty(value = "설명")
-	String description;
+	String sprint_description;
 	@ApiModelProperty(value = "스프린트 시작 날짜")
 	String sprint_start_date;
 	@ApiModelProperty(value = "스프린트 종료 날짜")
@@ -45,8 +45,11 @@ public class SprintDto {
 	public void setSprint_subject(String sprint_subject) {
 		this.sprint_subject = sprint_subject;
 	}
-	public String getDescription() {
-		return description;
+	public String getSprint_description() {
+		return sprint_description;
+	}
+	public void setSprint_description(String sprint_description) {
+		this.sprint_description = sprint_description;
 	}
 	public String getSprint_start_date() {
 		return sprint_start_date;
@@ -60,15 +63,12 @@ public class SprintDto {
 	public void setSprint_end_date(String sprint_end_date) {
 		this.sprint_end_date = sprint_end_date;
 	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
 	public int getProject_num() {
 		return project_num;
 	}
 	public void setProject_num(int project_num) {
 		this.project_num = project_num;
 	}
+
 	
 }
