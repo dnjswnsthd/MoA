@@ -24,11 +24,7 @@
                         class="cookie"
                         >펀딩 오픈</router-link
                     >
-                    <router-link
-                        v-else
-                        to="/fundingopen"
-                        style="color:#fff;"
-                        class="cookie"
+                    <router-link v-else to="/fundingopen" style="color:#fff;" class="cookie"
                         >펀딩 오픈</router-link
                     >
                 </li>
@@ -44,11 +40,7 @@
                         class="cookie"
                         >My Page</router-link
                     >
-                    <router-link
-                        v-else
-                        to="/mypage"
-                        style="color:#fff;"
-                        class="cookie"
+                    <router-link v-else to="/mypage" style="color:#fff;" class="cookie"
                         >My Page</router-link
                     >
                 </li>
@@ -83,11 +75,7 @@
                         class="cookie"
                         >회원가입</router-link
                     >
-                    <router-link
-                        v-else
-                        to="/join"
-                        style="color:#fff;"
-                        class="cookie"
+                    <router-link v-else to="/join" style="color:#fff;" class="cookie"
                         >회원가입</router-link
                     >
                 </li>
@@ -103,11 +91,7 @@
                         class="cookie"
                         >로그인</router-link
                     >
-                    <router-link
-                        v-else
-                        to="/login"
-                        style="color:#fff;"
-                        class="cookie"
+                    <router-link v-else to="/login" style="color:#fff;" class="cookie"
                         >로그인</router-link
                     >
                 </li>
@@ -137,86 +121,25 @@
         </v-container>
         <div class="categoryMenu col-8">
             <v-row>
-                <v-spacer></v-spacer>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showDgImg = afterDgImg"
-                    @mouseout="showDgImg = beforeDgImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent "
-                            :src="showDgImg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">디자인</router-link>
+                <div class="col-2 mainCategory" v-for="category in categories" :key="category">
+                    <v-spacer></v-spacer>
+                    <div>
+                        <div :id="category.value" @click="movepage(category.name)">
+                            <img
+                                class="width-40 height-40 centerContent "
+                                :src="category.img"
+                                :alt="category.name"
+                            />
+                            <img
+                                class="width-40 height-40 centerContent "
+                                :src="category.afterImg"
+                                :alt="category.name"
+                            />
+                        </div>
+                        <p @click="movepage(category.name)">{{ category.name }}</p>
+                    </div>
+                    <v-spacer></v-spacer>
                 </div>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showItImg = afterItImg"
-                    @mouseout="showItImg = beforeItImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent"
-                            :src="showItImg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">IT·프로그래밍</router-link>
-                </div>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showTrImg = afterTrImg"
-                    @mouseout="showTrImg = beforeTrImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent"
-                            :src="showTrImg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">번역·통역</router-link>
-                </div>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showVdImg = afterVdImg"
-                    @mouseout="showVdImg = beforeVdImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent"
-                            :src="showVdImg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">영상·사진·음향</router-link>
-                </div>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showCsImg = afterCsImg"
-                    @mouseout="showCsImg = beforeCsImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent"
-                            :src="showCsImg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">운세·상담</router-link>
-                </div>
-                <div
-                    class="col-2 mainCategory"
-                    @mouseover="showMkmg = afterMkImg"
-                    @mouseout="showMkmg = beforeMkImg"
-                >
-                    <router-link to="/fundinglist"
-                        ><img
-                            class="width-40 height-40 centerContent"
-                            :src="showMkmg"
-                            alt="디자인"
-                    /></router-link>
-                    <router-link to="/fundinglist">마케팅</router-link>
-                </div>
-                <v-spacer></v-spacer>
             </v-row>
         </div>
         <div class="mal">
@@ -244,29 +167,49 @@ export default {
             selectMyButton: false,
             selectSgButton: false,
             selectLgButton: false,
-            showDgImg: require('@/assets/category/design.png'),
-            showItImg: require('@/assets/category/computer.png'),
-            showTrImg: require('@/assets/category/translate.png'),
-            showVdImg: require('@/assets/category/video.png'),
-            showCsImg: require('@/assets/category/lucky.png'),
-            showMkmg: require('@/assets/category/marketing.png'),
-            beforeDgImg: [require('@/assets/category/design.png')],
-            afterDgImg: [require('@/assets/category/design(c).png')],
-            beforeItImg: [require('@/assets/category/computer.png')],
-            afterItImg: [require('@/assets/category/computer(c).png')],
-            beforeTrImg: [require('@/assets/category/translate.png')],
-            afterTrImg: [require('@/assets/category/translate(c).png')],
-            beforeVdImg: [require('@/assets/category/video.png')],
-            afterVdImg: [require('@/assets/category/video(c).png')],
-            beforeCsImg: [require('@/assets/category/lucky.png')],
-            afterCsImg: [require('@/assets/category/lucky(c).png')],
-            beforeMkImg: [require('@/assets/category/marketing.png')],
-            afterMkImg: [require('@/assets/category/marketing(c).png')],
+
+            categories: [
+                {
+                    img: require('@/assets/category/design.png'),
+                    afterImg: require('@/assets/category/design(c).png'),
+                    name: '디자인',
+                    value: 'design',
+                },
+                {
+                    img: require('@/assets/category/computer.png'),
+                    afterImg: require('@/assets/category/computer(c).png'),
+                    name: 'IT·프로그래밍',
+                    value: 'computer',
+                },
+                {
+                    img: require('@/assets/category/translate.png'),
+                    afterImg: require('@/assets/category/translate(c).png'),
+                    name: '번역·통역',
+                    value: 'translate',
+                },
+                {
+                    img: require('@/assets/category/video.png'),
+                    afterImg: require('@/assets/category/video(c).png'),
+                    name: '영상·사진·음향',
+                    value: 'video',
+                },
+                {
+                    img: require('@/assets/category/lucky.png'),
+                    afterImg: require('@/assets/category/lucky(c).png'),
+                    name: '운세·상담',
+                    value: 'lucky',
+                },
+                {
+                    img: require('@/assets/category/marketing.png'),
+                    afterImg: require('@/assets/category/marketing(c).png'),
+                    name: '마케팅',
+                    value: 'marketing',
+                },
+            ],
         };
     },
     created() {
-        if (localStorage.getItem('access-token') != null)
-            this.$store.commit('setIsLogined', true);
+        if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
     },
     methods: {
         onClickLogout() {
@@ -280,6 +223,9 @@ export default {
                 .catch(() => {
                     console.log('로그아웃 문제!!!');
                 });
+        },
+        movepage(name) {
+            this.$router.push({ name: 'FundingList', params: { cn: name } });
         },
     },
 };
