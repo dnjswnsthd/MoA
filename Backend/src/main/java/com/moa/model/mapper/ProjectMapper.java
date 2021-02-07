@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 
 public interface ProjectMapper {
@@ -39,4 +40,7 @@ public interface ProjectMapper {
 	List<ProjectDto> getFundingList() throws SQLException;
 
 	ProjectDto getFundingDetail(int project_num) throws SQLException;
+
+	MemberDto[] memberchk(int project_num) throws SQLException;
+	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
 }
