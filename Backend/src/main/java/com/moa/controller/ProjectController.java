@@ -113,7 +113,7 @@ public class ProjectController {
 	 * @return 포함되는 팀원들
 	 */
 	@ApiOperation(value = "프로젝트에 포함된 인원 확인", notes = "프로젝트 세부 페이지에서 팀원 확인하기", response = Map.class)
-	@GetMapping("/memberchk/{project_num")
+	@GetMapping("/memberchk/{project_num}")
 	public ResponseEntity<Map<String, Object>> memberchk(
 			@PathVariable("project_num") @ApiParam(value = "조회를 위한 프로젝트 넘버") int project_num){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
