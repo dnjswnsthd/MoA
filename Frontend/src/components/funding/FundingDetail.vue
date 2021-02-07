@@ -284,7 +284,7 @@ export default {
             return Math.floor((b - a + 1) * Math.random()) + a;
         },
         moveSchedule() {
-            this.$router.push('/schedule');
+            this.$router.push({ name: 'Schedule', params: { pn: this.project_num} });
         },
         fundingApply() {
             // http.post('/project/waiting,{
