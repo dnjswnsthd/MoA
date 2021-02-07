@@ -1,5 +1,5 @@
 <template>
-    <div class="col-8 centerContent">
+    <div class="col-8 centerContent height-1000">
         <p class="evaluateTitle">평가</p>
         <v-toolbar color="#c1a1d3" dark>
             <v-tabs v-model="tab" align-with-title>
@@ -35,28 +35,30 @@
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-card flat>
-                        <v-card-text>
-                            <h2 class="pb-5 pt-5">멘토 을(를) 평가해주세요!</h2>
-                            <p v-for="mento in mentos" :key="mento" class="evaluateFont">
-                                {{ mento.title }}&nbsp;은/는 어땠나요?
-                                <v-rating
-                                    v-model="mento.score"
-                                    background-color="purple lighten-3"
-                                    color="#bc6ff1"
-                                    large
-                                ></v-rating>
-                            </p>
-                            <div class="pt-8">
-                                <v-row>
-                                    <v-spacer></v-spacer>
-                                    <v-btn>초기화</v-btn>
-                                    <v-spacer></v-spacer>
-                                    <v-btn>제출하기</v-btn>
-                                </v-row>
-                            </div>
-                        </v-card-text>
-                    </v-card>
+                    <v-col>
+                        <v-card flat>
+                            <v-card-text>
+                                <h2 class="pb-5 pt-5">멘토 을(를) 평가해주세요!</h2>
+                                <p v-for="mento in mentos" :key="mento" class="evaluateFont">
+                                    {{ mento.title }}&nbsp;은/는 어땠나요?
+                                    <v-rating
+                                        v-model="mento.score"
+                                        background-color="purple lighten-3"
+                                        color="#bc6ff1"
+                                        large
+                                    ></v-rating>
+                                </p>
+                                <div class="pt-8" style="margin-bottom: 30px;">
+                                    <v-row>
+                                        <v-spacer></v-spacer>
+                                        <v-btn>초기화</v-btn>
+                                        <v-spacer></v-spacer>
+                                        <v-btn>제출하기</v-btn>
+                                    </v-row>
+                                </div>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
@@ -94,7 +96,7 @@
                                     large
                                 ></v-rating>
                             </p>
-                            <div class="pt-8">
+                            <div class="pt-8" style="margin-bottom: 30px;">
                                 <v-row>
                                     <v-spacer></v-spacer>
                                     <v-btn>초기화</v-btn>
@@ -109,7 +111,6 @@
                 </v-row>
             </v-tab-item>
         </v-tabs-items>
-        <br />
     </div>
 </template>
 
