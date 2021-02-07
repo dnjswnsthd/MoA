@@ -41,5 +41,6 @@ public interface ProjectMapper {
 
 	ProjectDto getFundingDetail(int project_num) throws SQLException;
 
-	MemberDto[] memberchk(int project_num);
+	MemberDto[] memberchk(int project_num) throws SQLException;
+	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
 }
