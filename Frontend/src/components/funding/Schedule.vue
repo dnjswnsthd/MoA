@@ -1,7 +1,7 @@
 <template>
     <div class="col-8 centerContent">
         <div>
-            <h1 class="height-50">name</h1>
+            <h1 class="height-50">{{ project.project_name }}</h1>
             <h4 class="height-50">주제 : {{ project.category }}</h4>
             <h4 class="height-50">일정 : {{ project.start_date }} ~ {{ project.end_date }}</h4>
         </div>
@@ -30,31 +30,46 @@
                                 <v-card-title class="headline">
                                     어떤 일정을 추가하시겠어요?
                                 </v-card-title>
-                                <v-text-field
-                                    id="제목"
-                                    type="text"
-                                    label="제목"
-                                    class="width-250 fundingMargin"
-                                ></v-text-field>
-                                <v-text-field
-                                    id="내용"
-                                    type="text"
-                                    label="내용"
-                                    class="width-250 fundingMargin"
-                                ></v-text-field>
-                                <v-text-field
-                                    id="담당자"
-                                    type="text"
-                                    label="담당자"
-                                    class="width-150 ml-6"
-                                ></v-text-field>
+                                <v-card-text>
+                                    <v-text-field
+                                        v-model="newTask.sprint_name"
+                                        type="text"
+                                        label="제목"
+                                        class="width-250 fundingMargin"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-model="newTask.sprint_subject"
+                                        type="text"
+                                        label="주제"
+                                        class="width-250 fundingMargin"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-model="newTask.sprint_description"
+                                        type="text"
+                                        label="설명"
+                                        class="width-150 ml-6"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-model="newTask.sprint_start_date"
+                                        type="date"
+                                        label="시작 날짜"
+                                        class="width-150 ml-6"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        v-model="newTask.sprint_end_date"
+                                        type="date"
+                                        label="종료 날짜"
+                                        class="width-150 ml-6"
+                                    ></v-text-field>
+                                  </v-card-text>
                                 <!-- <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text> -->
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="#845ec2" text @click="dialog = false">
                                         취소
                                     </v-btn>
-                                    <v-btn color="#845ec2" text @click="dialog = True">
+                                    <!-- text @click="dialog = True" -->
+                                    <v-btn color="#845ec2" text @click="addSprint">
                                         추가
                                     </v-btn>
                                 </v-card-actions>
@@ -101,17 +116,26 @@ export default {
                 [],
                 []
             ],
+            newTask:{
+                sprint_name: '',
+                sprint_status: 0,
+                sprint_subject: '',
+                sprint_description: '',
+                sprint_start_date: '',
+                sprint_end_date: '',
+                project_num: 0,
+            },
             items: ['할 일', '진행 중', '완료'],
             project:[{}],
-            project_num: [],
+            project_num: 0,
         };
     },
     created() {
         this.project_num = this.$route.params.pn;
+        this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
         .then(({ data }) => {
-            // this.sprints = data;
-            console.log(data.sprintList);
+            console.log(data.spprintList);
             data.sprintList.forEach(sprint => {
                 console.log(sprint);
                 if(sprint.sprint_status == 0) this.sprints[0].push(sprint);
@@ -154,6 +178,17 @@ export default {
                     alert('수정 실패!');
                 });
             }
+        },
+        addSprint() {
+            console.log(this.newTask);
+            http.post(`sprint/add`,this.newTask)
+                .then(() => {
+                    alert('추가 성공!');
+                    this.dialog = false;
+                })
+                .catch(() => {
+                    alert('추가 실패!');
+                });
         },
     },
 };
