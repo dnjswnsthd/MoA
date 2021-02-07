@@ -160,5 +160,12 @@
 		from project
 		where project_num = #{project_num}
 	</select> 
+	<!-- getFundingListByCategory -->
+	<!-- 선택한 카테고리에 속하는 프로젝트 목록을 제공 -->
+	<select id="getFundingListByCategory" parameterType="String" resultType="ProjectDto">
+		select *
+		from project
+		where category = #{category}
+	</select>
 	
 </mapper>

@@ -39,4 +39,6 @@ public interface ProjectMapper {
 	List<ProjectDto> getFundingList() throws SQLException;
 
 	ProjectDto getFundingDetail(int project_num) throws SQLException;
+
+	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
 }
