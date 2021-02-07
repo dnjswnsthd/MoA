@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" persistent max-width="500">
+    <v-dialog v-model="modifyDialog" persistent max-width="500">
         <template v-slot:activator="{ on, attrs }">
             <v-card class="width-350" outlined>
                 <v-list-item three-line class="scheduleList" v-bind="attrs" v-on="on">
@@ -36,7 +36,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="dialog = false">
+                <v-btn color="green darken-1" text @click="modifyDialog = false">
                     취소
                 </v-btn>
                 
@@ -54,7 +54,6 @@ export default {
     name: 'ScheduleCard',
     data() {
         return {
-            dialog: false,
             items: ['할 일', '진행 중', '완료'],
             modifyDialog: false,
             modSprint:{
@@ -83,8 +82,8 @@ export default {
         modifySprint(){
             http.put(`sprint/modifycontent`,this.modSprint)
                 .then(() => {
+                    this.modifyDialog = false;
                     alert('변경 완료!');
-                    this.modifyDialog = true;
                 })
                 .catch(() => {
                     alert('변경 실패!');
