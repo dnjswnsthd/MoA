@@ -41,7 +41,11 @@
         <div class="pt-2">
             <h2>당신의 취향을 저격할 프로젝트</h2>
             <v-row class="pt-5">
-                <v-col v-for="project in projectList" :key="project">
+                <v-col
+                    v-for="(project, index) in projectList"
+                    :key="index"
+                    @click="goDetail(project.project_num)"
+                >
                     <img
                         src="@/assets/images/funding/fox.jpg"
                         class="width-250 height-200"
@@ -51,8 +55,7 @@
                     <div class="width-250">
                         <v-progress-linear
                             color="#CE93D8"
-                            buffer-value="0"
-                            value="80"
+                            :value="dategap[index]"
                             stream
                         ></v-progress-linear>
                     </div>
@@ -70,7 +73,7 @@
                     </ul>
                     <ul class="pt-4">
                         <v-row>
-                            <li>기간 : ~ {{ project.end_date }}</li>
+                            <li>모집기간 : ~ {{ project.deadline }}</li>
                         </v-row>
                     </ul>
                     <ul class="pt-4">
@@ -145,14 +148,16 @@ export default {
                 '모바일 앱 제작',
             ],
             projectList: [],
-
-            selectOpButton: false,
-            selectMyButton: false,
-            selectSgButton: false,
-            selectLgButton: false,
+            dategap: [],
         };
     },
     methods: {
+        goDetail(project_num) {
+            console.log('index : ' + project_num);
+            // this.project_num = this.fundingDatas[index].project_num;
+            // console.log(this.project_num);
+            this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
+        },
         change(name) {
             for (var i = 0; i < this.categories.length; i++) {
                 if (this.categories[i].name == name)
@@ -164,11 +169,39 @@ export default {
                         i
                     ].img = require(`@/assets/category/${this.categories[i].value}.png`);
             }
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let date = today.getDate();
+            let current = year + '-' + month + '-' + date;
 
             http.get(`project/fundingList/${name}`)
                 .then(({ data }) => {
                     this.projectList = data.list;
                     console.log(this.projectList);
+
+                    for (var i = 0; i < this.projectList.length; i++) {
+                        let startdate = this.projectList[i].start_date;
+                        let deadline = this.projectList[i].deadline;
+
+                        let ttoday = new Date(current);
+                        let start = new Date(startdate);
+                        let end = new Date(deadline);
+
+                        // let gap = (today.getTime(this.fundingDatas[i].end_date) - today.getTime(this.fundingDatas[i].start_date)) / (1000 * 60 * 60 * 24);
+                        let gap = Math.floor(
+                            (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+                        );
+                        let gap2 = Math.floor(
+                            (end.getTime() - ttoday.getTime() + 32400000) / (1000 * 60 * 60 * 24)
+                        );
+
+                        let result = 100 - Math.ceil((gap2 / gap) * 100);
+
+                        // let res = Math.ceil(gap );
+                        this.dategap[i] = result;
+                        // console.log(res);
+                    }
                 })
                 .catch(() => {
                     console.log('fail');
