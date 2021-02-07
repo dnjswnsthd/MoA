@@ -9,7 +9,7 @@ public class SprintDto {
 	int sprint_num;
 	@ApiModelProperty(value = "스프린트 명")
 	String sprint_name;
-	@ApiModelProperty(value = "상태(1,2,3)")
+	@ApiModelProperty(value = "상태(0, 1, 2)")
 	int sprint_status;
 	@ApiModelProperty(value = "스프린트 주제?")
 	String sprint_subject;
