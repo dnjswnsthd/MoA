@@ -197,19 +197,16 @@
                         <v-card-title>참여 인원</v-card-title>
                         <v-divider></v-divider>
                         <v-card-text style="height: 300px;">
-                          <div v-for="(proceedMember, index) in proceedingMember" :key="index">
+                          <v-row v-for="(proceedMember, index) in proceedingMember" :key="index">
                             <p>{{ proceedMember.id }}</p>
-                            <v-radio label="수락" value="수락"></v-radio>
-                            <v-radio label="거절" value="거절"></v-radio>
-                          </div>
+                            <v-btn @click="enjoyGroup(proceedMember.id)">수락</v-btn>
+                            <v-btn @click="refuseGroup(proceedMember.id)">거절</v-btn>
+                          </v-row>
                         </v-card-text>
                         <v-divider></v-divider>
                         <v-card-actions>
                           <v-btn color="blue darken-1" text @click="proceedDialog = false">
                             Close
-                          </v-btn>
-                          <v-btn color="blue darken-1" text @click="proceedDialog = false">
-                            확인
                           </v-btn>
                         </v-card-actions>
                       </v-card>
@@ -458,11 +455,50 @@ export default {
     },
     projectState(project_num) {
       this.project_num = project_num;
+      console.log(this.project_num);
       http
-        .get(`/member/waiting_member/${this.projcet_num}`)
+        .get(`/project/waitingList/${this.project_num}`)
         .then((response) => {
           if (response.data.message == 'success') {
-            this.participateMembers = response.data.member;
+            this.proceedingMember = response.data.member;
+          }
+        })
+        .catch(() => {
+          alert('에러발생!');
+        });
+    },
+    enjoyGroup(id) {
+      http
+        .put('/project/permission', {
+          project_num: this.project_num,
+          id: id,
+        })
+        .then((response) => {
+          if (response.data.message == 'success') {
+            this.proceedDialog = false;
+            alert('수락성공');
+          } else {
+            alert('거절실패');
+          }
+        })
+        .catch(() => {
+          alert('에러발생!');
+        });
+    },
+    refuseGroup(id) {
+      console.log('id : ' + id);
+      console.log(this.project_num);
+      http
+        .put('/project/denial', {
+          project_num: this.project_num,
+          id: id,
+        })
+        .then((response) => {
+          if (response.data.message == 'success') {
+            this.proceedDialog = false;
+            alert('거절 성공');
+          } else {
+            alert('거절 실패');
           }
         })
         .catch(() => {
