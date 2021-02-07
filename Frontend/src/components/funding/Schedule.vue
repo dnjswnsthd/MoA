@@ -2,12 +2,12 @@
     <div class="col-8 centerContent">
         <div>
             <h1 class="height-50">name</h1>
-            <h4 class="height-50">주제:</h4>
-            <h4 class="height-50">일정:</h4>
+            <h4 class="height-50">주제 : {{ project.category }}</h4>
+            <h4 class="height-50">일정 : {{ project.start_date }} ~ {{ project.end_date }}</h4>
         </div>
 
-        <div v-for="(list, i) in lists" :key="i">
-            <drop class="drop list width-1200" @drop="handleDrop(list, ...arguments)">
+        <div v-for="(sprint, i) in sprints" :key="i">
+            <drop class="drop list width-1200" @drop="handleDrop(sprint, ...arguments)">
                 <div class="col-9">
                     <v-row>
                         <h2>{{ items[i] }}</h2>
@@ -65,14 +65,14 @@
                 <v-sheet class="mx-auto" max-width="1250">
                     <v-slide-group v-model="model" class="pa-4" active-class="success" show-arrows>
                         <drag
-                            v-for="item in list"
+                            v-for="item in sprint"
                             class="drag"
                             :key="item"
                             :class="{ [item]: true }"
-                            :transfer-data="{ item: item, list: list, example: 'lists' }"
+                            :transfer-data="{ item: item, sprint: sprint, example: 'sprints' }"
                         >
                             <v-slide-item>
-                                <schedule-card :index="i" :item="item.title"></schedule-card>
+                                <schedule-card :index="i" :sprint="item"></schedule-card>
                             </v-slide-item>
                         </drag>
                     </v-slide-group>
@@ -83,49 +83,76 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
 import ScheduleCard from './ScheduleCard.vue';
-// import draggable from 'vuedraggable';
-
 import { Drag, Drop } from 'vue-drag-drop';
 
 export default {
     components: {
         ScheduleCard,
-        // draggable,
         Drag,
         Drop,
     },
     data() {
         return {
             dialog: false,
-            items: ['할 일', '진행 중', '완료'],
-
-            lists: [
-                [
-                    {
-                        title: '뛰기',
-                    },
-                    { title: '걷기' },
-                    { title: '앉기' },
-                    {
-                        title: '제티먹기',
-                    },
-                    { title: 'Egg in the Hell' },
-                    { title: 'Pasta' },
-                ],
+            sprints: [
                 [],
                 [],
+                []
             ],
+            items: ['할 일', '진행 중', '완료'],
+            project:[{}],
+            project_num: [],
         };
     },
+    created() {
+        this.project_num = this.$route.params.pn;
+        http.get(`sprint/search/${this.project_num}`)
+        .then(({ data }) => {
+            // this.sprints = data;
+            console.log(data.sprintList);
+            data.sprintList.forEach(sprint => {
+                console.log(sprint);
+                if(sprint.sprint_status == 0) this.sprints[0].push(sprint);
+                else if(sprint.sprint_status == 1) this.sprints[1].push(sprint);
+                else if(sprint.sprint_status == 2) this.sprints[2].push(sprint);
+            });
+        //location.href = '/schedule';
+        })
+        .catch(() => {
+            //alert('에러가 발생했습니다.');
+        });
+
+        http.get(`project/fundingDetail/${this.project_num}`)
+        .then((response) => {
+                if (response.data.message == 'success') {
+                    this.project = response.data.project;
+                } else {
+                    alert('정보조회실패');
+                }
+            })
+            .catch(() => {});
+    },
     methods: {
-        handleDrop(toList, data) {
-            const fromList = data.list;
-            console.log(data);
+        handleDrop(toList, data) {  //toList : 이동한 곳의 데이터 , data : 이전 위치의 데이터
+            const fromList = data.sprint;
             if (fromList) {
+                data.item.sprint_status = this.sprints.indexOf(toList);
                 toList.push(data.item);
                 fromList.splice(fromList.indexOf(data.item), 1);
                 toList.sort((a, b) => a > b);
+
+                http.put(`sprint/modify`,{
+                    sprint_status: data.item.sprint_status,
+                    sprint_num: data.item.sprint_num,
+                })
+                .then(() =>{
+                    alert('수정 성공!');
+                })
+                .catch(() => {
+                    alert('수정 실패!');
+                });
             }
         },
     },
