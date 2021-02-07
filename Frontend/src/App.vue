@@ -21,6 +21,7 @@ export default {
 @import './assets/css/member.css';
 @import './assets/css/funding.css';
 @import './assets/css/fundingdetail.css';
+@import './assets/css/category.css';
 
 .wrap {
     min-height: 100%;
