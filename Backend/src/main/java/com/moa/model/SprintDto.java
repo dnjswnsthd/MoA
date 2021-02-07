@@ -9,16 +9,16 @@ public class SprintDto {
 	int sprint_num;
 	@ApiModelProperty(value = "스프린트 명")
 	String sprint_name;
-	@ApiModelProperty(value = "상태(1,2,3)")
+	@ApiModelProperty(value = "상태(0, 1, 2)")
 	int sprint_status;
 	@ApiModelProperty(value = "스프린트 주제?")
 	String sprint_subject;
 	@ApiModelProperty(value = "설명")
 	String description;
 	@ApiModelProperty(value = "스프린트 시작 날짜")
-	String start_date;
+	String sprint_start_date;
 	@ApiModelProperty(value = "스프린트 종료 날짜")
-	String end_date;
+	String sprint_end_date;
 	@ApiModelProperty(value = "프로젝트 번호")
 	int project_num;
 	public int getSprint_num() {
@@ -48,21 +48,22 @@ public class SprintDto {
 	public String getDescription() {
 		return description;
 	}
+	public String getSprint_start_date() {
+		return sprint_start_date;
+	}
+	public void setSprint_start_date(String sprint_start_date) {
+		this.sprint_start_date = sprint_start_date;
+	}
+	public String getSprint_end_date() {
+		return sprint_end_date;
+	}
+	public void setSprint_end_date(String sprint_end_date) {
+		this.sprint_end_date = sprint_end_date;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStart_date() {
-		return start_date;
-	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
-	}
-	public String getEnd_date() {
-		return end_date;
-	}
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
-	}
+	
 	public int getProject_num() {
 		return project_num;
 	}
