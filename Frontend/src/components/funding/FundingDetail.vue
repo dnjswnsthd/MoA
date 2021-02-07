@@ -59,11 +59,35 @@
         </v-dialog>
 
         <v-spacer></v-spacer>
-        <div class="col-3">
-          <p class="fundingBtn">
-            참여 멤버
-          </p>
-        </div>
+        <v-dialog v-model="participantsDialog" scrollable max-width="300px">
+          <template v-slot:activator="{ on, attrs }">
+            <div class="col-3">
+              <p class="fundingBtn" v-bind="attrs" v-on="on" @click="getParticipants">
+                참여 멤버
+              </p>
+            </div>
+          </template>
+          <v-card>
+            <v-card-title>참여 멤버</v-card-title>
+            <v-divider></v-divider>
+            <v-card-text style="height: 300px;">
+              <p v-for="(participant, index) in participants" :key="index">
+                {{ participant.id }}
+              </p>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-sapcer></v-sapcer>
+              <v-btn color="blue darken-1" text @click="participantsDialog = false">
+                닫기
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="participantsDialog = false">
+                확인
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         <v-spacer></v-spacer>
         <div class="col-3">
           <p class="fundingBtn">
@@ -199,7 +223,6 @@ export default {
       day: 'Day',
       '4day': '4 Days',
     },
-
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
@@ -210,6 +233,8 @@ export default {
     id: '',
     project_num: '',
     dialog: false,
+    participants: [],
+    participantsDialog: false,
   }),
   computed: {
     ...mapState(['memberInfo', 'isLogin']),
@@ -320,6 +345,20 @@ export default {
         })
         .catch(() => {
           alert('에러 발생!');
+        });
+    },
+    getParticipants() {
+      http
+        .get(`project/memberchk/${this.project_num}`)
+        .then((response) => {
+          if (response.data.message == 'success') {
+            this.participants = response.data.member;
+          } else {
+            alert('실패!');
+          }
+        })
+        .catch(() => {
+          alert('에러발생!');
         });
     },
   },
