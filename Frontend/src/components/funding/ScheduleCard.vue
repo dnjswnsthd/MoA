@@ -11,7 +11,7 @@
                              {{sprint.sprint_subject}}
                         </div>
                         <v-list-item-subtitle>
-                            기간: {{sprint.start_date}} ~ {{sprint.end_date}}
+                            기간: {{sprint.sprint_start_date}} ~ {{sprint.sprint_end_date}}
                             </v-list-item-subtitle>
                     </v-list-item-content>
                     <v-card-actions>
