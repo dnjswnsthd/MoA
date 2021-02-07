@@ -44,6 +44,9 @@ a {
     font-weight: normal;
     font-style: normal;
 }
+.width-30 {
+    width: 30px;
+}
 .width-40 {
     width: 40px;
 }
@@ -64,6 +67,9 @@ a {
 }
 .width-200 {
     width: 200px;
+}
+.width-210 {
+    width: 210px;
 }
 .width-230 {
     width: 230px;
@@ -121,6 +127,9 @@ a {
 }
 .fullWidth {
     width: 100%;
+}
+.height-30 {
+    width: 30px;
 }
 .height-40 {
     width: 40px;
