@@ -93,4 +93,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return sqlSession.getMapper(ProjectMapper.class).getFundingListByCategory(category);
 	}
 
+	@Override
+	public MemberDto[] waitingList(int project_num) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).waitingList(project_num);
+	}
+
 }
