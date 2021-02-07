@@ -1,0 +1,59 @@
+#design img:last-child {
+    display: none;
+}
+#design:hover img:first-child {
+    display: none;
+}
+#design:hover img:last-child {
+    display: block;
+}
+
+#computer img:last-child {
+    display: none;
+}
+#computer:hover img:first-child {
+    display: none;
+}
+#computer:hover img:last-child {
+    display: block;
+}
+
+#translate img:last-child {
+    display: none;
+}
+#translate:hover img:first-child {
+    display: none;
+}
+#translate:hover img:last-child {
+    display: block;
+}
+
+#video img:last-child {
+    display: none;
+}
+#video:hover img:first-child {
+    display: none;
+}
+#video:hover img:last-child {
+    display: block;
+}
+
+#lucky img:last-child {
+    display: none;
+}
+#lucky:hover img:first-child {
+    display: none;
+}
+#lucky:hover img:last-child {
+    display: block;
+}
+
+#marketing img:last-child {
+    display: none;
+}
+#marketing:hover img:first-child {
+    display: none;
+}
+#marketing:hover img:last-child {
+    display: block;
+}
