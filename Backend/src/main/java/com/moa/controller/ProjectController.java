@@ -75,7 +75,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			projectService.waiting(param);
-			resultMap.put("messagae", SUCCESS);
+			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", FAIL);
