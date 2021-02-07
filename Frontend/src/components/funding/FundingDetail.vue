@@ -61,7 +61,7 @@
         <v-spacer></v-spacer>
         <div class="col-3">
           <p class="fundingBtn">
-            대기 목록
+            참여 멤버
           </p>
         </div>
         <v-spacer></v-spacer>
