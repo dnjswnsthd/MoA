@@ -1,11 +1,11 @@
 <template>
   <div class="col-8 centerContent">
     <div>
-      <h1 class="height-50">{{ project.project_name }}</h1>
-      <h4 class="height-50">주제 : {{ project.category }}</h4>
-      <h4 class="height-50">
+      <h1 class="height-70">{{ project.project_name }}</h1>
+      <h2 class="height-70">주제 : {{ project.category }}</h2>
+      <h2 class="height-50">
         일정 : {{ project.start_date }} ~ {{ project.end_date }}
-      </h4>
+      </h2>
     </div>
 
     <div v-for="(sprint, i) in sprints" :key="i">
@@ -68,18 +68,28 @@
                   <v-textarea
                     v-model="newTask.sprint_description"
                     type="text"
-                    label="설명"
+                    label="내용"
                     class="width-350"
                   ></v-textarea>
                 </v-card-text>
                 <!-- <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text> -->
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="#845ec2" text @click="dialog = false">
+                  <v-btn
+                    class="font-weight-bold"
+                    color="#845ec2"
+                    text
+                    @click="dialog = false"
+                  >
                     취소
                   </v-btn>
                   <!-- text @click="dialog = True" -->
-                  <v-btn color="#845ec2" text @click="addSprint">
+                  <v-btn
+                    class="font-weight-bold"
+                    color="#845ec2"
+                    text
+                    @click="addSprint"
+                  >
                     추가
                   </v-btn>
                 </v-card-actions>

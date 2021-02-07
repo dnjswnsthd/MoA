@@ -28,7 +28,7 @@
       <v-card-title class="headline mb-1">
         {{ sprint.sprint_name }}
       </v-card-title>
-      <v-card-text>
+      <v-card-text class="font-weight-bold">
         Name :
         <v-text-field v-model="modSprint.sprint_name"></v-text-field>
         Subject :
@@ -48,11 +48,21 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="modifyDialog = false">
+        <v-btn
+          class="font-weight-bold"
+          color="green darken-1"
+          text
+          @click="modifyDialog = false"
+        >
           취소
         </v-btn>
 
-        <v-btn color="green darken-1" text @click="modifySprint">
+        <v-btn
+          class="font-weight-bold"
+          color="green darken-1"
+          text
+          @click="modifySprint"
+        >
           수정
         </v-btn>
       </v-card-actions>
