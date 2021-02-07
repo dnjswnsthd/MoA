@@ -85,7 +85,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public MemberDto[] memberchk(int project_num) {
+	public MemberDto[] memberchk(int project_num) throws Exception{
 		return sqlSession.getMapper(ProjectMapper.class).memberchk(project_num);
 	}
 	@Override
