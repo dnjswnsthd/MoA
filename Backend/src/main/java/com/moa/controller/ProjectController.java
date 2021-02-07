@@ -314,6 +314,26 @@ public class ProjectController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "선택한 카테고리에 대한 프로젝트 목록 제공", notes = "선택한 카테고리에 속하는 모든 프로젝트 정보를 제공", response = Map.class)
+	@GetMapping("/fundingList/{category}")
+	public ResponseEntity<Map<String, Object>> getFundingListByCategory(
+			@PathVariable @ApiParam(value = "펀딩 정보를 가져올 카테고리", required = true) String category) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			List<ProjectDto> list = projectService.getFundingListByCategory(category);
+			resultMap.put("list", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 	@ApiOperation(value = "펀딩 세부 정보 보기", notes = "펀딩 세부 정보를 가져옴", response = Map.class)
 	@GetMapping("/fundingDetail/{project_num}")
 	public ResponseEntity<Map<String, Object>> getFundingDetail(
