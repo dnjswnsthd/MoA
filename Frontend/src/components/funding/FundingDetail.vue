@@ -6,20 +6,32 @@
       </p>
     </div>
 
-    <div class="col-6  centerContent px-10 py-10">
+    <div class="col-6 centerContent px-10 py-10">
       <v-row>
         <div class="col-6">
           <div class="projectImgBox">
-            <img src="@/assets/category/marketing(c).png" alt="샘플이미지" class="projectImg" />
+            <img
+              src="@/assets/category/marketing(c).png"
+              alt="샘플이미지"
+              class="projectImg"
+            />
           </div>
         </div>
         <v-spacer></v-spacer>
         <div class="col-6">
-          <v-col style="background-color:#fff; font-size: 20px; margin:20% auto 10% auto;">
+          <v-col
+            style="
+              background-color: #fff;
+              font-size: 20px;
+              margin: 20% auto 10% auto;
+            "
+          >
             <v-spacer></v-spacer>
             <p>제목 : {{ project.project_name }}</p>
             <v-spacer></v-spacer>
-            <p>프로젝트 일정 : {{ project.start_date }} ~ {{ project.end_date }}</p>
+            <p>
+              프로젝트 일정 : {{ project.start_date }} ~ {{ project.end_date }}
+            </p>
             <v-spacer></v-spacer>
             <p>펀딩 금액 : {{ project.funding_cost }}원</p>
             <p>참가 인원 : {{ project.participants }}명</p>
@@ -31,20 +43,16 @@
           </v-col>
         </div>
       </v-row>
-      <v-row class="col-12 btnList" style="margin:0; padding:0;">
+      <v-row class="col-12 btnList" style="margin: 0; padding: 0">
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" persistent max-width="290">
           <template v-slot:activator="{ on, attrs }">
             <div class="col-3">
-              <p class="fundingBtn" v-bind="attrs" v-on="on">
-                펀딩하기
-              </p>
+              <p class="fundingBtn" v-bind="attrs" v-on="on">펀딩하기</p>
             </div>
           </template>
           <v-card>
-            <v-card-title class="headline">
-              펀딩신청
-            </v-card-title>
+            <v-card-title class="headline"> 펀딩신청 </v-card-title>
             <v-card-text>이 프로젝트에 정말 참여하시겠습니까?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -62,7 +70,12 @@
         <v-dialog v-model="participantsDialog" scrollable max-width="300px">
           <template v-slot:activator="{ on, attrs }">
             <div class="col-3">
-              <p class="fundingBtn" v-bind="attrs" v-on="on" @click="getParticipants">
+              <p
+                class="fundingBtn"
+                v-bind="attrs"
+                v-on="on"
+                @click="getParticipants"
+              >
                 참여 멤버
               </p>
             </div>
@@ -70,7 +83,7 @@
           <v-card>
             <v-card-title>참여 멤버</v-card-title>
             <v-divider></v-divider>
-            <v-card-text style="height: 300px;">
+            <v-card-text style="height: 300px">
               <p v-for="(participant, index) in participants" :key="index">
                 {{ participant.id }}
               </p>
@@ -78,10 +91,18 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-sapcer></v-sapcer>
-              <v-btn color="blue darken-1" text @click="participantsDialog = false">
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="participantsDialog = false"
+              >
                 닫기
               </v-btn>
-              <v-btn color="blue darken-1" text @click="participantsDialog = false">
+              <v-btn
+                color="blue darken-1"
+                text
+                @click="participantsDialog = false"
+              >
                 확인
               </v-btn>
             </v-card-actions>
@@ -90,24 +111,30 @@
 
         <v-spacer></v-spacer>
         <div class="col-3">
-          <p class="fundingBtn">
-            공유 하기
-          </p>
+          <p class="fundingBtn">공유 하기</p>
         </div>
         <v-spacer></v-spacer>
         <div class="col-3">
-          <p class="fundingBtn">
-            관심 등록
-          </p>
+          <p class="fundingBtn">관심 등록</p>
         </div>
         <v-spacer></v-spacer>
       </v-row>
       <v-col class="explainBox my-10">
-        <p style="text-decoration : underline overline; text-underline-position : under">
+        <p
+          style="
+            text-decoration: underline overline;
+            text-underline-position: under;
+          "
+        >
           상세 설명
         </p>
 
-        <v-textarea solo name="input-7-4" v-model="project.description" readonly></v-textarea>
+        <v-textarea
+          solo
+          name="input-7-4"
+          v-model="project.description"
+          readonly
+        ></v-textarea>
       </v-col>
     </div>
     <div class="col-8 centerContent">
@@ -115,30 +142,34 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat>
-              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
+              <v-btn
+                outlined
+                class="mr-4"
+                color="grey darken-2"
+                @click="setToday"
+              >
                 Today
               </v-btn>
               <v-btn fab text small color="grey darken-2" @click="prev">
-                <v-icon small>
-                  mdi-chevron-left
-                </v-icon>
+                <v-icon small> mdi-chevron-left </v-icon>
               </v-btn>
               <v-toolbar-title v-if="$refs.calendar">
                 {{ $refs.calendar.title }}
               </v-toolbar-title>
               <v-btn fab text small color="grey darken-2" @click="next">
-                <v-icon small>
-                  mdi-chevron-right
-                </v-icon>
+                <v-icon small> mdi-chevron-right </v-icon>
               </v-btn>
               <v-spacer></v-spacer>
               <v-menu bottom right>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
+                  <v-btn
+                    outlined
+                    color="grey darken-2"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
                     <span>{{ typeToLabel[type] }}</span>
-                    <v-icon right>
-                      mdi-menu-down
-                    </v-icon>
+                    <v-icon right> mdi-menu-down </v-icon>
                   </v-btn>
                 </template>
                 <v-list>
@@ -157,7 +188,9 @@
                 </v-list>
               </v-menu>
 
-              <v-btn style="margin-left:20px;" @click="moveSchedule">일정 관리</v-btn>
+              <v-btn style="margin-left: 20px" @click="moveSchedule"
+                >일정 관리</v-btn
+              >
             </v-toolbar>
           </v-sheet>
           <v-sheet height="600">
@@ -184,7 +217,9 @@
                   <v-btn icon>
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                  <v-toolbar-title
+                    v-html="selectedEvent.name"
+                  ></v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-btn icon>
                     <v-icon>mdi-heart</v-icon>
@@ -210,34 +245,51 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
-import http from '@/util/http-common';
+import { mapState } from "vuex";
+import http from "@/util/http-common";
 
 export default {
   data: () => ({
-    focus: '',
-    type: 'month',
+    focus: "",
+    type: "month",
     typeToLabel: {
-      month: 'Month',
-      week: 'Week',
-      day: 'Day',
-      '4day': '4 Days',
+      month: "Month",
+      week: "Week",
+      day: "Day",
+      "4day": "4 Days",
     },
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
     events: [],
-    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+    colors: [
+      "blue",
+      "indigo",
+      "deep-purple",
+      "cyan",
+      "green",
+      "orange",
+      "grey darken-1",
+    ],
+    names: [
+      "Meeting",
+      "Holiday",
+      "PTO",
+      "Travel",
+      "Event",
+      "Birthday",
+      "Conference",
+      "Party",
+    ],
     project: {},
-    id: '',
-    project_num: '',
+    id: "",
+    project_num: "",
     dialog: false,
     participants: [],
     participantsDialog: false,
   }),
   computed: {
-    ...mapState(['memberInfo', 'isLogin']),
+    ...mapState(["memberInfo", "isLogin"]),
   },
   mounted() {
     this.$refs.calendar.checkChange();
@@ -249,11 +301,11 @@ export default {
     http
       .get(`project/fundingDetail/${this.project_num}`)
       .then((response) => {
-        if (response.data.message == 'success') {
+        if (response.data.message == "success") {
           this.project = response.data.project;
           this.id = this.memberInfo.id;
         } else {
-          alert('정보조회실패');
+          alert("정보조회실패");
         }
       })
       .catch(() => {});
@@ -262,13 +314,13 @@ export default {
   methods: {
     viewDay({ date }) {
       this.focus = date;
-      this.type = 'day';
+      this.type = "day";
     },
     getEventColor(event) {
       return event.color;
     },
     setToday() {
-      this.focus = '';
+      this.focus = "";
     },
     prev() {
       this.$refs.calendar.prev();
@@ -318,31 +370,31 @@ export default {
         });
       }
 
-            this.events = events;
-        },
-        rnd(a, b) {
-            return Math.floor((b - a + 1) * Math.random()) + a;
-        },
-        moveSchedule() {
-            this.$router.push({ name: 'Schedule', params: { pn: this.project_num} });
-        },
-        fundingApply() {
-            // http.post('/project/waiting,{
-            // })
-            //     .then((response) => {
-            //       if(response.data.message == 'success'){
-            //         alert('신청 성공');
-            //       }
-            //       else{
-            //         alert('신청 실패');
-            //       }
-            //     })
-            //     .catch(() => {
-            //     });
-        },
+      this.events = events;
     },
+    rnd(a, b) {
+      return Math.floor((b - a + 1) * Math.random()) + a;
+    },
+    moveSchedule() {
+      this.$router.push({ name: "Schedule", params: { pn: this.project_num } });
+    },
+    fundingApply() {
+      // http.post('/project/waiting,{
+      // })
+      //     .then((response) => {
+      //       if(response.data.message == 'success'){
+      //         alert('신청 성공');
+      //       }
+      //       else{
+      //         alert('신청 실패');
+      //       }
+      //     })
+      //     .catch(() => {
+      //     });
+    },
+  },
 };
 </script>
 <style scoped>
-@import '../../assets/css/fundingdetail.css';
+@import "../../assets/css/fundingdetail.css";
 </style>
