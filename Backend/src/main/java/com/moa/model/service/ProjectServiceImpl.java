@@ -17,7 +17,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void create(ProjectDto param) throws Exception {
-		System.out.println("***********************");
 		sqlSession.getMapper(ProjectMapper.class).createProject(param);
 		sqlSession.getMapper(ProjectMapper.class).appendProject(param);
 	}
@@ -82,6 +81,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectDto getFundingDetail(int project_num) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).getFundingDetail(project_num);
+	}
+
+	@Override
+	public List<ProjectDto> getFundingListByCategory(String category) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).getFundingListByCategory(category);
 	}
 
 }
