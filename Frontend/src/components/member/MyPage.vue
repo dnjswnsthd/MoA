@@ -182,7 +182,38 @@
                 <div>
                   <v-row>
                     <p class="shorthand col-7">프로젝트 이름 : {{ proceed.project_name }}</p>
-                    <p class="col-5">상태보기</p>
+                    <v-dialog v-model="proceedDialog" scrollable max-width="300px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <p
+                          class="col-5"
+                          @click="projectState(proceed.project_num)"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          상태보기
+                        </p>
+                      </template>
+                      <v-card>
+                        <v-card-title>참여 인원</v-card-title>
+                        <v-divider></v-divider>
+                        <v-card-text style="height: 300px;">
+                          <div v-for="(proceedMember, index) in proceedingMember" :key="index">
+                            <p>{{ proceedMember.id }}</p>
+                            <v-radio label="수락" value="수락"></v-radio>
+                            <v-radio label="거절" value="거절"></v-radio>
+                          </div>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-actions>
+                          <v-btn color="blue darken-1" text @click="proceedDialog = false">
+                            Close
+                          </v-btn>
+                          <v-btn color="blue darken-1" text @click="proceedDialog = false">
+                            확인
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
                   </v-row>
                 </div>
               </v-col>
@@ -282,6 +313,9 @@ export default {
       complete: {},
       interesting: {},
       waiting: {},
+      proceedingMember: {},
+      project_num: '',
+      proceedDialog: false,
     };
   },
   created() {
@@ -420,6 +454,19 @@ export default {
         .catch(() => {
           console.log('3');
           alert('에러 발생!');
+        });
+    },
+    projectState(project_num) {
+      this.project_num = project_num;
+      http
+        .get(`/member/waiting_member/${this.projcet_num}`)
+        .then((response) => {
+          if (response.data.message == 'success') {
+            this.participateMembers = response.data.member;
+          }
+        })
+        .catch(() => {
+          alert('에러발생!');
         });
     },
     // checkCategory(category) {
