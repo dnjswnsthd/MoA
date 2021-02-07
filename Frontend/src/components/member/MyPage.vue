@@ -147,31 +147,14 @@
 
     <div class="projectBox">
       <v-tabs color="deep-purple accent-4" left>
-        <v-tab>관심중인 펀딩</v-tab>
         <v-tab>진행중인 펀딩</v-tab>
-        <v-tab>종료된 펀딩</v-tab>
         <v-tab>참여 대기 중 펀딩</v-tab>
+        <v-tab>종료된 펀딩</v-tab>
+        <v-tab>관심중인 펀딩</v-tab>
 
         <v-tab-item v-for="n in 4" :key="n">
           <v-container fluid>
             <v-row v-if="n == 1">
-              <v-col v-for="(interest, index) in interesting" :key="index" cols="12" md="4">
-                <img
-                  src="@/assets/images/funding/fox.jpg"
-                  class="fullWidth height-200"
-                  alt="예시"
-                />
-
-                <div>
-                  <v-row>
-                    <p class="shorthand col-7">프로젝트 이름 : {{ interest.project_name }}</p>
-                    <p class="col-5">상태보기</p>
-                  </v-row>
-                </div>
-              </v-col>
-            </v-row>
-
-            <v-row v-if="n == 2">
               <v-col v-for="(proceed, index) in proceeding" :key="index" cols="12" md="4">
                 <img
                   src="@/assets/images/funding/fox.jpg"
@@ -215,7 +198,22 @@
                 </div>
               </v-col>
             </v-row>
+            <v-row v-if="n == 2">
+              <v-col v-for="(wait, index) in waiting" :key="index" cols="12" md="4">
+                <img
+                  src="@/assets/images/funding/fox.jpg"
+                  class="fullWidth height-200"
+                  alt="예시"
+                />
 
+                <div>
+                  <v-row>
+                    <p class="shorthand col-7">프로젝트 이름 : {{ wait.project_name }}</p>
+                    <p class="col-5">상태보기</p>
+                  </v-row>
+                </div>
+              </v-col>
+            </v-row>
             <v-row v-if="n == 3">
               <v-col v-for="(completed, index) in complete" :key="index" cols="12" md="4">
                 <img
@@ -232,9 +230,8 @@
                 </div>
               </v-col>
             </v-row>
-
             <v-row v-if="n == 4">
-              <v-col v-for="(wait, index) in waiting" :key="index" cols="12" md="4">
+              <v-col v-for="(interest, index) in interesting" :key="index" cols="12" md="4">
                 <img
                   src="@/assets/images/funding/fox.jpg"
                   class="fullWidth height-200"
@@ -243,7 +240,7 @@
 
                 <div>
                   <v-row>
-                    <p class="shorthand col-7">프로젝트 이름 : {{ wait.project_name }}</p>
+                    <p class="shorthand col-7">프로젝트 이름 : {{ interest.project_name }}</p>
                     <p class="col-5">상태보기</p>
                   </v-row>
                 </div>
