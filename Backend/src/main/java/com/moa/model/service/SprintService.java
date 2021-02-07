@@ -9,6 +9,8 @@ public interface SprintService {
 	public void add(Map<String, Object> param) throws Exception;
 
 	public void modify(SprintDto sprintDto) throws Exception;
+	
+	public void modifycontent(SprintDto sprintDto) throws Exception;
 
 	public void delete(int sprint_num) throws Exception;
 
