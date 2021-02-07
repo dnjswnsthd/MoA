@@ -378,4 +378,24 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@ApiOperation(value = "허가 대기 중인 지원자 확인", notes = "프로젝트에 신청한 인원의 정보를 가져옴", response = Map.class)
+	@GetMapping("/waitingList/{project_num}")
+	public ResponseEntity<Map<String, Object>> waitingList(
+			@PathVariable("project_num") @ApiParam(value = "신청 멤버를 보기 위한 project_num", required = true)int project_num){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			MemberDto [] member = projectService.waitingList(project_num);
+			resultMap.put("member", member);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	
 }
