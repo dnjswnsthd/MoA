@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 import com.moa.model.service.ProjectService;
 
@@ -74,7 +75,7 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			projectService.waiting(param);
-			resultMap.put("messagae", SUCCESS);
+			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", FAIL);
@@ -105,6 +106,31 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	/**
+	 * 이 프로젝트에 포함된 팀원을 확인합니다.
+	 * 
+	 * @parma project_num 프로젝트에 포함된 인원을 보기 위해
+	 * @return 포함되는 팀원들
+	 */
+	@ApiOperation(value = "프로젝트에 포함된 인원 확인", notes = "프로젝트 세부 페이지에서 팀원 확인하기", response = Map.class)
+	@GetMapping("/memberchk/{project_num}")
+	public ResponseEntity<Map<String, Object>> memberchk(
+			@PathVariable("project_num") @ApiParam(value = "조회를 위한 프로젝트 넘버") int project_num){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			MemberDto [] member = projectService.memberchk(project_num);
+			resultMap.put("member", member);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	
 	/**
 	 * 자신이 참여하고 있는 펀딩의 정보를 모두 가지고 온다
 	 * 
@@ -303,6 +329,26 @@ public class ProjectController {
 		
 		try {
 			List<ProjectDto> list = projectService.getFundingList();
+			resultMap.put("list", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@ApiOperation(value = "선택한 카테고리에 대한 프로젝트 목록 제공", notes = "선택한 카테고리에 속하는 모든 프로젝트 정보를 제공", response = Map.class)
+	@GetMapping("/fundingList/{category}")
+	public ResponseEntity<Map<String, Object>> getFundingListByCategory(
+			@PathVariable @ApiParam(value = "펀딩 정보를 가져올 카테고리", required = true) String category) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			List<ProjectDto> list = projectService.getFundingListByCategory(category);
 			resultMap.put("list", list);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;

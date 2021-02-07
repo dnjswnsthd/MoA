@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 import com.moa.model.mapper.ProjectMapper;
 
@@ -17,7 +18,6 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void create(ProjectDto param) throws Exception {
-		System.out.println("***********************");
 		sqlSession.getMapper(ProjectMapper.class).createProject(param);
 		sqlSession.getMapper(ProjectMapper.class).appendProject(param);
 	}
@@ -82,6 +82,15 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public ProjectDto getFundingDetail(int project_num) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).getFundingDetail(project_num);
+	}
+
+	@Override
+	public MemberDto[] memberchk(int project_num) throws Exception{
+		return sqlSession.getMapper(ProjectMapper.class).memberchk(project_num);
+	}
+	@Override
+	public List<ProjectDto> getFundingListByCategory(String category) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).getFundingListByCategory(category);
 	}
 
 }
