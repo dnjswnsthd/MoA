@@ -121,10 +121,23 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
+
 export default {
     name: 'Evaluate',
+    created() {
+        this.project_num = this.$route.params.pn;
+        http.get(`project/evaluateList/${this.project_num}`)
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch(() => {
+                alert(`평가 대상자 가져오기 실패`);
+            });
+    },
     data() {
         return {
+            project_num: Number,
             tab: null,
             items: ['멘티', '멘티2', '멘티3', '멘티4', '멘티5'],
             evalutes: ['의사소통', '책임감', '리더십', '수행능력', '수행자세'],

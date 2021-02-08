@@ -30,8 +30,6 @@ public class MemberDto {
 	private String favorite_2;
 	@ApiModelProperty(value = "관심분야 3")
 	private String favorite_3;
-	@ApiModelProperty(value = "참여한 프로젝트 수")
-	private int numberOfProject;
 	@ApiModelProperty(value = "가지고 있는 포인트(펀딩에 사용)")
 	private int point;
 	@ApiModelProperty(value = "자기소개")
@@ -115,14 +113,6 @@ public class MemberDto {
 
 	public void setFavorite_3(String favorite_3) {
 		this.favorite_3 = favorite_3;
-	}
-
-	public int getNumberOfProject() {
-		return numberOfProject;
-	}
-
-	public void setNumberOfProject(int numberOfProject) {
-		this.numberOfProject = numberOfProject;
 	}
 
 	public int getPoint() {
