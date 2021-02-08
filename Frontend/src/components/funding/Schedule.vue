@@ -38,6 +38,7 @@
                           v-model="newTask.sprint_member"
                           :items="memberName"
                           label="담당자"
+                          class="width-350"
                           required
                         >
                         </v-autocomplete>
@@ -54,6 +55,7 @@
                             class="width-350"
                         ></v-text-field>
                         <v-textarea
+                            outlined
                             v-model="newTask.sprint_description"
                             type="text"
                             label="내용"
@@ -85,6 +87,12 @@
                     </v-row>
                 </div>
                 <v-sheet class="mx-auto" max-width="1250">
+                  <v-progress-linear
+                  class="mt-2"
+                  color="#CE93D8"
+                  rounded
+                  value="100"
+                  ></v-progress-linear>
                     <v-slide-group v-model="model" class="pa-4" active-class="success" show-arrows>
                         <drag
                             v-for="item in sprint"

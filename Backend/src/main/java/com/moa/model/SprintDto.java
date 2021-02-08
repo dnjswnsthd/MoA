@@ -6,23 +6,24 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "스프린트 정보", description = "스프린트의 상세 정보")
 public class SprintDto {
 	@ApiModelProperty(value = "스프린트 번호")
-	int sprint_num;
+	private int sprint_num;
 	@ApiModelProperty(value = "스프린트 명")
-	String sprint_name;
+	private String sprint_name;
 	@ApiModelProperty(value = "상태(0, 1, 2)")
-	int sprint_status;
+	private int sprint_status;
 	@ApiModelProperty(value = "스프린트 주제?")
-	String sprint_subject;
+	private String sprint_subject;
 	@ApiModelProperty(value = "설명")
-	String sprint_description;
+	private String sprint_description;
 	@ApiModelProperty(value = "스프린트 시작 날짜")
-	String sprint_start_date;
+	private String sprint_start_date;
 	@ApiModelProperty(value = "스프린트 종료 날짜")
-	String sprint_end_date;
+	private String sprint_end_date;
 	@ApiModelProperty(value = "스프린트 담당자")
-	String sprint_member;
+	private String sprint_member;
 	@ApiModelProperty(value = "프로젝트 번호")
-	int project_num;
+	private int project_num;
+	
 	public int getSprint_num() {
 		return sprint_num;
 	}

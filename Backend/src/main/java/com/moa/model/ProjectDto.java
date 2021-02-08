@@ -6,27 +6,27 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "프로젝트 정보", description = "프로젝트의 상세 정보")
 public class ProjectDto {
 	@ApiModelProperty(value = "프로젝트 번호")
-	int project_num;
+	private int project_num;
 	@ApiModelProperty(value = "프로젝트 명")
-	String project_name;
+	private String project_name;
 	@ApiModelProperty(value = "프로젝트 시작 날짜")
-	String start_date;
+	private String start_date;
 	@ApiModelProperty(value = "프로젝트 마감 날짜")
-	String end_date;
+	private String end_date;
 	@ApiModelProperty(value = "프로젝트 분류")
-	String category;
+	private String category;
 	@ApiModelProperty(value = "참가자 수")
-	int Participants;
+	private int Participants;
 	@ApiModelProperty(value = "펀딩 금액")
-	int funding_cost;
+	private int funding_cost;
 	@ApiModelProperty(value = "설명")
-	String description;
+	private String description;
 	@ApiModelProperty(value = "멘토 여부")
-	String mentor_chk;
+	private String mentor_chk;
 	@ApiModelProperty(value = "펀딩 마감")
-	String deadline;
+	private String deadline;
 	@ApiModelProperty(value = "팀장")
-	String leader;
+	private String leader;
 	@Override
 	public String toString() {
 		return "ProjectDto [project_num=" + project_num + ", project_name=" + project_name + ", start_date="
