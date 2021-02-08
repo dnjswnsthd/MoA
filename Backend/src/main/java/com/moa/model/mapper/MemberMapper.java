@@ -50,4 +50,6 @@ public interface MemberMapper {
 	public void updateEvaluateMentor(MentorDto mentor) throws SQLException;
 	public void updateEvaluateMentee(MenteeDto menteeDto) throws SQLException;
 
+	public void updateCompleteStatus(Map<String, Object> map);
+
 }
