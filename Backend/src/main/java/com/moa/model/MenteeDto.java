@@ -12,7 +12,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(value = "멘티 정보", description = "멘티의 보유 기술, 능력치 정보")
 public class MenteeDto extends MemberDto {
-	// 보유 기술
+	@ApiModelProperty(value = "평가 받은 횟수")
+	private int number_of_evaluation;
 	@ApiModelProperty(value = "보유 기술")
 	private String skill;
 	// 능력치
@@ -27,6 +28,12 @@ public class MenteeDto extends MemberDto {
 	@ApiModelProperty(value = "리더십")
 	private int leadership;		// 리더쉽
 	// getter, setter
+	public int getNumber_of_evaluation() {
+		return number_of_evaluation;
+	}
+	public void setNumber_of_evaluation(int number_of_evaluation) {
+		this.number_of_evaluation = number_of_evaluation;
+	}
 	public String getSkill() {
 		return skill;
 	}
@@ -63,4 +70,11 @@ public class MenteeDto extends MemberDto {
 	public void setLeadership(int leadership) {
 		this.leadership = leadership;
 	}
+	@Override
+	public String toString() {
+		return "MenteeDto [number_of_evaluation=" + number_of_evaluation + ", skill=" + skill + ", communication="
+				+ communication + ", responsibility=" + responsibility + ", performance=" + performance
+				+ ", positiveness=" + positiveness + ", leadership=" + leadership + "]";
+	}
+	
 }

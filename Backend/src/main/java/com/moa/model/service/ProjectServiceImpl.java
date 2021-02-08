@@ -106,4 +106,9 @@ public class ProjectServiceImpl implements ProjectService {
 		sqlSession.getMapper(ProjectMapper.class).memberDelete(param);
 	}
 
+	@Override
+	public List<Map<String, Object>> getEvaluateList(int project_num) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).getEvaluateList(project_num);
+	}
+
 }

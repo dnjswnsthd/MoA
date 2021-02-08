@@ -16,6 +16,8 @@ public class MentorDto extends MemberDto {
 	private String career;
 	@ApiModelProperty(value = "경험치")
 	private int exp;
+	@ApiModelProperty(value = "평가 받은 횟수")
+	private int number_of_evaluation;
 	// 능력치
 	@ApiModelProperty(value = "리더십")
 	private int leadership;		// 리더쉽
@@ -39,6 +41,12 @@ public class MentorDto extends MemberDto {
 	}
 	public void setExp(int exp) {
 		this.exp = exp;
+	}
+	public int getNumber_of_evaluation() {
+		return number_of_evaluation;
+	}
+	public void setNumber_of_evaluation(int number_of_evaluation) {
+		this.number_of_evaluation = number_of_evaluation;
 	}
 	public int getLeadership() {
 		return leadership;
@@ -70,6 +78,21 @@ public class MentorDto extends MemberDto {
 	public void setProfessional(int professional) {
 		this.professional = professional;
 	}
-	
+	@Override
+	public String toString() {
+		return "MentorDto [career=" + career + ", exp=" + exp + ", number_of_evaluation=" + number_of_evaluation
+				+ ", leadership=" + leadership + ", morality=" + morality + ", positiveness=" + positiveness
+				+ ", reliability=" + reliability + ", professional=" + professional + ", getCareer()=" + getCareer()
+				+ ", getExp()=" + getExp() + ", getNumber_of_evaluation()=" + getNumber_of_evaluation()
+				+ ", getLeadership()=" + getLeadership() + ", getMorality()=" + getMorality() + ", getPositiveness()="
+				+ getPositiveness() + ", getReliability()=" + getReliability() + ", getProfessional()="
+				+ getProfessional() + ", getId()=" + getId() + ", getPw()=" + getPw() + ", getName()=" + getName()
+				+ ", getAge()=" + getAge() + ", getMajor()=" + getMajor() + ", getStatus()=" + getStatus()
+				+ ", getPhone()=" + getPhone() + ", getFavorite_1()=" + getFavorite_1() + ", getFavorite_2()="
+				+ getFavorite_2() + ", getFavorite_3()=" + getFavorite_3() + ", getPoint()=" + getPoint()
+				+ ", getIntroduce()=" + getIntroduce() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 	
 }
