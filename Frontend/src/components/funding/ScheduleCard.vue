@@ -56,7 +56,7 @@
                 endDate :
                 <v-text-field v-model="modSprint.sprint_end_date" type="date"></v-text-field>
                 Description :
-                <v-textarea v-model="modSprint.sprint_description"></v-textarea>
+                <v-textarea outlined v-model="modSprint.sprint_description"></v-textarea>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>

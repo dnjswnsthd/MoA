@@ -38,6 +38,7 @@
                           v-model="newTask.sprint_member"
                           :items="memberName"
                           label="담당자"
+                          class="width-350"
                           required
                         >
                         </v-autocomplete>
@@ -54,6 +55,7 @@
                             class="width-350"
                         ></v-text-field>
                         <v-textarea
+                            outlined
                             v-model="newTask.sprint_description"
                             type="text"
                             label="내용"
