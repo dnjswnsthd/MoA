@@ -85,6 +85,12 @@
                     </v-row>
                 </div>
                 <v-sheet class="mx-auto" max-width="1250">
+                  <v-progress-linear
+                  class="mt-2"
+                  color="#CE93D8"
+                  rounded
+                  value="100"
+                  ></v-progress-linear>
                     <v-slide-group v-model="model" class="pa-4" active-class="success" show-arrows>
                         <drag
                             v-for="item in sprint"
