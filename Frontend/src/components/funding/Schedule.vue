@@ -54,6 +54,7 @@
                             class="width-350"
                         ></v-text-field>
                         <v-textarea
+                            outlined
                             v-model="newTask.sprint_description"
                             type="text"
                             label="내용"
