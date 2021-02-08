@@ -194,27 +194,30 @@
 	<!-- 멘토 평가 업데이트 -->
 	<update id="updateEvaluateMentor" parameterType="MentorDto">
 		update mentor
-		Inner join member
-		on mentor.id = member.id
-		set exp = (mentor.exp + #{morality} + #{positiveness} + #{reliability} + #{professional} + #{leadership}),
-			morality = ((#{morality} + mentor.morality) / member.number_of_project),
-			positiveness = ((#{positiveness} + mentor.positiveness) / member.number_of_project),
-			reliability = ((#{reliability} + mentor.reliability) / member.number_of_project),
-			professional = ((#{professional} + mentor.professional) / member.number_of_project),
-			leadership = ((#{leadership} + mentor.leadership) / member.number_of_project)
-		WHERE mentor.id = #{id};
+		set exp = (exp + #{morality} + #{positiveness} + #{reliability} + #{professional} + #{leadership}),
+			morality = ((#{morality} + mentor.morality) / number_of_evaluation),
+			positiveness = ((#{positiveness} + positiveness) / number_of_evaluation),
+			reliability = ((#{reliability} + reliability) / number_of_evaluation),
+			professional = ((#{professional} + professional) / number_of_evaluation),
+			leadership = ((#{leadership} + leadership) / number_of_evaluation),
+			number_of_evaluation = number_of_evaluation + 1
+		WHERE id = #{id};
 	</update>
 	<!-- 멘티 평가 업데이트 -->
 	<update id="updateEvaluateMentee" parameterType="MenteeDto">
 		update mentee
-		Inner Join member
-		on mentee.id = member.id
-		set communication = ((mentee.communication + #{communication}) / member.number_of_project),
-			responsibility = ((mentee.responsibility + #{responsibility}) / member.number_of_project),
-			performance = ((mentee.performance + #{performance}) / member.number_of_project),
-			positiveness = ((mentee.positiveness + #{positiveness}) / member.number_of_project),
-			leadership = ((mentee.leadership + #{leadership}) / member.number_of_project)
-		where mentee.id = #{id}
+		set communication = ((communication + #{communication}) / number_of_evaluation),
+			responsibility = ((responsibility + #{responsibility}) / number_of_evaluation),
+			performance = ((performance + #{performance}) / number_of_evaluation),
+			positiveness = ((positiveness + #{positiveness}) / number_of_evaluation),
+			leadership = ((leadership + #{leadership}) / number_of_evaluation),
+			number_of_evaluation = number_of_evaluation + 1
+		where id = #{id}
+	</update>
+	<update id="updateCompleteStatus" parameterType="Map">
+		update complete_project
+		set status = 1
+		where project_num = #{project_num} and id = #{id}
 	</update>
 
 </mapper>
