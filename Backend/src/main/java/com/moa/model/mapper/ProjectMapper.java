@@ -53,6 +53,8 @@ public interface ProjectMapper {
 	void completeAppend(Map<String, Object> param) throws SQLException;
 
 	void memberDelete(Map<String, Object> param) throws SQLException;
+
+	List<Map<String, Object>> getEvaluateList(int project_num) throws SQLException;
 	
 	
 }
