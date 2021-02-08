@@ -47,7 +47,7 @@ public interface MemberMapper {
 	public List<RankDto> getRankingProfessional() throws SQLException;
 	public List<RankDto> getRankingLeadership() throws SQLException;
 	// 멘토 멘티 평가 업데이트 Mapper
-	public void updateEvaluateMentor(MentorDto mentor);
-	public void updateEvaluateMentee(MenteeDto menteeDto);
+	public void updateEvaluateMentor(MentorDto mentor) throws SQLException;
+	public void updateEvaluateMentee(MenteeDto menteeDto) throws SQLException;
 
 }
