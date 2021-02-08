@@ -5,10 +5,10 @@
             <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
                 <v-tab>
-                    <p class="evaluateFont">멘토</p>
+                    <p class="evaluateFont">{{ mentor.name }}</p>
                 </v-tab>
-                <v-tab v-for="item in items" :key="item">
-                    <p class="evaluateFont">{{ item }}</p>
+                <v-tab v-for="(mentee, index) in mentees" :key="index">
+                    <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
             </v-tabs>
         </v-toolbar>
@@ -47,7 +47,7 @@
                                 >
                                     {{ item.title }}&nbsp;은/는 어땠나요?
                                     <v-rating
-                                        v-model="mentors[`${item.value}`]"
+                                        v-model="mentor[`${item.value}`]"
                                         background-color="purple lighten-3"
                                         color="#bc6ff1"
                                         large
@@ -129,7 +129,12 @@ export default {
         this.project_num = this.$route.params.pn;
         http.get(`project/evaluateList/${this.project_num}`)
             .then(({ data }) => {
-                console.log(data);
+                console.log(data.list);
+                data.list.forEach((el) => {
+                    console.log(el);
+                    if (el.status == 1) this.mentor = el;
+                    else this.mentees.push(el);
+                });
             })
             .catch(() => {
                 alert(`평가 대상자 가져오기 실패`);
@@ -148,7 +153,7 @@ export default {
                 { title: '전문성', value: 'professional' },
                 { title: '리더십', value: 'leadership' },
             ],
-            mentors: {},
+            mentor: {},
             mentees: [],
         };
     },
