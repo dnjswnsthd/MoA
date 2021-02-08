@@ -3,26 +3,17 @@
     <div>
       <h1 class="height-70">{{ project.project_name }}</h1>
       <h2 class="height-70">주제 : {{ project.category }}</h2>
-      <h2 class="height-50">
+      <h2 class="height-70">
         일정 : {{ project.start_date }} ~ {{ project.end_date }}
       </h2>
     </div>
-
-    <div v-for="(sprint, i) in sprints" :key="i">
-      <drop
-        class="drop list width-1200"
-        @drop="handleDrop(sprint, ...arguments)"
-      >
-        <div class="col-9">
-          <v-row>
-            <h2>{{ items[i] }}</h2>
-            <v-dialog
-              v-model="dialog"
+    <v-row>
+      <h2 class="height-50 ml-6"> Add Sprint </h2>
+      <v-dialog v-model="dialog"
               persistent
               max-width="500"
-              max-height="600"
-            >
-              <template v-slot:activator="{ on, attrs }">
+              max-height="600">
+         <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   class="mx-2"
                   dark
@@ -35,8 +26,8 @@
                     mdi-plus
                   </v-icon>
                 </v-btn>
-              </template>
-              <v-card class="px-5">
+          </template>
+          <v-card class="px-5">
                 <v-card-title class="headline mb-1">
                   어떤 일정을 추가하시겠어요?
                 </v-card-title>
@@ -72,7 +63,6 @@
                     class="width-350"
                   ></v-textarea>
                 </v-card-text>
-                <!-- <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text> -->
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
@@ -83,7 +73,6 @@
                   >
                     취소
                   </v-btn>
-                  <!-- text @click="dialog = True" -->
                   <v-btn
                     class="font-weight-bold"
                     color="#845ec2"
@@ -94,7 +83,16 @@
                   </v-btn>
                 </v-card-actions>
               </v-card>
-            </v-dialog>
+      </v-dialog>
+    </v-row>
+    <div v-for="(sprint, i) in sprints" :key="i">
+      <drop
+        class="drop list width-1200"
+        @drop="handleDrop(sprint, ...arguments)"
+      >
+        <div class="col-9">
+          <v-row>
+            <h2>{{ items[i] }}</h2>
           </v-row>
         </div>
         <v-sheet class="mx-auto" max-width="1250">
@@ -156,7 +154,7 @@ export default {
     };
   },
   created() {
-    this.project_num = this.$route.params.pn;
+    this.project_num = this.$route.query.pn;
     this.newTask.project_num = this.project_num;
     http
       .get(`sprint/search/${this.project_num}`)
@@ -215,6 +213,7 @@ export default {
         .then(() => {
           alert('추가 성공!');
           this.dialog = false;
+          this.sprints[0].push(this.newTask);
         })
         .catch(() => {
           alert('추가 실패!');
