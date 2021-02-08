@@ -339,8 +339,12 @@ export default {
             project_num: this.project_num,
           })
           .then((response) => {
+            console.log('메시지 : ' + response.data.message);
             if (response.data.message == 'success') {
               alert('신청 성공');
+              this.dialog = false;
+            } else if (response.data.message == 'FUCKING') {
+              alert('이미 신청되어있는 프로젝트 입니다.');
               this.dialog = false;
             } else {
               alert('신청 실패');

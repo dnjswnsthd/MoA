@@ -217,8 +217,7 @@
 
                 <div>
                   <v-row>
-                    <p class="shorthand col-7">프로젝트 이름 : {{ wait.project_name }}</p>
-                    <p class="col-5">상태보기</p>
+                    <p class="shorthand col-12">프로젝트 이름 : {{ wait.project_name }}</p>
                   </v-row>
                 </div>
               </v-col>
@@ -234,7 +233,7 @@
                 <div>
                   <v-row>
                     <p class="shorthand col-7">프로젝트 이름 : {{ completed.project_name }}</p>
-                    <p class="col-5">상태보기</p>
+                    <p class="col-5" @click="movePage(n)">평가 목록</p>
                   </v-row>
                 </div>
               </v-col>
@@ -249,8 +248,34 @@
 
                 <div>
                   <v-row>
-                    <p class="shorthand col-7">프로젝트 이름 : {{ interest.project_name }}</p>
-                    <p class="col-5">상태보기</p>
+                    <p class="shorthand col-7">프로젝트 이름 : {{ proceed.project_name }}</p>
+                    <v-dialog v-model="proceedDialog" scrollable max-width="300px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <p
+                          class="col-5"
+                          @click="projectState(proceed.project_num)"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          참여 인원
+                        </p>
+                      </template>
+                      <v-card>
+                        <v-card-title>참여 인원</v-card-title>
+                        <v-divider></v-divider>
+                        <v-card-text style="height: 300px;">
+                          <v-row v-for="(proceedMember, index) in proceedingMember" :key="index">
+                            <p>{{ proceedMember.id }}</p>
+                          </v-row>
+                        </v-card-text>
+                        <v-divider></v-divider>
+                        <v-card-actions>
+                          <v-btn color="blue darken-1" text @click="proceedDialog = false">
+                            Close
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
                   </v-row>
                 </div>
               </v-col>
@@ -265,6 +290,7 @@
 <script>
 import http from '@/util/http-common';
 import { mapState } from 'vuex';
+
 export default {
   computed: {
     ...mapState(['memberInfo', 'isLogin']),
@@ -350,7 +376,7 @@ export default {
         if (response.data.message == 'success') {
           this.complete = response.data.completeProjectInfo;
         } else {
-          alert('진행중플젝 가져오기 실패!');
+          alert('종료된플젝 가져오기 실패!');
         }
       })
       .catch(() => {
@@ -362,7 +388,7 @@ export default {
         if (response.data.message == 'success') {
           this.interesting = response.data.interestingProjectInfo;
         } else {
-          alert('진행중플젝 가져오기 실패!');
+          alert('관심플젝 가져오기 실패!');
         }
       })
       .catch(() => {
@@ -384,7 +410,7 @@ export default {
   },
   methods: {
     movePage(n) {
-      if (n == 3) this.$router.replace('/evaluate');
+      if (n == 3) this.$router.replace(`/evaluate/${this.project_num}`);
     },
     deleteMember() {
       this.deleteDialog = false;
