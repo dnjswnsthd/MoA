@@ -19,6 +19,8 @@ public class SprintDto {
 	String sprint_start_date;
 	@ApiModelProperty(value = "스프린트 종료 날짜")
 	String sprint_end_date;
+	@ApiModelProperty(value = "스프린트 담당자")
+	String sprint_member;
 	@ApiModelProperty(value = "프로젝트 번호")
 	int project_num;
 	public int getSprint_num() {
@@ -63,12 +65,19 @@ public class SprintDto {
 	public void setSprint_end_date(String sprint_end_date) {
 		this.sprint_end_date = sprint_end_date;
 	}
+	public String getSprint_member() {
+		return sprint_member;
+	}
+	public void setSprint_member(String sprint_member) {
+		this.sprint_member = sprint_member;
+	}
 	public int getProject_num() {
 		return project_num;
 	}
 	public void setProject_num(int project_num) {
 		this.project_num = project_num;
 	}
+	
 
 	
 }
