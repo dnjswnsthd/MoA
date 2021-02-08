@@ -38,6 +38,7 @@
                           v-model="newTask.sprint_member"
                           :items="memberName"
                           label="담당자"
+                          class="width-350"
                           required
                         >
                         </v-autocomplete>
