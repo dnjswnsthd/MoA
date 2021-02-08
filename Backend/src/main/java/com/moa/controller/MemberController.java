@@ -110,7 +110,7 @@ public class MemberController {
 		HttpStatus status = null;
 		String id = memberDto.getId();
 		String pw = memberDto.getPw();
-		System.out.println(id);
+		
 		try {
 			if (memberService.pwcheck(id, pw)) {// pw가 맞으면
 				resultMap.put("message", SUCCESS);
@@ -134,7 +134,6 @@ public class MemberController {
 			@RequestBody @ApiParam(value = "멘토 회원 가입에 필요한 회원 정보", required = true) Map<String, Object> param) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		System.out.println(param.get("status"));
 
 		try {
 			memberService.join(param);
@@ -245,7 +244,6 @@ public class MemberController {
 			memberService.memberUpdatePoint(memberDto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
-
 		} catch (Exception e) {
 			logger.error("수정 실패 : {}", e);
 			resultMap.put("massage", e.getMessage());
@@ -262,7 +260,6 @@ public class MemberController {
 		
 		try {
 			List<List<RankDto>> list = memberService.getRanking();
-			System.out.println(list);
 			resultMap.put("list", list);
 			resultMap.put("massage", SUCCESS);
 			status = HttpStatus.ACCEPTED;
@@ -281,7 +278,6 @@ public class MemberController {
 			@RequestBody EvaluateDto evaluateDto) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
 		try {
 			memberService.updateEvaluate(evaluateDto);
 			resultMap.put("message", SUCCESS);

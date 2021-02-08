@@ -206,7 +206,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateEvaluate(EvaluateDto evaluateDto) {
+	public void updateEvaluate(EvaluateDto evaluateDto) throws Exception {
 		MentorDto mentor = evaluateDto.getMentor();
 		List<MenteeDto> mentees = evaluateDto.getMentees();
 		if(mentor.getId() != null)
