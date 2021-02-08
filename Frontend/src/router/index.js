@@ -67,7 +67,7 @@ export default new VueRouter({
             components: { default: Schedule, header: SubHeader },
         },
         {
-            path: '/evaluate',
+            path: '/evaluate/:pn',
             name: 'Evaluate',
             components: { default: Evaluate, header: SubHeader },
         },

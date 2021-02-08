@@ -28,6 +28,6 @@ public interface MemberService {
 
 	public List<List<RankDto>> getRanking() throws Exception;
 
-	public void updateEvaluate(EvaluateDto evaluateDto);
+	public void updateEvaluate(EvaluateDto evaluateDto) throws Exception;
 
 }
