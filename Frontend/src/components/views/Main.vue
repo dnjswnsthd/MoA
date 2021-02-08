@@ -76,11 +76,6 @@ export default {
     let date = today.getDate();
 
     let current = year + '-' + month + '-' + date;
-    // let end_day = today.getTime(this.fundingDatas.end_date);
-    // let start_day = today.getTime(this.fundingDatas.start_date);
-    // let gap = end_day - start_day;
-    // let res = Math.ceil(gap / (1000 * 60 * 60 * 24));
-    // console.log(res);
 
     http
       .get(`project/fundingList`)
