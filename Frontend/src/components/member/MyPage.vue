@@ -182,7 +182,16 @@
                         <v-card-text style="height: 300px;">
                           <v-row v-for="(proceedMember, index) in proceedingMember" :key="index">
                             <p>{{ proceedMember.id }}</p>
-                            <v-btn @click="enjoyGroup(proceedMember.id)">수락</v-btn>
+                            <v-btn
+                              @click="
+                                enjoyGroup(
+                                  proceedMember.id,
+                                  proceed.funding_cost,
+                                  proceed.participants
+                                )
+                              "
+                              >수락</v-btn
+                            >
                             <v-btn @click="refuseGroup(proceedMember.id)">거절</v-btn>
                           </v-row>
                         </v-card-text>
@@ -464,23 +473,32 @@ export default {
           alert('에러발생!');
         });
     },
-    enjoyGroup(id) {
-      http
-        .put('/project/permission', {
-          project_num: this.project_num,
-          id: id,
-        })
-        .then((response) => {
-          if (response.data.message == 'success') {
-            this.proceedDialog = false;
-            alert('수락성공');
-          } else {
-            alert('거절실패');
-          }
-        })
-        .catch(() => {
-          alert('에러발생!');
-        });
+    enjoyGroup(id, funding_cost, participants) {
+      let cost = funding_cost / participants;
+      let updatePoint = this.memberInfo.point - cost;
+      console.log('cost : ' + cost);
+      console.log('updateP : ' + updatePoint);
+      if (updatePoint < 0) {
+        alert('포인트가 부족한 신청자 입니다.');
+      } else {
+        http
+          .put('/project/permission', {
+            project_num: this.project_num,
+            id: id,
+            point: updatePoint,
+          })
+          .then((response) => {
+            if (response.data.message == 'success') {
+              this.proceedDialog = false;
+              alert('수락성공');
+            } else {
+              alert('거절실패');
+            }
+          })
+          .catch(() => {
+            alert('에러발생!');
+          });
+      }
     },
     refuseGroup(id) {
       console.log('id : ' + id);
