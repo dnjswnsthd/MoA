@@ -51,18 +51,20 @@
 	<!-- member update -->
 	<update id="memberUpdate" parameterType="MemberDto">
 		update member set
-		name = #{name},
+		name =
+		#{name},
 		age = #{age},
 		major = #{major},
 		phone = #{phone},
-		favorite_1 = #{favorite_1},
+		favorite_1 =
+		#{favorite_1},
 		favorite_2 = #{favorite_2},
 		favorite_3 =
 		#{favorite_3},
 		introduce = #{introduce}
 		where id = #{id}
 	</update>
-	
+
 	<!-- member update point -->
 	<update id="memberUpdatePoint" parameterType="MemberDto">
 		update member set
@@ -74,7 +76,8 @@
 	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
 	<delete id="delete" parameterType="String">
 		delete from member
-		where id = #{id}
+		where id =
+		#{id}
 	</delete>
 
 	<!-- 임시 비밀번호로 비밀번호를 바꾸기 -->
@@ -123,56 +126,95 @@
 		mentee.id
 		where member.id = #{id}
 	</select>
-	
+
 	<!-- pw 검사 -->
 	<select id="pwcheck" parameterType="String" resultType="String">
 		select pw
 		from member
 		where id = #{id}
 	</select>
-	
+
 	<!-- 멘토 랭킹 가져오기 -->
 	<!-- 경험치 랭킹 -->
 	<select id="getRankingExp" resultType="RankDto">
-		select member.id, mentor.exp as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.exp as score
+		from member inner join mentor on member.id =
+		mentor.id
 		order by exp desc
 		limit 5;
 	</select>
 	<!-- 도덕성 랭킹 -->
 	<select id="getRankingMorality" resultType="RankDto">
-		select member.id, mentor.morality as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.morality as score
+		from member inner join mentor on member.id =
+		mentor.id
 		order by morality desc
 		limit 5;
 	</select>
 	<!-- 적극성 랭킹 -->
 	<select id="getRankingPositiveness" resultType="RankDto">
-		select member.id, mentor.positiveness as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.positiveness as score
+		from member inner join mentor on member.id
+		= mentor.id
 		order by positiveness desc
 		limit 5;
 	</select>
 	<!-- 신뢰도 랭킹 -->
 	<select id="getRankingReliability" resultType="RankDto">
-		select member.id, mentor.reliability as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.reliability as score
+		from member inner join mentor on member.id
+		= mentor.id
 		order by reliability desc
 		limit 5;
 	</select>
 	<!-- 전문성 랭킹 -->
 	<select id="getRankingProfessional" resultType="RankDto">
-		select member.id, mentor.professional as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.professional as score
+		from member inner join mentor on member.id
+		= mentor.id
 		order by professional desc
 		limit 5;
 	</select>
 	<!-- 리더쉽 랭킹 -->
 	<select id="getRankingLeadership" resultType="RankDto">
-		select member.id, mentor.leadership as score
-		from member inner join mentor on member.id = mentor.id
+		select member.id,
+		mentor.leadership as score
+		from member inner join mentor on member.id =
+		mentor.id
 		order by leadership desc
 		limit 5;
 	</select>
-	
+
+	<!-- 멘토, 멘티 평가 반영 -->
+	<!-- 멘토 평가 업데이트 -->
+	<update id="updateEvaluateMentor" parameterType="MentorDto">
+		update mentor
+		Inner join member
+		on mentor.id = member.id
+		set exp = (mentor.exp + #{morality} + #{positiveness} + #{reliability} + #{professional} + #{leadership}),
+			morality = ((#{morality} + mentor.morality) / member.number_of_project),
+			positiveness = ((#{positiveness} + mentor.positiveness) / member.number_of_project),
+			reliability = ((#{reliability} + mentor.reliability) / member.number_of_project),
+			professional = ((#{professional} + mentor.professional) / member.number_of_project),
+			leadership = ((#{leadership} + mentor.leadership) / member.number_of_project)
+		WHERE mentor.id = #{id};
+	</update>
+	<!-- 멘티 평가 업데이트 -->
+	<update id="updateEvaluateMentee" parameterType="MenteeDto">
+		update mentee
+		Inner Join member
+		on mentee.id = member.id
+		set communication = ((mentee.communication + #{communication}) / member.number_of_project),
+			responsibility = ((mentee.responsibility + #{responsibility}) / member.number_of_project),
+			performance = ((mentee.performance + #{performance}) / member.number_of_project),
+			positiveness = ((mentee.positiveness + #{positiveness}) / member.number_of_project),
+			leadership = ((mentee.leadership + #{leadership}) / member.number_of_project)
+		where mentee.id = #{id}
+	</update>
+
 </mapper>
