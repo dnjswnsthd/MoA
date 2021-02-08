@@ -33,6 +33,14 @@
                             label="주제"
                             class="width-350"
                         ></v-text-field>
+                        <v-autocomplete
+                          ref="newTask.sprint_member"
+                          v-model="newTask.sprint_member"
+                          :items="memberName"
+                          label="담당자"
+                          required
+                        >
+                        </v-autocomplete>
                         <v-text-field
                             v-model="newTask.sprint_start_date"
                             type="date"
@@ -126,10 +134,13 @@ export default {
                 sprint_description: '',
                 sprint_start_date: '',
                 sprint_end_date: '',
+                sprint_member: '',
                 project_num: 0,
             },
             items: ['할 일', '진행 중', '완료'],
             project: [{}],
+            members: {},
+            memberName: [],
             project_num: 0,
         };
     },
@@ -138,7 +149,7 @@ export default {
         this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
-                console.log(data.spprintList);
+                console.log(data.sprintList);
                 data.sprintList.forEach((sprint) => {
                     console.log(sprint);
                     if (sprint.sprint_status == 0) this.sprints[0].push(sprint);
@@ -147,7 +158,7 @@ export default {
                 });
             })
             .catch(() => {
-                alert('에러가 발생했습니다.');
+                alert('에러가 발생했습니다.!!');
             });
 
         http.get(`project/fundingDetail/${this.project_num}`)
@@ -159,6 +170,16 @@ export default {
                 }
             })
             .catch(() => {});
+        
+        http.get(`project/memberchk/${this.project_num}`)
+          .then((response) => {
+            this.members = response.data.member;
+            for(let i=0; i<this.members.length; i++){
+              this.memberName[i] = this.members[i].name;
+            }
+          })
+          .catch(() => {});
+
     },
     methods: {
         handleDrop(toList, data) {
@@ -175,38 +196,40 @@ export default {
                     sprint_num: data.item.sprint_num,
                 })
                     .then(() => {
-                        alert('수정 성공!');
+                        // alert('수정 성공!');
                     })
                     .catch(() => {
-                        alert('수정 실패!');
+                        // alert('수정 실패!');
                     });
             }
         },
         addSprint() {
             http.post(`sprint/add`, this.newTask)
                 .then(() => {
-                    this.dialog = false;
-                    this.sprints[0].push({
-                        sprint_name: this.newTask.sprint_name,
-                        sprint_status: this.newTask.sprint_status,
-                        sprint_subject: this.newTask.sprint_subject,
-                        sprint_description: this.newTask.sprint_description,
-                        sprint_start_date: this.newTask.sprint_start_date,
-                        sprint_end_date: this.newTask.sprint_end_date,
-                        project_num: this.newTask.project_num,
-                    });
-                    alert('추가 성공!');
+                  this.dialog = false;
+                  this.sprints[0].push({
+                    sprint_name: this.newTask.sprint_name,
+                    sprint_status: this.newTask.sprint_status,
+                    sprint_subject: this.newTask.sprint_subject,
+                    sprint_description: this.newTask.sprint_description,
+                    sprint_start_date: this.newTask.sprint_start_date,
+                    sprint_end_date: this.newTask.sprint_end_date,
+                    sprint_member: this.newTask.sprint_member,
+                    project_num: this.newTask.project_num,
+                  });
+                    // alert('추가 성공!');
                     this.newTask.sprint_name = '';
                     this.newTask.sprint_status = 0;
                     this.newTask.sprint_subject = '';
                     this.newTask.sprint_description = '';
                     this.newTask.sprint_start_date = '';
                     this.newTask.sprint_end_date = '';
+                    this.newTask.sprint_member = '';
                     this.newTask.project_num = 0;
                     location.href = 'schedule?pn=' + this.project_num;
                 })
                 .catch(() => {
-                    alert('추가 실패!');
+                    // alert('추가 실패!');
                 });
         },
         reLoad() {
