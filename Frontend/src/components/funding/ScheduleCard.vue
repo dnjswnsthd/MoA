@@ -34,6 +34,8 @@
         <v-text-field v-model="modSprint.sprint_name"></v-text-field>
         Subject :
         <v-text-field v-model="modSprint.sprint_subject"></v-text-field>
+        Member : 
+        <v-text-field v-model="modSprint.sprint_member"></v-text-field>
         startDate :
         <v-text-field
           v-model="modSprint.sprint_start_date"
@@ -85,6 +87,7 @@ export default {
         sprint_subject: '',
         sprint_start_date: '',
         sprint_end_date: '',
+        sprint_member: '',
       },
       project_num: 0,
     };
