@@ -195,22 +195,22 @@
 	<update id="updateEvaluateMentor" parameterType="MentorDto">
 		update mentor
 		set exp = (exp + #{morality} + #{positiveness} + #{reliability} + #{professional} + #{leadership}),
-			morality = ((#{morality} + mentor.morality) / number_of_evaluation),
-			positiveness = ((#{positiveness} + positiveness) / number_of_evaluation),
-			reliability = ((#{reliability} + reliability) / number_of_evaluation),
-			professional = ((#{professional} + professional) / number_of_evaluation),
-			leadership = ((#{leadership} + leadership) / number_of_evaluation),
+			morality = ((#{morality} + morality) / (number_of_evaluation + 1)),
+			positiveness = ((#{positiveness} + positiveness) / (number_of_evaluation + 1)),
+			reliability = ((#{reliability} + reliability) / (number_of_evaluation + 1)),
+			professional = ((#{professional} + professional) / (number_of_evaluation + 1)),
+			leadership = ((#{leadership} + leadership) / (number_of_evaluation + 1)),
 			number_of_evaluation = number_of_evaluation + 1
 		WHERE id = #{id};
 	</update>
 	<!-- 멘티 평가 업데이트 -->
 	<update id="updateEvaluateMentee" parameterType="MenteeDto">
 		update mentee
-		set communication = ((communication + #{communication}) / number_of_evaluation),
-			responsibility = ((responsibility + #{responsibility}) / number_of_evaluation),
-			performance = ((performance + #{performance}) / number_of_evaluation),
-			positiveness = ((positiveness + #{positiveness}) / number_of_evaluation),
-			leadership = ((leadership + #{leadership}) / number_of_evaluation),
+		set communication = ((communication + #{communication}) / (number_of_evaluation + 1)),
+			responsibility = ((responsibility + #{responsibility}) / (number_of_evaluation + 1)),
+			performance = ((performance + #{performance}) / (number_of_evaluation + 1)),
+			positiveness = ((positiveness + #{positiveness}) / (number_of_evaluation + 1)),
+			leadership = ((leadership + #{leadership}) / (number_of_evaluation + 1)),
 			number_of_evaluation = number_of_evaluation + 1
 		where id = #{id}
 	</update>

@@ -278,6 +278,8 @@ public class MemberController {
 			@RequestBody EvaluateDto evaluateDto) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
+		System.out.println(evaluateDto.getProject_num());
+		System.out.println(evaluateDto.getMentor().toString());
 		
 		try {
 			memberService.updateEvaluate(evaluateDto);
