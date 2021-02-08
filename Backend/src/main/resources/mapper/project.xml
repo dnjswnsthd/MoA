@@ -208,4 +208,12 @@
 		from project
 		where <![CDATA[date(end_date) < date(now())]]>)
 	</delete>
+	
+	<!-- 완료된 프로젝트 중 평가가 완료 되지 않은 프로젝트를 가져온다 -->
+	<select id="getEvaluateList" parameterType="Integer" resultType="Map">
+		select complete_project.project_num, complete_project.id, member.status
+		from complete_project inner join member on complete_project.id = member.id
+		where complete_project.project_num = #{project_num} and complete_project.status = 0
+	</select>
+	
 </mapper>
