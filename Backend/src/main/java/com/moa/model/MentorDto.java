@@ -78,5 +78,21 @@ public class MentorDto extends MemberDto {
 	public void setProfessional(int professional) {
 		this.professional = professional;
 	}
-		
+	@Override
+	public String toString() {
+		return "MentorDto [career=" + career + ", exp=" + exp + ", number_of_evaluation=" + number_of_evaluation
+				+ ", leadership=" + leadership + ", morality=" + morality + ", positiveness=" + positiveness
+				+ ", reliability=" + reliability + ", professional=" + professional + ", getCareer()=" + getCareer()
+				+ ", getExp()=" + getExp() + ", getNumber_of_evaluation()=" + getNumber_of_evaluation()
+				+ ", getLeadership()=" + getLeadership() + ", getMorality()=" + getMorality() + ", getPositiveness()="
+				+ getPositiveness() + ", getReliability()=" + getReliability() + ", getProfessional()="
+				+ getProfessional() + ", getId()=" + getId() + ", getPw()=" + getPw() + ", getName()=" + getName()
+				+ ", getAge()=" + getAge() + ", getMajor()=" + getMajor() + ", getStatus()=" + getStatus()
+				+ ", getPhone()=" + getPhone() + ", getFavorite_1()=" + getFavorite_1() + ", getFavorite_2()="
+				+ getFavorite_2() + ", getFavorite_3()=" + getFavorite_3() + ", getPoint()=" + getPoint()
+				+ ", getIntroduce()=" + getIntroduce() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
+	
 }

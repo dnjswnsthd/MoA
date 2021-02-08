@@ -4,17 +4,19 @@
         <v-toolbar color="#c1a1d3" dark>
             <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab>
-                    <p class="evaluateFont">{{ mentor.name }}</p>
+                <v-tab v-if="mentor.id">
+                    <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
                 <v-tab v-for="(mentee, index) in mentees" :key="index">
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
+                <v-spacer></v-spacer>
+                <v-btn text class="mt-3" @click="evaluate">제출하기</v-btn>
             </v-tabs>
         </v-toolbar>
         <v-tabs-items v-model="tab">
             <!-- 멘토가 있을 경우 멘토 평가 항목을 보여줌 -->
-            <v-tab-item>
+            <v-tab-item v-if="mentor.id">
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
@@ -37,9 +39,16 @@
                     </v-col>
                     <v-spacer></v-spacer>
                     <v-col>
-                        <v-card flat>
+                        <v-card flat width="320">
                             <v-card-text>
-                                <h2 class="pb-5 pt-5">멘토 을(를) 평가해주세요!</h2>
+                                <h2 class="pb-5 pt-5">
+                                    {{ mentor.name }} 멘토를 평가해주세요!
+                                    <span>
+                                        <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
+                                            초기화
+                                        </v-btn>
+                                    </span>
+                                </h2>
                                 <p
                                     v-for="(item, index) in mentorEvaluationItem"
                                     :key="index"
@@ -53,22 +62,14 @@
                                         large
                                     ></v-rating>
                                 </p>
-                                <div class="pt-8" style="margin-bottom: 30px;">
-                                    <v-row>
-                                        <v-spacer></v-spacer>
-                                        <v-btn>초기화</v-btn>
-                                        <v-spacer></v-spacer>
-                                        <v-btn>제출하기</v-btn>
-                                    </v-row>
-                                </div>
                             </v-card-text>
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
-
-            <v-tab-item v-for="item in items" :key="item">
+            <!-- 멘티들의 평가를 위한 tab-item -->
+            <v-tab-item v-for="(mentee, index) in mentees" :key="index">
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
@@ -90,26 +91,30 @@
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-card flat>
+                    <v-card flat width="320">
                         <v-card-text>
-                            <h2 class="pb-5 pt-5">{{ item }}&nbsp;을(를) 평가해주세요!</h2>
-                            <p v-for="evalute in evalutes" :key="evalute" class="evaluateFont">
-                                {{ evalute }}&nbsp;은/는 어땠나요?
-                                <!-- v-model="rating" -->
+                            <h2 class="pb-5 pt-5">
+                                {{ mentee.name }}&nbsp;을(를) 평가해주세요!
+
+                                <span>
+                                    <v-btn class="ml-3" color="#c1a1d3" @click="initMentee(index)">
+                                        초기화
+                                    </v-btn>
+                                </span>
+                            </h2>
+                            <p
+                                v-for="(item, index) in menteeEvaluationItem"
+                                :key="index"
+                                class="evaluateFont"
+                            >
+                                {{ item.title }}&nbsp;은/는 어땠나요?
                                 <v-rating
+                                    v-model="mentee[`${item.value}`]"
                                     background-color="purple lighten-3"
                                     color="#bc6ff1"
                                     large
                                 ></v-rating>
                             </p>
-                            <div class="pt-8" style="margin-bottom: 30px;">
-                                <v-row>
-                                    <v-spacer></v-spacer>
-                                    <v-btn>초기화</v-btn>
-                                    <v-spacer></v-spacer>
-                                    <v-btn>제출하기</v-btn>
-                                </v-row>
-                            </div>
                         </v-card-text>
                     </v-card>
 
@@ -153,9 +158,43 @@ export default {
                 { title: '전문성', value: 'professional' },
                 { title: '리더십', value: 'leadership' },
             ],
+            menteeEvaluationItem: [
+                { title: '의사소통', value: 'communication' },
+                { title: '책임감', value: 'responsibility' },
+                { title: '수행능력', value: 'performance' },
+                { title: '수행자세', value: 'positiveness' },
+                { title: '리더십', value: 'leadership' },
+            ],
             mentor: {},
             mentees: [],
         };
+    },
+    methods: {
+        initMentor() {
+            this.mentorEvaluationItem.forEach((el) => {
+                this.mentor[`${el.value}`] = 0;
+            });
+        },
+        initMentee(index) {
+            this.menteeEvaluationItem.forEach((el) => {
+                this.mentees[index][`${el.value}`] = 0;
+            });
+        },
+        evaluate() {
+            console.log(`evaluate()`);
+            http.post(`member/evaluate`, {
+                project_num: this.project_num,
+                mentor: this.mentor,
+                mentees: this.mentees,
+            })
+                .then(({ data }) => {
+                    console.log(data.message);
+                })
+                .catch(() => {
+                    alert(`평가 등록 실패`);
+                });
+            this.$router.push({ name: 'MyPage' });
+        },
     },
 };
 </script>
