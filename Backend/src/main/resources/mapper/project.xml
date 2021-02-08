@@ -77,7 +77,7 @@
 		waiting_project(project_num, id)
 		select #{project_num}, #{id}
 		from DUAL
-		where 0 = (select count(*) from member_project where project_num = #{project_num} and id = #{id})
+		where 0 = (select count(*) from waiting_project where project_num = #{project_num} and id = #{id})
 	</insert>
 	<!-- 허가 시 member_project에 추가 -->
 	<insert id="projectAppend" parameterType="Map">
