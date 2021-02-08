@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -401,6 +400,7 @@ public class ProjectController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
 	@ApiOperation(value = "오늘 시간 기준으로 종료된 프로젝트로 보내버리기", notes = "프로젝트 관리", response = Map.class)
 	@PutMapping("/projectmanage")
 	public ResponseEntity<Map<String, Object>> projectManage(
@@ -418,5 +418,24 @@ public class ProjectController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
-	
+	@ApiOperation(value = "평가 대상자 목록 얻어오기", notes = "평가 대상자 목록을 제공", response = Map.class)
+	@GetMapping("/evaluateList/{project_num}")
+	public ResponseEntity<Map<String, Object>> getEvaluateList(
+			@PathVariable("project_num") @ApiParam(value = "평가 대상자 목록을 얻어올 프로젝트 번호", required = true) int project_num) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			
+			List<Map<String, Object>> list = projectService.getEvaluateList(project_num);
+			System.out.println(list);
+			resultMap.put("list", list);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 }
