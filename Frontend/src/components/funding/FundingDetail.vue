@@ -262,6 +262,7 @@ export default {
     },
     created() {
         this.project_num = this.$route.params.pn;
+
         http.get(`project/fundingDetail/${this.project_num}`)
             .then((response) => {
                 if (response.data.message == 'success') {
@@ -272,14 +273,50 @@ export default {
                 }
             })
             .catch(() => {});
+
+        http.get(`project/interesting/${this.memberInfo.id}`)
+            .then(({ data }) => {
+                console.log(data);
+                for (var i = 0; i < data.interestingProjectInfo.length; i++) {
+                    if (data.interestingProjectInfo[i].project_num == this.project.project_num) {
+                        this.loveFlag = false;
+                        break;
+                    }
+                }
+            })
+            .catch(() => {
+                console.log('fffffff');
+            });
     },
 
     methods: {
         plusLove() {
-            console.log('dddd');
+            if (!this.loveFlag) {
+                alert('관심 펀딩에 취소되었습니다');
+                http.post(`project/interestingDelete`, {
+                    project_num: this.project_num,
+                    id: this.memberInfo.id,
+                })
+                    .then(({ data }) => {
+                        console.log(data);
+                    })
+                    .catch(() => {
+                        console.log(`fail`);
+                    });
+            } else {
+                alert('관심 펀딩이 추가되었습니다.');
+                http.post(`project/interesting`, {
+                    project_num: this.project_num,
+                    id: this.memberInfo.id,
+                })
+                    .then(({ data }) => {
+                        console.log(data);
+                    })
+                    .catch(() => {
+                        console.log(`fail`);
+                    });
+            }
             this.loveFlag = !this.loveFlag;
-            if (this.loveFlag) alert('관심 펀딩에 취소되었습니다');
-            else alert('관심 펀딩이 추가되었습니다.');
         },
         viewDay({ date }) {
             this.focus = date;
