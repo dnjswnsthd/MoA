@@ -16,7 +16,7 @@ public interface ProjectService {
 	
 	public void end(int project_num) throws Exception;
 	
-	public void waiting(Map<String, Object> param) throws Exception;
+	public int waiting(Map<String, Object> param) throws Exception;
 	public void interesting(Map<String, Object> param) throws Exception;
 	public void interestingDelete(Map<String, Object> param) throws Exception;
 
