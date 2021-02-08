@@ -205,6 +205,6 @@
 		delete from member_project
 		where project_num = any(select project_num 
 		from project
-		where date(end_date) < date(now()));
+		where date(end_date) < date(now()))
 	</delete>
 </mapper>
