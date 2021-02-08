@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moa.model.EvaluateDto;
 import com.moa.model.MemberDto;
 import com.moa.model.RankDto;
 import com.moa.model.service.JwtServiceImpl;
@@ -155,7 +156,7 @@ public class MemberController {
 		HttpStatus status = null;
 		try {
 			// 업데이트 데이터 전송시 updateMember 활용.
-			MemberDto updateMember = memberService.memberUpdate(memberDto);
+			memberService.memberUpdate(memberDto);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 
@@ -270,6 +271,27 @@ public class MemberController {
 			status = HttpStatus.ACCEPTED;
 		}
 
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@ApiOperation(value = "멘토, 멘티 평가 등록", notes = "", response = Map.class)
+	@PostMapping("/evaluate")
+	@Transactional // 트랜젝션 설정
+	public ResponseEntity<Map<String, Object>> evaluateTeammate(
+			@RequestBody EvaluateDto evaluateDto) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			memberService.updateEvaluate(evaluateDto);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 }

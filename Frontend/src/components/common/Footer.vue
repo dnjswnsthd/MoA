@@ -14,7 +14,7 @@
                         <v-icon style="color:#fff;">mdi-home</v-icon> 구미시 진평동 초록빌라 102호
                     </p>
                     <p class="col-4">
-                        <v-icon style="color:#fff;">mdi-phone</v-icon> : 010-1234-5678
+                        <v-icon style="color:#fff;">mdi-phone</v-icon> : 010-7917-2614
                     </p>
                     <p class="col-4">
                         <v-icon style="color:#fff;">mdi-email</v-icon> : ssafy@ssafy.com
