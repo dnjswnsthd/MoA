@@ -5,8 +5,8 @@
 <mapper namespace="com.moa.model.mapper.SprintMapper">
 	<insert id="add" parameterType="Map">
 		insert into
-		sprint(sprint_name, sprint_status, sprint_subject, sprint_description, sprint_start_date, sprint_end_date, project_num)
-		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num})
+		sprint(sprint_name, sprint_status, sprint_subject, sprint_description, sprint_start_date, sprint_end_date, project_num, sprint_member)
+		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num}, #{sprint_member})
 	</insert>
 	
 	<update id="modify" parameterType="SprintDto">
@@ -32,7 +32,8 @@
 			sprint_subject = #{sprint_subject},
 			sprint_description = #{sprint_description},
 			sprint_start_date = #{sprint_start_date},
-			sprint_end_date = #{sprint_end_date}
+			sprint_end_date = #{sprint_end_date},
+			sprint_member = #{sprint_member}
 		where sprint_num = #{sprint_num}
 	</update>
 </mapper>
