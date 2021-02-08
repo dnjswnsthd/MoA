@@ -288,8 +288,10 @@
                                             프로젝트 이름 : {{ interest.project_name }}
                                         </p>
                                         <v-dialog
-                                            v-model="proceedDialog"
+                                            v-model="interestingDialog"
                                             scrollable
+                                            persistent
+                                            :retain-focus="false"
                                             max-width="300px"
                                         >
                                             <template v-slot:activator="{ on, attrs }">
@@ -319,7 +321,7 @@
                                                     <v-btn
                                                         color="blue darken-1"
                                                         text
-                                                        @click="proceedDialog = false"
+                                                        @click="closeInterest"
                                                     >
                                                         Close
                                                     </v-btn>
@@ -395,6 +397,7 @@ export default {
             proceedingMember: {},
             project_num: '',
             proceedDialog: false,
+            interestingDialog: false,
         };
     },
     created() {
@@ -585,6 +588,9 @@ export default {
                 .catch(() => {
                     alert('에러발생!');
                 });
+        },
+        closeInterest() {
+            this.interestingDialog = false;
         },
     },
 };
