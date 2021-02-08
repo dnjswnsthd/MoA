@@ -1,10 +1,10 @@
 <template>
   <v-dialog v-model="modifyDialog" persistent max-width="600">
     <template v-slot:activator="{ on, attrs }">
-      <v-card class="width-350 mx-2" outlined>
-        <v-list-item three-line class="scheduleList" v-bind="attrs" v-on="on">
+      <v-card class="width-350 mx-2" outlined style="position:relative;">
+        <v-list-item three-line class="scheduleList font-weight-bold" v-bind="attrs" v-on="on">
           <v-list-item-content>
-            <v-list-item-title class="headline mb-1">
+            <v-list-item-title class="headline mb-1 font-weight-medium">
               {{ sprint.sprint_name }}
             </v-list-item-title>
             <div class="overline mb-4">
@@ -15,12 +15,10 @@
               {{ sprint.sprint_end_date }}
             </v-list-item-subtitle>
           </v-list-item-content>
-          <v-card-actions>
-            <v-btn small outlined rounded text @click="deleteSprint(sprint)">
+        </v-list-item>
+            <v-btn small outlined rounded text @click="deleteSprint(sprint)" style="position:absolute; right:10px; top:47px;">
               삭제하기
             </v-btn>
-          </v-card-actions>
-        </v-list-item>
       </v-card>
     </template>
 
@@ -85,10 +83,12 @@ export default {
         sprint_start_date: '',
         sprint_end_date: '',
       },
+      project_num: 0,
     };
   },
   created() {
     this.modSprint = this.sprint;
+    this.project_num = this.$route.query.pn;
   },
   props: {
     index: Number,
@@ -96,10 +96,13 @@ export default {
   },
   methods: {
     deleteSprint(sprint) {
-      http.delete(`/sprint/delete/${sprint.sprint_num}`, {
+      this.modifyDialog = false;
+      http
+      .delete(`/sprint/delete/${sprint.sprint_num}`, {
         sprint_num: sprint.sprint_num,
+      }).then(() => {
+        this.$emit("reload");
       });
-      location.href = '/schedule';
     },
     modifySprint() {
       http
@@ -112,9 +115,6 @@ export default {
           alert('변경 실패!');
         });
     },
-    // showCardDetail() {
-    //     console.log("dsfadf");
-    // },
   },
 };
 </script>
