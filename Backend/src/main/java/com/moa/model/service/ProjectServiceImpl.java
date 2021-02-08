@@ -43,8 +43,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public void waiting(Map<String, Object> param) throws Exception {
+	public int waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
+		return sqlSession.getMapper(ProjectMapper.class).getCnt(param);
 	}
 
 	@Override
