@@ -10,11 +10,7 @@
       <v-row>
         <div class="col-6">
           <div class="projectImgBox">
-            <img
-              src="@/assets/category/marketing(c).png"
-              alt="샘플이미지"
-              class="projectImg"
-            />
+            <img src="@/assets/category/marketing(c).png" alt="샘플이미지" class="projectImg" />
           </div>
         </div>
         <v-spacer></v-spacer>
@@ -29,9 +25,7 @@
             <v-spacer></v-spacer>
             <p>제목 : {{ project.project_name }}</p>
             <v-spacer></v-spacer>
-            <p>
-              프로젝트 일정 : {{ project.start_date }} ~ {{ project.end_date }}
-            </p>
+            <p>프로젝트 일정 : {{ project.start_date }} ~ {{ project.end_date }}</p>
             <v-spacer></v-spacer>
             <p>펀딩 금액 : {{ project.funding_cost }}원</p>
             <p>참가 인원 : {{ project.participants }}명</p>
@@ -59,7 +53,11 @@
               <v-btn color="green darken-1" text @click="dialog = false">
                 취소
               </v-btn>
-              <v-btn color="green darken-1" text @click="fundingApply">
+              <v-btn
+                color="green darken-1"
+                text
+                @click="fundingApply(project.participants, project.funding_cost)"
+              >
                 참여
               </v-btn>
             </v-card-actions>
@@ -74,7 +72,7 @@
                 class="fundingBtn"
                 v-bind="attrs"
                 v-on="on"
-                @click="getParticipants"
+                @click="getParticipants(project.project_num)"
               >
                 참여 멤버
               </p>
@@ -90,20 +88,9 @@
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
-              <v-sapcer></v-sapcer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="participantsDialog = false"
-              >
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="participantsDialog = false">
                 닫기
-              </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="participantsDialog = false"
-              >
-                확인
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -129,12 +116,7 @@
           상세 설명
         </p>
 
-        <v-textarea
-          solo
-          name="input-7-4"
-          v-model="project.description"
-          readonly
-        ></v-textarea>
+        <v-textarea solo name="input-7-4" v-model="project.description" readonly></v-textarea>
       </v-col>
     </div>
     <div class="col-8 centerContent">
@@ -142,12 +124,7 @@
         <v-col>
           <v-sheet height="64">
             <v-toolbar flat>
-              <v-btn
-                outlined
-                class="mr-4"
-                color="grey darken-2"
-                @click="setToday"
-              >
+              <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">
                 Today
               </v-btn>
               <v-btn fab text small color="grey darken-2" @click="prev">
@@ -162,12 +139,7 @@
               <v-spacer></v-spacer>
               <v-menu bottom right>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    outlined
-                    color="grey darken-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
+                  <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
                     <span>{{ typeToLabel[type] }}</span>
                     <v-icon right> mdi-menu-down </v-icon>
                   </v-btn>
@@ -188,9 +160,7 @@
                 </v-list>
               </v-menu>
 
-              <v-btn style="margin-left: 20px" @click="moveSchedule"
-                >일정 관리</v-btn
-              >
+              <v-btn style="margin-left: 20px" @click="moveSchedule">일정 관리</v-btn>
             </v-toolbar>
           </v-sheet>
           <v-sheet height="600">
@@ -217,9 +187,7 @@
                   <v-btn icon>
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
-                  <v-toolbar-title
-                    v-html="selectedEvent.name"
-                  ></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-btn icon>
                     <v-icon>mdi-heart</v-icon>
@@ -245,51 +213,34 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
-import http from "@/util/http-common";
+import { mapState } from 'vuex';
+import http from '@/util/http-common';
 
 export default {
   data: () => ({
-    focus: "",
-    type: "month",
+    focus: '',
+    type: 'month',
     typeToLabel: {
-      month: "Month",
-      week: "Week",
-      day: "Day",
-      "4day": "4 Days",
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
+      '4day': '4 Days',
     },
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
     events: [],
-    colors: [
-      "blue",
-      "indigo",
-      "deep-purple",
-      "cyan",
-      "green",
-      "orange",
-      "grey darken-1",
-    ],
-    names: [
-      "Meeting",
-      "Holiday",
-      "PTO",
-      "Travel",
-      "Event",
-      "Birthday",
-      "Conference",
-      "Party",
-    ],
+    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
+    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
     project: {},
-    id: "",
-    project_num: "",
+    id: '',
+    project_num: '',
     dialog: false,
-    participants: [],
+    participants: {},
     participantsDialog: false,
   }),
   computed: {
-    ...mapState(["memberInfo", "isLogin"]),
+    ...mapState(['memberInfo', 'isLogin']),
   },
   mounted() {
     this.$refs.calendar.checkChange();
@@ -301,11 +252,11 @@ export default {
     http
       .get(`project/fundingDetail/${this.project_num}`)
       .then((response) => {
-        if (response.data.message == "success") {
+        if (response.data.message == 'success') {
           this.project = response.data.project;
           this.id = this.memberInfo.id;
         } else {
-          alert("정보조회실패");
+          alert('정보조회실패');
         }
       })
       .catch(() => {});
@@ -314,13 +265,13 @@ export default {
   methods: {
     viewDay({ date }) {
       this.focus = date;
-      this.type = "day";
+      this.type = 'day';
     },
     getEventColor(event) {
       return event.color;
     },
     setToday() {
-      this.focus = "";
+      this.focus = '';
     },
     prev() {
       this.$refs.calendar.prev();
@@ -376,25 +327,42 @@ export default {
       return Math.floor((b - a + 1) * Math.random()) + a;
     },
     moveSchedule() {
-      this.$router.push({ name: "Schedule", params: { pn: this.project_num } });
+      this.$router.push({ name: 'Schedule', params: { pn: this.project_num } });
     },
-    fundingApply() {
-      // http.post('/project/waiting,{
-      // })
-      //     .then((response) => {
-      //       if(response.data.message == 'success'){
-      //         alert('신청 성공');
-      //       }
-      //       else{
-      //         alert('신청 실패');
-      //       }
-      //     })
-      //     .catch(() => {
-      //     });
+    fundingApply(participants, funding_cost) {
+      if (this.memberInfo.point < funding_cost / participants) {
+        alert('포인트 충전하세요!');
+      } else {
+        http
+          .post('/project/waiting', {
+            id: this.memberInfo.id,
+            project_num: this.project_num,
+          })
+          .then((response) => {
+            if (response.data.message == 'success') {
+              alert('신청 성공');
+              this.dialog = false;
+            } else {
+              alert('신청 실패');
+            }
+          })
+          .catch(() => {});
+      }
+    },
+    getParticipants(project_num) {
+      console.log(project_num);
+      http.get(`/project/memberchk/${project_num}`).then((response) => {
+        if (response.data.message == 'success') {
+          this.participants = response.data.member;
+          alert('확인 성공');
+        } else {
+          alert('확인 실패');
+        }
+      });
     },
   },
 };
 </script>
 <style scoped>
-@import "../../assets/css/fundingdetail.css";
+@import '../../assets/css/fundingdetail.css';
 </style>
