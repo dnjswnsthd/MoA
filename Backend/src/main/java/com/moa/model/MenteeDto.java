@@ -23,7 +23,7 @@ public class MenteeDto extends MemberDto {
 	@ApiModelProperty(value = "구현 능력")
 	private int performance;	// 구현 능력
 	@ApiModelProperty(value = "적극성")
-	private int positive;		//적극성
+	private int positiveness;		//적극성
 	@ApiModelProperty(value = "리더십")
 	private int leadership;		// 리더쉽
 	// getter, setter
@@ -51,11 +51,11 @@ public class MenteeDto extends MemberDto {
 	public void setPerformance(int performance) {
 		this.performance = performance;
 	}
-	public int getPositive() {
-		return positive;
+	public int getPositiveness() {
+		return positiveness;
 	}
-	public void setPositive(int positive) {
-		this.positive = positive;
+	public void setPositiveness(int positiveness) {
+		this.positiveness = positiveness;
 	}
 	public int getLeadership() {
 		return leadership;

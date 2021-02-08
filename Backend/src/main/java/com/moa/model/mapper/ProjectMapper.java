@@ -47,4 +47,6 @@ public interface ProjectMapper {
 	MemberDto[] waitingList(int project_num) throws SQLException;
 
 	void updatePoint(Map<String, Object> param) throws SQLException;
+
+	int getCnt(Map<String, Object> param) throws SQLException;
 }
