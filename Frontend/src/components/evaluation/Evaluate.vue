@@ -121,8 +121,6 @@ export default {
         return {
             tab: null,
             items: ['멘티', '멘티2', '멘티3', '멘티4', '멘티5'],
-            text:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             evalutes: ['의사소통', '책임감', '리더십', '수행능력', '수행자세'],
             mentos: [
                 {
