@@ -13,7 +13,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.moa.model.EvaluateDto;
 import com.moa.model.MemberDto;
+import com.moa.model.MenteeDto;
+import com.moa.model.MentorDto;
 import com.moa.model.RankDto;
 import com.moa.model.mapper.MemberMapper;
 
@@ -68,10 +71,9 @@ public class MemberServiceImpl implements MemberService {
 			sqlSession.getMapper(MemberMapper.class).joinMentee(param);
 	}
 
-	public MemberDto memberUpdate(MemberDto memberDto) throws SQLException {
+	public void memberUpdate(MemberDto memberDto) throws SQLException {
 		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdate(memberDto);
-		return sqlSession.getMapper(MemberMapper.class).memberSearch(memberDto);
 	}
 
 	/**
@@ -201,5 +203,16 @@ public class MemberServiceImpl implements MemberService {
 		list.add(sqlSession.getMapper(MemberMapper.class).getRankingLeadership());
 		
 		return list;
+	}
+
+	@Override
+	public void updateEvaluate(EvaluateDto evaluateDto) {
+		MentorDto mentor = evaluateDto.getMentor();
+		List<MenteeDto> mentees = evaluateDto.getMentees();
+		if(mentor.getId() != null)
+			sqlSession.getMapper(MemberMapper.class).updateEvaluateMentor(mentor);
+		
+		for(int i = 0; i < mentees.size(); i++)
+			sqlSession.getMapper(MemberMapper.class).updateEvaluateMentee(mentees.get(i));
 	}
 }
