@@ -57,7 +57,11 @@
                             <v-btn color="green darken-1" text @click="dialog = false">
                                 취소
                             </v-btn>
-                            <v-btn color="green darken-1" text @click="fundingApply">
+                            <v-btn
+                                color="green darken-1"
+                                text
+                                @click="fundingApply(project.participants, project.funding_cost)"
+                            >
                                 참여
                             </v-btn>
                         </v-card-actions>
@@ -68,7 +72,12 @@
                 <v-dialog v-model="participantsDialog" scrollable max-width="300px">
                     <template v-slot:activator="{ on, attrs }">
                         <div class="col-3">
-                            <p class="fundingBtn" v-bind="attrs" v-on="on" @click="getParticipants">
+                            <p
+                                class="fundingBtn"
+                                v-bind="attrs"
+                                v-on="on"
+                                @click="getParticipants(project.project_num)"
+                            >
                                 참여 멤버
                             </p>
                         </div>
@@ -83,12 +92,9 @@
                         </v-card-text>
                         <v-divider></v-divider>
                         <v-card-actions>
-                            <v-sapcer></v-sapcer>
+                            <v-spacer></v-spacer>
                             <v-btn color="blue darken-1" text @click="participantsDialog = false">
                                 닫기
-                            </v-btn>
-                            <v-btn color="blue darken-1" text @click="participantsDialog = false">
-                                확인
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -339,21 +345,37 @@ export default {
             return Math.floor((b - a + 1) * Math.random()) + a;
         },
         moveSchedule() {
-            this.$router.push({ name: 'Schedule', params: { pn: this.project_num } });
+            this.$router.push({ name: 'Schedule', query: { pn: this.project_num } });
         },
-        fundingApply() {
-            // http.post('/project/waiting,{
-            // })
-            //     .then((response) => {
-            //       if(response.data.message == 'success'){
-            //         alert('신청 성공');
-            //       }
-            //       else{
-            //         alert('신청 실패');
-            //       }
-            //     })
-            //     .catch(() => {
-            //     });
+        fundingApply(participants, funding_cost) {
+            if (this.memberInfo.point < funding_cost / participants) {
+                alert('포인트 충전하세요!');
+            } else {
+                http.post('/project/waiting', {
+                    id: this.memberInfo.id,
+                    project_num: this.project_num,
+                })
+                    .then((response) => {
+                        if (response.data.message == 'success') {
+                            alert('신청 성공');
+                            this.dialog = false;
+                        } else {
+                            alert('신청 실패');
+                        }
+                    })
+                    .catch(() => {});
+            }
+        },
+        getParticipants(project_num) {
+            console.log(project_num);
+            http.get(`/project/memberchk/${project_num}`).then((response) => {
+                if (response.data.message == 'success') {
+                    this.participants = response.data.member;
+                    alert('확인 성공');
+                } else {
+                    alert('확인 실패');
+                }
+            });
         },
     },
 };
