@@ -5,8 +5,9 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
-
+window.Kakao.init('eeec1cc8fd9676c2af3143c98b716672');
 new Vue({
+  
   router,
   store,
   vuetify,
