@@ -52,10 +52,10 @@ public class MentorDto extends MemberDto {
 	public void setMorality(int morality) {
 		this.morality = morality;
 	}
-	public int getPositive() {
+	public int getPositiveness() {
 		return positiveness;
 	}
-	public void setPositive(int positiveness) {
+	public void setPositiveness(int positiveness) {
 		this.positiveness = positiveness;
 	}
 	public int getReliability() {
