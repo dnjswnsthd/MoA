@@ -75,15 +75,17 @@
 	<insert id="waiting" parameterType="Map">
 		insert into
 		waiting_project(project_num, id)
-		values
-		(#{project_num}, #{id})
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from waiting_project where project_num = #{project_num} and id = #{id})
 	</insert>
 	<!-- 허가 시 member_project에 추가 -->
 	<insert id="projectAppend" parameterType="Map">
 		insert into
 		member_project(project_num, id)
-		values
-		(#{project_num}, #{id})
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from member_project where project_num = #{project_num} and id = #{id})
 	</insert>
 	<!-- 허가 시 waiting_project에서 삭제 -->
 	<delete id="watingDelete" parameterType="Map">
@@ -117,8 +119,9 @@
 	<insert id="interesting" parameterType="Map">
 		insert into
 		interesting_project(project_num, id)
-		values
-		(#{project_num}, #{id})
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from member_project where project_num = #{project_num} and id = #{id})
 	</insert>
 	
 	<!-- interesting project search -->
@@ -172,7 +175,7 @@
 	<select id="memberchk" parameterType="Integer" resultType="MemberDto">
 		select *
 		from member
-		where id = (select id from member_project where project_num = #{project_num})
+		where id = any (select id from member_project where project_num = #{project_num})
 	</select>
 	
 	<!-- 프로젝트 대기 멤버  가져오기 -->
