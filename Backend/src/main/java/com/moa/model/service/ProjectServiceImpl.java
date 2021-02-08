@@ -43,8 +43,9 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public void waiting(Map<String, Object> param) throws Exception {
+	public int waiting(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).waiting(param);
+		return sqlSession.getMapper(ProjectMapper.class).getCnt(param);
 	}
 
 	@Override
@@ -97,6 +98,12 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public MemberDto[] waitingList(int project_num) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).waitingList(project_num);
+	}
+
+	@Override
+	public void projectManager(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).completeAppend(param);
+		sqlSession.getMapper(ProjectMapper.class).memberDelete(param);
 	}
 
 }

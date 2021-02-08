@@ -2,7 +2,9 @@
     <div class="col-8 centerContent">
         <div>
             <h1 class="height-70">{{ project.project_name }}</h1>
-            <h2 class="height-70">Project Period : {{ project.start_date }} ~ {{ project.end_date }}</h2>
+            <h2 class="height-70">
+                Project Period : {{ project.start_date }} ~ {{ project.end_date }}
+            </h2>
         </div>
         <v-row>
             <h2 class="height-50 ml-6">Add Sprint</h2>
@@ -143,7 +145,7 @@ export default {
         };
     },
     created() {
-        this.project_num = this.$route.query.pn;
+        this.project_num = this.$route.params.pn;
         this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
