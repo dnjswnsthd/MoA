@@ -87,9 +87,20 @@ export default {
         let date = today.getDate();
         let current = year + '-' + month + '-' + date;
 
-        // setInterval(()=>{
+        http.put('project/projectmanage', {
+            today: this.today,
+        })
+            .then((response) => {
+                if (response.data.message == 'success') {
+                    alert('환영.');
+                } else {
+                    alert('작업실패!');
+                }
+            })
+            .catch(() => {
+                alert('에러발생!');
+            });
 
-        // }, 86400000);
         http.get(`project/fundingList`)
             .then(({ data }) => {
                 this.fundingDatas = data.list;
