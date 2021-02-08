@@ -51,6 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public void permission(Map<String, Object> param) throws Exception {
 		sqlSession.getMapper(ProjectMapper.class).watingDelete(param);
 		sqlSession.getMapper(ProjectMapper.class).projectAppend(param);
+		sqlSession.getMapper(ProjectMapper.class).updatePoint(param);
 	}
 
 	@Override
