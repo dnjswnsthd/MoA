@@ -101,9 +101,11 @@
           <p class="fundingBtn">공유 하기</p>
         </div>
         <v-spacer></v-spacer>
-        <div class="col-3">
-          <p class="fundingBtn">관심 등록</p>
+        <div class="col-3" @click="plusLove">
+          <p class="fundingBtn" v-if="loveFlag">{{ this.love }}</p>
+          <p class="fundingBtn" v-else>{{ this.cancelLove }}</p>
         </div>
+
         <v-spacer></v-spacer>
       </v-row>
       <v-col class="explainBox my-10">
@@ -234,10 +236,13 @@ export default {
     names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
     project: {},
     id: '',
+    loveFlag: true,
     project_num: '',
     dialog: false,
     participants: {},
     participantsDialog: false,
+    love: '관심등록',
+    cancelLove: '관심취소',
   }),
   computed: {
     ...mapState(['memberInfo', 'isLogin']),
@@ -260,9 +265,55 @@ export default {
         }
       })
       .catch(() => {});
+
+    http
+      .get(`project/interesting/${this.memberInfo.id}`)
+      .then(({ data }) => {
+        console.log(data);
+        for (var i = 0; i < data.interestingProjectInfo.length; i++) {
+          if (data.interestingProjectInfo[i].project_num == this.project.project_num) {
+            this.loveFlag = false;
+            break;
+          }
+        }
+      })
+      .catch(() => {
+        console.log('fffffff');
+      });
   },
 
   methods: {
+    plusLove() {
+      if (!this.loveFlag) {
+        alert('관심 펀딩에 취소되었습니다');
+        http
+          .post(`project/interestingDelete`, {
+            project_num: this.project_num,
+            id: this.memberInfo.id,
+          })
+          .then(({ data }) => {
+            console.log(data);
+          })
+          .catch(() => {
+            console.log(`fail`);
+          });
+      } else {
+        alert('관심 펀딩이 추가되었습니다.');
+        http
+          .post(`project/interesting`, {
+            project_num: this.project_num,
+            id: this.memberInfo.id,
+          })
+          .then(({ data }) => {
+            console.log(data);
+          })
+          .catch(() => {
+            console.log(`fail`);
+          });
+      }
+      this.loveFlag = !this.loveFlag;
+    },
+
     viewDay({ date }) {
       this.focus = date;
       this.type = 'day';
