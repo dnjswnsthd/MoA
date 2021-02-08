@@ -221,9 +221,6 @@
                 </v-col>
             </v-row>
         </div>
-        <div class="col-3">
-            <p class="fundingBtn" @click="kakaoShare">공유 하기</p>
-        </div>
     </div>
 </template>
 
