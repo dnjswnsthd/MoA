@@ -39,7 +39,7 @@
 	</select>
 	
 	<!-- waiting project search -->
-	<!-- 진행중인 프로젝트 조회 -->
+	<!-- 대기중인 프로젝트 조회 -->
 	<select id="waitingProjectInfo" parameterType="String"
 		resultType="ProjectDto">
 		select project.project_num, project.project_name,
