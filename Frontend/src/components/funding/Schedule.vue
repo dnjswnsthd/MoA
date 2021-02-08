@@ -149,7 +149,7 @@ export default {
         this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
-                console.log(data.spprintList);
+                console.log(data.sprintList);
                 data.sprintList.forEach((sprint) => {
                     console.log(sprint);
                     if (sprint.sprint_status == 0) this.sprints[0].push(sprint);
@@ -158,7 +158,7 @@ export default {
                 });
             })
             .catch(() => {
-                alert('에러가 발생했습니다.');
+                alert('에러가 발생했습니다.!!');
             });
 
         http.get(`project/fundingDetail/${this.project_num}`)
