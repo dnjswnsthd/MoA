@@ -2,15 +2,18 @@
   <v-dialog v-model="modifyDialog" persistent max-width="600">
     <template v-slot:activator="{ on, attrs }">
       <v-card class="width-350 mx-2" outlined style="position:relative;">
-        <v-list-item three-line class="scheduleList font-weight-bold" v-bind="attrs" v-on="on">
+        <v-list-item three-line class="scheduleList" v-bind="attrs" v-on="on">
           <v-list-item-content>
             <v-list-item-title class="headline mb-1 font-weight-medium">
               {{ sprint.sprint_name }}
             </v-list-item-title>
-            <div class="overline mb-4">
+            <div class="ml-2 mb-1">
               {{ sprint.sprint_subject }}
             </div>
-            <v-list-item-subtitle>
+            <div class="ml-2 mb-2">
+              담당자: {{ sprint.sprint_member }}
+            </div>
+            <v-list-item-subtitle class="ml-2 mb-1">
               기간: {{ sprint.sprint_start_date }} ~
               {{ sprint.sprint_end_date }}
             </v-list-item-subtitle>
@@ -109,10 +112,10 @@ export default {
         .put(`sprint/modifycontent`, this.modSprint)
         .then(() => {
           this.modifyDialog = false;
-          alert('변경 완료!');
+          // alert('변경 완료!');
         })
         .catch(() => {
-          alert('변경 실패!');
+          // alert('변경 실패!');
         });
     },
   },
