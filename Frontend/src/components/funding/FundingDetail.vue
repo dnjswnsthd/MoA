@@ -102,7 +102,7 @@
 
                 <v-spacer></v-spacer>
                 <div class="col-3">
-                    <p class="fundingBtn">공유 하기</p>
+                    <p class="fundingBtn" @click="kakaoShare" id="shareBtn">공유 하기</p>
                 </div>
                 <v-spacer></v-spacer>
                 <div class="col-3" @click="plusLove">
@@ -221,8 +221,12 @@
                 </v-col>
             </v-row>
         </div>
+        <div class="col-3">
+            <p class="fundingBtn" @click="kakaoShare">공유 하기</p>
+        </div>
     </div>
 </template>
+
 <script>
 import { mapState } from 'vuex';
 import http from '@/util/http-common';
@@ -247,6 +251,8 @@ export default {
         id: '',
         loveFlag: true,
         project_num: '',
+        mwurl: '',
+        wurl: '',
         dialog: false,
         participants: {},
         participantsDialog: false,
@@ -263,6 +269,9 @@ export default {
     },
     created() {
         this.project_num = this.$route.params.pn;
+        this.mwurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
+        this.wurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
+
         http.get(`project/fundingDetail/${this.project_num}`)
             .then((response) => {
                 if (response.data.message == 'success') {
@@ -417,6 +426,32 @@ export default {
                 } else {
                     alert('확인 실패');
                 }
+            });
+        },
+        kakaoShare() {
+            window.Kakao.Link.createDefaultButton({
+                container: '#shareBtn',
+                objectType: 'feed',
+                content: {
+                    title: this.project.project_name,
+                    description: this.project.description,
+                    imageUrl: 'https://i4d111.p.ssafy.io/img/logo(Bg).e2cc6ce0.png',
+                    imageWidth: 250,
+                    imageHeight: 100,
+                    link: {
+                        mobileWebUrl: this.mwurl,
+                        webUrl: this.wurl,
+                    },
+                },
+                // buttons: [
+                //     {
+                //         title: '웹으로 보기',
+                //         link: {
+                //             mobileWebUrl: 'https://localhost:8080',
+                //             webUrl: 'https://localhost:8080',
+                //         },
+                //     },
+                // ],
             });
         },
     },
