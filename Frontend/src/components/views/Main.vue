@@ -101,12 +101,13 @@ export default {
     },
     watch: {
         getMemberInfo() {
-            this.getInterestingList();
+            if (this.memberInfo) this.getInterestingList();
+            else this.interestingList = [];
+
             setTimeout(this.getProjectList, 200);
         },
     },
     mounted() {
-        console.log(`isLogin : ` + this.isLogin);
         http.get('member/rank')
             .then(({ data }) => {
                 this.rankDatas = data.list;
@@ -115,10 +116,8 @@ export default {
                 alert('랭킹 정보 가져오기 실패');
             });
 
-        if (this.memberInfo) {
-            this.getInterestingList();
-            setTimeout(this.getProjectList, 200);
-        }
+        if (this.memberInfo) this.getInterestingList();
+        setTimeout(this.getProjectList, 200);
     },
     data() {
         return {
@@ -140,9 +139,6 @@ export default {
     },
     methods: {
         goDetail(project_num) {
-            console.log('index : ' + project_num);
-            // this.project_num = this.fundingDatas[index].project_num;
-            // console.log(this.project_num);
             this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
         },
         getInterestingList() {
