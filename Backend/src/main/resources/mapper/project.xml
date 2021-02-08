@@ -38,7 +38,6 @@
 		member_project.id = #{id}
 	</select>
 	
-	<!-- waiting project search -->
 	<!-- 진행중인 프로젝트 조회 -->
 	<select id="waitingProjectInfo" parameterType="String"
 		resultType="ProjectDto">
@@ -72,6 +71,9 @@
 	
 	<!-- waiting project -->
 	<!-- 프로젝트 신청 후 대기 -->
+	<select id="getCnt" parameterType="Map" resultType="Integer">
+		select count(*) from waiting_project where project_num = #{project_num} and id = #{id}
+	</select>
 	<insert id="waiting" parameterType="Map">
 		insert into
 		waiting_project(project_num, id)
