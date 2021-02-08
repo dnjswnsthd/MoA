@@ -49,4 +49,10 @@ public interface ProjectMapper {
 	void updatePoint(Map<String, Object> param) throws SQLException;
 
 	int getCnt(Map<String, Object> param) throws SQLException;
+
+	void completeAppend(Map<String, Object> param) throws SQLException;
+
+	void memberDelete(Map<String, Object> param) throws SQLException;
+	
+	
 }
