@@ -74,8 +74,13 @@ public class ProjectController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
-			projectService.waiting(param);
-			resultMap.put("message", SUCCESS);
+			int cnt = projectService.waiting(param);
+			if(cnt > 0) {
+				resultMap.put("message", "FUCKING");
+			}
+			else{
+				resultMap.put("message", SUCCESS);
+			}
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", FAIL);
