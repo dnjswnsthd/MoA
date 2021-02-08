@@ -4,13 +4,15 @@
             <v-card class="width-350 mx-2" outlined style="position:relative;">
                 <v-list-item three-line class="scheduleList" v-bind="attrs" v-on="on">
                     <v-list-item-content>
-                        <v-list-item-title class="headline mb-1 font-weight-medium">
-                            {{ sprint.sprint_name }}
+                        <v-list-item-title>
+                            <h1>{{ sprint.sprint_name }}</h1> 
                         </v-list-item-title>
+                        <div class="mt-2">
                         <div class="ml-2 mb-1">
                             {{ sprint.sprint_subject }}
                         </div>
                         <div class="ml-2 mb-2">담당자: {{ sprint.sprint_member }}</div>
+                        </div>
                         <v-list-item-subtitle class="ml-2 mb-1">
                             기간: {{ sprint.sprint_start_date }} ~
                             {{ sprint.sprint_end_date }}
