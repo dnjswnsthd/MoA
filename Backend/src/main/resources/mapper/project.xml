@@ -38,7 +38,8 @@
 		member_project.id = #{id}
 	</select>
 	
-	<!-- 진행중인 프로젝트 조회 -->
+	<!-- waiting project search -->
+	<!-- 대기중인 프로젝트 조회 -->
 	<select id="waitingProjectInfo" parameterType="String"
 		resultType="ProjectDto">
 		select project.project_num, project.project_name,
@@ -198,13 +199,13 @@
 		from member_project
 		where project_num = any(select project_num 
 		from project
-		where date(end_date) < date(now()))
+		where <![CDATA[date(end_date) < date(now())]]>)
 	</insert>
 	<!-- 날짜 변화에 따른 프로젝트 관리 -->
 	<delete id = "memberDelete" parameterType="Map">
 		delete from member_project
 		where project_num = any(select project_num 
 		from project
-		where date(end_date) < date(now()));
+		where <![CDATA[date(end_date) < date(now())]]>)
 	</delete>
 </mapper>
