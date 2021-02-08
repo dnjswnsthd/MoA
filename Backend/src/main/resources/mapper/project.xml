@@ -172,7 +172,7 @@
 	<select id="memberchk" parameterType="Integer" resultType="MemberDto">
 		select *
 		from member
-		where id = (select id from member_project where project_num = #{project_num})
+		where id = any (select id from member_project where project_num = #{project_num})
 	</select>
 	
 	<!-- 프로젝트 대기 멤버  가져오기 -->
