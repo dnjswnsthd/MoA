@@ -382,7 +382,7 @@ export default {
             return Math.floor((b - a + 1) * Math.random()) + a;
         },
         moveSchedule() {
-            this.$router.push({ name: 'Schedule', query: { pn: this.project_num } });
+            this.$router.push({ name: 'Schedule', params: { pn: this.project_num } });
         },
         fundingApply(participants, funding_cost) {
             if (this.memberInfo.point < funding_cost / participants) {
