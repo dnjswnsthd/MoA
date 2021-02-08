@@ -70,5 +70,11 @@ public class MenteeDto extends MemberDto {
 	public void setLeadership(int leadership) {
 		this.leadership = leadership;
 	}
+	@Override
+	public String toString() {
+		return "MenteeDto [number_of_evaluation=" + number_of_evaluation + ", skill=" + skill + ", communication="
+				+ communication + ", responsibility=" + responsibility + ", performance=" + performance
+				+ ", positiveness=" + positiveness + ", leadership=" + leadership + "]";
+	}
 	
 }
