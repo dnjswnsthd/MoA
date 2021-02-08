@@ -53,7 +53,6 @@
 
                     <v-text-field
                         label="펀딩액"
-                        type="number"
                         v-model="project.funding_cost"
                         suffix="원"
                         class="mx-10"
@@ -89,9 +88,9 @@
             </form>
         </div>
         <div class="col-10 fundingContent">
-            <div class="py-10 fundingMargin">
+            <div class="py-5 fundingMargin">
                 <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
-                <v-textarea
+                <v-textarea class="width-650 mx-auto"
                     outlined
                     name="input-12-4"
                     label="세부내용"
@@ -103,8 +102,8 @@
         <div class="height-50 mb-15">
             <v-row>
                 <v-spacer></v-spacer>
-                <div class="fundingBtn">
-                    취소하기
+                <div class="fundingBtn" @click="reset">
+                    초기화
                 </div>
                 <v-spacer></v-spacer>
                 <div @click="openFunding" class="fundingBtn">
@@ -142,7 +141,7 @@ export default {
                 project_name: '',
                 participants: Number,
                 mentor_chk: '',
-                funding_cost: Number,
+                funding_cost: '',
                 deadline: '',
                 start_date: '',
                 end_date: '',
@@ -224,6 +223,15 @@ export default {
                 .catch(() => {
                     alert('추가 실패!');
                 });
+        },
+        reset() {
+            this.project.project_name = '',
+            this.project.participants= 0,
+            this.project.funding_cost ='',
+            this.project.mentor_chk='',
+            this.project.deadline ='',
+            this.project.end_date='',
+            this.proejct.description=''
         },
     },
 };
