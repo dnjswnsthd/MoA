@@ -101,9 +101,9 @@
 		select member.id, member.name, member.age, member.major,
 		member.status, member.phone,
 		member.favorite_1, member.favorite_2,
-		member.favorite_3, member.number_of_project, member.point,
+		member.favorite_3, member.point,
 		member.introduce,
-		mentor.career, mentor.exp, mentor.morality,
+		mentor.number_of_evaluation, mentor.career, mentor.exp, mentor.morality,
 		mentor.positiveness, mentor.reliability, mentor.professional,
 		mentor.leadership
 		from member inner join mentor on member.id =
@@ -117,9 +117,9 @@
 		select member.id, member.name, member.age, member.major,
 		member.status, member.phone,
 		member.favorite_1, member.favorite_2,
-		member.favorite_3, member.number_of_project, member.point,
+		member.favorite_3, member.point,
 		member.introduce,
-		mentee.skill, mentee.communication,
+		mentee.number_of_evaluation, mentee.skill, mentee.communication,
 		mentee.responsibility, mentee.performance, mentee.positiveness,
 		mentee.leadership
 		from member inner join mentee on member.id =
