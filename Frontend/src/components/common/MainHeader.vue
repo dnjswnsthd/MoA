@@ -121,7 +121,11 @@
         </v-container>
         <div class="categoryMenu col-8">
             <v-row>
-                <div class="col-2 mainCategory" v-for="category in categories" :key="category">
+                <div
+                    class="col-2 mainCategory"
+                    v-for="(category, index) in categories"
+                    :key="index"
+                >
                     <v-spacer></v-spacer>
                     <div>
                         <div :id="category.value" @click="movepage(category.name)">
