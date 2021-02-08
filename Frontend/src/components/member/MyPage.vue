@@ -264,7 +264,12 @@
                                         <p class="shorthand col-7">
                                             프로젝트 이름 : {{ completed.project_name }}
                                         </p>
-                                        <p class="col-5" @click="movePage(n)">평가 목록</p>
+                                        <p
+                                            class="col-5"
+                                            @click="movePage(n, completed.project_num)"
+                                        >
+                                            평가 목록
+                                        </p>
                                     </v-row>
                                 </div>
                             </v-col>
@@ -457,8 +462,8 @@ export default {
             });
     },
     methods: {
-        movePage(n) {
-            if (n == 3) this.$router.replace(`/evaluate/${this.project_num}`);
+        movePage(n, pn) {
+            if (n == 3) this.$router.push({ name: 'Evaluate', params: { pn: pn } });
         },
         deleteMember() {
             this.deleteDialog = false;

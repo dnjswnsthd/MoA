@@ -13,6 +13,7 @@
             </v-tabs>
         </v-toolbar>
         <v-tabs-items v-model="tab">
+            <!-- 멘토가 있을 경우 멘토 평가 항목을 보여줌 -->
             <v-tab-item>
                 <v-row>
                     <v-spacer></v-spacer>
@@ -39,10 +40,14 @@
                         <v-card flat>
                             <v-card-text>
                                 <h2 class="pb-5 pt-5">멘토 을(를) 평가해주세요!</h2>
-                                <p v-for="mento in mentos" :key="mento" class="evaluateFont">
-                                    {{ mento.title }}&nbsp;은/는 어땠나요?
+                                <p
+                                    v-for="(item, index) in mentorEvaluationItem"
+                                    :key="index"
+                                    class="evaluateFont"
+                                >
+                                    {{ item.title }}&nbsp;은/는 어땠나요?
                                     <v-rating
-                                        v-model="mento.score"
+                                        v-model="mentors[`${item.value}`]"
                                         background-color="purple lighten-3"
                                         color="#bc6ff1"
                                         large
@@ -62,6 +67,7 @@
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
+
             <v-tab-item v-for="item in items" :key="item">
                 <v-row>
                     <v-spacer></v-spacer>
@@ -89,8 +95,8 @@
                             <h2 class="pb-5 pt-5">{{ item }}&nbsp;을(를) 평가해주세요!</h2>
                             <p v-for="evalute in evalutes" :key="evalute" class="evaluateFont">
                                 {{ evalute }}&nbsp;은/는 어땠나요?
+                                <!-- v-model="rating" -->
                                 <v-rating
-                                    v-model="rating"
                                     background-color="purple lighten-3"
                                     color="#bc6ff1"
                                     large
@@ -115,37 +121,35 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
+
 export default {
     name: 'Evaluate',
+    created() {
+        this.project_num = this.$route.params.pn;
+        http.get(`project/evaluateList/${this.project_num}`)
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch(() => {
+                alert(`평가 대상자 가져오기 실패`);
+            });
+    },
     data() {
         return {
+            project_num: Number,
             tab: null,
             items: ['멘티', '멘티2', '멘티3', '멘티4', '멘티5'],
-            text:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             evalutes: ['의사소통', '책임감', '리더십', '수행능력', '수행자세'],
-            mentos: [
-                {
-                    title: '도덕성',
-                    score: 0,
-                },
-                {
-                    title: '적극성',
-                    score: 0,
-                },
-                {
-                    title: '신뢰성',
-                    score: 0,
-                },
-                {
-                    title: '전문성',
-                    score: 0,
-                },
-                {
-                    title: '리더십',
-                    score: 0,
-                },
+            mentorEvaluationItem: [
+                { title: '도덕성', value: 'morality' },
+                { title: '적극성', value: 'positiveness' },
+                { title: '신뢰성', value: 'reliability' },
+                { title: '전문성', value: 'professional' },
+                { title: '리더십', value: 'leadership' },
             ],
+            mentors: {},
+            mentees: [],
         };
     },
 };
