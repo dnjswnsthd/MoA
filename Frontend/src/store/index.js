@@ -9,6 +9,11 @@ export default new Vuex.Store({
     isLogin: false, // 로그인 여부
     memberInfo: null,
   },
+  getters: {
+    getMemberInfo(state) {
+      return state.memberInfo;
+    }
+  },
   mutations: {
     setIsLogined(state, isLogin) {
       state.isLogin = isLogin;
