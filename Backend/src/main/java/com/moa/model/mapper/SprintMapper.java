@@ -9,7 +9,7 @@ public interface SprintMapper {
 
 	void modify(SprintDto sprintDto);
 	
-	void modifycontent(SprintDto sprontDto);
+	void modifycontent(SprintDto sprintDto);
 
 	void delete(int sprint_num);
 
