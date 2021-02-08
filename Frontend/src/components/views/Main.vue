@@ -107,6 +107,21 @@ export default {
             setTimeout(this.getProjectList, 200);
         },
     },
+    created() {
+        http.put('project/projectmanage', {
+            today: this.today,
+        })
+            .then((response) => {
+                if (response.data.message == 'success') {
+                    console.log('환영');
+                } else {
+                    alert('작업실패!');
+                }
+            })
+            .catch(() => {
+                alert('에러발생!');
+            });
+    },
     mounted() {
         http.get('member/rank')
             .then(({ data }) => {
