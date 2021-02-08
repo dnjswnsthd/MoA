@@ -62,7 +62,7 @@ export default new VueRouter({
             components: { default: FundingDetail, header: SubHeader },
         },
         {
-            path: '/schedule',
+            path: '/schedule/:pn',
             name: 'Schedule',
             components: { default: Schedule, header: SubHeader },
         },

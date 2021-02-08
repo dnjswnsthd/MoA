@@ -74,8 +74,13 @@ public class ProjectController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
-			projectService.waiting(param);
-			resultMap.put("message", SUCCESS);
+			int cnt = projectService.waiting(param);
+			if(cnt > 0) {
+				resultMap.put("message", "FUCKING");
+			}
+			else{
+				resultMap.put("message", SUCCESS);
+			}
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", FAIL);
@@ -388,6 +393,22 @@ public class ProjectController {
 		try {
 			MemberDto [] member = projectService.waitingList(project_num);
 			resultMap.put("member", member);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	@ApiOperation(value = "오늘 시간 기준으로 종료된 프로젝트로 보내버리기", notes = "프로젝트 관리", response = Map.class)
+	@PutMapping("/projectmanage")
+	public ResponseEntity<Map<String, Object>> projectManage(
+			@RequestBody @ApiParam(value = "딱히 없음", required = true)  Map<String, Object> param){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			projectService.projectManager(param);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
 		}catch(Exception e) {
