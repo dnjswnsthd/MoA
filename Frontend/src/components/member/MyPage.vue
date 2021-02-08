@@ -146,12 +146,13 @@
         </div>
 
         <div class="projectBox">
-            <v-tabs color="deep-purple accent-4" left>
-                <v-tab>진행중인 펀딩</v-tab>
-                <v-tab>참여 대기 중 펀딩</v-tab>
-                <v-tab>종료된 펀딩</v-tab>
-                <v-tab>관심중인 펀딩</v-tab>
-
+            <v-tabs left slider-color="yellow">
+                <v-toolbar color="#7900c5" dark class="mb-10" style="border-radius:20px">
+                    <v-tab style="font-size:18px; color:white">진행중인 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white">참여 대기 중 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white">종료된 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white">관심중인 펀딩</v-tab>
+                </v-toolbar>
                 <v-tab-item v-for="n in 4" :key="n">
                     <v-container fluid>
                         <v-row v-if="n == 1">
@@ -167,10 +168,10 @@
                                     alt="예시"
                                 />
 
-                                <div>
+                                <div style="color: black;">
                                     <v-row>
                                         <p class="shorthand col-7">
-                                            프로젝트 이름 : {{ proceed.project_name }}
+                                            {{ proceed.project_name }}
                                         </p>
                                         <v-dialog
                                             v-model="proceedDialog"
@@ -178,14 +179,19 @@
                                             max-width="300px"
                                         >
                                             <template v-slot:activator="{ on, attrs }">
-                                                <p
-                                                    class="col-5"
-                                                    @click="projectState(proceed.project_num)"
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                >
-                                                    상태보기
-                                                </p>
+                                                <div class="mt-2">
+                                                    <v-btn
+                                                        medium
+                                                        class="ma-2"
+                                                        outlined
+                                                        color="#bc6ff1"
+                                                        @click="projectState(proceed.project_num)"
+                                                        v-bind="attrs"
+                                                        v-on="on"
+                                                    >
+                                                        상태보기
+                                                    </v-btn>
+                                                </div>
                                             </template>
                                             <v-card>
                                                 <v-card-title>참여 인원</v-card-title>
@@ -196,7 +202,9 @@
                                                         index) in proceedingMember"
                                                         :key="index"
                                                     >
-                                                        <p>{{ proceedMember.id }}</p>
+                                                        <p style="color: black;">
+                                                            {{ proceedMember.id }}
+                                                        </p>
                                                         <v-btn
                                                             @click="
                                                                 enjoyGroup(
@@ -239,7 +247,7 @@
 
                                 <div>
                                     <v-row>
-                                        <p class="shorthand col-12">
+                                        <p class="shorthand col-12" style="color: black;">
                                             프로젝트 이름 : {{ wait.project_name }}
                                         </p>
                                     </v-row>
@@ -261,15 +269,21 @@
 
                                 <div>
                                     <v-row>
-                                        <p class="shorthand col-7">
-                                            프로젝트 이름 : {{ completed.project_name }}
+                                        <p class="shorthand col-7 ml-2" style="color: black;">
+                                            {{ completed.project_name }}
                                         </p>
-                                        <p
-                                            class="col-5"
-                                            @click="movePage(n, completed.project_num)"
-                                        >
-                                            평가 목록
-                                        </p>
+                                        <v-spacer></v-spacer>
+                                        <div class="mt-4 mr-2">
+                                            <v-btn
+                                                medium
+                                                class="ma-2"
+                                                outlined
+                                                color="#bc6ff1"
+                                                @click="movePage(n, completed.project_num)"
+                                            >
+                                                평가하기
+                                            </v-btn>
+                                        </div>
                                     </v-row>
                                 </div>
                             </v-col>
@@ -287,54 +301,57 @@
                                     alt="예시"
                                 />
 
-                                <div>
-                                    <v-row>
-                                        <p class="shorthand col-7">
-                                            프로젝트 이름 : {{ interest.project_name }}
-                                        </p>
-                                        <v-dialog
-                                            v-model="interestingDialog"
-                                            scrollable
-                                            persistent
-                                            :retain-focus="false"
-                                            max-width="300px"
-                                        >
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <p
-                                                    class="col-5"
+                                <v-row>
+                                    <p class="shorthand col-7 ml-2" style="color: black;">
+                                        {{ interest.project_name }}
+                                    </p>
+                                    <v-dialog
+                                        v-model="interestingDialog"
+                                        scrollable
+                                        persistent
+                                        :retain-focus="false"
+                                        max-width="300px"
+                                    >
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <div class="mt-4">
+                                                <v-btn
+                                                    class="ma-2 "
                                                     @click="projectState(interest.project_num)"
                                                     v-bind="attrs"
                                                     v-on="on"
+                                                    outlined
+                                                    color="#bc6ff1"
+                                                    medium
                                                 >
                                                     참여 인원
-                                                </p>
-                                            </template>
-                                            <v-card>
-                                                <v-card-title>참여 인원</v-card-title>
-                                                <v-divider></v-divider>
-                                                <v-card-text style="height: 300px;">
-                                                    <v-row
-                                                        v-for="(proceedMember,
-                                                        index) in proceedingMember"
-                                                        :key="index"
-                                                    >
-                                                        <p>{{ proceedMember.id }}</p>
-                                                    </v-row>
-                                                </v-card-text>
-                                                <v-divider></v-divider>
-                                                <v-card-actions>
-                                                    <v-btn
-                                                        color="blue darken-1"
-                                                        text
-                                                        @click="closeInterest"
-                                                    >
-                                                        Close
-                                                    </v-btn>
-                                                </v-card-actions>
-                                            </v-card>
-                                        </v-dialog>
-                                    </v-row>
-                                </div>
+                                                </v-btn>
+                                            </div>
+                                        </template>
+                                        <v-card>
+                                            <v-card-title>참여 인원</v-card-title>
+                                            <v-divider></v-divider>
+                                            <v-card-text style="height: 300px;">
+                                                <v-row
+                                                    v-for="(proceedMember,
+                                                    index) in proceedingMember"
+                                                    :key="index"
+                                                >
+                                                    <p>{{ proceedMember.id }}</p>
+                                                </v-row>
+                                            </v-card-text>
+                                            <v-divider></v-divider>
+                                            <v-card-actions>
+                                                <v-btn
+                                                    color="blue darken-1"
+                                                    text
+                                                    @click="closeInterest"
+                                                >
+                                                    Close
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-row>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -603,6 +620,7 @@ export default {
 
 <style scoped>
 .cardBox {
+    position: relative;
     width: 1000px;
     margin: 50px auto;
 }
