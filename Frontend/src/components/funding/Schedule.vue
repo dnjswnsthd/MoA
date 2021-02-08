@@ -2,7 +2,9 @@
     <div class="col-8 centerContent">
         <div>
             <h1 class="height-70">{{ project.project_name }}</h1>
-            <h2 class="height-70">Project Period : {{ project.start_date }} ~ {{ project.end_date }}</h2>
+            <h2 class="height-70">
+                Project Period : {{ project.start_date }} ~ {{ project.end_date }}
+            </h2>
         </div>
         <v-row>
             <h2 class="height-50 ml-6">Add Sprint</h2>
@@ -132,7 +134,7 @@ export default {
         };
     },
     created() {
-        this.project_num = this.$route.query.pn;
+        this.project_num = this.$route.params.pn;
         this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
@@ -183,16 +185,16 @@ export default {
         addSprint() {
             http.post(`sprint/add`, this.newTask)
                 .then(() => {
-                  this.dialog = false;
-                  this.sprints[0].push({
-                    sprint_name: this.newTask.sprint_name,
-                    sprint_status: this.newTask.sprint_status,
-                    sprint_subject: this.newTask.sprint_subject,
-                    sprint_description: this.newTask.sprint_description,
-                    sprint_start_date: this.newTask.sprint_start_date,
-                    sprint_end_date: this.newTask.sprint_end_date,
-                    project_num: this.newTask.project_num,
-                  });
+                    this.dialog = false;
+                    this.sprints[0].push({
+                        sprint_name: this.newTask.sprint_name,
+                        sprint_status: this.newTask.sprint_status,
+                        sprint_subject: this.newTask.sprint_subject,
+                        sprint_description: this.newTask.sprint_description,
+                        sprint_start_date: this.newTask.sprint_start_date,
+                        sprint_end_date: this.newTask.sprint_end_date,
+                        project_num: this.newTask.project_num,
+                    });
                     alert('추가 성공!');
                     this.newTask.sprint_name = '';
                     this.newTask.sprint_status = 0;
