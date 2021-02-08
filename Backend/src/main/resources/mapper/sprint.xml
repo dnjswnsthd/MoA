@@ -25,4 +25,14 @@
 		from sprint
 		where project_num = #{project_num}
 	</select>
+	
+	<update id="modifycontent" parameterType="SprintDto">
+		update sprint
+		set sprint_name = #{sprint_name},
+			sprint_subject = #{sprint_subject},
+			sprint_description = #{sprint_description},
+			sprint_start_date = #{sprint_start_date},
+			sprint_end_date = #{sprint_end_date}
+		where sprint_num = #{sprint_num}
+	</update>
 </mapper>

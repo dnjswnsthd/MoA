@@ -45,4 +45,6 @@ public interface ProjectMapper {
 	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
 
 	MemberDto[] waitingList(int project_num) throws SQLException;
+
+	void updatePoint(Map<String, Object> param) throws SQLException;
 }
