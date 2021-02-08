@@ -145,7 +145,7 @@ export default {
         };
     },
     created() {
-        this.project_num = this.$route.params.pn;
+        this.project_num = this.$route.query.pn;
         this.newTask.project_num = this.project_num;
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
