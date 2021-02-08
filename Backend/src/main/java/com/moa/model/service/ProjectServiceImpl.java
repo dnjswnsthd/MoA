@@ -100,4 +100,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return sqlSession.getMapper(ProjectMapper.class).waitingList(project_num);
 	}
 
+	@Override
+	public void projectManager(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(ProjectMapper.class).completeAppend(param);
+		sqlSession.getMapper(ProjectMapper.class).memberDelete(param);
+	}
+
 }

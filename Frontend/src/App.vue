@@ -1,19 +1,19 @@
 <template>
-  <v-app class="wrap">
-    <router-view name="header"></router-view>
-    <router-view class="wrap_2"></router-view>
-    <nav-footer></nav-footer>
-  </v-app>
+    <v-app class="wrap">
+        <router-view name="header"></router-view>
+        <router-view class="wrap_2"></router-view>
+        <nav-footer></nav-footer>
+    </v-app>
 </template>
 
 <script>
 import NavFooter from '@/components/common/Footer.vue';
 
 export default {
-  name: 'App',
-  components: {
-    NavFooter,
-  },
+    name: 'App',
+    components: {
+        NavFooter,
+    },
 };
 </script>
 <style>
@@ -24,17 +24,17 @@ export default {
 @import './assets/css/category.css';
 
 .wrap {
-  min-height: 100%;
-  position: relative;
-  padding-bottom: 0px;
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 0px;
 }
 .wrap_2 {
-  padding-bottom: 70px;
+    padding-bottom: 70px;
 }
 
 * {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
 }
 </style>
