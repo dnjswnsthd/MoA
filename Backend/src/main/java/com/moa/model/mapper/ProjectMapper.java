@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.moa.model.CompleteProjectInfoDto;
 import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 
@@ -14,11 +15,8 @@ public interface ProjectMapper {
 	void appendProject(ProjectDto param) throws SQLException;
 
 	public ProjectDto[] projectInfo(String id) throws SQLException;
-	
 	public ProjectDto[] waitingProjectInfo(String id) throws SQLException;
-	
-	public ProjectDto[] completeProjectInfo(String id) throws SQLException;
-	
+	public List<CompleteProjectInfoDto> completeProjectInfo(String id) throws SQLException;
 	public ProjectDto[] interestingProjectInfo(String id) throws SQLException;
 	
 	void memberToComplete(int project_num) throws SQLException;
