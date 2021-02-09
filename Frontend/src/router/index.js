@@ -15,6 +15,7 @@ import FundingDetail from '@/components/funding/FundingDetail.vue';
 import FundingList from '@/components/funding/FundingList.vue';
 import Schedule from '@/components/funding/Schedule.vue';
 import Evaluate from '@/components/evaluation/Evaluate.vue';
+
 // import Sub from "@/views/Sub.vue";
 
 import Test from '@/components/views/Test.vue';
@@ -79,5 +80,6 @@ export default new VueRouter({
             name: 'Evaluate',
             components: { default: Evaluate, header: SubHeader },
         },
+
     ],
 });
