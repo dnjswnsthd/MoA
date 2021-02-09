@@ -4,10 +4,10 @@
         <v-toolbar color="#c1a1d3" dark>
             <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab v-if="mentor.id">
+                <v-tab v-if="mentor.id" @click="createCharts">
                     <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
-                <v-tab v-for="(mentee, index) in mentees" :key="index">
+                <v-tab v-for="(mentee, index) in mentees" :key="index" @click="createCharts">
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
                 <v-spacer></v-spacer>
@@ -20,51 +20,36 @@
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
-                        <div>
-                            <v-card class="mx-auto" max-width="344">
-                                <v-img
-                                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                                    height="200px"
-                                ></v-img>
-
-                                <v-card-title>
-                                    Top western road trips
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    1,000 miles of wonder
-                                </v-card-subtitle>
-                            </v-card>
+                        <div class="width-500 height-300">
+                            <canvas class="canvas" height="40vh" width="80vw"></canvas>
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-col>
-                        <v-card flat width="320">
-                            <v-card-text>
-                                <h2 class="pb-5 pt-5">
-                                    {{ mentor.name }} 멘토를 평가해주세요!
-                                    <span>
-                                        <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
-                                            초기화
-                                        </v-btn>
-                                    </span>
-                                </h2>
-                                <p
-                                    v-for="(item, index) in mentorEvaluationItem"
-                                    :key="index"
-                                    class="evaluateFont"
-                                >
-                                    {{ item.title }}&nbsp;은/는 어땠나요?
-                                    <v-rating
-                                        v-model="mentor[`${item.value}`]"
-                                        background-color="purple lighten-3"
-                                        color="#bc6ff1"
-                                        large
-                                    ></v-rating>
-                                </p>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
+                    <v-card flat width="320">
+                        <v-card-text>
+                            <h2 class="pb-5 pt-5">
+                                {{ mentor.name }} 멘토를 평가해주세요!
+                                <span>
+                                    <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
+                                        초기화
+                                    </v-btn>
+                                </span>
+                            </h2>
+                            <p
+                                v-for="(item, index) in mentorEvaluationItem"
+                                :key="index"
+                                class="evaluateFont"
+                            >
+                                {{ item.title }}&nbsp;은/는 어땠나요?
+                                <v-rating
+                                    v-model="mentor[`${item.value}`]"
+                                    background-color="purple lighten-3"
+                                    color="#bc6ff1"
+                                    large
+                                ></v-rating>
+                            </p>
+                        </v-card-text>
+                    </v-card>
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
@@ -73,21 +58,8 @@
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
-                        <div>
-                            <v-card class="mx-auto" max-width="344">
-                                <v-img
-                                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                                    height="200px"
-                                ></v-img>
-
-                                <v-card-title>
-                                    Top western road trips
-                                </v-card-title>
-
-                                <v-card-subtitle>
-                                    1,000 miles of wonder
-                                </v-card-subtitle>
-                            </v-card>
+                        <div class="width-500 height-300">
+                            <canvas class="canvas" height="40vh" width="80vw"></canvas>
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -117,7 +89,6 @@
                             </p>
                         </v-card-text>
                     </v-card>
-
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
@@ -128,6 +99,7 @@
 <script>
 import http from '@/util/http-common';
 import { mapState } from 'vuex';
+import Chart from 'chart.js';
 
 export default {
     name: 'Evaluate',
@@ -137,27 +109,19 @@ export default {
             return this.$store.getters.getMemberInfo;
         },
     },
-    created() {
+    mounted() {
         this.project_num = this.$route.params.pn;
-        http.get(`project/evaluateList/${this.project_num}`)
-            .then(({ data }) => {
-                data.list.forEach((el) => {
-                    if (el.id != this.memberInfo.id) {
-                        if (el.status == 1) this.mentor = el;
-                        else this.mentees.push(el);
-                    }
-                });
-            })
-            .catch(() => {
-                alert(`평가 대상자 가져오기 실패`);
-            });
+        setTimeout(this.init(), 200);
+    },
+    watch: {
+        mentor() {
+            this.createCharts();
+        },
     },
     data() {
         return {
             project_num: Number,
             tab: null,
-            items: ['멘티', '멘티2', '멘티3', '멘티4', '멘티5'],
-            evalutes: ['의사소통', '책임감', '리더십', '수행능력', '수행자세'],
             mentorEvaluationItem: [
                 { title: '도덕성', value: 'morality' },
                 { title: '적극성', value: 'positiveness' },
@@ -172,11 +136,68 @@ export default {
                 { title: '수행자세', value: 'positiveness' },
                 { title: '리더십', value: 'leadership' },
             ],
+            mentorData: {
+                labels: ['도덕성', '적극성', '신뢰성', '전문성', '리더십'],
+                datasets: [
+                    {
+                        data: [5, 3, 4, 2, 5],
+                        backgroundColor: 'rgba(188, 111, 241, .5)',
+                        borderColor: '#ab47bc',
+                        borderWidth: '1',
+                    },
+                ],
+            },
+            options: {
+                legend: {
+                    display: false,
+                },
+                reponsive: false,
+                scale: {
+                    angleLines: {
+                        display: false,
+                    },
+                    ticks: {
+                        min: 0,
+                        max: 5,
+                        stepSize: 1,
+                    },
+                    pointLabels: {
+                        fontSize: 18,
+                        fontColor: '#ab47bc',
+                        fontFamily: 'CookieRunOTF-Bold',
+                        src: `url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff')`,
+                        fontWeight: 'normal',
+                        fontStyle: 'normal',
+                    },
+                },
+            },
             mentor: {},
             mentees: [],
         };
     },
     methods: {
+        init() {
+            console.log(`call init()`);
+            http.get(`project/evaluateList/${this.project_num}`)
+                .then(({ data }) => {
+                    data.list.forEach((el) => {
+                        if (el.id != this.memberInfo.id) {
+                            if (el.status == 1) {
+                                this.mentor = el;
+                            } else {
+                                this.mentees.push(el);
+                            }
+                        }
+                    });
+                })
+                .catch(() => {
+                    alert(`평가 대상자 가져오기 실패`);
+                });
+            if (this.mentor) {
+                this.createCharts();
+                console.log('ㅅㅄㅄㅄㅅㅄㅄㅂ');
+            }
+        },
         initMentor() {
             this.mentorEvaluationItem.forEach((el) => {
                 this.mentor[`${el.value}`] = 0;
@@ -221,6 +242,29 @@ export default {
 
             this.$router.push({ name: 'MyPage' });
         },
+        createCharts() {
+            const ctx = document.getElementsByClassName('canvas');
+
+            for (var i = 0; i < ctx.length; i++) {
+                console.log(ctx[i]);
+                new Chart(ctx[i], {
+                    type: 'radar',
+                    data: this.mentorData,
+                    options: this.options,
+                });
+            }
+        },
+        chart() {
+            console.log(`call chart`);
+            console.log(this.mentor);
+            // if (this.mentor.id) {
+            //     this.createCharts(this.mentor.id);
+            // }
+            console.log(this.mentees);
+            this.mentees.forEach((el) => {
+                this.createCharts(el.id);
+            });
+        },
     },
 };
 </script>
@@ -233,4 +277,9 @@ export default {
 .evaluateTitle {
     font-size: xx-large;
 }
+
+/* .canvas {
+    width: 100%;
+    height: 300px;
+} */
 </style>
