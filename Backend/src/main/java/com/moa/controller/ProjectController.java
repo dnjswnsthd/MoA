@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moa.model.CompleteProjectInfoDto;
 import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 import com.moa.model.service.ProjectService;
@@ -199,9 +200,9 @@ public class ProjectController {
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신의 종료 된 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto[] completeProjectInfo = projectService.completeProjectInfo(id);
+			List<CompleteProjectInfoDto> list = projectService.completeProjectInfo(id);
 			resultMap.put("message", SUCCESS);
-			resultMap.put("completeProjectInfo", completeProjectInfo);
+			resultMap.put("list", list);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", e.getMessage());
