@@ -272,14 +272,32 @@ public class MemberController {
 	}
 	
 	@ApiOperation(value = "멘토, 멘티 평가 등록", notes = "", response = Map.class)
+	@PutMapping("/evaluate/change")
+	@Transactional
+	public ResponseEntity<Map<String, Object>> updateCompleteStatus(
+			@RequestBody @ApiParam(value = "평가를 완료한 사람의 id와 평가한 프로젝트 번호", required = true) Map<String, Object> map) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		
+		try {
+			memberService.updateCompleteStatus(map);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		} catch (Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@ApiOperation(value = "멘토, 멘티 평가 등록", notes = "", response = Map.class)
 	@PostMapping("/evaluate")
 	@Transactional // 트랜젝션 설정
 	public ResponseEntity<Map<String, Object>> evaluateTeammate(
-			@RequestBody EvaluateDto evaluateDto) {
+			@RequestBody @ApiParam(value = "평가 대상자의 id와 평가 값을 담은 객체", required = true) EvaluateDto evaluateDto) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		System.out.println(evaluateDto.getProject_num());
-		System.out.println(evaluateDto.getMentor().toString());
 		
 		try {
 			memberService.updateEvaluate(evaluateDto);
