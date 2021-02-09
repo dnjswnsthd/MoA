@@ -129,18 +129,25 @@
 
 <script>
 import http from '@/util/http-common';
+import { mapState } from 'vuex';
 
 export default {
     name: 'Evaluate',
+    computed: {
+        ...mapState(['memberInfo', 'isLogin']),
+        getMemberInfo() {
+            return this.$store.getters.getMemberInfo;
+        },
+    },
     created() {
         this.project_num = this.$route.params.pn;
         http.get(`project/evaluateList/${this.project_num}`)
             .then(({ data }) => {
-                console.log(data.list);
                 data.list.forEach((el) => {
-                    console.log(el);
-                    if (el.status == 1) this.mentor = el;
-                    else this.mentees.push(el);
+                    if (el.id != this.memberInfo.id) {
+                        if (el.status == 1) this.mentor = el;
+                        else this.mentees.push(el);
+                    }
                 });
             })
             .catch(() => {
@@ -184,6 +191,23 @@ export default {
         },
         evaluate() {
             console.log(`evaluate()`);
+            // 평가 완료 상태 반영
+            http.put(`member/evaluate/change`, {
+                id: this.memberInfo.id,
+                project_num: this.project_num,
+            })
+                .then(({ data }) => {
+                    console.log(data.message);
+                    if (data.message == 'fail') {
+                        alert(`평가 등록 실패!!`);
+                        return;
+                    }
+                })
+                .catch(() => {
+                    alert(`평가 등록 실패`);
+                });
+
+            // 평가 반영
             http.post(`member/evaluate`, {
                 project_num: this.project_num,
                 mentor: this.mentor,
@@ -195,6 +219,8 @@ export default {
                 .catch(() => {
                     alert(`평가 등록 실패`);
                 });
+            alert(`평가 완료!`);
+
             this.$router.push({ name: 'MyPage' });
         },
     },
