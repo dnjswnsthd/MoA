@@ -20,12 +20,12 @@
                 <v-text-field
                     label="MoA Point"
                     type="text"
-                    class="width-50"
+                    class="width-100 ml-5"
                     v-model="memberInfo.point"
                 ></v-text-field>
                 <v-dialog v-model="plusPointDialog" max-width="290">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="ml-4" v-bind="attrs" v-on="on">
+                        <v-btn class="ml-4" style="background-color:#ab47bc; color:white" v-bind="attrs" v-on="on">
                             충전
                         </v-btn>
                     </template>
@@ -48,7 +48,7 @@
                 </v-dialog>
                 <v-dialog v-model="minusPointDialog" max-width="290">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="ml-4" v-bind="attrs" v-on="on">
+                        <v-btn class="ml-4" v-bind="attrs" v-on="on" style="background-color:#ab47bc; color:white">
                             전환
                         </v-btn>
                     </template>
@@ -737,6 +737,10 @@ export default {
             })
         },
          minusPoint(){
+             if(this.changePoint > this.memberInfo.point){
+                 alert('있는 포인트보다 작게입력해주세요.');
+                 this.changePoint = 0;
+             }else{
             this.changePoint = this.memberInfo.point - this.changePoint*1;
             http.put('/member/updatepoint',{
                 id:this.memberInfo.id,
@@ -753,6 +757,7 @@ export default {
             }).catch(()=>{
                 alert('에러발생!');
             })
+             }
         }
     },
 };
