@@ -146,12 +146,12 @@
         </div>
 
         <div class="projectBox">
-            <v-tabs left slider-color="yellow">
-                <v-toolbar color="#7900c5" dark class="mb-10" style="border-radius:20px">
-                    <v-tab style="font-size:18px; color:white">진행중인 펀딩</v-tab>
-                    <v-tab style="font-size:18px; color:white">참여 대기 중 펀딩</v-tab>
-                    <v-tab style="font-size:18px; color:white">종료된 펀딩</v-tab>
-                    <v-tab style="font-size:18px; color:white">관심중인 펀딩</v-tab>
+            <v-tabs left slider-color="yellow"> 
+                <v-toolbar color="#c1a1d3" dark class="mb-10" style="border-radius:20px">
+                    <v-tab style="font-size:18px; color:white" class="mb-2">진행중인 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white" class="mb-2">참여 대기 중 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white" class="mb-2">종료된 펀딩</v-tab>
+                    <v-tab style="font-size:18px; color:white" class="mb-2">관심중인 펀딩</v-tab>
                 </v-toolbar>
                 <v-tab-item v-for="n in 4" :key="n">
                     <v-container fluid>
@@ -248,7 +248,7 @@
                                 <div>
                                     <v-row>
                                         <p class="shorthand col-12" style="color: black;">
-                                            프로젝트 이름 : {{ wait.project_name }}
+                                            {{ wait.project_name }}
                                         </p>
                                     </v-row>
                                 </div>
