@@ -5,7 +5,8 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import Tawk from 'vue-tawk';
 
-const TAWK_SRC_URL = 'https://embed.tawk.to/60220d47c31c9117cb772fdc/1eu2g7ogf';
+//npm install vue-tawk --save
+const TAWK_SRC_URL = 'https://embed.tawk.to/60220d47c31c9117cb772fdc/1eu2g7ogf';  //TAWK 주소
   
 Vue.config.productionTip = false;
 
