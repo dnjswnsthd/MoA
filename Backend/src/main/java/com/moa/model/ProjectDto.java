@@ -27,13 +27,6 @@ public class ProjectDto {
 	private String deadline;
 	@ApiModelProperty(value = "팀장")
 	private String leader;
-	@Override
-	public String toString() {
-		return "ProjectDto [project_num=" + project_num + ", project_name=" + project_name + ", start_date="
-				+ start_date + ", end_date=" + end_date + ", category=" + category + ", Participants=" + Participants
-				+ ", funding_cost=" + funding_cost + ", description=" + description + ", mentor_chk=" + mentor_chk
-				+ ", deadline=" + deadline + ", leader=" + leader + "]";
-	}
 	
 	public String getLeader() {
 		return leader;
