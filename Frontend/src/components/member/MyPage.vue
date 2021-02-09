@@ -38,7 +38,8 @@
                                 </div>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn color="green darken-1" text @click="plusPoint">
+                            <v-spacer></v-spacer>
+                            <v-btn color="#ab47bc" text @click="plusPoint">
                                 충전하기
                             </v-btn>
                         </v-card-actions>
@@ -61,7 +62,8 @@
                                 </div>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn color="green darken-1" text @click="minusPoint">
+                            <v-spacer></v-spacer>
+                            <v-btn color="#ab47bc" text @click="minusPoint">
                                 전환하기
                             </v-btn>
                         </v-card-actions>
