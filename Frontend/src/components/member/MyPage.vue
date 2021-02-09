@@ -1,8 +1,6 @@
 <template>
     <div class="cardBox">
         <h1 class="width-1000 centerText">내 정보</h1>
-        <p class="myPoint rightText">포인트: {{ memberInfo.point }}</p>
-
         <form class="width-1000">
             <v-row class="width-1000">
                 <v-spacer></v-spacer>
