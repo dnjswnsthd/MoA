@@ -3,6 +3,7 @@ package com.moa.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.moa.model.CompleteProjectInfoDto;
 import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 
@@ -11,7 +12,7 @@ public interface ProjectService {
 	public void create(ProjectDto param) throws Exception;
 	public ProjectDto[] projectInfo(String id) throws Exception;
 	public ProjectDto[] waitingProjectInfo(String id) throws Exception;
-	public ProjectDto[] completeProjectInfo(String id) throws Exception;
+	public List<CompleteProjectInfoDto> completeProjectInfo(String id) throws Exception;
 	public ProjectDto[] interestingProjectInfo(String id) throws Exception;
 	
 	public void end(int project_num) throws Exception;
