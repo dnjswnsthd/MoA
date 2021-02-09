@@ -1,21 +1,20 @@
 <template>
     <div class="width-1000 fundingMargin">
-        <h1>펀딩목록</h1>
-        <v-carousel cycle height="300" hide-delimiter-background show-arrows-on-hover>
-            <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                <v-sheet :color="colors[i]" height="100%">
-                    <v-row class="fill-height" align="center" justify="center">
-                        <div class="display-3">
-                            <img
-                                src="@/assets/images/sample.jpg"
-                                alt="샘플"
-                                class="widht-950 height-300"
-                            />
-                        </div>
-                    </v-row>
-                </v-sheet>
-            </v-carousel-item>
+        <h1 class="pageTitle">펀딩목록</h1>
+        <!-- <v-carousel cycle height="300" hide-delimiter-background show-arrows-on-hover> -->
+        <v-carousel
+            interval="2000"
+            hide-delimiter-background
+            show-arrows-on-hover
+            cycle
+            progress-color="purple"
+            hide-delimiters
+            prev-icon="mdi-arrow-left"
+            next-icon="mdi-arrow-right"
+        >
+            <v-carousel-item v-for="item in items" :key="item" :src="item"></v-carousel-item>
         </v-carousel>
+        <!-- </v-carousel> -->
         <ul class="fundingListPadding_2">
             <v-row>
                 <v-col v-for="category in categories" :key="category">
@@ -162,13 +161,14 @@ export default {
                     value: 'marketing',
                 },
             ],
-            colors: ['indigo', 'warning', 'pink darken-2', 'red lighten-1', 'deep-purple accent-4'],
-            slides: [
-                '반응형 웹 디자인',
-                '오늘의 운세는?',
-                '골목 시장 상권 살리기',
-                '디자이너를 위한 프로젝트',
-                '모바일 앱 제작',
+
+            items: [
+                require('@/assets/images/AD/ad3.jpg'),
+                require('@/assets/images/AD/ad4.jpg'),
+                require('@/assets/images/AD/ad5.jpg'),
+                require('@/assets/images/AD/ad2.jpg'),
+                require('@/assets/images/AD/ad1.jpg'),
+                require('@/assets/images/AD/ad6.jpg'),
             ],
             interestingList: [],
             projectList: [],

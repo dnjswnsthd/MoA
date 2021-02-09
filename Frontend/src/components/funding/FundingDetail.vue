@@ -130,6 +130,9 @@
                 ></v-textarea>
             </v-col>
         </div>
+
+        <p>{{ selectedEvent.description }}</p>
+
         <div class="col-8 centerContent">
             <v-row class="fill-height">
                 <v-col>
@@ -174,13 +177,13 @@
                             <v-btn style="margin-left: 20px" @click="moveSchedule">일정 관리</v-btn>
                         </v-toolbar>
                     </v-sheet>
+
                     <v-sheet height="600">
                         <v-calendar
                             ref="calendar"
                             v-model="focus"
                             color="primary"
                             :events="events"
-                            :event-color="getEventColor"
                             :type="type"
                             @click:event="showEvent"
                             @click:more="viewDay"
@@ -207,8 +210,12 @@
                                         <v-icon>mdi-dots-vertical</v-icon>
                                     </v-btn>
                                 </v-toolbar>
+
                                 <v-card-text>
-                                    <span v-html="selectedEvent.details"></span>
+                                    <h2>
+                                        일정 설명 :
+                                        <span>{{ selectedEvent.description }}</span>
+                                    </h2>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn text color="secondary" @click="selectedOpen = false">
@@ -238,12 +245,14 @@ export default {
             day: 'Day',
             '4day': '4 Days',
         },
-        selectedEvent: {},
+        selectedEvent: {
+            name: '',
+            description: '',
+        },
         selectedElement: null,
         selectedOpen: false,
         events: [],
-        colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-        names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+        colors: ['orange', 'purple', 'green'],
         project: {},
         id: '',
         loveFlag: true,
@@ -255,20 +264,18 @@ export default {
         participantsDialog: false,
         love: '관심등록',
         cancelLove: '관심취소',
+        schedule: {},
     }),
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
     },
     mounted() {
-        this.$refs.calendar.checkChange();
-
-        console.log(this.project_num);
-    },
-    created() {
         this.project_num = this.$route.params.pn;
         this.mwurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
         this.wurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
 
+        setTimeout(this.init, 200);
+        // setTimeout(this.$refs.calendar.checkChange(), 1000);
         http.get(`project/fundingDetail/${this.project_num}`)
             .then((response) => {
                 if (response.data.message == 'success') {
@@ -285,7 +292,7 @@ export default {
                 console.log(data);
                 for (var i = 0; i < data.interestingProjectInfo.length; i++) {
                     if (data.interestingProjectInfo[i].project_num == this.project.project_num) {
-                        this.loveFlag = false;
+                        this.loveFlag = true;
                         break;
                     }
                 }
@@ -296,6 +303,49 @@ export default {
     },
 
     methods: {
+        init() {
+            http.get(`project/fundingDetail/${this.project_num}`)
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        this.project = response.data.project;
+                        this.id = this.memberInfo.id;
+                    } else {
+                        alert('정보조회실패');
+                    }
+                })
+                .catch(() => {});
+
+            http.get(`project/interesting/${this.memberInfo.id}`)
+                .then(({ data }) => {
+                    console.log(data);
+                    for (var i = 0; i < data.interestingProjectInfo.length; i++) {
+                        if (
+                            data.interestingProjectInfo[i].project_num == this.project.project_num
+                        ) {
+                            this.loveFlag = false;
+                            break;
+                        }
+                    }
+                })
+                .catch(() => {
+                    console.log('fffffff');
+                });
+            http.get(`sprint/search/${this.project_num}`)
+                .then((response) => {
+                    console.log('pn : ' + this.project_num);
+                    console.log('message : ' + response.data.message);
+                    if (response.data.message == 'success') {
+                        console.log(response.data.sprintList);
+                        this.schedule = response.data.sprintList;
+                        this.updateRange();
+                    } else {
+                        alert('받아오다 실패!');
+                    }
+                })
+                .catcb(() => {
+                    alert('에러발생!');
+                });
+        },
         plusLove() {
             if (!this.loveFlag) {
                 alert('관심 펀딩에 취소되었습니다');
@@ -345,6 +395,8 @@ export default {
             const open = () => {
                 this.selectedEvent = event;
                 this.selectedElement = nativeEvent.target;
+                console.log(`open`);
+                console.log(this.selectedEvent);
                 setTimeout(() => {
                     this.selectedOpen = true;
                 }, 10);
@@ -359,35 +411,35 @@ export default {
 
             nativeEvent.stopPropagation();
         },
-        updateRange({ start, end }) {
+        updateRange() {
             const events = [];
 
-            const min = new Date(`${start.date}T00:00:00`);
-            const max = new Date(`${end.date}T23:59:59`);
-            const days = (max.getTime() - min.getTime()) / 86400000;
-            const eventCount = this.rnd(days, days + 20);
-
-            for (let i = 0; i < eventCount; i++) {
-                const allDay = this.rnd(0, 3) === 0;
-                const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-                const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-                const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-                const second = new Date(first.getTime() + secondTimestamp);
-
+            // const min = new Date(`${start.date}T00:00:00`);
+            // const max = new Date(`${end.date}T23:59:59`);
+            // const days = (max.getTime() - min.getTime()) / 86400000;
+            // const eventCount = this.rnd(days, days + 20);
+            console.log(`updateRange`);
+            for (let i = 0; i < this.schedule.length; i++) {
+                // const allDay = this.rnd(0, 3) === 0;
+                // const firstTimestamp = this.rnd(min.getTime(), max.getTime());
+                // const first = new Date(firstTimestamp - (firstTimestamp % 900000));
+                // const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
+                // const second = new Date(first.getTime() + secondTimestamp);
+                console.log('status : ' + this.schedule[i].sprint_status);
                 events.push({
-                    name: this.names[this.rnd(0, this.names.length - 1)],
-                    start: first,
-                    end: second,
-                    color: this.colors[this.rnd(0, this.colors.length - 1)],
-                    timed: !allDay,
+                    name: this.schedule[i].sprint_name,
+                    start: new Date(this.schedule[i].sprint_start_date),
+                    end: new Date(this.schedule[i].sprint_end_date),
+                    color: this.colors[this.schedule[i].sprint_status],
+                    description: this.schedule[i].sprint_description,
                 });
             }
 
             this.events = events;
         },
-        rnd(a, b) {
-            return Math.floor((b - a + 1) * Math.random()) + a;
-        },
+        // rnd(a, b) {
+        //     return Math.floor((b - a + 1) * Math.random()) + a;
+        // },
         moveSchedule() {
             this.$router.push({ name: 'Schedule', query: { pn: this.project_num } });
         },
@@ -440,15 +492,6 @@ export default {
                         webUrl: this.wurl,
                     },
                 },
-                // buttons: [
-                //     {
-                //         title: '웹으로 보기',
-                //         link: {
-                //             mobileWebUrl: 'https://localhost:8080',
-                //             webUrl: 'https://localhost:8080',
-                //         },
-                //     },
-                // ],
             });
         },
     },
