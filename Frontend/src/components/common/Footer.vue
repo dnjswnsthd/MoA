@@ -24,7 +24,7 @@
         </div>
     </footer>
 </template>
-<style scoped>
+<style>
 footer {
     /* background-color:#401B7B; */
     background: linear-gradient(to right, #401b7b, #d68ddf);
@@ -53,5 +53,6 @@ footer .row div:first-child img {
     bottom: 0;
     left: 0;
     right: 0;
+    flex-shrink: 0;
 }
 </style>
