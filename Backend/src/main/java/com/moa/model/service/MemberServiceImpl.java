@@ -206,23 +206,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void updateCompleteStatus(Map<String, Object> map) {
+		sqlSession.getMapper(MemberMapper.class).updateCompleteStatus(map);
+	}
+	
+	@Override
 	public void updateEvaluate(EvaluateDto evaluateDto) throws Exception {
 		MentorDto mentor = evaluateDto.getMentor();
 		List<MenteeDto> mentees = evaluateDto.getMentees();
-		if(mentor.getId() != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("project_num", evaluateDto.getProject_num());
-			map.put("id", mentor.getId());
-			sqlSession.getMapper(MemberMapper.class).updateEvaluateMentor(mentor);
-			sqlSession.getMapper(MemberMapper.class).updateCompleteStatus(map);
-		}
 		
-		for(int i = 0; i < mentees.size(); i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("project_num", evaluateDto.getProject_num());
-			map.put("id", mentees.get(i).getId());
+		if(mentor.getId() != null)
+			sqlSession.getMapper(MemberMapper.class).updateEvaluateMentor(mentor);
+		
+		for(int i = 0; i < mentees.size(); i++)
 			sqlSession.getMapper(MemberMapper.class).updateEvaluateMentee(mentees.get(i));
-			sqlSession.getMapper(MemberMapper.class).updateCompleteStatus(map);
-		}
 	}
 }
