@@ -279,9 +279,20 @@
                                                 class="ma-2"
                                                 outlined
                                                 color="#bc6ff1"
+                                                v-if="completed.status == 0"
                                                 @click="movePage(n, completed.project_num)"
                                             >
                                                 평가하기
+                                            </v-btn>
+                                            <v-btn
+                                                medium
+                                                class="ma-2"
+                                                outlined
+                                                color="#bc6ff1"
+                                                v-else
+                                                disabled
+                                            >
+                                                평가완료
                                             </v-btn>
                                         </div>
                                     </v-row>
@@ -446,7 +457,7 @@ export default {
         http.get(`/project/complete/${this.memberInfo.id}`)
             .then((response) => {
                 if (response.data.message == 'success') {
-                    this.complete = response.data.completeProjectInfo;
+                    this.complete = response.data.list;
                 } else {
                     alert('종료된플젝 가져오기 실패!');
                 }
