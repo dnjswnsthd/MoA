@@ -1,49 +1,48 @@
 @charset "utf-8";
 .memberFormLogo {
-  width: 100%;
-  margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 }
 .cardBox {
-  width: 450px;
-  border: none;
+    width: 450px;
+    border: none;
 }
 .lineBox {
-  width: 100%;
-  height: 5px;
-  background-color: #ddd;
-  margin: 0 auto;
-  border-radius: 20px;
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+    margin: 0 auto;
+    border-radius: 20px;
 }
 
 .formBox {
-  width: 100%;
-  margin: 25px auto;
+    width: 100%;
+    margin: 25px auto;
 }
 
 .idBox {
-  width: 100%;
-  margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 }
 .loginBtn {
-  display: block;
-  margin: 20px auto;
-  background-color: #eee;
+    display: block;
+    margin: 20px auto;
+    background-color: #eee;
 }
 
 .myPoint {
-  height: 48px;
-  font-size: 16px;
-  line-height: 48px;
-  margin: 0;
-  /* border: black 2px solid; */
+    height: 48px;
+    font-size: 16px;
+    line-height: 48px;
+    margin: 0;
+    /* border: black 2px solid; */
 }
 
 .btnBox {
-  margin: 25px auto;
+    margin: 25px auto;
 }
 
 .projectBox {
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid black;
+    width: 100%;
+    box-sizing: border-box;
 }
