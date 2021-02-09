@@ -433,63 +433,66 @@ export default {
             interestingDialog: false,
         };
     },
-    created() {
-        http.get(`/member/mypage/${this.memberInfo.id}`)
-            .then(({ data }) => {
-                this.member = data;
-            })
-            .catch(() => {
-                alert('에러가 발생하였습니다.');
-            });
-
-        http.get(`/project/proceeding/${this.memberInfo.id}`)
-            .then((response) => {
-                if (response.data.message == 'success') {
-                    this.proceeding = response.data.projectInfo;
-                } else {
-                    alert('진행중플젝 가져오기 실패!');
-                }
-            })
-            .catch(() => {
-                alert('에러발생!');
-            });
-
-        http.get(`/project/complete/${this.memberInfo.id}`)
-            .then((response) => {
-                if (response.data.message == 'success') {
-                    this.complete = response.data.list;
-                } else {
-                    alert('종료된플젝 가져오기 실패!');
-                }
-            })
-            .catch(() => {
-                alert('에러발생!');
-            });
-        http.get(`/project/interesting/${this.memberInfo.id}`)
-            .then((response) => {
-                if (response.data.message == 'success') {
-                    this.interesting = response.data.interestingProjectInfo;
-                } else {
-                    alert('관심플젝 가져오기 실패!');
-                }
-            })
-            .catch(() => {
-                alert('에러발생!');
-            });
-
-        http.get(`/project/waiting/${this.memberInfo.id}`)
-            .then((response) => {
-                if (response.data.message == 'success') {
-                    this.waiting = response.data.waitingProjectInfo;
-                } else {
-                    alert('진행중플젝 가져오기 실패!');
-                }
-            })
-            .catch(() => {
-                alert('에러발생!');
-            });
+    mounted() {
+        console.log(`MyPage Mounted`);
+        setTimeout(this.getMyFundingInfo, 200);
     },
     methods: {
+        getMyFundingInfo() {
+            http.get(`/member/mypage/${this.memberInfo.id}`)
+                .then(({ data }) => {
+                    this.member = data;
+                })
+                .catch(() => {
+                    alert('에러가 발생하였습니다.');
+                });
+
+            http.get(`/project/proceeding/${this.memberInfo.id}`)
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        this.proceeding = response.data.projectInfo;
+                    } else {
+                        alert('진행중플젝 가져오기 실패!');
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
+            // setTimeout(function() {}, 200);
+            http.get(`/project/complete/${this.memberInfo.id}`)
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        console.log(response.data.list);
+                        this.complete = response.data.list;
+                    } else {
+                        alert('종료된플젝 가져오기 실패!');
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
+            http.get(`/project/interesting/${this.memberInfo.id}`)
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        this.interesting = response.data.interestingProjectInfo;
+                    } else {
+                        alert('관심플젝 가져오기 실패!');
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
+
+            http.get(`/project/waiting/${this.memberInfo.id}`)
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        this.waiting = response.data.waitingProjectInfo;
+                    } else {
+                        alert('진행중플젝 가져오기 실패!');
+                    }
+                })
+                .catch(() => {});
+        },
         movePage(n, pn) {
             if (n == 3) this.$router.push({ name: 'Evaluate', params: { pn: pn } });
         },
