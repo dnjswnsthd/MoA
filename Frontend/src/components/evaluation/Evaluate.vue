@@ -1,13 +1,13 @@
 <template>
     <div class="col-8 centerContent height-1000">
         <p class="evaluateTitle">평가</p>
-        <v-toolbar color="#c1a1d3" dark>
+        <v-toolbar color="#c1a1d3" dark style="border-radius:20px">
             <v-tabs v-model="tab" align-with-title>
-                <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab v-if="mentor.id">
+                <v-tabs-slider color="yellow" style="border: 2px;"></v-tabs-slider>
+                <v-tab v-if="mentor.id"  class="mt-2">
                     <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
-                <v-tab v-for="(mentee, index) in mentees" :key="index">
+                <v-tab v-for="(mentee, index) in mentees" :key="index"  class="mt-2">
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
                 <v-spacer></v-spacer>
@@ -44,7 +44,9 @@
                                 <h2 class="pb-5 pt-5">
                                     {{ mentor.name }} 멘토를 평가해주세요!
                                     <span>
-                                        <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
+                                        <v-btn class="ml-3" medium
+                                                        outlined
+                                                        color="#bc6ff1" @click="initMentor">
                                             초기화
                                         </v-btn>
                                     </span>
