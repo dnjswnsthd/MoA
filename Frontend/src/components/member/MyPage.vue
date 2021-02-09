@@ -15,7 +15,68 @@
                 ></v-text-field>
                 <v-spacer></v-spacer>
             </v-row>
-
+            <v-row class="width-1000">
+                <v-spacer></v-spacer>
+                <v-text-field
+                    label="MoA Point"
+                    type="text"
+                    class="width-50"
+                    v-model="memberInfo.point"
+                ></v-text-field>
+                <v-dialog v-model="plusPointDialog" max-width="290">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn class="ml-4" v-bind="attrs" v-on="on">
+                            충전
+                        </v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            충전
+                        </v-card-title>
+                        <v-card-text>
+                                <div>
+                                    <p style="padding:0">충전 할 포인트</p>
+                                    <v-text-field label="POINT" type="text" required v-model="changePoint"></v-text-field>
+                                </div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="green darken-1" text @click="plusPoint">
+                                충전하기
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="minusPointDialog" max-width="290">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn class="ml-4" v-bind="attrs" v-on="on">
+                            전환
+                        </v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            전환
+                        </v-card-title>
+                        <v-card-text>
+                                <div>
+                                    <p style="padding:0">전환 할 포인트</p>
+                                    <v-text-field label="POINT" type="text" required v-model="changePoint"></v-text-field>
+                                </div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="green darken-1" text @click="minusPoint">
+                                전환하기
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+            </v-row>
             <v-row class="width-1000">
                 <v-spacer></v-spacer>
                 <v-text-field
@@ -431,6 +492,9 @@ export default {
             project_num: '',
             proceedDialog: false,
             interestingDialog: false,
+            plusPointDialog: false,
+            minusPointDialog: false,
+            changePoint:0,
         };
     },
     mounted() {
@@ -628,6 +692,42 @@ export default {
         closeInterest() {
             this.interestingDialog = false;
         },
+        plusPoint(){
+            this.changePoint = this.changePoint*1 + this.memberInfo.point ;
+            http.put('/member/updatepoint',{
+                id:this.memberInfo.id,
+                point: this.changePoint
+            }).then((response)=>{
+                if(response.data.message == 'success'){
+                    alert('충전성공!');
+                    this.plusPointDialog = false;
+                    location.href='/mypage';
+                }else{
+                    alert('충전실패!');
+                    this.plusPointDialog = false;
+                }
+            }).catch(()=>{
+                alert('에러발생!');
+            })
+        },
+         minusPoint(){
+            this.changePoint = this.memberInfo.point - this.changePoint*1;
+            http.put('/member/updatepoint',{
+                id:this.memberInfo.id,
+                point: this.changePoint
+            }).then((response)=>{
+                if(response.data.message == 'success'){
+                    alert('전환성공!');
+                    this.minusPointDialog = false;
+                    location.href='/mypage';
+                }else{
+                    alert('전환실패!');
+                    this.minusPointDialog = false;
+                }
+            }).catch(()=>{
+                alert('에러발생!');
+            })
+        }
     },
 };
 </script>
