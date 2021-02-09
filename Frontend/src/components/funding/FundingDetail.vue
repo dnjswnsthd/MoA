@@ -285,7 +285,7 @@ export default {
                 console.log(data);
                 for (var i = 0; i < data.interestingProjectInfo.length; i++) {
                     if (data.interestingProjectInfo[i].project_num == this.project.project_num) {
-                        this.loveFlag = false;
+                        this.loveFlag = true;
                         break;
                     }
                 }
