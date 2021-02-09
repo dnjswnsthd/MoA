@@ -1,17 +1,26 @@
 <template>
     <div class="col-8 centerContent height-1000">
         <p class="evaluateTitle">평가</p>
-        <v-toolbar color="#c1a1d3" dark>
+        <v-toolbar
+            color="#ab47bc"
+            dark
+            style="border-top-left-radius:20px; border-top-right-radius:20px;"
+        >
             <v-tabs v-model="tab" align-with-title>
-                <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab v-if="mentor.id" @click="createCharts">
+                <v-tabs-slider color="yellow" style="border: 2px;"></v-tabs-slider>
+                <v-tab v-if="mentor.id" class="mt-2" @click="createCharts">
                     <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
-                <v-tab v-for="(mentee, index) in mentees" :key="index" @click="createCharts">
+                <v-tab
+                    class="mt-2"
+                    v-for="(mentee, index) in mentees"
+                    :key="index"
+                    @click="createCharts"
+                >
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
                 <v-spacer></v-spacer>
-                <v-btn text class="mt-3" @click="evaluate">제출하기</v-btn>
+                <v-btn text class="mt-3 evaluateFont mr-3" @click="evaluate">제출하기</v-btn>
             </v-tabs>
         </v-toolbar>
         <v-tabs-items v-model="tab">
@@ -25,31 +34,39 @@
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-card flat width="320">
-                        <v-card-text>
-                            <h2 class="pb-5 pt-5">
-                                {{ mentor.name }} 멘토를 평가해주세요!
-                                <span>
-                                    <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
-                                        초기화
-                                    </v-btn>
-                                </span>
-                            </h2>
-                            <p
-                                v-for="(item, index) in mentorEvaluationItem"
-                                :key="index"
-                                class="evaluateFont"
-                            >
-                                {{ item.title }}&nbsp;은/는 어땠나요?
-                                <v-rating
-                                    v-model="mentor[`${item.value}`]"
-                                    background-color="purple lighten-3"
-                                    color="#bc6ff1"
-                                    large
-                                ></v-rating>
-                            </p>
-                        </v-card-text>
-                    </v-card>
+                    <v-col>
+                        <v-card flat width="320">
+                            <v-card-text>
+                                <h2 class="pb-5 pt-5">
+                                    {{ mentor.name }} 멘토를 평가해주세요!
+                                    <span>
+                                        <v-btn
+                                            class="ml-3"
+                                            medium
+                                            outlined
+                                            color="#bc6ff1"
+                                            @click="initMentor"
+                                        >
+                                            초기화
+                                        </v-btn>
+                                    </span>
+                                </h2>
+                                <p
+                                    v-for="(item, index) in mentorEvaluationItem"
+                                    :key="index"
+                                    class="evaluateFont"
+                                >
+                                    {{ item.title }}&nbsp;은/는 어땠나요?
+                                    <v-rating
+                                        v-model="mentor[`${item.value}`]"
+                                        background-color="purple lighten-3"
+                                        color="#bc6ff1"
+                                        large
+                                    ></v-rating>
+                                </p>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
                     <v-spacer></v-spacer>
                 </v-row>
             </v-tab-item>
@@ -69,7 +86,13 @@
                                 {{ mentee.name }}&nbsp;을(를) 평가해주세요!
 
                                 <span>
-                                    <v-btn class="ml-3" color="#c1a1d3" @click="initMentee(index)">
+                                    <v-btn
+                                        class="ml-3"
+                                        medium
+                                        outlined
+                                        color="#bc6ff1"
+                                        @click="initMentee(index)"
+                                    >
                                         초기화
                                     </v-btn>
                                 </span>
