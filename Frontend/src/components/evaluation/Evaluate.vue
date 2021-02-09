@@ -1,17 +1,21 @@
 <template>
     <div class="col-8 centerContent height-1000">
         <p class="evaluateTitle">평가</p>
-        <v-toolbar color="#c1a1d3" dark>
+        <v-toolbar
+            color="#ab47bc"
+            dark
+            style="border-top-left-radius:20px; border-top-right-radius:20px;"
+        >
             <v-tabs v-model="tab" align-with-title>
-                <v-tabs-slider color="yellow"></v-tabs-slider>
-                <v-tab v-if="mentor.id">
+                <v-tabs-slider color="yellow" style="border: 2px;"></v-tabs-slider>
+                <v-tab v-if="mentor.id" class="mt-2">
                     <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
-                <v-tab v-for="(mentee, index) in mentees" :key="index">
+                <v-tab v-for="(mentee, index) in mentees" :key="index" class="mt-2">
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
                 <v-spacer></v-spacer>
-                <v-btn text class="mt-3" @click="evaluate">제출하기</v-btn>
+                <v-btn text class="mt-3 evaluateFont mr-3" @click="evaluate">제출하기</v-btn>
             </v-tabs>
         </v-toolbar>
         <v-tabs-items v-model="tab">
@@ -44,7 +48,13 @@
                                 <h2 class="pb-5 pt-5">
                                     {{ mentor.name }} 멘토를 평가해주세요!
                                     <span>
-                                        <v-btn class="ml-3" color="#c1a1d3" @click="initMentor">
+                                        <v-btn
+                                            class="ml-3"
+                                            medium
+                                            outlined
+                                            color="#bc6ff1"
+                                            @click="initMentor"
+                                        >
                                             초기화
                                         </v-btn>
                                     </span>
@@ -97,7 +107,13 @@
                                 {{ mentee.name }}&nbsp;을(를) 평가해주세요!
 
                                 <span>
-                                    <v-btn class="ml-3" color="#c1a1d3" @click="initMentee(index)">
+                                    <v-btn
+                                        class="ml-3"
+                                        medium
+                                        outlined
+                                        color="#bc6ff1"
+                                        @click="initMentee(index)"
+                                    >
                                         초기화
                                     </v-btn>
                                 </span>
@@ -127,18 +143,25 @@
 
 <script>
 import http from '@/util/http-common';
+import { mapState } from 'vuex';
 
 export default {
     name: 'Evaluate',
+    computed: {
+        ...mapState(['memberInfo', 'isLogin']),
+        getMemberInfo() {
+            return this.$store.getters.getMemberInfo;
+        },
+    },
     created() {
         this.project_num = this.$route.params.pn;
         http.get(`project/evaluateList/${this.project_num}`)
             .then(({ data }) => {
-                console.log(data.list);
                 data.list.forEach((el) => {
-                    console.log(el);
-                    if (el.status == 1) this.mentor = el;
-                    else this.mentees.push(el);
+                    if (el.id != this.memberInfo.id) {
+                        if (el.status == 1) this.mentor = el;
+                        else this.mentees.push(el);
+                    }
                 });
             })
             .catch(() => {
@@ -182,6 +205,23 @@ export default {
         },
         evaluate() {
             console.log(`evaluate()`);
+            // 평가 완료 상태 반영
+            http.put(`member/evaluate/change`, {
+                id: this.memberInfo.id,
+                project_num: this.project_num,
+            })
+                .then(({ data }) => {
+                    console.log(data.message);
+                    if (data.message == 'fail') {
+                        alert(`평가 등록 실패!!`);
+                        return;
+                    }
+                })
+                .catch(() => {
+                    alert(`평가 등록 실패`);
+                });
+
+            // 평가 반영
             http.post(`member/evaluate`, {
                 project_num: this.project_num,
                 mentor: this.mentor,
@@ -193,6 +233,8 @@ export default {
                 .catch(() => {
                     alert(`평가 등록 실패`);
                 });
+            alert(`평가 완료!`);
+
             this.$router.push({ name: 'MyPage' });
         },
     },
