@@ -276,6 +276,30 @@ export default {
 
         setTimeout(this.init, 200);
         // setTimeout(this.$refs.calendar.checkChange(), 1000);
+        http.get(`project/fundingDetail/${this.project_num}`)
+            .then((response) => {
+                if (response.data.message == 'success') {
+                    this.project = response.data.project;
+                    this.id = this.memberInfo.id;
+                } else {
+                    alert('정보조회실패');
+                }
+            })
+            .catch(() => {});
+
+        http.get(`project/interesting/${this.memberInfo.id}`)
+            .then(({ data }) => {
+                console.log(data);
+                for (var i = 0; i < data.interestingProjectInfo.length; i++) {
+                    if (data.interestingProjectInfo[i].project_num == this.project.project_num) {
+                        this.loveFlag = true;
+                        break;
+                    }
+                }
+            })
+            .catch(() => {
+                console.log('fffffff');
+            });
     },
 
     methods: {
