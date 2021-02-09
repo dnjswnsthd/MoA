@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moa.model.CompleteProjectInfoDto;
 import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 import com.moa.model.mapper.ProjectMapper;
@@ -33,7 +34,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public ProjectDto[] completeProjectInfo(String id) throws Exception {
+	public List<CompleteProjectInfoDto> completeProjectInfo(String id) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).completeProjectInfo(id);
 	}
 	

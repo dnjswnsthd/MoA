@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moa.model.CompleteProjectInfoDto;
 import com.moa.model.MemberDto;
 import com.moa.model.ProjectDto;
 import com.moa.model.service.ProjectService;
@@ -193,15 +195,16 @@ public class ProjectController {
 	 */
 	@ApiOperation(value = "종료 된 펀딩 정보 보기", notes = "마이 페이지에서 유저의 종료 된 펀딩 정보 보기", response = Map.class)
 	@GetMapping("/complete/{id}")
+	@Transactional
 	public ResponseEntity<Map<String, Object>> completeProjectInfo(
 			@PathVariable("id") @ApiParam(value = "종료 된 펀딩 정보를 불러올 아이디", required = true) String id) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		try {
 			// DB 에서 ID를 통해 자신의 종료 된 있는 프로젝트의 정보를 가지고 온다
-			ProjectDto[] completeProjectInfo = projectService.completeProjectInfo(id);
+			List<CompleteProjectInfoDto> list = projectService.completeProjectInfo(id);
 			resultMap.put("message", SUCCESS);
-			resultMap.put("completeProjectInfo", completeProjectInfo);
+			resultMap.put("list", list);
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
 			resultMap.put("message", e.getMessage());
