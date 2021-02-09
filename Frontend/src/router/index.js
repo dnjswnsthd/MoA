@@ -18,18 +18,11 @@ import Evaluate from '@/components/evaluation/Evaluate.vue';
 
 // import Sub from "@/views/Sub.vue";
 
-import Test from '@/components/views/Test.vue';
-
 Vue.use(VueRouter);
 
 export default new VueRouter({
     mode: 'history',
     routes: [
-        {
-            path: '/test',
-            name: 'Test',
-            components: { default: Test, header: MainHeader },
-        },
         {
             path: '/',
             name: 'Main',
@@ -80,6 +73,5 @@ export default new VueRouter({
             name: 'Evaluate',
             components: { default: Evaluate, header: SubHeader },
         },
-
     ],
 });
