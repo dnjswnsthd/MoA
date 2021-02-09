@@ -28,6 +28,7 @@ public interface MemberService {
 
 	public List<List<RankDto>> getRanking() throws Exception;
 
+	public void updateCompleteStatus(Map<String, Object> map);
 	public void updateEvaluate(EvaluateDto evaluateDto) throws Exception;
 
 }

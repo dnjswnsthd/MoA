@@ -3,14 +3,12 @@ package com.moa.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(value = "프로젝트 정보", description = "프로젝트의 상세 정보")
-public class ProjectDto {
+@ApiModel(value = "완료 된 프로젝트 정보", description = "종료된 프로젝트의 정보와 평가가 완료 되었는지에 대한 정보를 담아 전달")
+public class CompleteProjectInfoDto {
 	@ApiModelProperty(value = "프로젝트 번호")
 	private int project_num;
 	@ApiModelProperty(value = "프로젝트 명")
 	private String project_name;
-	@ApiModelProperty(value = "프로젝트 시작 날짜")
-	private String start_date;
 	@ApiModelProperty(value = "프로젝트 마감 날짜")
 	private String end_date;
 	@ApiModelProperty(value = "프로젝트 분류")
@@ -21,19 +19,11 @@ public class ProjectDto {
 	private int funding_cost;
 	@ApiModelProperty(value = "설명")
 	private String description;
-	@ApiModelProperty(value = "멘토 여부")
-	private String mentor_chk;
 	@ApiModelProperty(value = "펀딩 마감")
 	private String deadline;
-	@ApiModelProperty(value = "팀장")
-	private String leader;
+	@ApiModelProperty(value = "평가 완료 여부")
+	private int status;
 	
-	public String getLeader() {
-		return leader;
-	}
-	public void setLeader(String leader) {
-		this.leader = leader;
-	}
 	public int getProject_num() {
 		return project_num;
 	}
@@ -45,12 +35,6 @@ public class ProjectDto {
 	}
 	public void setProject_name(String project_name) {
 		this.project_name = project_name;
-	}
-	public String getStart_date() {
-		return start_date;
-	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
 	}
 	public String getEnd_date() {
 		return end_date;
@@ -82,16 +66,16 @@ public class ProjectDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getMentor_chk() {
-		return mentor_chk;
-	}
-	public void setMentor_chk(String mentor_chk) {
-		this.mentor_chk = mentor_chk;
-	}
 	public String getDeadline() {
 		return deadline;
 	}
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
