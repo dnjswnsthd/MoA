@@ -235,7 +235,10 @@
                   <h2 class="mb-1">
                     일정 설명
                   </h2>
-                  <v-textarea v-model="selectedEvent.description"></v-textarea>
+                  <v-textarea
+                    v-model="selectedEvent.description"
+                    readonly
+                  ></v-textarea>
                 </v-card-text>
                 <!-- <v-card-actions>
                   <v-btn text color="secondary" @click="selectedOpen = false">
