@@ -1,52 +1,38 @@
 @charset "utf-8";
+
 .mainTitle {
-  margin: 0 auto;
-  padding-bottom: 5px;
-  width: 20%;
-  border-bottom: 1px solid #1976d2;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1976d2;
 }
 .funding {
-  padding: 0;
-  background-size: 100% 100%;
-  background-position: center;
-  border-radius: 20px;
-  position: relative;
+    padding: 0;
 }
+.projectName {
+    color: #ab47bc;
+    font-weight: 900;
+}
+.pdate {
+    width: 50%;
+    margin: 0;
+    float: left;
+}
+
 #funding01 {
-  background: url('../../assets/images/main/sample01.jpg');
+    background: url('../../assets/images/main/sample01.jpg');
 }
 #funding02 {
-  background: url('../../assets/images/main/sample02.jpg');
+    background: url('../../assets/images/main/sample02.jpg');
 }
 #funding03 {
-  background: url('../../assets/images/main/sample03.jpg');
+    background: url('../../assets/images/main/sample03.jpg');
 }
 
 .rankingBox {
-  font-size: 12px;
+    padding: 0;
 }
 .rankingBox p {
-  line-height: 30px;
-}
-.invisibleBox {
-  padding: 10px;
-  width: 100%;
-  height: 50%;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  border-radius: 0 0 20px 20px;
-  z-index: 22;
-  position: absolute;
-  bottom: 0;
-}
-.shorthand {
-  display: -webkit-box;
-  word-wrap: break-word;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.invisibleBox p {
-  margin: 0;
+    text-align: center;
+    padding: 0;
+    margin: 0;
 }
