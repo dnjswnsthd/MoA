@@ -1,9 +1,9 @@
 <template>
     <v-container class="col-8">
-        <div class="progressing mt-10">
-            <h2 class="centerText mainTitle col-2">모집 중인 팀 펀딩</h2>
+        <div class="mt-10">
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-sm-12">모집 중인 팀 펀딩</h2>
             <div class="mt-10">
-                <v-row class="centerContent col-12 mx-4">
+                <v-row class="centerContent col-12">
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
@@ -15,8 +15,7 @@
                                 class="fullWidth fullHeight"
                                 alt="예시"
                             />
-                            <br />
-                            <div>
+                            <div class="mt-4">
                                 <v-progress-linear
                                     color="#CE93D8"
                                     :value="dategap[index]"
@@ -24,7 +23,7 @@
                                 ></v-progress-linear>
                             </div>
                             <ul>
-                                <li class="shorthand" style="color:#ab47bc; font-weight:900">
+                                <li class="shorthand projectName">
                                     프로젝트 이름 : {{ funding.project_name }}
                                 </li>
 
@@ -53,34 +52,37 @@
                 </v-row>
             </div>
         </div>
-        <div>
-            <h2 class="centerText mainTitle">멘토 랭킹</h2>
+        <div class="mt-10">
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-sm-12">멘토 랭킹</h2>
             <div class="mt-10">
-                <v-row class="fundingRow col-12 mx-1 ">
+                <v-row class="centerContent col-12">
                     <!-- <v-spacer></v-spacer> -->
                     <div
-                        class="col-4 height-300"
+                        class="col-lg-4 col-md-6 col-sm-6 my-5 px-2"
                         v-for="(rankName, index) in rankings"
                         :key="index"
                     >
-                        <div class="halfHeight">
-                            <p class="centerText" style="font-size:20px">{{ rankName }}</p>
+                        <div>
+                            <p class="centerText font-20">{{ rankName }}</p>
                         </div>
-                        <v-col
-                            class="rankingBox"
+
+                        <v-row
+                            class="mx-2 rankingBox mt-10"
                             v-for="(rankData, index) in rankDatas[index]"
                             :key="index"
                         >
-                            <v-row class="halfHeight mx-2">
-                                <v-col class="centerText col-2"> {{ index + 1 }}위 </v-col>
-                                <v-col class="centerText col-7">
+                            <v-row>
+                                <p class="centerText shorthand col-lg-2 col-md-1 col-sm-1">
+                                    {{ index + 1 }}위
+                                </p>
+                                <p class="centerText shorthand col-lg-7 col-md-8 col-sm-8 ">
                                     {{ rankData.id }}
-                                </v-col>
-                                <v-col class="rightText col-3">
+                                </p>
+                                <p class="rightText shorthand col-lg-3 col-md-2 col-sm-2">
                                     {{ rankData.score }}
-                                </v-col>
+                                </p>
                             </v-row>
-                        </v-col>
+                        </v-row>
                     </div>
                 </v-row>
             </div>
@@ -136,14 +138,6 @@ export default {
     },
     data() {
         return {
-            fundings: [
-                'funding01',
-                'funding02',
-                'funding03',
-                'funding03',
-                'funding01',
-                'funding02',
-            ],
             fundingDatas: [],
             interestingList: [],
             rankings: ['경험치', '도덕성', '적극성', '신뢰도', '전문성', '리더쉽'],
@@ -221,10 +215,5 @@ export default {
 ul,
 li {
     padding: 5px;
-}
-.pdate {
-    width: 50%;
-    margin: 0;
-    float: left;
 }
 </style>
