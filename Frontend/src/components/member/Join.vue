@@ -114,7 +114,7 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary" text>
+      <v-btn color="primary" text @click="reset">
         초기화
       </v-btn>
       <v-btn color="primary" text @click="join">
@@ -167,8 +167,15 @@ export default {
   },
   methods: {
     validEmail(email) {
-      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-      return re.test(email);
+      return /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i.test(
+        email
+      );
+    },
+    validPassword(password) {
+      return /^.*(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*#?&]).*$/.test(password);
+    },
+    validPhone(phone) {
+      return /^\d{3}-\d{3,4}-\d{4}$/.test(phone);
     },
     openMentor() {
       (this.mentorForm = true),
@@ -189,6 +196,10 @@ export default {
         });
       } else if (!this.idChecked) {
         swal('아이디 중복 검사를 해 주세요!', {
+          icon: 'error',
+        });
+      } else if (!this.validPassword(this.member.pw)) {
+        swal('숫자와 문자, 특수문자 포함 형태의 8자리 이상으로 입력해주세요.', {
           icon: 'error',
         });
       } else if (this.member.pw == '') {
@@ -219,17 +230,41 @@ export default {
         swal('전화번호를 입력해 주세요!', {
           icon: 'error',
         });
+      } else if (!this.validPhone(this.member.phone)) {
+        swal('핸드폰 번호 양식에 맞춰 입력해 주세요!', {
+          icon: 'error',
+        });
+      } else if (this.member.favorite_1 == '') {
+        swal('관심분야 1 을 입력해 주세요!', {
+          icon: 'error',
+        });
+      } else if (this.member.favorite_2 == '') {
+        swal('관심분야 2 을 입력해 주세요!', {
+          icon: 'error',
+        });
+      } else if (this.member.favorite_3 == '') {
+        swal('관심분야 3 을 입력해 주세요!', {
+          icon: 'error',
+        });
+      } else if (this.member.introduce == '') {
+        swal('소개를 입력해 주세요!', {
+          icon: 'error',
+        });
       } else {
         let data = this.member;
         console.log(data);
         http
           .post(`/member/join`, data)
           .then(() => {
-            alert('회원가입 성공!');
+            swal('회원가입 성공!', {
+              icon: 'success',
+            });
             location.href = '/';
           })
           .catch(() => {
-            alert('회원가입 실패!');
+            swal('회원가입 실패!', {
+              icon: 'error',
+            });
           });
       }
     },
@@ -257,6 +292,19 @@ export default {
           })
           .catch();
       }
+    },
+    reset() {
+      this.member.id = '';
+      this.member.pw = '';
+      this.pwChecked = '';
+      this.member.name = '';
+      this.member.age = Number;
+      this.member.major = '';
+      this.member.phone = '';
+      this.member.favorite_1 = '';
+      this.member.favorite_2 = '';
+      this.member.favorite_3 = '';
+      this.member.introduce = '';
     },
   },
 };
