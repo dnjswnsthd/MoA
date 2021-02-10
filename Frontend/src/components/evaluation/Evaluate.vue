@@ -8,15 +8,10 @@
         >
             <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow" style="border: 2px;"></v-tabs-slider>
-                <v-tab v-if="mentor.id" class="mt-2" @click="createCharts">
+                <v-tab v-if="mentor.id" class="mt-2">
                     <p class="evaluateFont">{{ mentor.name }} 멘토</p>
                 </v-tab>
-                <v-tab
-                    class="mt-2"
-                    v-for="(mentee, index) in mentees"
-                    :key="index"
-                    @click="createCharts"
-                >
+                <v-tab class="mt-2" v-for="(mentee, index) in mentees" :key="index">
                     <p class="evaluateFont">{{ mentee.name }}</p>
                 </v-tab>
                 <v-spacer></v-spacer>
@@ -30,7 +25,11 @@
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
                         <div class="width-500 height-300">
-                            <canvas class="canvas" height="40vh" width="80vw"></canvas>
+                            <RadarCanvas
+                                :id="mentor.id"
+                                :labels="mentorEv.labels"
+                                :data="mentorEv.score"
+                            ></RadarCanvas>
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -51,14 +50,10 @@
                                         </v-btn>
                                     </span>
                                 </h2>
-                                <p
-                                    v-for="(item, index) in mentorEvaluationItem"
-                                    :key="index"
-                                    class="evaluateFont"
-                                >
-                                    {{ item.title }}&nbsp;은/는 어땠나요?
+                                <p v-for="index in 5" :key="index" class="evaluateFont">
+                                    {{ mentorEv.labels[index - 1] }}&nbsp;은/는 어땠나요?
                                     <v-rating
-                                        v-model="mentor[`${item.value}`]"
+                                        v-model="mentorEv.score[index - 1]"
                                         background-color="purple lighten-3"
                                         color="#bc6ff1"
                                         large
@@ -76,7 +71,12 @@
                     <v-spacer></v-spacer>
                     <v-col style="margin: auto;">
                         <div class="width-500 height-300">
-                            <canvas class="canvas" height="40vh" width="80vw"></canvas>
+                            <!-- <canvas class="canvas" height="40vh" width="80vw"></canvas> -->
+                            <RadarCanvas
+                                :id="mentee.id"
+                                :labels="menteeEv.labels"
+                                :data="menteeEv.scores[index]"
+                            ></RadarCanvas>
                         </div>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -97,14 +97,10 @@
                                     </v-btn>
                                 </span>
                             </h2>
-                            <p
-                                v-for="(item, index) in menteeEvaluationItem"
-                                :key="index"
-                                class="evaluateFont"
-                            >
-                                {{ item.title }}&nbsp;은/는 어땠나요?
+                            <p v-for="i in 5" :key="i" class="evaluateFont">
+                                {{ menteeEv.labels[i - 1] }}&nbsp;은/는 어땠나요?
                                 <v-rating
-                                    v-model="mentee[`${item.value}`]"
+                                    v-model="menteeEv.scores[index][i - 1]"
                                     background-color="purple lighten-3"
                                     color="#bc6ff1"
                                     large
@@ -122,10 +118,13 @@
 <script>
 import http from '@/util/http-common';
 import { mapState } from 'vuex';
-import Chart from 'chart.js';
+import RadarCanvas from './RadarCanvas.vue';
 
 export default {
     name: 'Evaluate',
+    components: {
+        RadarCanvas,
+    },
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
         getMemberInfo() {
@@ -136,63 +135,25 @@ export default {
         this.project_num = this.$route.params.pn;
         setTimeout(this.init(), 200);
     },
-    watch: {
-        mentor() {
-            this.createCharts();
-        },
-    },
     data() {
         return {
             project_num: Number,
             tab: null,
-            mentorEvaluationItem: [
-                { title: '도덕성', value: 'morality' },
-                { title: '적극성', value: 'positiveness' },
-                { title: '신뢰성', value: 'reliability' },
-                { title: '전문성', value: 'professional' },
-                { title: '리더십', value: 'leadership' },
-            ],
-            menteeEvaluationItem: [
-                { title: '의사소통', value: 'communication' },
-                { title: '책임감', value: 'responsibility' },
-                { title: '수행능력', value: 'performance' },
-                { title: '수행자세', value: 'positiveness' },
-                { title: '리더십', value: 'leadership' },
-            ],
-            mentorData: {
+            mentorEv: {
                 labels: ['도덕성', '적극성', '신뢰성', '전문성', '리더십'],
-                datasets: [
-                    {
-                        data: [5, 3, 4, 2, 5],
-                        backgroundColor: 'rgba(188, 111, 241, .5)',
-                        borderColor: '#ab47bc',
-                        borderWidth: '1',
-                    },
-                ],
+                values: ['morality', 'positiveness', 'reliability', 'professional', 'leadership'],
+                score: [0, 0, 0, 0, 0],
             },
-            options: {
-                legend: {
-                    display: false,
-                },
-                reponsive: false,
-                scale: {
-                    angleLines: {
-                        display: false,
-                    },
-                    ticks: {
-                        min: 0,
-                        max: 5,
-                        stepSize: 1,
-                    },
-                    pointLabels: {
-                        fontSize: 18,
-                        fontColor: '#ab47bc',
-                        fontFamily: 'CookieRunOTF-Bold',
-                        src: `url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff')`,
-                        fontWeight: 'normal',
-                        fontStyle: 'normal',
-                    },
-                },
+            menteeEv: {
+                labels: ['의사소통', '책임감', '수행능력', '수행자세', '리더십'],
+                values: [
+                    'communication',
+                    'responsibility',
+                    'performance',
+                    'positiveness',
+                    'leadership',
+                ],
+                scores: [],
             },
             mentor: {},
             mentees: [],
@@ -209,6 +170,7 @@ export default {
                                 this.mentor = el;
                             } else {
                                 this.mentees.push(el);
+                                this.menteeEv.scores.push([0, 0, 0, 0, 0]);
                             }
                         }
                     });
@@ -217,8 +179,8 @@ export default {
                     alert(`평가 대상자 가져오기 실패`);
                 });
             if (this.mentor) {
-                this.createCharts();
                 console.log('ㅅㅄㅄㅄㅅㅄㅄㅂ');
+                this.createCharts();
             }
         },
         initMentor() {
@@ -233,6 +195,18 @@ export default {
         },
         evaluate() {
             console.log(`evaluate()`);
+
+            for (var i = 0; i < 5; i++) {
+                this.mentor[this.mentorEv.values[i]] = this.mentorEv.score[i];
+            }
+            this.menteeEv.scores.forEach((el, index) => {
+                console.log(`index : ${index}`);
+                console.log(el);
+                for (i = 0; i < 5; i++) {
+                    this.mentees[index][this.menteeEv.values[i]] = this.menteeEv.scores[index][i];
+                }
+            });
+
             // 평가 완료 상태 반영
             http.put(`member/evaluate/change`, {
                 id: this.memberInfo.id,
@@ -264,29 +238,6 @@ export default {
             alert(`평가 완료!`);
 
             this.$router.push({ name: 'MyPage' });
-        },
-        createCharts() {
-            const ctx = document.getElementsByClassName('canvas');
-
-            for (var i = 0; i < ctx.length; i++) {
-                console.log(ctx[i]);
-                new Chart(ctx[i], {
-                    type: 'radar',
-                    data: this.mentorData,
-                    options: this.options,
-                });
-            }
-        },
-        chart() {
-            console.log(`call chart`);
-            console.log(this.mentor);
-            // if (this.mentor.id) {
-            //     this.createCharts(this.mentor.id);
-            // }
-            console.log(this.mentees);
-            this.mentees.forEach((el) => {
-                this.createCharts(el.id);
-            });
         },
     },
 };
