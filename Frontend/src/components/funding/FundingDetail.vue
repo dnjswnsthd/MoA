@@ -235,7 +235,7 @@
                   <h2 class="mb-1">
                     일정 설명
                   </h2>
-                  <h3>{{ selectedEvent.description }}</h3>
+                  <v-textarea v-model="selectedEvent.description"></v-textarea>
                 </v-card-text>
                 <!-- <v-card-actions>
                   <v-btn text color="secondary" @click="selectedOpen = false">
