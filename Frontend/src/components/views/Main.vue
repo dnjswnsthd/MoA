@@ -1,18 +1,18 @@
 <template>
     <v-container class="col-8">
         <div class="progressing mt-10">
-            <h2 class="centerText mainTitle">진행중인 팀 펀딩</h2>
+            <h2 class="centerText mainTitle col-2">모집 중인 팀 펀딩</h2>
             <div class="mt-10">
-                <v-row class="centerContent my-10 col-12 mx-4">
+                <v-row class="centerContent col-12 mx-4">
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
-                        class="funding col-3 my-5 mx-12"
+                        class="funding col-lg-4 col-md-6 col-sm-6 my-5 px-2"
                     >
                         <div @click="goDetail(funding.project_num)">
                             <img
                                 src="@/assets/images/funding/fox.jpg"
-                                class="fullWidth"
+                                class="fullWidth fullHeight"
                                 alt="예시"
                             />
                             <br />
