@@ -139,8 +139,6 @@
       </v-col>
     </div>
 
-    <p>{{ selectedEvent.description }}</p>
-
     <div class="col-8 centerContent">
       <v-row class="fill-height">
         <v-col>
@@ -234,10 +232,11 @@
                 </v-toolbar>
 
                 <v-card-text>
-                  <h2 class="mb-1">일정 설명</h2>
+                  <h2 class="mb-1">
+                    일정 설명
+                  </h2>
                   <h3>{{ selectedEvent.description }}</h3>
                 </v-card-text>
-
                 <!-- <v-card-actions>
                   <v-btn text color="secondary" @click="selectedOpen = false">
                     Cancel
