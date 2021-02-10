@@ -22,19 +22,4 @@ export default {
 @import './assets/css/funding.css';
 @import './assets/css/fundingdetail.css';
 @import './assets/css/category.css';
-
-.wrap {
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 0px;
-}
-.wrap_2 {
-    padding-bottom: 70px;
-}
-
-* {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
 </style>
