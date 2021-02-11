@@ -1,5 +1,5 @@
 <template>
-    <v-container class="col-lg-8 col-md-12 col-12 centerContent">
+    <div class="col-8 centerContent">
         <div>
             <h1 class="height-70">{{ project.project_name }}</h1>
             <h2 class="height-70">
@@ -117,7 +117,7 @@
                 </v-sheet>
             </drop>
         </div>
-    </v-container>
+    </div>
 </template>
 
 <script>
