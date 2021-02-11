@@ -27,6 +27,7 @@ export default {
                     },
                 ],
             },
+            // chart options
             options: {
                 legend: {
                     display: false,
@@ -51,10 +52,13 @@ export default {
                     },
                 },
             },
+            chratObject: Object,
         };
     },
     watch: {
         data() {
+            // 데이터가 변경 될 때마다 차트를 새로 그린다
+            // this.chratObject.update();
             this.createCharts();
         },
     },
@@ -69,7 +73,7 @@ export default {
 
             console.log(ctx);
 
-            new Chart(ctx, {
+            this.chratObject = new Chart(ctx, {
                 type: 'radar',
                 data: this.memberData,
                 options: this.options,
