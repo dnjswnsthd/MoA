@@ -19,7 +19,7 @@ export default {
 <style>
 @import './assets/css/reset.css';
 @import './assets/css/member.css';
-@import './assets/css/funding.css';
-@import './assets/css/fundingdetail.css';
+/* @import './assets/css/funding.css'; */
+/* @import './assets/css/fundingdetail.css'; */
 @import './assets/css/category.css';
 </style>

@@ -1,13 +1,13 @@
 <template>
-    <v-container class="col-8">
+    <v-container class="col-lg-8 col-md-8 col-12">
         <div class="mt-10">
-            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-xs-12">모집 중인 팀 펀딩</h2>
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-12">모집 중인 팀 펀딩</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
-                        class="funding col-lg-4 col-md-6 col-xs-6 my-5 px-2"
+                        class="funding col-lg-4 col-md-6 col-6 my-5 px-2"
                     >
                         <div @click="goDetail(funding.project_num)">
                             <img
@@ -53,35 +53,35 @@
             </div>
         </div>
         <div class="mt-10">
-            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-xs-12">멘토 랭킹</h2>
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-12">멘토 랭킹</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
                     <!-- <v-spacer></v-spacer> -->
                     <div
-                        class="col-lg-4 col-md-6 col-xs-6 my-5 px-2"
+                        class="col-lg-4 col-md-6 col-12 my-lg-5 px-lg-2"
                         v-for="(rankName, index) in rankings"
                         :key="index"
                     >
-                        <div>
-                            <p class="centerText font-20">{{ rankName }}</p>
-                        </div>
+                        <p class="centerText font-20 " style="margin-bottom:5px;">
+                            {{ rankName }}
+                        </p>
 
                         <v-row
-                            class="mx-2 rankingBox mt-10"
+                            class="mx-2 rankingBox"
                             v-for="(rankData, index) in rankDatas[index]"
                             :key="index"
                         >
-                            <v-row>
-                                <p class="centerText shorthand col-lg-2 col-md-1 col-xs-1">
+                            <div class="rankInfo col-12">
+                                <p class="centerText shorthand col-lg-2 col-md-2 col-2">
                                     {{ index + 1 }}위
                                 </p>
-                                <p class="centerText shorthand col-lg-7 col-md-8 col-xs-8 ">
+                                <p class="centerText shorthand col-lg-7 col-md-8 col-8 ">
                                     {{ rankData.id }}
                                 </p>
-                                <p class="rightText shorthand col-lg-3 col-md-2 col-xs-2">
+                                <p class="rightText shorthand col-lg-3 col-md-2 col-2">
                                     {{ rankData.score }}
                                 </p>
-                            </v-row>
+                            </div>
                         </v-row>
                     </div>
                 </v-row>
@@ -215,5 +215,8 @@ export default {
 ul,
 li {
     padding: 5px;
+}
+.row + .row {
+    margin-top: 10px;
 }
 </style>

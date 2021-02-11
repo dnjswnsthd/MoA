@@ -334,25 +334,6 @@ a {
     margin: 0 auto;
 }
 
-.fundingBtn {
-    width: 150px;
-    height: 40px;
-    border-radius: 5px;
-    text-align: center;
-    background-color: #ab47bc;
-    font-size: 20px;
-    color: white;
-    height: 40px;
-    line-height: 40px;
-}
-
-.pageTitle {
-    text-decoration: underline overline;
-    text-underline-position: under;
-    font-size: 36px;
-    line-height: 100px;
-}
-
 .text-fff {
     color: #fff;
 }
@@ -371,4 +352,9 @@ a {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.v-application p {
+    margin: 0;
+    padding: 0;
 }
