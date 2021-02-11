@@ -1,13 +1,13 @@
 <template>
     <v-container class="col-8">
         <div class="mt-10">
-            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-sm-12">모집 중인 팀 펀딩</h2>
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-xs-12">모집 중인 팀 펀딩</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
                     <v-col
                         v-for="(funding, index) in fundingDatas"
                         :key="index"
-                        class="funding col-lg-4 col-md-6 col-sm-6 my-5 px-2"
+                        class="funding col-lg-4 col-md-6 col-xs-6 my-5 px-2"
                     >
                         <div @click="goDetail(funding.project_num)">
                             <img
@@ -53,12 +53,12 @@
             </div>
         </div>
         <div class="mt-10">
-            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-sm-12">멘토 랭킹</h2>
+            <h2 class="centerText mainTitle col-lg-2 col-md-12 col-xs-12">멘토 랭킹</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
                     <!-- <v-spacer></v-spacer> -->
                     <div
-                        class="col-lg-4 col-md-6 col-sm-6 my-5 px-2"
+                        class="col-lg-4 col-md-6 col-xs-6 my-5 px-2"
                         v-for="(rankName, index) in rankings"
                         :key="index"
                     >
@@ -72,13 +72,13 @@
                             :key="index"
                         >
                             <v-row>
-                                <p class="centerText shorthand col-lg-2 col-md-1 col-sm-1">
+                                <p class="centerText shorthand col-lg-2 col-md-1 col-xs-1">
                                     {{ index + 1 }}위
                                 </p>
-                                <p class="centerText shorthand col-lg-7 col-md-8 col-sm-8 ">
+                                <p class="centerText shorthand col-lg-7 col-md-8 col-xs-8 ">
                                     {{ rankData.id }}
                                 </p>
-                                <p class="rightText shorthand col-lg-3 col-md-2 col-sm-2">
+                                <p class="rightText shorthand col-lg-3 col-md-2 col-xs-2">
                                     {{ rankData.score }}
                                 </p>
                             </v-row>
