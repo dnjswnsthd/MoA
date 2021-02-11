@@ -1,29 +1,31 @@
 <template>
-    <div class="cardBox">
-        <h1 class="width-1000 centerText">내 정보</h1>
-        <form class="width-1000">
-            <v-row class="width-1000">
-                <v-spacer></v-spacer>
+    <v-container class="col-lg-6 col-md-8 col-12 centerContent">
+        <h1 class="centerText">내 정보</h1>
+        <form class="col-lg-8 col-md-8 col-12 centerContent">
+            <v-row>
                 <v-text-field
                     label="ID"
                     type="text"
-                    class="width-700"
+                    style="width:60%;"
                     v-model="memberInfo.id"
                     readonly
                 ></v-text-field>
-                <v-spacer></v-spacer>
             </v-row>
-            <v-row class="width-1000">
-                <v-spacer></v-spacer>
+            <v-row>
                 <v-text-field
                     label="MoA Point"
                     type="text"
-                    class="width-100 ml-5"
+                    style="width:15%;"
                     v-model="memberInfo.point"
                 ></v-text-field>
                 <v-dialog v-model="plusPointDialog" max-width="290">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="ml-4" style="background-color:#ab47bc; color:white" v-bind="attrs" v-on="on">
+                        <v-btn
+                            class="ml-4"
+                            style="background-color:#ab47bc; color:white"
+                            v-bind="attrs"
+                            v-on="on"
+                        >
                             충전
                         </v-btn>
                     </template>
@@ -32,10 +34,15 @@
                             충전
                         </v-card-title>
                         <v-card-text>
-                                <div>
-                                    <p style="padding:0">충전 할 포인트</p>
-                                    <v-text-field label="POINT" type="text" required v-model="changePoint"></v-text-field>
-                                </div>
+                            <div>
+                                <p style="padding:0">충전 할 포인트</p>
+                                <v-text-field
+                                    label="POINT"
+                                    type="text"
+                                    required
+                                    v-model="changePoint"
+                                ></v-text-field>
+                            </div>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -47,7 +54,12 @@
                 </v-dialog>
                 <v-dialog v-model="minusPointDialog" max-width="290">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="ml-4" v-bind="attrs" v-on="on" style="background-color:#ab47bc; color:white">
+                        <v-btn
+                            class="ml-4"
+                            v-bind="attrs"
+                            v-on="on"
+                            style="background-color:#ab47bc; color:white"
+                        >
                             전환
                         </v-btn>
                     </template>
@@ -56,10 +68,15 @@
                             전환
                         </v-card-title>
                         <v-card-text>
-                                <div>
-                                    <p style="padding:0">전환 할 포인트</p>
-                                    <v-text-field label="POINT" type="text" required v-model="changePoint"></v-text-field>
-                                </div>
+                            <div>
+                                <p style="padding:0">전환 할 포인트</p>
+                                <v-text-field
+                                    label="POINT"
+                                    type="text"
+                                    required
+                                    v-model="changePoint"
+                                ></v-text-field>
+                            </div>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
@@ -71,18 +88,12 @@
                 </v-dialog>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
             </v-row>
-            <v-row class="width-1000">
-                <v-spacer></v-spacer>
+            <v-row>
                 <v-text-field
                     label="NAME"
                     type="text"
-                    class="width-250"
+                    style="width:30%;"
                     v-model="memberInfo.name"
                     readonly
                 ></v-text-field>
@@ -90,25 +101,21 @@
                 <v-text-field
                     label="AGE"
                     type="text"
-                    class="width-250"
+                    style="width:30%;"
                     v-model="memberInfo.age"
                     readonly
                 ></v-text-field>
-                <v-spacer></v-spacer>
             </v-row>
 
-            <v-row class="width-1000">
-                <v-spacer></v-spacer>
+            <v-row>
                 <v-text-field
                     label="MAJOR"
                     type="text"
-                    class="width-700"
+                    class="width:60%;"
                     v-model="memberInfo.major"
                 ></v-text-field>
-                <v-spacer></v-spacer>
             </v-row>
-            <v-row class="width-1000">
-                <v-spacer></v-spacer>
+            <v-row>
                 <v-text-field
                     label="favorite 1"
                     type="text"
@@ -129,280 +136,256 @@
                     class="width-100"
                     v-model="memberInfo.favorite_3"
                 ></v-text-field>
-                <v-spacer></v-spacer>
             </v-row>
         </form>
 
-        <div>
-            <v-row class="btnBox">
-                <v-spacer></v-spacer>
-                <div class="col-3">
-                    <router-link to="/">
-                        <p class="fundingBtn">
-                            비밀번호 변경
-                        </p>
-                    </router-link>
-                </div>
-                <v-spacer></v-spacer>
+        <v-row class="btnBox">
+            <v-spacer></v-spacer>
+            <div class="col-3" @click="movePage('FindPassword')">
+                <p class="fundingBtn">
+                    비밀번호 변경
+                </p>
+            </div>
+            <v-spacer></v-spacer>
 
-                <!-- <v-btn
-                color="primary"
-                text
-                >
-                내 정보 변경
-                </v-btn> -->
-                <v-dialog v-model="modifyDialog" persistent max-width="290">
-                    <template v-slot:activator="{ on, attrs }">
-                        <div class="col-3">
-                            <p class="fundingBtn" v-bind="attrs" v-on="on">
-                                내 정보 변경
-                            </p>
-                        </div>
-                    </template>
-                    <v-card>
-                        <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
-                        <v-card-text>
-                            <v-text-field
-                                label="Password"
-                                type="password"
-                                class="width-700"
-                                v-model="password"
-                            ></v-text-field>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn small outlined color="#bc6ff1" @click="modifyDialog = false">
-                                취소
-                            </v-btn>
-                            <v-btn small outlined color="#bc6ff1" @click="modifyMember">
-                                변경
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="deleteDialog" persistent max-width="290">
-                    <template v-slot:activator="{ on, attrs }">
-                        <div class="col-3">
-                            <p class="fundingBtn" v-bind="attrs" v-on="on">
-                                탈퇴 하기
-                            </p>
-                        </div>
-                    </template>
-                    <v-card>
-                        <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
-                        <v-card-text>
-                            <v-text-field
-                                label="Password"
-                                type="password"
-                                class="width-700"
-                                v-model="password"
-                            ></v-text-field>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="deleteDialog = false">
-                                취소
-                            </v-btn>
-                            <v-btn color="green darken-1" text @click="deleteMember">
-                                탈퇴
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-                <v-spacer></v-spacer>
-            </v-row>
-        </div>
+            <v-dialog v-model="modifyDialog" persistent max-width="290">
+                <template v-slot:activator="{ on, attrs }">
+                    <div class="col-3">
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">
+                            내 정보 변경
+                        </p>
+                    </div>
+                </template>
+                <v-card>
+                    <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
+                    <v-card-text>
+                        <v-text-field
+                            label="Password"
+                            type="password"
+                            class="width-700"
+                            v-model="password"
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn small outlined color="#bc6ff1" @click="modifyDialog = false">
+                            취소
+                        </v-btn>
+                        <v-btn small outlined color="#bc6ff1" @click="modifyMember">
+                            변경
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-spacer></v-spacer>
+
+            <v-dialog v-model="deleteDialog" persistent max-width="290">
+                <template v-slot:activator="{ on, attrs }">
+                    <div class="col-3">
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">
+                            탈퇴 하기
+                        </p>
+                    </div>
+                </template>
+                <v-card>
+                    <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
+                    <v-card-text>
+                        <v-text-field
+                            label="Password"
+                            type="password"
+                            class="width-700"
+                            v-model="password"
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="deleteDialog = false">
+                            취소
+                        </v-btn>
+                        <v-btn color="green darken-1" text @click="deleteMember">
+                            탈퇴
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-spacer></v-spacer>
+        </v-row>
 
         <div class="projectBox">
             <v-tabs left slider-color="yellow">
+                <!--원상복구시 inline style로 color주기-->
                 <v-toolbar color="#ab47bc" dark class="mb-10" style="border-radius:20px">
-                    <v-tab style="font-size:18px; color:white" class="mb-2">진행중인 펀딩</v-tab>
-                    <v-tab style="font-size:18px; color:white" class="mb-2"
-                        >참여 대기 중 펀딩</v-tab
-                    >
-                    <v-tab style="font-size:18px; color:white" class="mb-2">종료된 펀딩</v-tab>
-                    <v-tab style="font-size:18px; color:white" class="mb-2">관심중인 펀딩</v-tab>
+                    <v-tab class="mb-2 mypageTabs">진행중인 펀딩</v-tab>
+                    <v-tab class="mb-2 mypageTabs">참여 대기 중 펀딩</v-tab>
+                    <v-tab class="mb-2 mypageTabs">종료된 펀딩</v-tab>
+                    <v-tab class="mb-2 mypageTabs">관심중인 펀딩</v-tab>
                 </v-toolbar>
                 <v-tab-item v-for="n in 4" :key="n">
                     <v-container fluid>
                         <v-row v-if="n == 1">
-                            <v-col
+                            <div
                                 v-for="(proceed, index) in proceeding"
                                 :key="index"
-                                cols="12"
-                                md="4"
+                                class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
                                     src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200"
                                     alt="예시"
+                                    class="fullWidth height-200 centerContent mb-2"
                                 />
 
-                                <div style="color: black;">
-                                    <v-row>
-                                        <p class="shorthand col-7">
-                                            {{ proceed.project_name }}
-                                        </p>
-                                        <v-dialog
-                                            v-model="proceedDialog"
-                                            scrollable
-                                            max-width="300px"
-                                        >
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <div class="mt-4 ml-9">
-                                                    <v-btn
-                                                        medium
-                                                        class="ma-2"
-                                                        outlined
-                                                        color="#bc6ff1"
-                                                        @click="projectState(proceed.project_num)"
-                                                        v-bind="attrs"
-                                                        v-on="on"
+                                <v-row>
+                                    <p class="shorthand col-12 col-md-6 col-lg-6 centerText">
+                                        {{ proceed.project_name }}
+                                    </p>
+                                    <v-spacer></v-spacer>
+                                    <v-dialog v-model="proceedDialog" scrollable max-width="300px">
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn
+                                                medium
+                                                class="col-12 col-md-2 col-lg-2 centerContent"
+                                                outlined
+                                                color="#bc6ff1"
+                                                @click="projectState(proceed.project_num)"
+                                                v-bind="attrs"
+                                                v-on="on"
+                                            >
+                                                상태보기
+                                            </v-btn>
+                                        </template>
+                                        <v-card>
+                                            <v-card-title>참여 인원</v-card-title>
+                                            <v-divider></v-divider>
+                                            <v-card-text style="height: 300px;">
+                                                <div class="mt-3">
+                                                    <v-row
+                                                        v-for="(proceedMember,
+                                                        index) in proceedingMember"
+                                                        :key="index"
                                                     >
-                                                        상태보기
-                                                    </v-btn>
-                                                </div>
-                                            </template>
-                                            <v-card>
-                                                <v-card-title>참여 인원</v-card-title>
-                                                <v-divider></v-divider>
-                                                <v-card-text style="height: 300px;">
-                                                    <div class="mt-3">
-                                                        <v-row
-                                                            v-for="(proceedMember,
-                                                            index) in proceedingMember"
-                                                            :key="index"
+                                                        <p class="shorthand col-7">
+                                                            {{ proceedMember.id }}
+                                                        </p>
+                                                        <v-btn
+                                                            class="my-auto"
+                                                            small
+                                                            outlined
+                                                            color="#bc6ff1"
+                                                            @click="
+                                                                enjoyGroup(
+                                                                    proceedMember.id,
+                                                                    proceed.funding_cost,
+                                                                    proceed.participants
+                                                                )
+                                                            "
+                                                            >수락</v-btn
                                                         >
-                                                            <p
-                                                                class="shorthand col-7 ml-2"
-                                                                style="color: black;"
-                                                            >
-                                                                {{ proceedMember.id }}
-                                                            </p>
-                                                            <v-btn
-                                                                class="my-auto"
-                                                                small
-                                                                outlined
-                                                                color="#bc6ff1"
-                                                                @click="
-                                                                    enjoyGroup(
-                                                                        proceedMember.id,
-                                                                        proceed.funding_cost,
-                                                                        proceed.participants
-                                                                    )
-                                                                "
-                                                                >수락</v-btn
-                                                            >
-                                                            <v-btn
-                                                                class="my-auto"
-                                                                small
-                                                                outlined
-                                                                color="#bc6ff1"
-                                                                @click="
-                                                                    refuseGroup(proceedMember.id)
-                                                                "
-                                                                >거절</v-btn
-                                                            >
-                                                        </v-row>
-                                                    </div>
-                                                </v-card-text>
+                                                        <v-btn
+                                                            class="my-auto"
+                                                            small
+                                                            outlined
+                                                            color="#bc6ff1"
+                                                            @click="refuseGroup(proceedMember.id)"
+                                                            >거절</v-btn
+                                                        >
+                                                    </v-row>
+                                                </div>
+                                            </v-card-text>
 
-                                                <v-divider></v-divider>
-                                                <v-card-actions>
-                                                    <v-btn
-                                                        color="blue darken-1"
-                                                        text
-                                                        @click="proceedDialog = false"
-                                                    >
-                                                        Close
-                                                    </v-btn>
-                                                </v-card-actions>
-                                            </v-card>
-                                        </v-dialog>
-                                    </v-row>
-                                </div>
-                            </v-col>
+                                            <v-divider></v-divider>
+                                            <v-card-actions>
+                                                <v-btn
+                                                    color="blue darken-1"
+                                                    text
+                                                    @click="proceedDialog = false"
+                                                >
+                                                    Close
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-row>
+                            </div>
                         </v-row>
                         <v-row v-if="n == 2">
-                            <v-col v-for="(wait, index) in waiting" :key="index" cols="12" md="4">
+                            <div
+                                v-for="(wait, index) in waiting"
+                                :key="index"
+                                class="col-6 col-md-6 col-lg-4"
+                            >
                                 <img
                                     src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200"
+                                    class="fullWidth centerContent mb-2"
                                     alt="예시"
                                 />
 
                                 <div>
                                     <v-row>
-                                        <p class="shorthand col-7 ml-2" style="color: black;">
+                                        <p class="shorthand col-12 centerText">
                                             {{ wait.project_name }}
                                         </p>
                                     </v-row>
                                 </div>
-                            </v-col>
+                            </div>
                         </v-row>
                         <v-row v-if="n == 3">
-                            <v-col
+                            <div
                                 v-for="(completed, index) in complete"
                                 :key="index"
-                                cols="12"
-                                md="4"
+                                class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
                                     src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200"
-                                    alt="예시"
-                                />
-
-                                <div>
-                                    <v-row>
-                                        <p class="shorthand col-7 ml-2" style="color: black;">
-                                            {{ completed.project_name }}
-                                        </p>
-                                        <v-spacer></v-spacer>
-                                        <div class="mt-4 ml-6">
-                                            <v-btn
-                                                medium
-                                                class="ma-2"
-                                                outlined
-                                                color="#bc6ff1"
-                                                v-if="completed.status == 0"
-                                                @click="movePage(n, completed.project_num)"
-                                            >
-                                                평가하기
-                                            </v-btn>
-                                            <v-btn
-                                                medium
-                                                class="ma-2"
-                                                outlined
-                                                color="#bc6ff1"
-                                                v-else
-                                                disabled
-                                            >
-                                                평가완료
-                                            </v-btn>
-                                        </div>
-                                    </v-row>
-                                </div>
-                            </v-col>
-                        </v-row>
-                        <v-row v-if="n == 4">
-                            <v-col
-                                v-for="(interest, index) in interesting"
-                                :key="index"
-                                cols="12"
-                                md="4"
-                            >
-                                <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200"
+                                    class="fullWidth height-200 centerContent mb-2"
                                     alt="예시"
                                 />
 
                                 <v-row>
-                                    <p class="shorthand col-7 ml-2" style="color: black;">
+                                    <p class="shorthand col-12 col-md-6 col-lg-6 centerText">
+                                        {{ completed.project_name }}
+                                    </p>
+                                    <v-spacer></v-spacer>
+
+                                    <v-btn
+                                        medium
+                                        class="col-12 col-md-2 col-lg-2 centerContent"
+                                        outlined
+                                        color="#bc6ff1"
+                                        v-if="completed.status == 0"
+                                        @click="moveEvaluatePage(n, completed.project_num)"
+                                    >
+                                        평가하기
+                                    </v-btn>
+                                    <v-btn
+                                        medium
+                                        class="col-12 col-md-2 col-lg-2 centerContent"
+                                        outlined
+                                        color="#bc6ff1"
+                                        v-else
+                                        disabled
+                                    >
+                                        평가완료
+                                    </v-btn>
+                                </v-row>
+                            </div>
+                        </v-row>
+                        <v-row v-if="n == 4">
+                            <div
+                                v-for="(interest, index) in interesting"
+                                :key="index"
+                                class="col-6 col-md-6 col-lg-4"
+                            >
+                                <img
+                                    src="@/assets/images/funding/fox.jpg"
+                                    class="fullWidth height-200 centerContent mb-2"
+                                    alt="예시"
+                                />
+
+                                <v-row>
+                                    <p class="shorthand col-12 col-md-6 col-lg-6 centerText">
                                         {{ interest.project_name }}
                                     </p>
+                                    <v-spacer></v-spacer>
                                     <v-dialog
                                         v-model="interestingDialog"
                                         scrollable
@@ -411,19 +394,17 @@
                                         max-width="300px"
                                     >
                                         <template v-slot:activator="{ on, attrs }">
-                                            <div class="mt-4 ml-6">
-                                                <v-btn
-                                                    class="ma-2"
-                                                    @click="projectState(interest.project_num)"
-                                                    v-bind="attrs"
-                                                    v-on="on"
-                                                    outlined
-                                                    color="#bc6ff1"
-                                                    medium
-                                                >
-                                                    참여 인원
-                                                </v-btn>
-                                            </div>
+                                            <v-btn
+                                                class="col-12 col-md-2 col-lg-2 centerContent"
+                                                @click="projectState(interest.project_num)"
+                                                v-bind="attrs"
+                                                v-on="on"
+                                                outlined
+                                                color="#bc6ff1"
+                                                medium
+                                            >
+                                                참여 인원
+                                            </v-btn>
                                         </template>
                                         <v-card>
                                             <v-card-title>참여 인원</v-card-title>
@@ -450,13 +431,13 @@
                                         </v-card>
                                     </v-dialog>
                                 </v-row>
-                            </v-col>
+                            </div>
                         </v-row>
                     </v-container>
                 </v-tab-item>
             </v-tabs>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -520,7 +501,7 @@ export default {
             interestingDialog: false,
             plusPointDialog: false,
             minusPointDialog: false,
-            changePoint:0,
+            changePoint: 0,
         };
     },
     mounted() {
@@ -583,7 +564,7 @@ export default {
                 })
                 .catch(() => {});
         },
-        movePage(n, pn) {
+        moveEvaluatePage(n, pn) {
             if (n == 3) this.$router.push({ name: 'Evaluate', params: { pn: pn } });
         },
         deleteMember() {
@@ -718,47 +699,54 @@ export default {
         closeInterest() {
             this.interestingDialog = false;
         },
-        plusPoint(){
-            this.changePoint = this.changePoint*1 + this.memberInfo.point ;
-            http.put('/member/updatepoint',{
-                id:this.memberInfo.id,
-                point: this.changePoint
-            }).then((response)=>{
-                if(response.data.message == 'success'){
-                    alert('충전성공!');
-                    this.plusPointDialog = false;
-                    location.href='/mypage';
-                }else{
-                    alert('충전실패!');
-                    this.plusPointDialog = false;
-                }
-            }).catch(()=>{
-                alert('에러발생!');
+        plusPoint() {
+            this.changePoint = this.changePoint * 1 + this.memberInfo.point;
+            http.put('/member/updatepoint', {
+                id: this.memberInfo.id,
+                point: this.changePoint,
             })
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        alert('충전성공!');
+                        this.plusPointDialog = false;
+                        location.href = '/mypage';
+                    } else {
+                        alert('충전실패!');
+                        this.plusPointDialog = false;
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
         },
-         minusPoint(){
-             if(this.changePoint > this.memberInfo.point){
-                 alert('있는 포인트보다 작게입력해주세요.');
-                 this.changePoint = 0;
-             }else{
-            this.changePoint = this.memberInfo.point - this.changePoint*1;
-            http.put('/member/updatepoint',{
-                id:this.memberInfo.id,
-                point: this.changePoint
-            }).then((response)=>{
-                if(response.data.message == 'success'){
-                    alert('전환성공!');
-                    this.minusPointDialog = false;
-                    location.href='/mypage';
-                }else{
-                    alert('전환실패!');
-                    this.minusPointDialog = false;
-                }
-            }).catch(()=>{
-                alert('에러발생!');
-            })
-             }
-        }
+        minusPoint() {
+            if (this.changePoint > this.memberInfo.point) {
+                alert('있는 포인트보다 작게입력해주세요.');
+                this.changePoint = 0;
+            } else {
+                this.changePoint = this.memberInfo.point - this.changePoint * 1;
+                http.put('/member/updatepoint', {
+                    id: this.memberInfo.id,
+                    point: this.changePoint,
+                })
+                    .then((response) => {
+                        if (response.data.message == 'success') {
+                            alert('전환성공!');
+                            this.minusPointDialog = false;
+                            location.href = '/mypage';
+                        } else {
+                            alert('전환실패!');
+                            this.minusPointDialog = false;
+                        }
+                    })
+                    .catch(() => {
+                        alert('에러발생!');
+                    });
+            }
+        },
+        movePage(name) {
+            this.$router.push({ name: name });
+        },
     },
 };
 </script>
@@ -775,5 +763,8 @@ p {
 
 .fundingBtn {
     padding: 0;
+}
+.row {
+    margin: 0;
 }
 </style>
