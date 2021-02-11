@@ -195,7 +195,7 @@ export default {
         },
         evaluate() {
             console.log(`evaluate()`);
-
+            // 제출 하기 버튼 클릭 시 평가 데이터를 mentor 객체와 mentees 객체에 각각 입력 하여 준다
             for (var i = 0; i < 5; i++) {
                 this.mentor[this.mentorEv.values[i]] = this.mentorEv.score[i];
             }
@@ -208,6 +208,7 @@ export default {
             });
 
             // 평가 완료 상태 반영
+            // 자신의 id와 프로젝트 넘버를 이용하여 자신이 평가를 완료하였다는 점을 전송
             http.put(`member/evaluate/change`, {
                 id: this.memberInfo.id,
                 project_num: this.project_num,
