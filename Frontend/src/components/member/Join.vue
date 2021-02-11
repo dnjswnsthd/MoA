@@ -72,28 +72,34 @@
         ></v-text-field>
         <div class="checkBtn"></div>
       </v-row>
-      <v-row>
-        <v-text-field
-          label="선호 분야"
-          dense
-          solo
-          class="width-50"
+      <v-row max-width:450>
+        <v-autocomplete
+          class="width-50 mr-2"
+          ref="member.favorite_1"
           v-model="member.favorite_1"
-        ></v-text-field>
-        <v-text-field
-          label="선호 분야"
-          dense
-          solo
-          class="width-50 mx-10"
+          :items="selectItems"
+          label="선호 분야 1"
+          required
+        >
+        </v-autocomplete>
+        <v-autocomplete
+          class="width-50 mr-2"
+          ref="member.favorite_2"
           v-model="member.favorite_2"
-        ></v-text-field>
-        <v-text-field
-          label="선호 분야"
-          dense
-          solo
+          :items="selectItems"
+          label="선호 분야 2"
+          required
+        >
+        </v-autocomplete>
+        <v-autocomplete
           class="width-50"
+          ref="member.favorite_3"
           v-model="member.favorite_3"
-        ></v-text-field>
+          :items="selectItems"
+          label="선호 분야 3"
+          required
+        >
+        </v-autocomplete>
       </v-row>
 
       <v-row>
@@ -134,7 +140,14 @@ export default {
       passwordSchema: new PV(),
       mentorForm: true,
       menteeForm: false,
-      // selectItems: ['디자인', 'IT·프로그래밍', '번역·통역', '영상·사진·음향', '운세·상담', '마케팅'],
+      selectItems: [
+        '디자인',
+        'IT·프로그래밍',
+        '번역·통역',
+        '영상·사진·음향',
+        '운세·상담',
+        '마케팅',
+      ],
       member: {
         id: '',
         pw: '',
