@@ -1,14 +1,12 @@
 @charset "utf-8";
-.banner {
-    height: 100px;
-    /* background-color: ; */
-}
-.banner p {
-    display: block;
-    color: black;
+
+.pageTitle {
+    text-decoration: underline overline;
+    text-underline-position: under;
     font-size: 36px;
     line-height: 100px;
 }
+
 .projectImgBox {
     width: 70%;
     height: 70%;
@@ -20,9 +18,27 @@
     display: block;
     margin: 0;
 }
-.btnList {
-    text-align: center;
+.infoBox {
+    font-size: 24px;
+    margin-top: 20%;
 }
+
+.fundingBtn {
+    border-radius: 5px;
+    text-align: center;
+    background-color: #ab47bc;
+    font-size: 20px;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+}
+
+.pageSubTitle {
+    text-decoration: underline overline;
+    text-underline-position: under;
+    font-size: 28px;
+}
+
 .explainBox {
     background-color: white;
     color: black;
