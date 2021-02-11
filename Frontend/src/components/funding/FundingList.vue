@@ -1,6 +1,6 @@
 <template>
-    <div class="width-1000 fundingMargin">
-        <h1 class="pageTitle">펀딩목록</h1>
+    <v-container class="col-lg-8 col-md-12 col-12 centerContent">
+        <p class="pageTitle">펀딩목록</p>
         <!-- <v-carousel cycle height="300" hide-delimiter-background show-arrows-on-hover> -->
         <v-carousel
             interval="2000"
@@ -15,94 +15,82 @@
             <v-carousel-item v-for="item in items" :key="item" :src="item"></v-carousel-item>
         </v-carousel>
         <!-- </v-carousel> -->
-        <ul class="fundingListPadding_2">
-            <v-row>
-                <v-col v-for="category in categories" :key="category">
-                    <v-spacer></v-spacer>
-                    <div class="mainCategory" @click="change(category.name)">
-                        <router-link to="/fundinglist">
-                            <div :id="category.value">
-                                <img
-                                    class="width-40 height-40 centerContent "
-                                    :src="category.img"
-                                    alt="디자인"
-                                />
-                                <img
-                                    class="width-40 height-40 centerContent "
-                                    :src="category.afterImg"
-                                    alt="디자인"
-                                />
-                            </div>
-                        </router-link>
-                        <router-link to="/fundinglist">{{ category.name }}</router-link>
-                    </div>
-                    <v-spacer></v-spacer>
-                </v-col>
-            </v-row>
-        </ul>
-        <v-divider></v-divider>
-        <div class="pt-2">
-            <h2>당신의 취향을 저격할 프로젝트</h2>
-            <v-row class="pt-5 pl-9">
-                <v-col class="width-300" v-for="(project, index) in projectList" :key="index">
-                    <v-row>
+
+        <v-row class="mt-1">
+            <div class="col-lg-2 col-md-4 col-4" v-for="category in categories" :key="category">
+                <v-spacer></v-spacer>
+                <div class="category" @click="change(category.name)">
+                    <div :id="category.value">
                         <img
-                            src="@/assets/images/funding/fox.jpg"
-                            class="width-300 height-200"
-                            alt="예시"
-                            @click="goDetail(project.project_num)"
+                            class="width-40 height-40 centerContent "
+                            :src="category.img"
+                            :alt="category.name"
                         />
-                    </v-row>
+                        <img
+                            class="width-40 height-40 centerContent "
+                            :src="category.afterImg"
+                            :alt="category.name"
+                        />
+                    </div>
+
+                    <p>{{ category.name }}</p>
+                </div>
+                <v-spacer></v-spacer>
+            </div>
+        </v-row>
+
+        <v-divider></v-divider>
+        <div class="mt-2">
+            <h2 style="display:block;">당신의 취향을 저격할 프로젝트</h2>
+            <v-row class="mt-5">
+                <div class="col-6 col-lg-4" v-for="(project, index) in projectList" :key="index">
+                    <img
+                        src="@/assets/images/funding/fox.jpg"
+                        alt="예시"
+                        class="col-12"
+                        @click="goDetail(project.project_num)"
+                    />
+
                     <!-- <br /> -->
-                    <v-row class="width-300 pt-4">
+                    <div class="col-12">
                         <v-progress-linear
                             color="#CE93D8"
                             :value="dategap[index]"
                             stream
                         ></v-progress-linear>
-                    </v-row>
-                    <v-row class="pt-2">
-                        <p
-                            style="font-size: large; font-weight: 900;"
-                            @click="goDetail(project.project_num)"
-                        >
+                    </div>
+                    <div class="col-12">
+                        <p class="projectTitle" @click="goDetail(project.project_num)">
                             {{ project.project_name }}
                         </p>
-                    </v-row>
-                    <v-row class="col-12 width-300 mt-0 pt-0">
-                        <v-col class="pl-3 col-9">
-                            <v-row>
-                                <p style="margin: 0px">카테고리 : {{ project.category }}</p>
-                            </v-row>
-                            <v-row>
-                                <p style="margin: 0px">모집기간 : ~ {{ project.deadline }}</p>
-                            </v-row>
-                            <v-row>
-                                <p style="margin: 0px">담당자 : {{ project.leader }}</p>
-                            </v-row>
-                        </v-col>
-                        <v-col class="col-3 pl-8 pb-5" style="margin: auto;">
+                    </div>
+                    <div class="col-12 mt-0 pt-0">
+                        <div>
+                            <p>카테고리 : {{ project.category }}</p>
+
+                            <p>모집기간 : ~ {{ project.deadline }}</p>
+
+                            <p>담당자 : {{ project.leader }}</p>
+                        </div>
+                        <v-col class="col-12">
                             <img
                                 v-if="!project.love"
                                 :src="require('@/assets/category/heart.png')"
                                 alt="하트"
-                                class="width-30 height-30"
+                                class="width-30 height-30 centerContent"
                             />
                             <img
                                 v-else
                                 :src="require('@/assets/category/heart(c).png')"
                                 alt="하트"
-                                class="width-30 height-30"
+                                class="width-30 height-30 centerContent"
                             />
                         </v-col>
-                    </v-row>
-                    <br />
-                </v-col>
-                <br /><br /><br /><br /><br />
+                    </div>
+                </div>
             </v-row>
         </div>
-        <br /><br />
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -267,4 +255,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@import '../../assets/css/fundinglist.css';
+.row + .row {
+    margin-top: 0px;
+}
+</style>
