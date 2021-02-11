@@ -62,16 +62,27 @@
           type="text"
           v-model="member.major"
         ></v-text-field>
-        <div class="checkBtn"></div>
       </v-row>
-      <v-row>
+      <v-row class="col-12">
         <v-text-field
-          label="phone"
+          class="width-50 mr-2"
           type="tel"
-          v-model="member.phone"
-        ></v-text-field>
-        <div class="checkBtn"></div>
+          label="phone"
+          v-model="phone1"
+        >
+        </v-text-field>
+        <v-spacer></v-spacer>
+        <span style="line-height: 80px">-</span>
+        <v-spacer></v-spacer>
+        <v-text-field class="width-50 mr-2" type="tel" v-model="phone2">
+        </v-text-field>
+        <v-spacer></v-spacer>
+        <span style="line-height: 80px">-</span>
+        <v-spacer></v-spacer>
+        <v-text-field class="width-50" type="tel" v-model="phone3">
+        </v-text-field>
       </v-row>
+
       <v-row max-width:450>
         <v-autocomplete
           class="width-50 mr-2"
@@ -163,6 +174,9 @@ export default {
         skill: '',
         introduce: '',
       },
+      phone1: '',
+      phone2: '',
+      phone3: '',
       idChecked: false,
       pwChecked: '',
     };
@@ -187,9 +201,9 @@ export default {
     validPassword(password) {
       return /^.*(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*#?&]).*$/.test(password);
     },
-    validPhone(phone) {
-      return /^\d{3}-\d{3,4}-\d{4}$/.test(phone);
-    },
+    // validPhone(phone) {
+    //   return /^\d{3}-\d{3,4}-\d{4}$/.test(phone);
+    // },
     openMentor() {
       (this.mentorForm = true),
         (this.menteeForm = false),
@@ -201,7 +215,6 @@ export default {
         (this.member.status = 2);
     },
     join() {
-      console.log(this.member);
       if (this.member.id == '') {
         console.log(this.member.id);
         swal('아이디를 입력해 주세요!', {
@@ -239,15 +252,17 @@ export default {
         swal('전공을 입력해 주세요!', {
           icon: 'error',
         });
-      } else if (this.member.phone == '') {
+      } else if (this.phone1 == '' || this.phone2 == '' || this.phone3 == '') {
         swal('전화번호를 입력해 주세요!', {
           icon: 'error',
         });
-      } else if (!this.validPhone(this.member.phone)) {
-        swal('핸드폰 번호 양식에 맞춰 입력해 주세요!', {
-          icon: 'error',
-        });
-      } else if (this.member.favorite_1 == '') {
+      }
+      // else if (!this.validPhone(this.member.phone)) {
+      //   swal('핸드폰 번호 양식에 맞춰 입력해 주세요!', {
+      //     icon: 'error',
+      //   });
+      // }
+      else if (this.member.favorite_1 == '') {
         swal('관심분야 1 을 입력해 주세요!', {
           icon: 'error',
         });
@@ -264,6 +279,7 @@ export default {
           icon: 'error',
         });
       } else {
+        this.member.phone = this.phone1 + '-' + this.phone2 + '-' + this.phone3;
         let data = this.member;
         console.log(data);
         http
