@@ -2,7 +2,7 @@
     <header>
         <v-container class="col-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-2">
+                <div class="col-lg-2 col-md-2 col-xs-2">
                     <router-link to="/">
                         <img
                             src="@/assets/images/main/logo(Bg).png"

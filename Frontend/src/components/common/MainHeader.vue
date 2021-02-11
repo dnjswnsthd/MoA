@@ -2,7 +2,7 @@
     <header class="backgroundImg">
         <v-container class="col-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="col-lg-2 col-md-2 col-xs-2">
                     <router-link to="/">
                         <img
                             src="@/assets/images/main/logo.png"
@@ -23,7 +23,7 @@
                 </li>
             </v-row>
             <v-row v-else>
-                <div>
+                <div class="col-lg-2 col-md-2 col-xs-2">
                     <router-link to="/">
                         <img
                             src="@/assets/images/main/logo.png"
@@ -63,7 +63,7 @@
 
             <v-row class="categoryMenu">
                 <div
-                    class="col-lg-2 col-md-4 col-sm-6 mainCategory"
+                    class="col-lg-2 col-md-4 col-xs-6 mainCategory"
                     v-for="(category, index) in categories"
                     :key="index"
                 >
