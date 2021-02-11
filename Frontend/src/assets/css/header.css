@@ -4,7 +4,7 @@
 }
 
 .backgroundImg {
-    background-image: url('../../assets/images/main/mainBg.jpg');
+    background-image: url('../images/main/mainBg.jpg');
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
