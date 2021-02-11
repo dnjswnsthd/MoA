@@ -1,57 +1,52 @@
 <template>
-    <div class="cardBox">
+    <v-container class="col-lg-3 col-md-5 col-sm-7 col-12 my-10">
         <div>
-            <div>
-                <v-spacer></v-spacer>
-                <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="memberFormLogo" />
-                <v-spacer></v-spacer>
-                <h2 class="centerText loginTitle">로그인</h2>
-                <!-- <div class="lineBox"></div> -->
-            </div>
+            <v-spacer></v-spacer>
+            <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="col-12" />
+            <v-spacer></v-spacer>
+            <h2 class="centerText">로그인</h2>
+        </div>
 
-            <div>
-                <form class="col-12 formBox">
-                    <v-text-field
-                        id="memberId"
-                        v-model="member.id"
-                        required
-                        label="ID"
-                        type="email"
-                        class="col-12"
-                        @keyup.enter="confirm"
-                    ></v-text-field>
+        <div>
+            <form class="col-12 formBox">
+                <v-text-field
+                    id="memberId"
+                    v-model="member.id"
+                    required
+                    label="ID"
+                    type="email"
+                    class="col-12"
+                    @keyup.enter="confirm"
+                ></v-text-field>
 
-                    <v-text-field
-                        id="memberPw"
-                        v-model="member.pw"
-                        required
-                        label="PW"
-                        type="password"
-                        class="col-12"
-                        @keyup.enter="confirm"
-                    ></v-text-field>
-                </form>
-                <div class="fullWidth">
-                    <button class="loginBtn col-4" @click="confirm">Login</button>
+                <v-text-field
+                    id="memberPw"
+                    v-model="member.pw"
+                    required
+                    label="PW"
+                    type="password"
+                    class="col-12"
+                    @keyup.enter="confirm"
+                ></v-text-field>
+            </form>
+            <div class="col-12" @click="confirm">
+                <div class="col-4 loginBtn">
+                    Login
                 </div>
             </div>
-
-            <v-card-actions class="cardActionBox">
-                <v-spacer></v-spacer>
-
-                <v-btn color="primary" text>
-                    <router-link to="/findpassword">
-                        비밀번호 찾기
-                    </router-link>
-                </v-btn>
-                <v-btn color="primary" text>
-                    <router-link to="/join">
-                        회원가입
-                    </router-link>
-                </v-btn>
-            </v-card-actions>
         </div>
-    </div>
+
+        <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn color="primary" text @click="movePage('FindPassword')">
+                비밀번호 찾기
+            </v-btn>
+            <v-btn color="primary" text @click="movePage('Join')">
+                회원가입
+            </v-btn>
+        </v-card-actions>
+    </v-container>
 </template>
 <script>
 import { login } from '@/api/user.js';
@@ -91,15 +86,13 @@ export default {
                 }
             );
         },
+        movePage(name) {
+            this.$router.push({ name: name });
+        },
     },
 };
 </script>
 
 <style scoped>
-.cardBox {
-    margin: 6.5rem auto;
-}
-.loginTitle {
-    margin: 20px auto;
-}
+@import '../../assets/css/member.css';
 </style>
