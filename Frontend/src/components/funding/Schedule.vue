@@ -1,5 +1,5 @@
 <template>
-    <div class="col-8 centerContent">
+    <v-container class="col-lg-8 col-md-12 col-12 centerContent">
         <div>
             <h1 class="height-70">{{ project.project_name }}</h1>
             <h2 class="height-70">
@@ -117,7 +117,7 @@
                 </v-sheet>
             </drop>
         </div>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -247,15 +247,5 @@ export default {
 </script>
 
 <style scoped>
-.drag {
-    display: inline-block;
-}
-.drop {
-    display: inline-block;
-    vertical-align: top;
-    padding: 15px;
-    margin-bottom: 20px;
-    width: 1200px;
-    height: 220px;
-}
+@import '../../assets/css/schedule.css';
 </style>

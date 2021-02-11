@@ -6,7 +6,7 @@
             <ul class="pt-5">
                 <v-row>
                     <div
-                        class="fundingCategory fundingMargin"
+                        class="fundingCategory centerContent"
                         v-for="category in categories"
                         :key="category.id"
                     >
@@ -90,7 +90,8 @@
         <div class="col-10 fundingContent">
             <div class="py-5 fundingMargin">
                 <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
-                <v-textarea class="width-650 mx-auto"
+                <v-textarea
+                    class="width-650 mx-auto"
                     outlined
                     name="input-12-4"
                     label="세부내용"
@@ -225,13 +226,13 @@ export default {
                 });
         },
         reset() {
-            this.project.project_name = '',
-            this.project.participants= 0,
-            this.project.funding_cost ='',
-            this.project.mentor_chk='',
-            this.project.deadline ='',
-            this.project.end_date='',
-            this.proejct.description=''
+            (this.project.project_name = ''),
+                (this.project.participants = 0),
+                (this.project.funding_cost = ''),
+                (this.project.mentor_chk = ''),
+                (this.project.deadline = ''),
+                (this.project.end_date = ''),
+                (this.proejct.description = '');
         },
     },
 };
