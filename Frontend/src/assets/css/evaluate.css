@@ -1,0 +1,12 @@
+@charset "utf-8";
+.evaluateFont {
+    font-size: large;
+}
+
+.evaluateTitle {
+    font-size: xx-large;
+}
+
+.memberTabs {
+    border-radius: 20px 20px 0 0;
+}

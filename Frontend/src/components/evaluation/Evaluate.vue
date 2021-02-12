@@ -1,11 +1,7 @@
 <template>
-    <div class="col-8 centerContent height-1000">
+    <v-container class="col-12 col-lg-8 col-md-8 centerContent">
         <p class="evaluateTitle">평가</p>
-        <v-toolbar
-            color="#ab47bc"
-            dark
-            style="border-top-left-radius:20px; border-top-right-radius:20px;"
-        >
+        <v-toolbar color="#ab47bc" dark style="border-radius: 20px 20px 0 0;">
             <v-tabs v-model="tab" align-with-title>
                 <v-tabs-slider color="yellow" style="border: 2px;"></v-tabs-slider>
                 <v-tab v-if="mentor.id" class="mt-2">
@@ -22,97 +18,83 @@
             <!-- 멘토가 있을 경우 멘토 평가 항목을 보여줌 -->
             <v-tab-item v-if="mentor.id">
                 <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col style="margin: auto;">
-                        <div class="width-500 height-300">
-                            <RadarCanvas
-                                :id="mentor.id"
-                                :labels="mentorEv.labels"
-                                :data="mentorEv.score"
-                            ></RadarCanvas>
-                        </div>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-col>
-                        <v-card flat width="320">
-                            <v-card-text>
-                                <h2 class="pb-5 pt-5">
-                                    {{ mentor.name }} 멘토를 평가해주세요!
-                                    <span>
-                                        <v-btn
-                                            class="ml-3"
-                                            medium
-                                            outlined
-                                            color="#bc6ff1"
-                                            @click="initMentor"
-                                        >
-                                            초기화
-                                        </v-btn>
-                                    </span>
-                                </h2>
-                                <p v-for="index in 5" :key="index" class="evaluateFont">
-                                    {{ mentorEv.labels[index - 1] }}&nbsp;은/는 어땠나요?
-                                    <v-rating
-                                        v-model="mentorEv.score[index - 1]"
-                                        background-color="purple lighten-3"
-                                        color="#bc6ff1"
-                                        large
-                                    ></v-rating>
-                                </p>
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                    <v-spacer></v-spacer>
+                    <div class="col-12 col-lg-6 col-md-8 col-sm-8 centerContent mt-15">
+                        <RadarCanvas
+                            :id="mentor.id"
+                            :labels="mentorEv.labels"
+                            :data="mentorEv.score"
+                        ></RadarCanvas>
+                    </div>
+
+                    <div class="col-11 col-lg-6 col-md-6 col-sm-5 centerContent">
+                        <h2 class="pb-5 pt-5">
+                            {{ mentor.name }} 멘토를 평가해주세요!
+                            <span>
+                                <v-btn
+                                    class="ml-3"
+                                    medium
+                                    outlined
+                                    color="#bc6ff1"
+                                    @click="initMentor"
+                                >
+                                    초기화
+                                </v-btn>
+                            </span>
+                        </h2>
+                        <p v-for="index in 5" :key="index" class="evaluateFont">
+                            {{ mentorEv.labels[index - 1] }}&nbsp;은/는 어땠나요?
+                            <v-rating
+                                v-model="mentorEv.score[index - 1]"
+                                background-color="purple lighten-3"
+                                color="#bc6ff1"
+                                large
+                            ></v-rating>
+                        </p>
+                    </div>
                 </v-row>
             </v-tab-item>
             <!-- 멘티들의 평가를 위한 tab-item -->
             <v-tab-item v-for="(mentee, index) in mentees" :key="index">
                 <v-row>
-                    <v-spacer></v-spacer>
-                    <v-col style="margin: auto;">
-                        <div class="width-500 height-300">
-                            <!-- <canvas class="canvas" height="40vh" width="80vw"></canvas> -->
-                            <RadarCanvas
-                                :id="mentee.id"
-                                :labels="menteeEv.labels"
-                                :data="menteeEv.scores[index]"
-                            ></RadarCanvas>
-                        </div>
-                    </v-col>
-                    <v-spacer></v-spacer>
-                    <v-card flat width="320">
-                        <v-card-text>
-                            <h2 class="pb-5 pt-5">
-                                {{ mentee.name }}&nbsp;을(를) 평가해주세요!
+                    <div class="col-12 col-lg-6 col-md-8 col-sm-8 centerContent mt-15">
+                        <!-- <canvas class="canvas" height="40vh" width="80vw"></canvas> -->
+                        <RadarCanvas
+                            :id="mentee.id"
+                            :labels="menteeEv.labels"
+                            :data="menteeEv.scores[index]"
+                        ></RadarCanvas>
+                    </div>
 
-                                <span>
-                                    <v-btn
-                                        class="ml-3"
-                                        medium
-                                        outlined
-                                        color="#bc6ff1"
-                                        @click="initMentee(index)"
-                                    >
-                                        초기화
-                                    </v-btn>
-                                </span>
-                            </h2>
-                            <p v-for="i in 5" :key="i" class="evaluateFont">
-                                {{ menteeEv.labels[i - 1] }}&nbsp;은/는 어땠나요?
-                                <v-rating
-                                    v-model="menteeEv.scores[index][i - 1]"
-                                    background-color="purple lighten-3"
+                    <div class="col-11 col-lg-6 col-md-6 col-sm-5 centerContent">
+                        <h2 class="pb-5 pt-5">
+                            {{ mentee.name }}&nbsp;을(를) 평가해주세요!
+
+                            <span>
+                                <v-btn
+                                    class="ml-3"
+                                    medium
+                                    outlined
                                     color="#bc6ff1"
-                                    large
-                                ></v-rating>
-                            </p>
-                        </v-card-text>
-                    </v-card>
-                    <v-spacer></v-spacer>
+                                    @click="initMentee(index)"
+                                >
+                                    초기화
+                                </v-btn>
+                            </span>
+                        </h2>
+                        <p v-for="i in 5" :key="i" class="evaluateFont">
+                            {{ menteeEv.labels[i - 1] }}&nbsp;은/는 어땠나요?
+                            <v-rating
+                                v-model="menteeEv.scores[index][i - 1]"
+                                background-color="purple lighten-3"
+                                color="#bc6ff1"
+                                large
+                            ></v-rating>
+                        </p>
+                    </div>
                 </v-row>
             </v-tab-item>
         </v-tabs-items>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -245,16 +227,5 @@ export default {
 </script>
 
 <style scoped>
-.evaluateFont {
-    font-size: large;
-}
-
-.evaluateTitle {
-    font-size: xx-large;
-}
-
-/* .canvas {
-    width: 100%;
-    height: 300px;
-} */
+@import '../../assets/css/evaluate.css';
 </style>
