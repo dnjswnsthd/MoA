@@ -1,119 +1,117 @@
 <template>
-    <div class="width-1000 centerContent">
+    <v-container class="col-lg-6 col-md-7 com-sm-8 col-12">
         <p class="pageTitle">펀딩오픈</p>
-        <div class="width-1000 centerContent pt-3">
+        <div class="col-12 centerContent pt-3">
             <h2>카테고리</h2>
-            <ul class="pt-5">
-                <v-row>
-                    <div
-                        class="fundingCategory centerContent"
-                        v-for="category in categories"
-                        :key="category.id"
-                    >
-                        <div :id="category.value" @click="categorySelect(category.name)">
-                            <img
-                                class="width-40 height-40 centerContent "
-                                :src="category.img"
-                                :alt="category.name"
-                            />
-                            <img
-                                class="width-40 height-40 centerContent "
-                                :src="category.afterImg"
-                                :alt="category.name"
-                            />
-                        </div>
-                        <p>{{ category.name }}</p>
-                    </div>
-                </v-row>
-            </ul>
-        </div>
-        <div class="cardBox">
-            <form class="width-1000">
-                <v-row class="col-12">
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="제목"
-                        type="text"
-                        v-model="project.project_name"
-                        class="width-500"
-                    ></v-text-field>
-                    <v-spacer></v-spacer>
-                </v-row>
 
-                <v-row class="width-1000">
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="인원"
-                        type="number"
-                        v-model="project.participants"
-                        suffix="명"
-                        style="width:5px;"
-                    >
-                    </v-text-field>
-
-                    <v-text-field
-                        label="펀딩액"
-                        v-model="project.funding_cost"
-                        suffix="원"
-                        class="mx-10"
-                        style="width:5px;"
-                    ></v-text-field>
-
-                    <v-radio-group v-model="project.mentor_chk" row>
-                        멘토
-                        <v-radio value="필요있음" label="필요있음"></v-radio>
-                        <v-radio value="필요없음" label="필요없음"></v-radio>
-                    </v-radio-group>
-                    <v-spacer></v-spacer>
-                </v-row>
-
-                <v-row class="col-12">
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="모집기간"
-                        type="date"
-                        class="width-100"
-                        v-model="project.deadline"
-                        style="width:80px;"
-                    ></v-text-field>
-
-                    <v-text-field
-                        label="프로젝트 End"
-                        type="date"
-                        class="width-130 ml-15"
-                        v-model="project.end_date"
-                    ></v-text-field>
-                    <v-spacer></v-spacer>
-                </v-row>
-            </form>
-        </div>
-        <div class="col-10 fundingContent">
-            <div class="py-5 fundingMargin">
-                <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
-                <v-textarea
-                    class="width-650 mx-auto"
-                    outlined
-                    name="input-12-4"
-                    label="세부내용"
-                    v-model="project.description"
-                ></v-textarea>
-            </div>
-            <v-spacer></v-spacer>
-        </div>
-        <div class="height-50 mb-15">
             <v-row>
-                <v-spacer></v-spacer>
-                <div class="fundingBtn" @click="reset">
-                    초기화
+                <div
+                    class="category col-lg-2 col-md-4 col-4"
+                    v-for="category in categories"
+                    :key="category.id"
+                >
+                    <div :id="category.value" @click="categorySelect(category.name)">
+                        <img
+                            class="width-40 height-40 centerContent "
+                            :src="category.img"
+                            :alt="category.name"
+                        />
+                        <img
+                            class="width-40 height-40 centerContent "
+                            :src="category.afterImg"
+                            :alt="category.name"
+                        />
+                    </div>
+                    <p>{{ category.name }}</p>
                 </div>
-                <v-spacer></v-spacer>
-                <div @click="openFunding" class="fundingBtn">
-                    오픈하기
-                </div>
-                <v-spacer></v-spacer>
             </v-row>
         </div>
-    </div>
+
+        <form class="col-12">
+            <v-row>
+                <v-spacer></v-spacer>
+                <v-text-field
+                    label="제목"
+                    type="text"
+                    v-model="project.project_name"
+                    style="width:60%;"
+                ></v-text-field>
+                <v-spacer></v-spacer>
+            </v-row>
+
+            <v-row>
+                <v-spacer></v-spacer>
+                <v-text-field
+                    label="인원"
+                    type="number"
+                    v-model="project.participants"
+                    suffix="명"
+                    style="width:40px;"
+                    class="col-2"
+                >
+                </v-text-field>
+
+                <v-text-field
+                    label="펀딩액"
+                    v-model="project.funding_cost"
+                    suffix="원"
+                    class="mx-10 col-2"
+                    style="width:40px;"
+                ></v-text-field>
+
+                <v-spacer></v-spacer>
+                <v-radio-group v-model="project.mentor_chk" class="centerContent" row>
+                    멘토
+                    <v-radio value="필요있음" label="필요있음"></v-radio>
+                    <v-radio value="필요없음" label="필요없음"></v-radio>
+                </v-radio-group>
+                <v-spacer></v-spacer>
+                <v-sapcer></v-sapcer>
+            </v-row>
+
+            <v-row>
+                <v-spacer></v-spacer>
+                <v-text-field
+                    label="모집기간"
+                    type="date"
+                    class="width-100"
+                    v-model="project.deadline"
+                    style="width:80px;"
+                ></v-text-field>
+
+                <v-text-field
+                    label="프로젝트 End"
+                    type="date"
+                    class="width-130 ml-15"
+                    v-model="project.end_date"
+                ></v-text-field>
+                <v-spacer></v-spacer>
+            </v-row>
+        </form>
+
+        <div class="py-5 centerContent">
+            <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
+            <v-textarea
+                class="width-650 mx-auto"
+                outlined
+                name="input-12-4"
+                label="세부내용"
+                v-model="project.description"
+            ></v-textarea>
+        </div>
+
+        <v-row class="my-5">
+            <v-spacer></v-spacer>
+            <div class="fundingBtn" @click="reset">
+                초기화
+            </div>
+            <v-spacer></v-spacer>
+            <div @click="openFunding" class="fundingBtn">
+                오픈하기
+            </div>
+            <v-spacer></v-spacer>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -152,43 +150,43 @@ export default {
             categories: [
                 {
                     id: 0,
-                    img: require('@/assets/category/design.png'),
-                    afterImg: require('@/assets/category/design(c).png'),
+                    img: require('@/assets/images/category/design.png'),
+                    afterImg: require('@/assets/images/category/design(c).png'),
                     name: '디자인',
                     value: 'design',
                 },
                 {
                     id: 1,
-                    img: require('@/assets/category/computer.png'),
-                    afterImg: require('@/assets/category/computer(c).png'),
+                    img: require('@/assets/images/category/computer.png'),
+                    afterImg: require('@/assets/images/category/computer(c).png'),
                     name: 'IT·프로그래밍',
                     value: 'computer',
                 },
                 {
                     id: 2,
-                    img: require('@/assets/category/translate.png'),
-                    afterImg: require('@/assets/category/translate(c).png'),
+                    img: require('@/assets/images/category/translate.png'),
+                    afterImg: require('@/assets/images/category/translate(c).png'),
                     name: '번역·통역',
                     value: 'translate',
                 },
                 {
                     id: 3,
-                    img: require('@/assets/category/video.png'),
-                    afterImg: require('@/assets/category/video(c).png'),
+                    img: require('@/assets/images/category/video.png'),
+                    afterImg: require('@/assets/images/category/video(c).png'),
                     name: '영상·사진·음향',
                     value: 'video',
                 },
                 {
                     id: 4,
-                    img: require('@/assets/category/lucky.png'),
-                    afterImg: require('@/assets/category/lucky(c).png'),
+                    img: require('@/assets/images/category/lucky.png'),
+                    afterImg: require('@/assets/images/category/lucky(c).png'),
                     name: '운세·상담',
                     value: 'lucky',
                 },
                 {
                     id: 5,
-                    img: require('@/assets/category/marketing.png'),
-                    afterImg: require('@/assets/category/marketing(c).png'),
+                    img: require('@/assets/images/category/marketing.png'),
+                    afterImg: require('@/assets/images/category/marketing(c).png'),
                     name: '마케팅',
                     value: 'marketing',
                 },
@@ -201,12 +199,12 @@ export default {
                 if (this.categories[i].name == name) {
                     this.categories[
                         i
-                    ].img = require(`@/assets/category/${this.categories[i].value}(c).png`);
+                    ].img = require(`@/assets/images/category/${this.categories[i].value}(c).png`);
                     this.project.category = this.categories[i].name;
                 } else {
                     this.categories[
                         i
-                    ].img = require(`@/assets/category/${this.categories[i].value}.png`);
+                    ].img = require(`@/assets/images/category/${this.categories[i].value}.png`);
                 }
             }
         },
@@ -239,6 +237,7 @@ export default {
 </script>
 
 <style>
+@import '../../assets/css/fundingOpen.css';
 #design img:last-child {
     display: none;
 }

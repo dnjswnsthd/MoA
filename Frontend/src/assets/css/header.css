@@ -138,4 +138,49 @@
     }
 }
 
+.menuBtn {
+    display: none;
+}
 /********서브헤더***********/
+
+@media screen and (min-width: 360px) and (max-width: 600px) {
+    .mainCloseMenu {
+        display: none;
+        opacity: 0;
+        background-color: rgba(255, 255, 255);
+        color: black;
+        transition: all 0.4s;
+    }
+    .mainOpenMenu {
+        display: block;
+        opacity: 1;
+        background-color: rgba(255, 255, 255);
+        color: black;
+        transition: all 0.4s;
+    }
+    .headerMenu {
+        line-height: 30px;
+    }
+    .menuBtn {
+        line-height: 70px;
+        display: block;
+    }
+    .introduceMessage {
+        font-size: 2.225rem;
+        text-align: center;
+    }
+    .bgLogo {
+        display: none;
+    }
+    .categoryMenu {
+        margin-top: 70px;
+    }
+    .mal,
+    .mal2,
+    .mal3 {
+        display: none;
+    }
+    .searchBar {
+        height: 50px;
+    }
+}

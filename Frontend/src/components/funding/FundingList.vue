@@ -75,13 +75,13 @@
                         <v-col class="col-12">
                             <img
                                 v-if="!project.love"
-                                :src="require('@/assets/category/heart.png')"
+                                :src="require('@/assets/images/category/heart.png')"
                                 alt="하트"
                                 class="width-30 height-30 centerContent"
                             />
                             <img
                                 v-else
-                                :src="require('@/assets/category/heart(c).png')"
+                                :src="require('@/assets/images/category/heart(c).png')"
                                 alt="하트"
                                 class="width-30 height-30 centerContent"
                             />
@@ -113,38 +113,38 @@ export default {
             categoryName: '',
             categories: [
                 {
-                    img: require('@/assets/category/design.png'),
-                    afterImg: require('@/assets/category/design(c).png'),
+                    img: require('@/assets/images/category/design.png'),
+                    afterImg: require('@/assets/images/category/design(c).png'),
                     name: '디자인',
                     value: 'design',
                 },
                 {
-                    img: require('@/assets/category/computer.png'),
-                    afterImg: require('@/assets/category/computer(c).png'),
+                    img: require('@/assets/images/category/computer.png'),
+                    afterImg: require('@/assets/images/category/computer(c).png'),
                     name: 'IT·프로그래밍',
                     value: 'computer',
                 },
                 {
-                    img: require('@/assets/category/translate.png'),
-                    afterImg: require('@/assets/category/translate(c).png'),
+                    img: require('@/assets/images/category/translate.png'),
+                    afterImg: require('@/assets/images/category/translate(c).png'),
                     name: '번역·통역',
                     value: 'translate',
                 },
                 {
-                    img: require('@/assets/category/video.png'),
-                    afterImg: require('@/assets/category/video(c).png'),
+                    img: require('@/assets/images/category/video.png'),
+                    afterImg: require('@/assets/images/category/video(c).png'),
                     name: '영상·사진·음향',
                     value: 'video',
                 },
                 {
-                    img: require('@/assets/category/lucky.png'),
-                    afterImg: require('@/assets/category/lucky(c).png'),
+                    img: require('@/assets/images/category/lucky.png'),
+                    afterImg: require('@/assets/images/category/lucky(c).png'),
                     name: '운세·상담',
                     value: 'lucky',
                 },
                 {
-                    img: require('@/assets/category/marketing.png'),
-                    afterImg: require('@/assets/category/marketing(c).png'),
+                    img: require('@/assets/images/category/marketing.png'),
+                    afterImg: require('@/assets/images/category/marketing(c).png'),
                     name: '마케팅',
                     value: 'marketing',
                 },
@@ -162,8 +162,8 @@ export default {
             projectList: [],
             dategap: [],
             heart: {
-                img: require('@/assets/category/heart.png'),
-                afterImg: require('@/assets/category/heart(c).png'),
+                img: require('@/assets/images/category/heart.png'),
+                afterImg: require('@/assets/images/category/heart(c).png'),
                 name: '관심',
                 value: 'heart',
             },
@@ -193,11 +193,11 @@ export default {
                 if (this.categories[i].name == name)
                     this.categories[
                         i
-                    ].img = require(`@/assets/category/${this.categories[i].value}(c).png`);
+                    ].img = require(`@/assets/images/category/${this.categories[i].value}(c).png`);
                 else
                     this.categories[
                         i
-                    ].img = require(`@/assets/category/${this.categories[i].value}.png`);
+                    ].img = require(`@/assets/images/category/${this.categories[i].value}.png`);
             }
             let today = new Date();
             let year = today.getFullYear();

@@ -12,13 +12,47 @@
                     </router-link>
                 </div>
                 <v-spacer></v-spacer>
-                <li class="col-1 centerText headerMenu" @click="movePage('FundingOpen')">
+                <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('FundingOpen')"
+                >
                     펀딩 오픈
                 </li>
-                <li class="col-1 centerText headerMenu" @click="movePage('MyPage')">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('FundingOpen')"
+                >
+                    펀딩 오픈
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('MyPage')"
+                >
                     My Page
                 </li>
-                <li class="col-1 centerText headerMenu" @click.prevent="onClickLogout">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('MyPage')"
+                >
+                    My Page
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click.prevent="onClickLogout"
+                >
+                    LOGOUT
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click.prevent="onClickLogout"
+                >
                     LOGOUT
                 </li>
             </v-row>
@@ -33,22 +67,45 @@
                     </router-link>
                 </div>
                 <v-spacer></v-spacer>
-                <li class="col-1 centerText headerMenu" @click="movePage('Join')">
+                <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('Join')"
+                >
                     회원가입
                 </li>
-                <li class="col-1 centerText headerMenu" @click="movePage('Login')">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('Join')"
+                >
+                    회원가입
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('Login')"
+                >
+                    로그인
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('Login')"
+                >
                     로그인
                 </li>
             </v-row>
             <v-row class="introduceBox">
-                <div class="col-6">
+                <div class="col-12 col-sm-6">
                     <h1 class="introduceMessage">
                         "최고의 팀"
                         <br />꾸려보고 싶은가요?
                     </h1>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12 col-sm-6">
                     <div class="searchBar">
                         <input type="text" class="col-11" />
                         <button class="col-1 searchIcon">
@@ -111,42 +168,43 @@ export default {
         return {
             categories: [
                 {
-                    img: require('@/assets/category/design.png'),
-                    afterImg: require('@/assets/category/design(c).png'),
+                    img: require('@/assets/images/category/design.png'),
+                    afterImg: require('@/assets/images/category/design(c).png'),
                     name: '디자인',
                     value: 'design',
                 },
                 {
-                    img: require('@/assets/category/computer.png'),
-                    afterImg: require('@/assets/category/computer(c).png'),
+                    img: require('@/assets/images/category/computer.png'),
+                    afterImg: require('@/assets/images/category/computer(c).png'),
                     name: 'IT·프로그래밍',
                     value: 'computer',
                 },
                 {
-                    img: require('@/assets/category/translate.png'),
-                    afterImg: require('@/assets/category/translate(c).png'),
+                    img: require('@/assets/images/category/translate.png'),
+                    afterImg: require('@/assets/images/category/translate(c).png'),
                     name: '번역·통역',
                     value: 'translate',
                 },
                 {
-                    img: require('@/assets/category/video.png'),
-                    afterImg: require('@/assets/category/video(c).png'),
+                    img: require('@/assets/images/category/video.png'),
+                    afterImg: require('@/assets/images/category/video(c).png'),
                     name: '영상·사진·음향',
                     value: 'video',
                 },
                 {
-                    img: require('@/assets/category/lucky.png'),
-                    afterImg: require('@/assets/category/lucky(c).png'),
+                    img: require('@/assets/images/category/lucky.png'),
+                    afterImg: require('@/assets/images/category/lucky(c).png'),
                     name: '운세·상담',
                     value: 'lucky',
                 },
                 {
-                    img: require('@/assets/category/marketing.png'),
-                    afterImg: require('@/assets/category/marketing(c).png'),
+                    img: require('@/assets/images/category/marketing.png'),
+                    afterImg: require('@/assets/images/category/marketing(c).png'),
                     name: '마케팅',
                     value: 'marketing',
                 },
             ],
+            openFlag: false,
         };
     },
     created() {
@@ -158,6 +216,7 @@ export default {
                 .dispatch('LOGOUT')
                 .then(() => {
                     if (this.$route.path !== '/') {
+                        this.openFlag = false;
                         this.$router.replace('/');
                     }
                 })
@@ -170,6 +229,9 @@ export default {
         },
         movePage(name) {
             this.$router.push({ name: name });
+        },
+        openMenu() {
+            this.openFlag = !this.openFlag;
         },
     },
 };

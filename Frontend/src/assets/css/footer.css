@@ -5,6 +5,7 @@ footer {
     color: #fff;
     margin-top: 20px;
 }
+
 .contactBox {
     color: #fff;
     text-align: center;
@@ -16,6 +17,7 @@ footer {
     margin: 0;
     display: inline-block;
 }
+
 /* .footerFixing {
     position: absolute;
     bottom: 0;
@@ -23,3 +25,27 @@ footer {
     right: 0;
     flex-shrink: 0;
 } */
+@media screen and (min-width: 360px) and (max-width: 600px) {
+    .flogo {
+        display: none;
+    }
+    .contactBox {
+        font-size: 8px;
+        padding: 0;
+    }
+    .contactBox i::before {
+        display: none;
+    }
+    .contactBox i {
+        display: none;
+    }
+    .contactBox i::after {
+        display: none;
+    }
+    .contactBox p {
+        margin: 0;
+        padding: 0;
+        font-size: 0.625em;
+        text-align: center;
+    }
+}

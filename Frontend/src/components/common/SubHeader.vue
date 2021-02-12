@@ -1,24 +1,58 @@
 <template>
     <header>
-        <v-container class="col-8">
+        <v-container class="col-12 col-sm-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-xs-2">
+                <div class="col-lg-2 col-md-2 col-2">
                     <router-link to="/">
                         <img
                             src="@/assets/images/main/logo(Bg).png"
                             alt="로고"
-                            class="width-150 height-70 centerContent"
+                            class="width-150 height-70"
                         />
                     </router-link>
                 </div>
                 <v-spacer></v-spacer>
-                <li class="col-1 centerText headerMenu" @click="movePage('FundingOpen')">
+                <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('FundingOpen')"
+                >
                     펀딩 오픈
                 </li>
-                <li class="col-1 centerText headerMenu" @click="movePage('MyPage')">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('FundingOpen')"
+                >
+                    펀딩 오픈
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('MyPage')"
+                >
                     My Page
                 </li>
-                <li class="col-1 centerText headerMenu" @click.prevent="onClickLogout">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('MyPage')"
+                >
+                    My Page
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click.prevent="onClickLogout"
+                >
+                    LOGOUT
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click.prevent="onClickLogout"
+                >
                     LOGOUT
                 </li>
             </v-row>
@@ -33,10 +67,33 @@
                     </router-link>
                 </div>
                 <v-spacer></v-spacer>
-                <li class="col-1 centerText headerMenu" @click="movePage('Join')">
+                <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('Join')"
+                >
                     회원가입
                 </li>
-                <li class="col-1 centerText headerMenu" @click="movePage('Login')">
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('Join')"
+                >
+                    회원가입
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    v-if="!this.openFlag"
+                    @click="movePage('Login')"
+                >
+                    로그인
+                </li>
+                <li
+                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    v-else
+                    @click="movePage('Login')"
+                >
                     로그인
                 </li>
             </v-row>
@@ -48,6 +105,11 @@
 import { mapState } from 'vuex';
 
 export default {
+    data() {
+        return {
+            openFlag: false,
+        };
+    },
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
     },
@@ -61,7 +123,10 @@ export default {
                 .then(() => {
                     // this.$router.push({ name: "" });
 
-                    if (this.$route.path !== '/') this.$router.replace('/');
+                    if (this.$route.path !== '/') {
+                        this.openFlag = false;
+                        this.$router.replace('/');
+                    }
                 })
                 .catch(() => {
                     console.log('로그아웃 문제!!!');
@@ -70,6 +135,10 @@ export default {
         movePage(name) {
             this.$router.push({ name: name });
         },
+        openMenu() {
+            this.openFlag = !this.openFlag;
+            console.log(this.openFlag);
+        },
     },
 };
 </script>
@@ -77,6 +146,7 @@ export default {
 <style scoped>
 @import '../../assets/css/header.css';
 header {
+    padding-bottom: 12px;
     border-bottom: 1px solid black;
 }
 .headerMenu {

@@ -9,7 +9,7 @@
                 <div class="col-6">
                     <div class="projectImgBox">
                         <img
-                            src="@/assets/category/marketing(c).png"
+                            src="@/assets/images/category/marketing(c).png"
                             alt="샘플이미지"
                             class="projectImg"
                         />
