@@ -37,13 +37,13 @@
                             </ul>
                             <img
                                 v-if="!funding.love"
-                                :src="require('@/assets/category/heart.png')"
+                                :src="require('@/assets/images/category/heart.png')"
                                 alt="하트"
                                 class="width-30 height-30"
                             />
                             <img
                                 v-else
-                                :src="require('@/assets/category/heart(c).png')"
+                                :src="require('@/assets/images/category/heart(c).png')"
                                 alt="하트"
                                 class="width-30 height-30"
                             />
@@ -62,7 +62,7 @@
                         v-for="(rankName, index) in rankings"
                         :key="index"
                     >
-                        <p class="centerText font-20 " style="margin-bottom:5px;">
+                        <p class="centerText font-20" style="margin-bottom:5px;">
                             {{ rankName }}
                         </p>
 
