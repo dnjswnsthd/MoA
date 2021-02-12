@@ -352,6 +352,8 @@ a {
     -webkit-box-orient: vertical;
     -moz-line-clamp: 1;
     -moz-box-orient: vertical;
+    -ms-line-clamp: 1;
+    -ms-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
