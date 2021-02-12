@@ -1,5 +1,5 @@
 <template>
-    <v-container class="col-12 col-lg-8 col-md-8 centerContent">
+    <v-container class="col-12 col-lg-6 col-md-6 centerContent">
         <p class="evaluateTitle">평가</p>
         <v-toolbar color="#ab47bc" dark style="border-radius: 20px 20px 0 0;">
             <v-tabs v-model="tab" align-with-title>
