@@ -454,6 +454,7 @@
 <script>
 import http from '@/util/http-common';
 import { mapState } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
   computed: {
@@ -608,8 +609,7 @@ export default {
                   .dispatch('LOGOUT')
                   .then(() => {
                     // this.$router.push({ name: "" });
-
-                    alert('삭제 성공!');
+                    swal('삭제 성공!', { icon: 'success' });
                     if (this.$route.path !== '/') this.$router.replace('/');
                   })
                   .catch(() => {
@@ -617,7 +617,9 @@ export default {
                   });
               })
               .catch(() => {
-                alert('삭제 실패!');
+                swal('삭제 실패!', {
+                  icon: 'error',
+                });
               });
           }
         })
@@ -652,10 +654,12 @@ export default {
                 introduce: this.memberInfo.introduce,
               })
               .then(() => {
-                alert('수정 성공!');
+                swal('수정 성공!', { icon: 'success' });
               })
               .catch(() => {
-                alert('수정 실패!');
+                swal('수정 실패!', {
+                  icon: 'error',
+                });
               });
           }
         })
