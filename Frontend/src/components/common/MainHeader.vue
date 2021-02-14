@@ -14,42 +14,42 @@
                 <v-spacer></v-spacer>
                 <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainCloseMenu"
                     v-if="!this.openFlag"
                     @click="movePage('FundingOpen')"
                 >
                     펀딩 오픈
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainOpenMenu"
                     v-else
                     @click="movePage('FundingOpen')"
                 >
                     펀딩 오픈
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainCloseMenu"
                     v-if="!this.openFlag"
                     @click="movePage('MyPage')"
                 >
                     My Page
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainOpenMenu"
                     v-else
                     @click="movePage('MyPage')"
                 >
                     My Page
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainCloseMenu"
                     v-if="!this.openFlag"
                     @click.prevent="onClickLogout"
                 >
                     LOGOUT
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainOpenMenu"
                     v-else
                     @click.prevent="onClickLogout"
                 >
@@ -69,28 +69,28 @@
                 <v-spacer></v-spacer>
                 <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainCloseMenu"
                     v-if="!this.openFlag"
                     @click="movePage('Join')"
                 >
                     회원가입
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainOpenMenu"
                     v-else
                     @click="movePage('Join')"
                 >
                     회원가입
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainCloseMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainCloseMenu"
                     v-if="!this.openFlag"
                     @click="movePage('Login')"
                 >
                     로그인
                 </li>
                 <li
-                    class="col-12 col-sm-1 centerText headerMenu mainOpenMenu"
+                    class="col-12 col-md-2 centerText headerMenu mainOpenMenu"
                     v-else
                     @click="movePage('Login')"
                 >
