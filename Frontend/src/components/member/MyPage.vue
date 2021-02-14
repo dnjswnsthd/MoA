@@ -690,7 +690,9 @@ export default {
       console.log('updateP : ' + updatePoint);
 
       if (updatePoint < 0) {
-        alert('포인트가 부족한 신청자 입니다.');
+        swal('포인트가 부족합니다.', {
+          icon: 'error',
+        });
       } else {
         http
           .put('/project/permission', {
@@ -701,7 +703,9 @@ export default {
           .then((response) => {
             if (response.data.message == 'success') {
               this.proceedDialog = false;
-              alert('수락성공');
+              swal('수락 완료!', {
+                icon: 'success',
+              });
             } else {
               alert('거절실패');
             }
@@ -722,7 +726,9 @@ export default {
         .then((response) => {
           if (response.data.message == 'success') {
             this.proceedDialog = false;
-            alert('거절 성공');
+            swal('거절 완료!', {
+              icon: 'success',
+            });
           } else {
             alert('거절 실패');
           }
@@ -743,11 +749,15 @@ export default {
         })
         .then((response) => {
           if (response.data.message == 'success') {
-            alert('충전성공!');
+            swal('충전 완료!', {
+              icon: 'success',
+            });
             this.plusPointDialog = false;
             location.href = '/mypage';
           } else {
-            alert('충전실패!');
+            swal('충전 실패!', {
+              icon: 'error',
+            });
             this.plusPointDialog = false;
           }
         })
@@ -757,7 +767,10 @@ export default {
     },
     minusPoint() {
       if (this.changePoint > this.memberInfo.point) {
-        alert('있는 포인트보다 작게입력해주세요.');
+        swal('보유 포인트보다 작게 입력해주세요!', {
+          icon: 'error',
+        });
+        alert('');
         this.changePoint = 0;
       } else {
         this.changePoint = this.memberInfo.point - this.changePoint * 1;
@@ -768,7 +781,9 @@ export default {
           })
           .then((response) => {
             if (response.data.message == 'success') {
-              alert('전환성공!');
+              swal('전환 완료!', {
+                icon: 'success',
+              });
               this.minusPointDialog = false;
               location.href = '/mypage';
             } else {
