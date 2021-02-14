@@ -137,7 +137,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .scheduleList {
     border: 2px solid #b39ddb;
 }
