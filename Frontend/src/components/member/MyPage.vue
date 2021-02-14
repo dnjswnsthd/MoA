@@ -752,11 +752,8 @@ export default {
 </script>
 
 <style scoped>
-.cardBox {
-    position: relative;
-    width: 1000px;
-    margin: 50px auto;
-}
+@import '../../assets/css/member.css';
+
 p {
     padding: 10px 0 0 10px;
 }
@@ -766,5 +763,20 @@ p {
 }
 .row {
     margin: 0;
+}
+@media screen and (min-width: 360px) and (max-width: 600px) {
+    .fundingBtn {
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 960px) {
+    .fundingBtn {
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1264px) {
+    .fundingBtn {
+        font-size: 18px;
+    }
 }
 </style>
