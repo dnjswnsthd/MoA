@@ -1,300 +1,306 @@
 <template>
-    <v-container class="col-lg-6 col-md-7 com-sm-8 col-12">
-        <p class="pageTitle">펀딩오픈</p>
-        <div class="col-12 centerContent pt-3">
-            <h2>카테고리</h2>
+  <v-container class="col-lg-6 col-md-7 com-sm-8 col-12">
+    <p class="pageTitle">펀딩오픈</p>
+    <div class="col-12 centerContent pt-3">
+      <h2>카테고리</h2>
 
-            <v-row>
-                <div
-                    class="category col-lg-2 col-md-4 col-4"
-                    v-for="category in categories"
-                    :key="category.id"
-                >
-                    <div :id="category.value" @click="categorySelect(category.name)">
-                        <img
-                            class="width-40 height-40 centerContent "
-                            :src="category.img"
-                            :alt="category.name"
-                        />
-                        <img
-                            class="width-40 height-40 centerContent "
-                            :src="category.afterImg"
-                            :alt="category.name"
-                        />
-                    </div>
-                    <p>{{ category.name }}</p>
-                </div>
-            </v-row>
+      <v-row>
+        <div
+          class="category col-lg-2 col-md-4 col-4"
+          v-for="category in categories"
+          :key="category.id"
+        >
+          <div :id="category.value" @click="categorySelect(category.name)">
+            <img
+              class="width-40 height-40 centerContent "
+              :src="category.img"
+              :alt="category.name"
+            />
+            <img
+              class="width-40 height-40 centerContent "
+              :src="category.afterImg"
+              :alt="category.name"
+            />
+          </div>
+          <p>{{ category.name }}</p>
         </div>
+      </v-row>
+    </div>
 
-        <form class="col-12">
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-text-field
-                    label="제목"
-                    type="text"
-                    v-model="project.project_name"
-                    style="width:60%;"
-                ></v-text-field>
-                <v-spacer></v-spacer>
-            </v-row>
+    <form class="col-12">
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-text-field
+          label="제목"
+          type="text"
+          v-model="project.project_name"
+          style="width:60%;"
+        ></v-text-field>
+        <v-spacer></v-spacer>
+      </v-row>
 
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-text-field
-                    label="인원"
-                    type="number"
-                    v-model="project.participants"
-                    suffix="명"
-                    style="width:40px;"
-                    class="col-2"
-                >
-                </v-text-field>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-text-field
+          label="인원"
+          type="number"
+          v-model="project.participants"
+          suffix="명"
+          style="width:40px;"
+          class="col-2"
+        >
+        </v-text-field>
 
-                <v-text-field
-                    label="펀딩액"
-                    v-model="project.funding_cost"
-                    suffix="원"
-                    class="mx-10 col-2"
-                    style="width:40px;"
-                ></v-text-field>
+        <v-text-field
+          label="펀딩액"
+          v-model="project.funding_cost"
+          suffix="원"
+          class="mx-10 col-2"
+          style="width:40px;"
+        ></v-text-field>
 
-                <v-spacer></v-spacer>
-                <v-radio-group v-model="project.mentor_chk" class="centerContent" row>
-                    멘토
-                    <v-radio value="필요있음" label="필요있음"></v-radio>
-                    <v-radio value="필요없음" label="필요없음"></v-radio>
-                </v-radio-group>
-                <v-spacer></v-spacer>
-                <v-sapcer></v-sapcer>
-            </v-row>
+        <v-spacer></v-spacer>
+        <v-radio-group v-model="project.mentor_chk" class="centerContent" row>
+          멘토
+          <v-radio value="필요있음" label="필요있음"></v-radio>
+          <v-radio value="필요없음" label="필요없음"></v-radio>
+        </v-radio-group>
+        <v-spacer></v-spacer>
+        <v-sapcer></v-sapcer>
+      </v-row>
 
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-text-field
-                    label="모집기간"
-                    type="date"
-                    class="width-100"
-                    v-model="project.deadline"
-                    style="width:80px;"
-                ></v-text-field>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-text-field
+          label="모집기간"
+          type="date"
+          class="width-100"
+          v-model="project.deadline"
+          style="width:80px;"
+        ></v-text-field>
 
-                <v-text-field
-                    label="프로젝트 End"
-                    type="date"
-                    class="width-130 ml-15"
-                    v-model="project.end_date"
-                ></v-text-field>
-                <v-spacer></v-spacer>
-            </v-row>
-        </form>
+        <v-text-field
+          label="프로젝트 End"
+          type="date"
+          class="width-130 ml-15"
+          v-model="project.end_date"
+        ></v-text-field>
+        <v-spacer></v-spacer>
+      </v-row>
+    </form>
 
-        <div class="py-5 centerContent">
-            <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
-            <v-textarea
-                class="width-650 mx-auto"
-                outlined
-                name="input-12-4"
-                label="세부내용"
-                v-model="project.description"
-            ></v-textarea>
-        </div>
+    <div class="py-5 centerContent">
+      <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
+      <v-textarea
+        class="width-650 mx-auto"
+        outlined
+        name="input-12-4"
+        label="세부내용"
+        v-model="project.description"
+      ></v-textarea>
+    </div>
 
-        <v-row class="my-5">
-            <v-spacer></v-spacer>
-            <div class="fundingBtn" @click="reset">
-                초기화
-            </div>
-            <v-spacer></v-spacer>
-            <div @click="openFunding" class="fundingBtn">
-                오픈하기
-            </div>
-            <v-spacer></v-spacer>
-        </v-row>
-    </v-container>
+    <v-row class="my-5">
+      <v-spacer></v-spacer>
+      <div class="fundingBtn" @click="reset">
+        초기화
+      </div>
+      <v-spacer></v-spacer>
+      <div @click="openFunding" class="fundingBtn">
+        오픈하기
+      </div>
+      <v-spacer></v-spacer>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import http from '@/util/http-common';
 import { mapState } from 'vuex';
+import swal from 'sweetalert';
 export default {
-    computed: {
-        ...mapState(['memberInfo', 'isLogin']),
-    },
-    created() {
-        this.project.leader = this.memberInfo.id;
+  computed: {
+    ...mapState(['memberInfo', 'isLogin']),
+  },
+  created() {
+    this.project.leader = this.memberInfo.id;
 
-        let today = new Date();
+    let today = new Date();
 
-        let year = today.getFullYear();
-        let month = today.getMonth() + 1;
-        let date = today.getDate();
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
 
-        this.project.start_date = year + '-' + month + '-' + date;
-        console.log(this.project.start_date);
-    },
-    data() {
-        return {
-            project: {
-                category: '',
-                project_name: '',
-                participants: Number,
-                mentor_chk: '',
-                funding_cost: '',
-                deadline: '',
-                start_date: '',
-                end_date: '',
-                description: '',
-                leader: '',
-            },
-            categories: [
-                {
-                    id: 0,
-                    img: require('@/assets/images/category/design.png'),
-                    afterImg: require('@/assets/images/category/design(c).png'),
-                    name: '디자인',
-                    value: 'design',
-                },
-                {
-                    id: 1,
-                    img: require('@/assets/images/category/computer.png'),
-                    afterImg: require('@/assets/images/category/computer(c).png'),
-                    name: 'IT·프로그래밍',
-                    value: 'computer',
-                },
-                {
-                    id: 2,
-                    img: require('@/assets/images/category/translate.png'),
-                    afterImg: require('@/assets/images/category/translate(c).png'),
-                    name: '번역·통역',
-                    value: 'translate',
-                },
-                {
-                    id: 3,
-                    img: require('@/assets/images/category/video.png'),
-                    afterImg: require('@/assets/images/category/video(c).png'),
-                    name: '영상·사진·음향',
-                    value: 'video',
-                },
-                {
-                    id: 4,
-                    img: require('@/assets/images/category/lucky.png'),
-                    afterImg: require('@/assets/images/category/lucky(c).png'),
-                    name: '운세·상담',
-                    value: 'lucky',
-                },
-                {
-                    id: 5,
-                    img: require('@/assets/images/category/marketing.png'),
-                    afterImg: require('@/assets/images/category/marketing(c).png'),
-                    name: '마케팅',
-                    value: 'marketing',
-                },
-            ],
-        };
-    },
-    methods: {
-        categorySelect(name) {
-            for (var i = 0; i < this.categories.length; i++) {
-                if (this.categories[i].name == name) {
-                    this.categories[
-                        i
-                    ].img = require(`@/assets/images/category/${this.categories[i].value}(c).png`);
-                    this.project.category = this.categories[i].name;
-                } else {
-                    this.categories[
-                        i
-                    ].img = require(`@/assets/images/category/${this.categories[i].value}.png`);
-                }
-            }
+    this.project.start_date = year + '-' + month + '-' + date;
+    console.log(this.project.start_date);
+  },
+  data() {
+    return {
+      project: {
+        category: '',
+        project_name: '',
+        participants: Number,
+        mentor_chk: '',
+        funding_cost: '',
+        deadline: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+        leader: '',
+      },
+      categories: [
+        {
+          id: 0,
+          img: require('@/assets/images/category/design.png'),
+          afterImg: require('@/assets/images/category/design(c).png'),
+          name: '디자인',
+          value: 'design',
         },
-        openFunding() {
-            http.post('/project/create', this.project)
-                .then((response) => {
-                    console.log(response);
-                    if (response.data.message == 'success') {
-                        alert('추가 성공!');
-                        this.$router.push({ name: 'Main' });
-                    } else {
-                        alert('추가실패!');
-                    }
-                })
-                .catch(() => {
-                    alert('추가 실패!');
-                });
+        {
+          id: 1,
+          img: require('@/assets/images/category/computer.png'),
+          afterImg: require('@/assets/images/category/computer(c).png'),
+          name: 'IT·프로그래밍',
+          value: 'computer',
         },
-        reset() {
-            (this.project.project_name = ''),
-                (this.project.participants = 0),
-                (this.project.funding_cost = ''),
-                (this.project.mentor_chk = ''),
-                (this.project.deadline = ''),
-                (this.project.end_date = ''),
-                (this.proejct.description = '');
+        {
+          id: 2,
+          img: require('@/assets/images/category/translate.png'),
+          afterImg: require('@/assets/images/category/translate(c).png'),
+          name: '번역·통역',
+          value: 'translate',
         },
+        {
+          id: 3,
+          img: require('@/assets/images/category/video.png'),
+          afterImg: require('@/assets/images/category/video(c).png'),
+          name: '영상·사진·음향',
+          value: 'video',
+        },
+        {
+          id: 4,
+          img: require('@/assets/images/category/lucky.png'),
+          afterImg: require('@/assets/images/category/lucky(c).png'),
+          name: '운세·상담',
+          value: 'lucky',
+        },
+        {
+          id: 5,
+          img: require('@/assets/images/category/marketing.png'),
+          afterImg: require('@/assets/images/category/marketing(c).png'),
+          name: '마케팅',
+          value: 'marketing',
+        },
+      ],
+    };
+  },
+  methods: {
+    categorySelect(name) {
+      for (var i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].name == name) {
+          this.categories[
+            i
+          ].img = require(`@/assets/images/category/${this.categories[i].value}(c).png`);
+          this.project.category = this.categories[i].name;
+        } else {
+          this.categories[
+            i
+          ].img = require(`@/assets/images/category/${this.categories[i].value}.png`);
+        }
+      }
     },
+    openFunding() {
+      http
+        .post('/project/create', this.project)
+        .then((response) => {
+          console.log(response);
+          if (response.data.message == 'success') {
+            swal('추가 완료!', {
+              icon: 'success',
+            });
+            this.$router.push({ name: 'Main' });
+          } else {
+            swal('추가 실패!', {
+              icon: 'error',
+            });
+          }
+        })
+        .catch(() => {
+          alert('추가 실패!');
+        });
+    },
+    reset() {
+      (this.project.project_name = ''),
+        (this.project.participants = 0),
+        (this.project.funding_cost = ''),
+        (this.project.mentor_chk = ''),
+        (this.project.deadline = ''),
+        (this.project.end_date = ''),
+        (this.proejct.description = '');
+    },
+  },
 };
 </script>
 
 <style>
 @import '../../assets/css/fundingOpen.css';
 #design img:last-child {
-    display: none;
+  display: none;
 }
 #design:hover img:first-child {
-    display: none;
+  display: none;
 }
 #design:hover img:last-child {
-    display: block;
+  display: block;
 }
 
 #computer img:last-child {
-    display: none;
+  display: none;
 }
 #computer:hover img:first-child {
-    display: none;
+  display: none;
 }
 #computer:hover img:last-child {
-    display: block;
+  display: block;
 }
 
 #translate img:last-child {
-    display: none;
+  display: none;
 }
 #translate:hover img:first-child {
-    display: none;
+  display: none;
 }
 #translate:hover img:last-child {
-    display: block;
+  display: block;
 }
 
 #video img:last-child {
-    display: none;
+  display: none;
 }
 #video:hover img:first-child {
-    display: none;
+  display: none;
 }
 #video:hover img:last-child {
-    display: block;
+  display: block;
 }
 
 #lucky img:last-child {
-    display: none;
+  display: none;
 }
 #lucky:hover img:first-child {
-    display: none;
+  display: none;
 }
 #lucky:hover img:last-child {
-    display: block;
+  display: block;
 }
 
 #marketing img:last-child {
-    display: none;
+  display: none;
 }
 #marketing:hover img:first-child {
-    display: none;
+  display: none;
 }
 #marketing:hover img:last-child {
-    display: block;
+  display: block;
 }
 </style>
