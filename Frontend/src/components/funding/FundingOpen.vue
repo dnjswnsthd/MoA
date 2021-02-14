@@ -236,7 +236,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import '../../assets/css/fundingOpen.css';
 #design img:last-child {
     display: none;
@@ -296,5 +296,8 @@ export default {
 }
 #marketing:hover img:last-child {
     display: block;
+}
+.fundingBtn {
+    font-size: 14px;
 }
 </style>

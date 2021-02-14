@@ -482,8 +482,4 @@ export default {
 </script>
 <style scoped>
 @import '../../assets/css/fundingdetail.css';
-.row + .row {
-    padding: 0;
-    margin: 0;
-}
 </style>
