@@ -19,6 +19,8 @@ public interface MemberService {
 	public void memberUpdate(MemberDto memberDto) throws Exception;
 
 	public void memberUpdatePoint(MemberDto memberDto) throws Exception;
+	
+	public void changePassword(Map<String, Object> param) throws Exception;
 
 	public void updateTempPassword(String email) throws Exception;
 
