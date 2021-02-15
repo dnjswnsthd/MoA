@@ -216,7 +216,6 @@
 		select *
 		from project
 		where project_name = any (select project_name from project where project_name like CONCAT("%", #{topic}, "%"));
-		CONCAT(‘%’, #{topic}, ‘%’)
 
 	</select>
 </mapper>
