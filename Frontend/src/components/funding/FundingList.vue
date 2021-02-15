@@ -103,14 +103,20 @@ export default {
         ...mapState(['memberInfo', 'isLogin']),
     },
     created() {
-        this.categoryName = this.$route.params.cn;
-
+        this.categoryName = this.$route.query.cn;
+        this.fundingName = this.$route.query.fn;
         this.getInterestingList();
-        this.change(this.categoryName);
+        if(this.categoryName == '') {
+            this.change2(this.fundingName);
+        }
+        else{
+            this.change(this.categoryName);
+        }
     },
     data() {
         return {
             categoryName: '',
+            fundingName: '',
             categories: [
                 {
                     img: require('@/assets/images/category/design.png'),
@@ -251,6 +257,52 @@ export default {
                     console.log('fail');
                 });
         },
+        change2(name){
+
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let date = today.getDate();
+            let current = year + '-' + month + '-' + date;
+
+            http.get(`project/fundingList/${name}`)
+                .then((data) =>{
+                    this.projectList = data.list;
+
+                    for (var i = 0; i < this.projectList.length; i++) {
+                        this.projectList[i].love = false;
+                        for (var j = 0; j < this.interestingList.length; j++) {
+                            if (
+                                this.interestingList[j].project_num ==
+                                this.projectList[i].project_num
+                            )
+                                this.projectList[i].love = true;
+                        }
+
+                        let startdate = this.projectList[i].start_date;
+                        let deadline = this.projectList[i].deadline;
+
+                        let ttoday = new Date(current);
+                        let start = new Date(startdate);
+                        let end = new Date(deadline);
+
+                        // let gap = (today.getTime(this.fundingDatas[i].end_date) - today.getTime(this.fundingDatas[i].start_date)) / (1000 * 60 * 60 * 24);
+                        let gap = Math.floor(
+                            (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+                        );
+                        let gap2 = Math.floor(
+                            (end.getTime() - ttoday.getTime() + 32400000) / (1000 * 60 * 60 * 24)
+                        );
+
+                        let result = 100 - Math.ceil((gap2 / gap) * 100);
+
+                        // let res = Math.ceil(gap );
+                        this.dategap[i] = result;
+                        // console.log(res);
+                    }
+                })
+
+        }
     },
 };
 </script>
