@@ -45,9 +45,9 @@
             <v-row class="mt-5">
                 <div class="col-6 col-lg-4" v-for="(project, index) in projectList" :key="index">
                     <img
-                        src="@/assets/images/funding/fox.jpg"
+                        :src="categoriesImg[project.category]"
                         alt="예시"
-                        class="col-12"
+                        class="col-6 centerContent"
                         @click="goDetail(project.project_num)"
                     />
 
@@ -155,7 +155,14 @@ export default {
                     value: 'marketing',
                 },
             ],
-
+            categoriesImg: {
+                디자인: require('@/assets/images/category/design(c).png'),
+                'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
+                '번역·통역': require('@/assets/images/category/translate(c).png'),
+                '영상·사진·음향': require('@/assets/images/category/video(c).png'),
+                '운세·상담': require('@/assets/images/category/lucky(c).png'),
+                마케팅: require('@/assets/images/category/marketing(c).png'),
+            },
             items: [
                 require('@/assets/images/AD/ad3.jpg'),
                 require('@/assets/images/AD/ad4.jpg'),

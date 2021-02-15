@@ -2,7 +2,9 @@
 .container {
     padding-bottom: 0;
 }
-
+.logo {
+    cursor: pointer;
+}
 .backgroundImg {
     background-image: url('../images/main/mainBg.jpg');
     background-attachment: fixed;

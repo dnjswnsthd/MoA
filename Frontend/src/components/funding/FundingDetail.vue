@@ -9,7 +9,7 @@
                 <div class="col-6">
                     <div class="projectImgBox">
                         <img
-                            src="@/assets/images/category/marketing(c).png"
+                            :src="categoriesImg[project.category]"
                             alt="샘플이미지"
                             class="projectImg"
                         />
@@ -248,6 +248,14 @@ export default {
         love: '관심등록',
         cancelLove: '관심취소',
         schedule: {},
+        categoriesImg: {
+            디자인: require('@/assets/images/category/design(c).png'),
+            'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
+            '번역·통역': require('@/assets/images/category/translate(c).png'),
+            '영상·사진·음향': require('@/assets/images/category/video(c).png'),
+            '운세·상담': require('@/assets/images/category/lucky(c).png'),
+            마케팅: require('@/assets/images/category/marketing(c).png'),
+        },
     }),
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
