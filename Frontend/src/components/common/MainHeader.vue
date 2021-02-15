@@ -205,6 +205,7 @@ export default {
             ],
             openFlag: false,
             topic: '',
+            project: {},
         };
     },
     created() {
@@ -234,12 +235,12 @@ export default {
             this.openFlag = !this.openFlag;
         },
         searchProject() {
-            http.get('/project/', {
-                topic: this.topic,
-            })
+            http.get(`/project/${this.topic}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        topic = response.data;
+                        this.project = response.data;
+                    } else {
+                        alert('받기실패');
                     }
                 })
                 .catch(() => {
