@@ -76,7 +76,6 @@
                     type="date"
                     class="width-100"
                     v-model="project.deadline"
-                    style="width:80px;"
                 ></v-text-field>
 
                 <v-text-field
@@ -89,9 +88,9 @@
             </v-row>
         </form>
 
-        <div class="py-5 centerContent">
+        <div class="py-5 centerContent ">
             <!-- <v-text-area type="text" class="fundingBox" v-model="project.description" /> -->
-            <div class="editor px-2 fundingBox">
+            <div class="editor px-2">
                 <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
                     <div class="menubar">
                         <button
@@ -219,8 +218,9 @@
                         </button>
                     </div>
                 </editor-menu-bar>
-
-                <editor-content class="editor__content px-2" :editor="editor" />
+                <div @click="focusEditor">
+                    <editor-content class="editor__content px-2" :editor="editor" />
+                </div>
             </div>
         </div>
 
@@ -383,7 +383,9 @@ export default {
         },
         openFunding() {
             this.project.description = this.editor.getHTML();
-
+            if (this.project.mentor_chk == '필요없음') {
+                this.project.funding_cost = 0;
+            }
             http.post('/project/create', this.project)
                 .then((response) => {
                     console.log(response);
@@ -410,6 +412,9 @@ export default {
                 (this.project.deadline = ''),
                 (this.project.end_date = ''),
                 (this.proejct.description = '');
+        },
+        focusEditor() {
+            this.editor.focus();
         },
     },
     beforeDestroy() {
@@ -499,7 +504,7 @@ export default {
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    width: 0.8rem;
+    width: 0.7rem;
     height: 0.8rem;
     margin: 0 0.3rem;
     top: -0.05rem;
