@@ -179,10 +179,10 @@ public class MemberController {
 			// 데이터베이스에 이메일이 존재해야 임시 비밀번호를 생성
 			if (!memberService.idChk(email)) {
 				memberService.updateTempPassword(email);
-				resultMap.put("massage", SUCCESS);
+				resultMap.put("message", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			} else {
-				resultMap.put("massage", FAIL); // 이메일이 존재하지 않는 경우
+				resultMap.put("message", FAIL); // 이메일이 존재하지 않는 경우
 				status = HttpStatus.ACCEPTED;
 			}
 		} catch (Exception e) {
