@@ -112,4 +112,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return sqlSession.getMapper(ProjectMapper.class).getEvaluateList(project_num);
 	}
 
+	@Override
+	public ProjectDto[] search(String topic) throws Exception {
+		return sqlSession.getMapper(ProjectMapper.class).search(topic);
+	}
+
 }
