@@ -27,6 +27,7 @@ public interface ProjectService {
 	public ProjectDto getFundingDetail(int project_num) throws Exception;
 	public MemberDto[] memberchk(int project_num)throws Exception;
 	public List<ProjectDto> getFundingListByCategory(String category) throws Exception;
+	public List<ProjectDto> getFundingListByProjectName(String project_name) throws Exception;
 	public MemberDto[] waitingList(int project_num) throws Exception;
 	public void projectManager(Map<String, Object> param) throws Exception;
 	public List<Map<String, Object>> getEvaluateList(int project_num) throws Exception;
