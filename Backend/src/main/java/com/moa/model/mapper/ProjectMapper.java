@@ -43,7 +43,7 @@ public interface ProjectMapper {
 	
 	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
 	
-	List<ProjectDto> getFundingListByProjectName(String projectName) throws SQLException;
+	List<ProjectDto> getFundingListByProjectName(String project_name) throws SQLException;
 
 	MemberDto[] waitingList(int project_num) throws SQLException;
 
