@@ -145,14 +145,50 @@
 
     <v-row class="btnBox">
       <v-spacer></v-spacer>
-      <div class="col-3" @click="movePage('FindPassword')">
-        <p class="fundingBtn">
-          비밀번호 변경
-        </p>
-      </div>
+      <v-dialog v-model="changePasswordDialog" max-width="290">
+        <template v-slot:activator="{ on, attrs }">
+          <div class="col-3">
+            <p class="fundingBtn" v-bind="attrs" v-on="on">
+              비밀번호 변경
+            </p>
+          </div>
+        </template>
+        <v-card>
+          <v-card-title class="headline mb-1"> 비밀번호 변경 </v-card-title>
+          <v-card-text>
+            <v-text-field
+              label="현재 비밀번호"
+              type="password"
+              class="width-700"
+              v-model="password"
+            ></v-text-field>
+            <v-text-field
+              label="변경 할 비밀번호"
+              type="password"
+              class="width-700"
+              v-model="modifyPassword"
+            ></v-text-field>
+            <v-text-field
+              label="변경 할 비밀번호 확인"
+              type="password"
+              class="width-700"
+              v-model="modifyPasswordChk"
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn small outlined color="#bc6ff1" @click="changePasswordDialog = false">
+              취소
+            </v-btn>
+            <v-btn small outlined color="#bc6ff1" @click="changePassword">
+              변경
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-spacer></v-spacer>
 
-      <v-dialog v-model="modifyDialog" persistent max-width="290">
+      <v-dialog v-model="modifyDialog" max-width="290">
         <template v-slot:activator="{ on, attrs }">
           <div class="col-3">
             <p class="fundingBtn" v-bind="attrs" v-on="on">
@@ -513,7 +549,10 @@ export default {
       interestingDialog: false,
       plusPointDialog: false,
       minusPointDialog: false,
+      changePasswordDialog: false,
       changePoint: 0,
+      modifyPassword: '',
+      modifyPasswordChk: '',
       selectItems: [
         '디자인',
         'IT·프로그래밍',
@@ -795,6 +834,42 @@ export default {
             alert('에러발생!');
           });
       }
+    },
+    changePassword(){
+      http
+        .post(`/member/pwcheck`, {
+          id: this.memberInfo.id,
+          pw: this.password,
+        })
+        .then((response) => {
+          if(response.data.message == 'success'){
+            if(this.modifyPassword != this.modifyPasswordChk){
+              swal('비밀번호, 비밀번호 확인이 틀립니다!', {
+                icon: 'error',
+              });
+            } else if(this.modifyPassword =='' || this.modifyPasswordChk== ''){
+              swal('변경 할 비밀번호를 입력해주세요!!', {
+                icon: 'error',
+              });
+            } 
+            else {
+              http
+                .put(`/member/changepw`, {
+                  id: this.memberInfo.id,
+                  pw: this.modifyPassword,
+                })
+              swal('비밀번호 변경 완료!', {
+                icon: 'success',
+              });
+              this.changePasswordDialog = false;
+            }
+          } else{
+            swal('비밀번호가 틀립니다!', {
+                icon: 'error',
+              });
+          }
+        })
+
     },
     movePage(name) {
       this.$router.push({ name: name });
