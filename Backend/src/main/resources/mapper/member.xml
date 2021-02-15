@@ -64,6 +64,13 @@
 		introduce = #{introduce}
 		where id = #{id}
 	</update>
+	
+	<!-- member change password -->
+	<update id="changePassword" parameterType="MemberDto">
+		update member set
+		pw = #{pw}
+		where id = #{id}
+	</update>
 
 	<!-- member update point -->
 	<update id="memberUpdatePoint" parameterType="MemberDto">

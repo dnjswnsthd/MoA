@@ -166,6 +166,25 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@ApiOperation(value = "비밀번호 변경", notes = "비밀번호를 변경하고 성공 여부에 따라 Success Or Fail 문자열을 반환한다.", response = Map.class)
+	@PutMapping("/changepw")
+	public ResponseEntity<Map<String, Object>> changePassword(
+			@RequestBody @ApiParam(value = "본인 확인용 pw", required = true) Map<String, Object> param) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			memberService.changePassword(param);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+
+		} catch (Exception e) {
+			logger.error("수정 실패 : {}", e);
+			resultMap.put("massage", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 
 	@ApiOperation(value = "비밀번호 찾기", notes = "입력한 아이디를 확인하여 임시 비밀번호를 만들어 이메일로 전송하여준다.", response = Map.class)
 	@PutMapping("/findpw/{email}")
