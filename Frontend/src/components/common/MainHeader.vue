@@ -106,7 +106,7 @@
                 <div class="col-12 col-sm-6">
                     <div class="searchBar">
                         <input type="text" class="col-11" v-model="topic" />
-                        <button class="col-1 searchIcon" @click="searchProject">
+                        <button class="col-1 searchIcon" @click="moveSearchMain">
                             <v-icon>mdi-magnify</v-icon>
                         </button>
                     </div>
@@ -116,7 +116,7 @@
                 <img src="@/assets/images/main/logo.png" alt="로고" />
             </div>
 
-            <v-row class="categoryMenu">
+            <v-row class="categoryMenu" id="focusing">
                 <div
                     class="col-lg-2 col-md-4 col-4 mainCategory"
                     v-for="(category, index) in categories"
@@ -156,7 +156,6 @@
 </template>
 
 <script>
-import http from '@/util/http-common';
 import { mapState } from 'vuex';
 
 export default {
@@ -234,18 +233,8 @@ export default {
         openMenu() {
             this.openFlag = !this.openFlag;
         },
-        searchProject() {
-            http.get(`/project/${this.topic}`)
-                .then((response) => {
-                    if (response.data.message == 'success') {
-                        this.project = response.data;
-                    } else {
-                        alert('받기실패');
-                    }
-                })
-                .catch(() => {
-                    alert('에러발생!');
-                });
+        moveSearchMain() {
+            this.$router.push({ name: 'SearchMain', params: { topic: this.topic } });
         },
     },
 };

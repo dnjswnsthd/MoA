@@ -1,7 +1,7 @@
 <template>
     <v-container class="col-lg-8 col-md-8 col-12 my-5">
         <div class="my-10">
-            <h2 class="centerText mainTitle col-lg-4 col-md-12 col-12">모집 중인 팀 펀딩</h2>
+            <h2 class="centerText mainTitle col-lg-4 col-md-12 col-12">검색된 펀딩 결과</h2>
 
             <div class="mt-10">
                 <v-row class="centerContent col-12">
@@ -91,30 +91,21 @@ export default {
             return this.$store.getters.getMemberInfo;
         },
     },
-    watch: {
-        getMemberInfo() {
-            if (this.memberInfo) this.getInterestingList();
-            else this.interestingList = [];
-
-            setTimeout(this.getProjectList, 200);
-        },
-    },
-    created() {
-        http.put('project/projectmanage', {
-            today: this.today,
-        })
+    watch: {},
+    created() {},
+    mounted() {
+        this.topic = this.$route.params.topic;
+        http.get(`/project/search/${this.topic}`)
             .then((response) => {
                 if (response.data.message == 'success') {
-                    console.log('환영');
+                    this.fundingDatas = response.data.list;
                 } else {
-                    alert('작업실패!');
+                    alert('받기실패');
                 }
             })
             .catch(() => {
                 alert('에러발생!');
             });
-    },
-    mounted() {
         http.get('member/rank')
             .then(({ data }) => {
                 this.rankDatas = data.list;
@@ -122,14 +113,11 @@ export default {
             .catch(() => {
                 alert('랭킹 정보 가져오기 실패');
             });
-
-        if (this.memberInfo) this.getInterestingList();
-        setTimeout(this.getProjectList, 200);
     },
     data() {
         return {
             fundingDatas: [],
-            interestingList: [],
+
             rankings: ['경험치', '도덕성', '적극성', '신뢰도', '전문성', '리더쉽'],
             rankDatas: [],
             dategap: [],
@@ -150,15 +138,7 @@ export default {
         goDetail(project_num) {
             this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
         },
-        getInterestingList() {
-            http.get(`project/interesting/${this.memberInfo.id}`)
-                .then(({ data }) => {
-                    this.interestingList = data.interestingProjectInfo;
-                })
-                .catch(() => {
-                    alert(`관심 목록 가져오기 실패`);
-                });
-        },
+
         getProjectList() {
             let today = new Date();
             let year = today.getFullYear();
@@ -180,8 +160,8 @@ export default {
 
                         list[i].love = false;
 
-                        for (var j = 0; j < this.interestingList.length; j++) {
-                            if (this.interestingList[j].project_num == list[i].project_num)
+                        for (var j = 0; j < this.fundingDatas.length; j++) {
+                            if (this.fundingDatas[j].project_num == list[i].project_num)
                                 list[i].love = true;
                         }
 

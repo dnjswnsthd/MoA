@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Main from '@/components/views/Main.vue';
+import SearchMain from '@/components/views/SearchMain.vue';
 import MainHeader from '@/components/common/MainHeader.vue';
 import SubHeader from '@/components/common/SubHeader.vue';
 
@@ -27,6 +28,11 @@ export default new VueRouter({
             path: '/',
             name: 'Main',
             components: { default: Main, header: MainHeader },
+        },
+        {
+            path: '/searchmain/:topic',
+            name: 'SearchMain',
+            components: { default: SearchMain, header: MainHeader },
         },
         {
             path: '/login',
