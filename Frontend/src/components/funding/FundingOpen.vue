@@ -76,7 +76,6 @@
                     type="date"
                     class="width-100"
                     v-model="project.deadline"
-                    style="width:80px;"
                 ></v-text-field>
 
                 <v-text-field
@@ -384,7 +383,9 @@ export default {
         },
         openFunding() {
             this.project.description = this.editor.getHTML();
-
+            if (this.project.mentor_chk == '필요없음') {
+                this.project.funding_cost = 0;
+            }
             http.post('/project/create', this.project)
                 .then((response) => {
                     console.log(response);
