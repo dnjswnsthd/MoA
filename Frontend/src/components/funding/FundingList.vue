@@ -40,7 +40,7 @@
         </v-row>
 
         <v-divider></v-divider>
-        <div class="mt-2">
+        <div class="mt-2 mb-15">
             <h2 style="display:block;">당신의 취향을 저격할 프로젝트</h2>
             <v-row class="mt-5">
                 <div class="col-6 col-lg-4" v-for="(project, index) in projectList" :key="index">
