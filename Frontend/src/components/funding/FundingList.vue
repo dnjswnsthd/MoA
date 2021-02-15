@@ -105,11 +105,11 @@ export default {
     created() {
         this.categoryName = this.$route.query.cn;
         this.fundingName = this.$route.query.fn;
-        this.getInterestingList();
-        if(this.categoryName == '') {
+        if(this.categoryName == undefined) {
             this.change2(this.fundingName);
         }
         else{
+            this.getInterestingList();
             this.change(this.categoryName);
         }
     },
@@ -265,17 +265,18 @@ export default {
                 });
         },
         change2(name){
-
+            this.fundingName = name;
             let today = new Date();
             let year = today.getFullYear();
             let month = today.getMonth() + 1;
             let date = today.getDate();
             let current = year + '-' + month + '-' + date;
 
-            http.get(`project/fundingList/${name}`)
+            http.get(`project/fundingList/${this.fundingName}`)
                 .then((data) =>{
                     this.projectList = data.list;
-
+                    console.log(1111);
+                    console.log(this.projectList);
                     for (var i = 0; i < this.projectList.length; i++) {
                         this.projectList[i].love = false;
                         for (var j = 0; j < this.interestingList.length; j++) {
