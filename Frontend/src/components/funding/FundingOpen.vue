@@ -62,7 +62,7 @@
                 <v-spacer></v-spacer>
                 <v-radio-group v-model="project.mentor_chk" class="centerContent" row>
                     멘토
-                    <v-radio value="필요있음" label="필요있음"></v-radio>
+                    <v-radio class="ml-5" value="필요있음" label="필요있음"></v-radio>
                     <v-radio value="필요없음" label="필요없음"></v-radio>
                 </v-radio-group>
                 <v-spacer></v-spacer>
@@ -226,11 +226,11 @@
 
         <v-row class="my-5">
             <v-spacer></v-spacer>
-            <div class="fundingBtn" @click="reset">
+            <div class="fundingBtn width-100" @click="reset">
                 초기화
             </div>
             <v-spacer></v-spacer>
-            <div @click="openFunding" class="fundingBtn">
+            <div @click="openFunding" class="fundingBtn width-100">
                 오픈하기
             </div>
             <v-spacer></v-spacer>
