@@ -445,12 +445,12 @@ public class ProjectController {
 	@ApiOperation(value = "입력한 제목에 맞는프로젝트 목록 제공", notes = "선택한 카테고리에 속하는 모든 프로젝트 정보를 제공", response = Map.class)
 	@GetMapping("/fundingList/{project_name}")
 	public ResponseEntity<Map<String, Object>> getFundingListByProjectName(
-			@PathVariable @ApiParam(value = "펀딩 정보를 가져올 카테고리", required = true) String projectName) {
+			@PathVariable @ApiParam(value = "펀딩 정보를 가져올 카테고리", required = true) String project_name) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		
 		try {
-			List<ProjectDto> list = projectService.getFundingListByProjectName(projectName);
+			List<ProjectDto> list = projectService.getFundingListByProjectName(project_name);
 			resultMap.put("list", list);
 			resultMap.put("message", SUCCESS);
 			status = HttpStatus.ACCEPTED;
