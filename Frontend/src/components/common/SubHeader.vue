@@ -1,6 +1,6 @@
 <template>
     <header>
-        <v-container class="col-12 col-sm-8">
+        <v-container class="col-12 col-lg-8">
             <v-row v-if="isLogin !== false">
                 <div class="col-lg-2 col-md-2 col-2 logo" @click="movePage('Main')">
                     <img

@@ -1,5 +1,5 @@
 <template>
-    <v-container class="col-lg-3 col-md-5 col-sm-7 col-10 my-10">
+    <v-container class="col-lg-3 col-md-5 col-sm-7 col-10 mb-15">
         <div>
             <v-spacer></v-spacer>
             <img src="@/assets/images/main/logo(Bg).png" alt="로고" class="col-12" />

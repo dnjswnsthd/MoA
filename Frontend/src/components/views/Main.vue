@@ -1,6 +1,6 @@
 <template>
-    <v-container class="col-lg-8 col-md-8 col-12">
-        <div class="mt-10">
+    <v-container class="col-lg-8 col-md-8 col-12 my-5">
+        <div class="my-10">
             <h2 class="centerText mainTitle col-lg-2 col-md-12 col-12">모집 중인 팀 펀딩</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
@@ -37,23 +37,11 @@
                                 <li>팀장 : {{ funding.leader }}</li>
                             </ul>
                         </div>
-                        <img
-                            v-if="!funding.love"
-                            :src="require('@/assets/images/category/heart.png')"
-                            alt="하트"
-                            class="width-30 height-30 centerContent"
-                        />
-                        <img
-                            v-else
-                            :src="require('@/assets/images/category/heart(c).png')"
-                            alt="하트"
-                            class="width-30 height-30 centerContent"
-                        />
                     </v-col>
                 </v-row>
             </div>
         </div>
-        <div class="mt-10">
+        <div class="my-10">
             <h2 class="centerText mainTitle col-lg-2 col-md-12 col-12">멘토 랭킹</h2>
             <div class="mt-10">
                 <v-row class="centerContent col-12">
