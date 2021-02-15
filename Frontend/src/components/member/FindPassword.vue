@@ -7,12 +7,9 @@
             <h2 class="centerText">비밀번호 찾기</h2>
         </div>
 
-        <!-- <v-card-title class="headline grey lighten-2 titleText">
-            비밀번호 찾기
-        </v-card-title> -->
         <div class="height-100">
             <form class="formBox">
-                <v-text-field label="ID" type="text"></v-text-field>
+                <v-text-field label="ID" type="text" v-model="id"></v-text-field>
             </form>
         </div>
 
@@ -22,17 +19,8 @@
                 <v-btn
                     class="ml-4"
                     style="background-color:#ab47bc; color:white"
-                    v-bind="attrs"
-                    v-on="on"
+                    @click="findPassword()"
                     >이메일로 찾기</v-btn
-                >
-                <v-spacer></v-spacer>
-                <v-btn
-                    class="ml-4"
-                    style="background-color:#ab47bc; color:white"
-                    v-bind="attrs"
-                    v-on="on"
-                    >휴대폰번호로 찾기</v-btn
                 >
                 <v-spacer></v-spacer>
             </v-row>
@@ -57,8 +45,28 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
 export default {
     name: 'FindPassword',
+    data() {
+        return {
+            id: '',
+        };
+    },
+    methods: {
+        findPassword() {
+            http.put(`/member/findpw/${this.id}`)
+                .then((response) => {
+                    console.log(response.data.message);
+                    if (response.data.message == 'success') {
+                        alert('메일로 임시비밀번호가 보내졌습니다!');
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
+        },
+    },
 };
 </script>
 
