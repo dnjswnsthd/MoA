@@ -62,7 +62,7 @@
                 <v-spacer></v-spacer>
                 <v-radio-group v-model="project.mentor_chk" class="centerContent" row>
                     멘토
-                    <v-radio value="필요있음" label="필요있음"></v-radio>
+                    <v-radio class="ml-5" value="필요있음" label="필요있음"></v-radio>
                     <v-radio value="필요없음" label="필요없음"></v-radio>
                 </v-radio-group>
                 <v-spacer></v-spacer>
