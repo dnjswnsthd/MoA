@@ -11,9 +11,10 @@
                     >
                         <div @click="goDetail(funding.project_num)">
                             <img
-                                src="@/assets/images/funding/fox.jpg"
-                                class="fullWidth fullHeight"
+                                :src="categoriesImg[funding.category]"
                                 alt="예시"
+                                class="centerContent"
+                                style="width:50%; height:50%;"
                             />
                             <div class="mt-4">
                                 <v-progress-linear
@@ -35,19 +36,19 @@
                                 </li>
                                 <li>팀장 : {{ funding.leader }}</li>
                             </ul>
-                            <img
-                                v-if="!funding.love"
-                                :src="require('@/assets/images/category/heart.png')"
-                                alt="하트"
-                                class="width-30 height-30"
-                            />
-                            <img
-                                v-else
-                                :src="require('@/assets/images/category/heart(c).png')"
-                                alt="하트"
-                                class="width-30 height-30"
-                            />
                         </div>
+                        <img
+                            v-if="!funding.love"
+                            :src="require('@/assets/images/category/heart.png')"
+                            alt="하트"
+                            class="width-30 height-30 centerContent"
+                        />
+                        <img
+                            v-else
+                            :src="require('@/assets/images/category/heart(c).png')"
+                            alt="하트"
+                            class="width-30 height-30 centerContent"
+                        />
                     </v-col>
                 </v-row>
             </div>
@@ -144,6 +145,14 @@ export default {
             rankDatas: [],
             dategap: [],
             project_num: '',
+            categoriesImg: {
+                디자인: require('@/assets/images/category/design(c).png'),
+                'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
+                '번역·통역': require('@/assets/images/category/translate(c).png'),
+                '영상·사진·음향': require('@/assets/images/category/video(c).png'),
+                '운세·상담': require('@/assets/images/category/lucky(c).png'),
+                마케팅: require('@/assets/images/category/marketing(c).png'),
+            },
         };
     },
     methods: {
