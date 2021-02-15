@@ -550,6 +550,10 @@ export default {
 
             if (this.memberInfo.status == 1) {
                 this.data.push(this.memberInfo.morality);
+                this.data.push(this.memberInfo.positiveness);
+                this.data.push(this.memberInfo.reliability);
+                this.data.push(this.memberInfo.professional);
+                this.data.push(this.memberInfo.leadership);
             } else {
                 this.data.push(this.memberInfo.communication);
                 this.data.push(this.memberInfo.responsibility);
