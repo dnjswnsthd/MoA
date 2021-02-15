@@ -46,6 +46,7 @@
 
 <script>
 import http from '@/util/http-common';
+import swal from 'sweetalert';
 export default {
     name: 'FindPassword',
     data() {
@@ -59,7 +60,9 @@ export default {
                 .then((response) => {
                     console.log(response.data.message);
                     if (response.data.message == 'success') {
-                        alert('메일로 임시비밀번호가 보내졌습니다!');
+                        swal('메일로 임시비밀번호가 보내졌습니다!', {
+                                    icon: 'success',
+                                });
                     }
                 })
                 .catch(() => {
