@@ -105,7 +105,7 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="searchBar">
-                        <input type="text" class="col-11" v-model="title" />
+                        <input type="text" class="col-11"/>
                         <button class="col-1 searchIcon">
                             <v-icon>mdi-magnify</v-icon>
                         </button>
