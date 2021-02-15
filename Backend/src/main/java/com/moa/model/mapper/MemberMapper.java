@@ -23,6 +23,8 @@ public interface MemberMapper {
 	public void delete(String id) throws SQLException;
 
 	public void memberUpdate(MemberDto memberDto) throws SQLException;
+	
+	public void changePassword(Map<String, Object> param) throws SQLException;
 
 	public void memberUpdatePoint(MemberDto memberDto) throws SQLException;
 	
