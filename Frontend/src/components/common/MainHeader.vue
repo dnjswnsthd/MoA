@@ -106,7 +106,7 @@
                 <div class="col-12 col-sm-6">
                     <div class="searchBar">
                         <input type="text" class="col-11" v-model="title" />
-                        <button class="col-1 searchIcon" @click="searchFunding()">
+                        <button class="col-1 searchIcon">
                             <v-icon>mdi-magnify</v-icon>
                         </button>
                     </div>
@@ -203,7 +203,6 @@ export default {
                 },
             ],
             openFlag: false,
-            title: '',
         };
     },
     created() {
@@ -224,16 +223,13 @@ export default {
                 });
         },
         moveByCategory(name) {
-            this.$router.push({ name: 'FundingList', query: { cn: name } });
+            this.$router.push({ name: 'FundingList', params: { cn: name } });
         },
         movePage(name) {
             this.$router.push({ name: name });
         },
         openMenu() {
             this.openFlag = !this.openFlag;
-        },
-        searchFunding(){
-            this.$router.push({ name: 'FundingList', query: { fn: this.title}});
         },
     },
 };

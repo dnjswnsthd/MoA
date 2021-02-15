@@ -97,11 +97,6 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public List<ProjectDto> getFundingListByProjectName(String project_name) throws Exception {
-		return sqlSession.getMapper(ProjectMapper.class).getFundingListByProjectName(project_name);
-	}
-
-	@Override
 	public MemberDto[] waitingList(int project_num) throws Exception {
 		return sqlSession.getMapper(ProjectMapper.class).waitingList(project_num);
 	}
