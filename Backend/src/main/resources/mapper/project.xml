@@ -170,12 +170,12 @@
 		where category = #{category}
 	</select>
 	
-	<!-- getFundingListByCategory -->
+	<!-- getFundingListByProjectName -->
 	<!-- 검색한 제목이 포함 된 프로젝트 목록을 제공 -->
 	<select id="getFundingListByProjectName" parameterType="String" resultType="ProjectDto">
 		select *
 		from project
-		where projectName = LIKE '%' || #{project_name} || '%'
+		where projectName LIKE '%' || #{project_name} || '%'
 	</select>
 	
 	<!-- 프로젝트에 포함된 친구들 가져오기 -->
