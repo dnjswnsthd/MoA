@@ -472,9 +472,6 @@ export default {
             http.get(`/project/memberchk/${project_num}`).then((response) => {
                 if (response.data.message == 'success') {
                     this.participants = response.data.member;
-                    swal('확인 성공!', {
-                        icon: 'success',
-                    });
                 } else {
                     swal('확인 실패.', {
                         icon: 'error',

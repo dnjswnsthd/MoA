@@ -2,151 +2,158 @@
     <v-container class="col-lg-6 col-md-8 col-12 centerContent">
         <h1 class="centerText">내 정보</h1>
         <v-row>
-            <div class="col-lg-6 col-md-6 col-12" style="margin-top:2%;">
-                <RadarCanvas :id="`ability`" :labels="labels[memberInfo.status - 1]" :data="data" />
-            </div>
-
-            <form class="col-lg-6 col-md-6 col-12 centerContent">
-                <v-row>
-                    <v-text-field
-                        label="ID"
-                        type="text"
-                        style="width:60%;"
-                        v-model="memberInfo.id"
-                        readonly
-                    ></v-text-field>
-                </v-row>
-                <v-row>
-                    <v-text-field
-                        label="MoA Point"
-                        type="text"
-                        style="width:15%;"
-                        v-model="memberInfo.point"
-                    ></v-text-field>
-                    <v-dialog v-model="plusPointDialog" max-width="290">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                class="ml-4"
-                                style="background-color:#ab47bc; color:white"
-                                v-bind="attrs"
-                                v-on="on"
-                            >
-                                충전
-                            </v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                충전
-                            </v-card-title>
-                            <v-card-text>
-                                <div>
-                                    <p style="padding:0">충전 할 포인트</p>
-                                    <v-text-field
-                                        label="POINT"
-                                        type="text"
-                                        required
-                                        v-model="changePoint"
-                                    ></v-text-field>
-                                </div>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="#ab47bc" text @click="plusPoint">
-                                    충전하기
+            <v-col class="centerContent mt-15">
+                <div>
+                    <RadarCanvas
+                        :id="`ability`"
+                        :labels="labels[memberInfo.status - 1]"
+                        :data="data"
+                    />
+                </div>
+            </v-col>
+            <v-col>
+                <form class="col-lg-8 col-md-8 col-12 centerContent">
+                    <v-row>
+                        <v-text-field
+                            label="ID"
+                            type="text"
+                            style="width:60%;"
+                            v-model="memberInfo.id"
+                            readonly
+                        ></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-text-field
+                            label="MoA Point"
+                            type="text"
+                            style="width:15%;"
+                            v-model="memberInfo.point"
+                        ></v-text-field>
+                        <v-dialog v-model="plusPointDialog" max-width="290">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                    class="ml-4"
+                                    style="background-color:#ab47bc; color:white"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                >
+                                    충전
                                 </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                    <v-dialog v-model="minusPointDialog" max-width="290">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                                class="ml-4"
-                                v-bind="attrs"
-                                v-on="on"
-                                style="background-color:#ab47bc; color:white"
-                            >
-                                전환
-                            </v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                전환
-                            </v-card-title>
-                            <v-card-text>
-                                <div>
-                                    <p style="padding:0">전환 할 포인트</p>
-                                    <v-text-field
-                                        label="POINT"
-                                        type="text"
-                                        required
-                                        v-model="changePoint"
-                                    ></v-text-field>
-                                </div>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="#ab47bc" text @click="minusPoint">
-                                    전환하기
+                            </template>
+                            <v-card>
+                                <v-card-title>
+                                    충전
+                                </v-card-title>
+                                <v-card-text>
+                                    <div>
+                                        <p style="padding:0">충전 할 포인트</p>
+                                        <v-text-field
+                                            label="POINT"
+                                            type="text"
+                                            required
+                                            v-model="changePoint"
+                                        ></v-text-field>
+                                    </div>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="#ab47bc" text @click="plusPoint">
+                                        충전하기
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <v-dialog v-model="minusPointDialog" max-width="290">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                    class="ml-4"
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    style="background-color:#ab47bc; color:white"
+                                >
+                                    전환
                                 </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                    <v-spacer></v-spacer>
-                    <v-spacer></v-spacer>
-                </v-row>
-                <v-row>
-                    <v-text-field
-                        label="NAME"
-                        type="text"
-                        style="width:30%;"
-                        v-model="memberInfo.name"
-                        readonly
-                    ></v-text-field>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                        label="AGE"
-                        type="text"
-                        style="width:30%;"
-                        v-model="memberInfo.age"
-                        readonly
-                    ></v-text-field>
-                </v-row>
+                            </template>
+                            <v-card>
+                                <v-card-title>
+                                    전환
+                                </v-card-title>
+                                <v-card-text>
+                                    <div>
+                                        <p style="padding:0">전환 할 포인트</p>
+                                        <v-text-field
+                                            label="POINT"
+                                            type="text"
+                                            required
+                                            v-model="changePoint"
+                                        ></v-text-field>
+                                    </div>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="#ab47bc" text @click="minusPoint">
+                                        전환하기
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
+                    </v-row>
+                    <v-row>
+                        <v-text-field
+                            label="NAME"
+                            type="text"
+                            style="width:30%;"
+                            v-model="memberInfo.name"
+                            readonly
+                        ></v-text-field>
+                        <v-spacer></v-spacer>
+                        <v-text-field
+                            label="AGE"
+                            type="text"
+                            style="width:30%;"
+                            v-model="memberInfo.age"
+                            readonly
+                        ></v-text-field>
+                    </v-row>
 
-                <v-row>
-                    <v-text-field
-                        label="MAJOR"
-                        type="text"
-                        class="width:60%;"
-                        v-model="memberInfo.major"
-                    ></v-text-field>
-                </v-row>
-                <v-row>
-                    <v-autocomplete
-                        class="width-100 mr-2"
-                        ref="member.favorite_1"
-                        v-model="memberInfo.favorite_1"
-                        :items="selectItems"
-                        label="favorite_1"
-                    >
-                    </v-autocomplete>
-                    <v-autocomplete
-                        class="width-100 mr-2"
-                        ref="member.favorite_2"
-                        v-model="memberInfo.favorite_2"
-                        :items="selectItems"
-                        label="favorite_2"
-                    >
-                    </v-autocomplete>
-                    <v-autocomplete
-                        class="width-100"
-                        ref="member.favorite_3"
-                        v-model="memberInfo.favorite_3"
-                        :items="selectItems"
-                        label="favorite_3"
-                    >
-                    </v-autocomplete>
-                </v-row>
-            </form>
+                    <v-row>
+                        <v-text-field
+                            label="MAJOR"
+                            type="text"
+                            class="width:60%;"
+                            v-model="memberInfo.major"
+                        ></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-autocomplete
+                            class="width-100 mr-2"
+                            ref="member.favorite_1"
+                            v-model="memberInfo.favorite_1"
+                            :items="selectItems"
+                            label="favorite_1"
+                        >
+                        </v-autocomplete>
+                        <v-autocomplete
+                            class="width-100 mr-2"
+                            ref="member.favorite_2"
+                            v-model="memberInfo.favorite_2"
+                            :items="selectItems"
+                            label="favorite_2"
+                        >
+                        </v-autocomplete>
+                        <v-autocomplete
+                            class="width-100"
+                            ref="member.favorite_3"
+                            v-model="memberInfo.favorite_3"
+                            :items="selectItems"
+                            label="favorite_3"
+                        >
+                        </v-autocomplete>
+                    </v-row>
+                </form>
+            </v-col>
         </v-row>
 
         <v-row class="btnBox">
@@ -160,7 +167,7 @@
                     </div>
                 </template>
                 <v-card>
-                    <v-card-title class="headline mb-1"> 비밀번호 변경 </v-card-title>
+                    <v-card-title> 비밀번호 변경 </v-card-title>
                     <v-card-text>
                         <v-text-field
                             label="현재 비밀번호"
@@ -194,7 +201,7 @@
             </v-dialog>
             <v-spacer></v-spacer>
 
-            <v-dialog v-model="modifyDialog" persistent max-width="290">
+            <v-dialog v-model="modifyDialog" max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <div class="col-3">
                         <p class="fundingBtn" v-bind="attrs" v-on="on">
@@ -203,7 +210,7 @@
                     </div>
                 </template>
                 <v-card>
-                    <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
+                    <v-card-title> 비밀번호 확인 </v-card-title>
                     <v-card-text>
                         <v-text-field
                             label="Password"
@@ -225,7 +232,7 @@
             </v-dialog>
             <v-spacer></v-spacer>
 
-            <v-dialog v-model="deleteDialog" persistent max-width="290">
+            <v-dialog v-model="deleteDialog" max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <div class="col-3">
                         <p class="fundingBtn" v-bind="attrs" v-on="on">
@@ -234,7 +241,7 @@
                     </div>
                 </template>
                 <v-card>
-                    <v-card-title class="headline"> 비밀번호 확인 </v-card-title>
+                    <v-card-title> 비밀번호 확인 </v-card-title>
                     <v-card-text>
                         <v-text-field
                             label="Password"
