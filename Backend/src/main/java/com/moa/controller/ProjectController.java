@@ -443,9 +443,9 @@ public class ProjectController {
 	}
 	
 	@ApiOperation(value = "프로젝트 검색", notes = "프로젝트 검색하여 그 항목 띠우기", response = Map.class)
-	@GetMapping("/search")
+	@GetMapping("/search/{topic}")
 	public ResponseEntity<Map<String, Object>> search(
-			@RequestBody @ApiParam(value = "검색어", required = true) String topic){
+			@PathVariable("topic") @ApiParam(value = "검색어", required = true) String topic){
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		try {
