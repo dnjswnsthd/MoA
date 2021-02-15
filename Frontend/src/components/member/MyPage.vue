@@ -279,12 +279,12 @@
                             <div
                                 v-for="(proceed, index) in proceeding"
                                 :key="index"
-                                class="col-6 col-md-6 col-lg-4"
+                                class="col-6 col-md-6 col-lg-4 mb-2"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
+                                    :src="categoriesImg[proceed.category]"
                                     alt="예시"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                 />
 
                                 <v-row>
@@ -367,8 +367,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth centerContent mb-2"
+                                    :src="categoriesImg[wait.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -388,8 +388,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    :src="categoriesImg[completed.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -429,8 +429,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    :src="categoriesImg[interest.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -513,44 +513,15 @@ export default {
             deleteDialog: false,
             password: '',
             proceeding: {},
-            categories: [
-                {
-                    img: require('@/assets/images/category/design.png'),
-                    afterImg: require('@/assets/images/category/design(c).png'),
-                    name: '디자인',
-                    value: 'design',
-                },
-                {
-                    img: require('@/assets/images/category/computer.png'),
-                    afterImg: require('@/assets/images/category/computer(c).png'),
-                    name: 'IT·프로그래밍',
-                    value: 'computer',
-                },
-                {
-                    img: require('@/assets/images/category/translate.png'),
-                    afterImg: require('@/assets/images/category/translate(c).png'),
-                    name: '번역·통역',
-                    value: 'translate',
-                },
-                {
-                    img: require('@/assets/images/category/video.png'),
-                    afterImg: require('@/assets/images/category/video(c).png'),
-                    name: '영상·사진·음향',
-                    value: 'video',
-                },
-                {
-                    img: require('@/assets/images/category/lucky.png'),
-                    afterImg: require('@/assets/images/category/lucky(c).png'),
-                    name: '운세·상담',
-                    value: 'lucky',
-                },
-                {
-                    img: require('@/assets/images/category/marketing.png'),
-                    afterImg: require('@/assets/images/category/marketing(c).png'),
-                    name: '마케팅',
-                    value: 'marketing',
-                },
-            ],
+
+            categoriesImg: {
+                디자인: require('@/assets/images/category/design(c).png'),
+                'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
+                '번역·통역': require('@/assets/images/category/translate(c).png'),
+                '영상·사진·음향': require('@/assets/images/category/video(c).png'),
+                '운세·상담': require('@/assets/images/category/lucky(c).png'),
+                마케팅: require('@/assets/images/category/marketing(c).png'),
+            },
             complete: {},
             interesting: {},
             waiting: {},

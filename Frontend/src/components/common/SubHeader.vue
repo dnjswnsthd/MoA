@@ -2,14 +2,12 @@
     <header>
         <v-container class="col-12 col-sm-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-2">
-                    <router-link to="/">
-                        <img
-                            src="@/assets/images/main/logo(Bg).png"
-                            alt="로고"
-                            class="width-150 height-70"
-                        />
-                    </router-link>
+                <div class="col-lg-2 col-md-2 col-2 logo" @click="movePage('Main')">
+                    <img
+                        src="@/assets/images/main/logo(Bg).png"
+                        alt="로고"
+                        class="width-150 height-70"
+                    />
                 </div>
                 <v-spacer></v-spacer>
                 <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>

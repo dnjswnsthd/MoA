@@ -2,14 +2,12 @@
     <header class="backgroundImg">
         <v-container class="col-12 col-lg-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-2">
-                    <router-link to="/">
-                        <img
-                            src="@/assets/images/main/logo.png"
-                            alt="로고"
-                            class="width-150 height-70 centerContent"
-                        />
-                    </router-link>
+                <div class="col-lg-2 col-md-2 col-2 logo" @click="movePage('Main')">
+                    <img
+                        src="@/assets/images/main/logo.png"
+                        alt="로고"
+                        class="width-150 height-70 centerContent"
+                    />
                 </div>
                 <v-spacer></v-spacer>
                 <li class="col-4 centerText headerMenu menuBtn" @click="openMenu">메뉴</li>
@@ -97,7 +95,7 @@
                     로그인
                 </li>
             </v-row>
-            <v-row class="introduceBox">
+            <v-row class="introduceBox mt-15">
                 <div class="col-12 col-sm-6">
                     <h1 class="introduceMessage">
                         "최고의 팀"
