@@ -54,6 +54,8 @@ public interface ProjectMapper {
 	void memberDelete(Map<String, Object> param) throws SQLException;
 
 	List<Map<String, Object>> getEvaluateList(int project_num) throws SQLException;
+
+	ProjectDto[] search(String topic) throws SQLException;
 	
 	
 }

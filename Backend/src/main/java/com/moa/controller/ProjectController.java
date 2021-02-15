@@ -442,4 +442,22 @@ public class ProjectController {
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 	
+	@ApiOperation(value = "프로젝트 검색", notes = "프로젝트 검색하여 그 항목 띠우기", response = Map.class)
+	@GetMapping("/search")
+	public ResponseEntity<Map<String, Object>> search(
+			@RequestBody @ApiParam(value = "검색어", required = true) String topic){
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		HttpStatus status = null;
+		try {
+			ProjectDto[] searchProject = projectService.search(topic);
+			resultMap.put("list", searchProject);
+			resultMap.put("message", SUCCESS);
+			status = HttpStatus.ACCEPTED;
+		}catch(Exception e) {
+			resultMap.put("message", FAIL);
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
 }
