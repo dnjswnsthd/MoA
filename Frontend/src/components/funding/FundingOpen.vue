@@ -226,11 +226,11 @@
 
         <v-row class="my-5">
             <v-spacer></v-spacer>
-            <div class="fundingBtn" @click="reset">
+            <div class="fundingBtn width-100" @click="reset">
                 초기화
             </div>
             <v-spacer></v-spacer>
-            <div @click="openFunding" class="fundingBtn">
+            <div @click="openFunding" class="fundingBtn width-100">
                 오픈하기
             </div>
             <v-spacer></v-spacer>
