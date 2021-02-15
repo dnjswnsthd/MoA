@@ -1,5 +1,5 @@
 <template>
-    <v-container class="col-lg-8 col-md-12 col-12 centerContent">
+    <v-container class="col-lg-8 col-md-12 col-12 centerContent mb-15">
         <p class="pageTitle">
             {{ project.category }}
         </p>
@@ -112,7 +112,7 @@
             </v-col>
         </div>
 
-        <div class="col-12 centerContent">
+        <div class="col-12 centerContent mb-15">
             <v-row>
                 <v-col>
                     <v-sheet height="64" class="col-12 mb-5">
