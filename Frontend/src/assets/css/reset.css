@@ -132,7 +132,12 @@ a {
 .fullWidth {
     width: 100%;
 }
-
+.halfWidth {
+    width: 50%;
+}
+.halfHeight {
+    height: 50%;
+}
 .height-30 {
     width: 30px;
 }

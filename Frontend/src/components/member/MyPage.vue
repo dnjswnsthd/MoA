@@ -150,49 +150,49 @@
         </v-row>
 
         <v-row class="btnBox">
-             <v-spacer></v-spacer>
-      <v-dialog v-model="changePasswordDialog" max-width="290">
-        <template v-slot:activator="{ on, attrs }">
-          <div class="col-3">
-            <p class="fundingBtn" v-bind="attrs" v-on="on">
-              비밀번호 변경
-            </p>
-          </div>
-        </template>
-        <v-card>
-          <v-card-title class="headline mb-1"> 비밀번호 변경 </v-card-title>
-          <v-card-text>
-            <v-text-field
-              label="현재 비밀번호"
-              type="password"
-              class="width-700"
-              v-model="password"
-            ></v-text-field>
-            <v-text-field
-              label="변경 할 비밀번호"
-              type="password"
-              class="width-700"
-              v-model="modifyPassword"
-            ></v-text-field>
-            <v-text-field
-              label="변경 할 비밀번호 확인"
-              type="password"
-              class="width-700"
-              v-model="modifyPasswordChk"
-            ></v-text-field>
-          </v-card-text>
-          <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn small outlined color="#bc6ff1" @click="changePasswordDialog = false">
-              취소
-            </v-btn>
-            <v-btn small outlined color="#bc6ff1" @click="changePassword">
-              변경
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-spacer></v-spacer>
+            <v-dialog v-model="changePasswordDialog" max-width="290">
+                <template v-slot:activator="{ on, attrs }">
+                    <div class="col-3">
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">
+                            비밀번호 변경
+                        </p>
+                    </div>
+                </template>
+                <v-card>
+                    <v-card-title class="headline mb-1"> 비밀번호 변경 </v-card-title>
+                    <v-card-text>
+                        <v-text-field
+                            label="현재 비밀번호"
+                            type="password"
+                            class="width-700"
+                            v-model="password"
+                        ></v-text-field>
+                        <v-text-field
+                            label="변경 할 비밀번호"
+                            type="password"
+                            class="width-700"
+                            v-model="modifyPassword"
+                        ></v-text-field>
+                        <v-text-field
+                            label="변경 할 비밀번호 확인"
+                            type="password"
+                            class="width-700"
+                            v-model="modifyPasswordChk"
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn small outlined color="#bc6ff1" @click="changePasswordDialog = false">
+                            취소
+                        </v-btn>
+                        <v-btn small outlined color="#bc6ff1" @click="changePassword">
+                            변경
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+            <v-spacer></v-spacer>
 
             <v-dialog v-model="modifyDialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
@@ -272,12 +272,12 @@
                             <div
                                 v-for="(proceed, index) in proceeding"
                                 :key="index"
-                                class="col-6 col-md-6 col-lg-4"
+                                class="col-6 col-md-6 col-lg-4 mb-2"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
+                                    :src="categoriesImg[proceed.category]"
                                     alt="예시"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                 />
 
                                 <v-row>
@@ -360,8 +360,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth centerContent mb-2"
+                                    :src="categoriesImg[wait.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -381,8 +381,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    :src="categoriesImg[completed.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -422,8 +422,8 @@
                                 class="col-6 col-md-6 col-lg-4"
                             >
                                 <img
-                                    src="@/assets/images/funding/fox.jpg"
-                                    class="fullWidth height-200 centerContent mb-2"
+                                    :src="categoriesImg[interest.category]"
+                                    class="fullWidth height-200 centerContent px-5 py-5"
                                     alt="예시"
                                 />
 
@@ -506,44 +506,15 @@ export default {
             deleteDialog: false,
             password: '',
             proceeding: {},
-            categories: [
-                {
-                    img: require('@/assets/images/category/design.png'),
-                    afterImg: require('@/assets/images/category/design(c).png'),
-                    name: '디자인',
-                    value: 'design',
-                },
-                {
-                    img: require('@/assets/images/category/computer.png'),
-                    afterImg: require('@/assets/images/category/computer(c).png'),
-                    name: 'IT·프로그래밍',
-                    value: 'computer',
-                },
-                {
-                    img: require('@/assets/images/category/translate.png'),
-                    afterImg: require('@/assets/images/category/translate(c).png'),
-                    name: '번역·통역',
-                    value: 'translate',
-                },
-                {
-                    img: require('@/assets/images/category/video.png'),
-                    afterImg: require('@/assets/images/category/video(c).png'),
-                    name: '영상·사진·음향',
-                    value: 'video',
-                },
-                {
-                    img: require('@/assets/images/category/lucky.png'),
-                    afterImg: require('@/assets/images/category/lucky(c).png'),
-                    name: '운세·상담',
-                    value: 'lucky',
-                },
-                {
-                    img: require('@/assets/images/category/marketing.png'),
-                    afterImg: require('@/assets/images/category/marketing(c).png'),
-                    name: '마케팅',
-                    value: 'marketing',
-                },
-            ],
+
+            categoriesImg: {
+                디자인: require('@/assets/images/category/design(c).png'),
+                'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
+                '번역·통역': require('@/assets/images/category/translate(c).png'),
+                '영상·사진·음향': require('@/assets/images/category/video(c).png'),
+                '운세·상담': require('@/assets/images/category/lucky(c).png'),
+                마케팅: require('@/assets/images/category/marketing(c).png'),
+            },
             complete: {},
             interesting: {},
             waiting: {},
