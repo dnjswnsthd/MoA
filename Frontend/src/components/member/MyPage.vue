@@ -524,6 +524,9 @@ export default {
             interestingDialog: false,
             plusPointDialog: false,
             minusPointDialog: false,
+            changePasswordDialog: false,
+            modifyPassword: '',
+            modifyPasswordChk: '',
             changePoint: 0,
             selectItems: [
                 '디자인',
@@ -805,6 +808,37 @@ export default {
                         alert('에러발생!');
                     });
             }
+        },
+        changePassword() {
+            http.post(`/member/pwcheck`, {
+                id: this.memberInfo.id,
+                pw: this.password,
+            }).then((response) => {
+                if (response.data.message == 'success') {
+                    if (this.modifyPassword != this.modifyPasswordChk) {
+                        swal('비밀번호, 비밀번호 확인이 틀립니다!', {
+                            icon: 'error',
+                        });
+                    } else if (this.modifyPassword == '' || this.modifyPasswordChk == '') {
+                        swal('변경 할 비밀번호를 입력해주세요!!', {
+                            icon: 'error',
+                        });
+                    } else {
+                        http.put(`/member/changepw`, {
+                            id: this.memberInfo.id,
+                            pw: this.modifyPassword,
+                        });
+                        swal('비밀번호 변경 완료!', {
+                            icon: 'success',
+                        });
+                        this.changePasswordDialog = false;
+                    }
+                } else {
+                    swal('비밀번호가 틀립니다!', {
+                        icon: 'error',
+                    });
+                }
+            });
         },
         movePage(name) {
             this.$router.push({ name: name });
