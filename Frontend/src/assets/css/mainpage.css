@@ -20,12 +20,22 @@
 
 .rankingBox {
     padding: 0;
+    border-bottom: 1px dotted #bbb;
 }
 .rankingBox p {
     text-align: center;
     padding: 0;
     margin: 0;
 }
+
 .rankInfo p {
     display: inline-block;
+}
+
+.rankName {
+    color: #ab47bc;
+    font-weight: 900;
+    border-bottom: 2px solid #ab47bc;
+    box-sizing: border-box;
+    font-size: 24px;
 }

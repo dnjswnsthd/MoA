@@ -47,11 +47,11 @@
                 <v-row class="centerContent col-12">
                     <!-- <v-spacer></v-spacer> -->
                     <div
-                        class="col-lg-4 col-md-6 col-12 my-lg-5 px-lg-2"
+                        class="col-lg-4 col-md-6 col-12 my-lg-5 px-lg-2 rankInfoBox"
                         v-for="(rankName, index) in rankings"
                         :key="index"
                     >
-                        <p class="centerText font-20" style="margin-bottom:5px;">
+                        <p class="centerText rankName centerContent">
                             {{ rankName }}
                         </p>
 
@@ -215,5 +215,9 @@ li {
 }
 .row + .row {
     margin-top: 10px;
+}
+.rankName {
+    margin: 0 auto;
+    margin-bottom: 15px;
 }
 </style>

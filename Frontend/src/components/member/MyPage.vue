@@ -277,7 +277,7 @@
                                 <img
                                     :src="categoriesImg[proceed.category]"
                                     alt="예시"
-                                    class="fullWidth height-200 centerContent px-5 py-5"
+                                    class="col-6 centerContent"
                                 />
 
                                 <v-row>
@@ -361,7 +361,7 @@
                             >
                                 <img
                                     :src="categoriesImg[wait.category]"
-                                    class="fullWidth height-200 centerContent px-5 py-5"
+                                    class="col-6 centerContent"
                                     alt="예시"
                                 />
 
@@ -382,7 +382,7 @@
                             >
                                 <img
                                     :src="categoriesImg[completed.category]"
-                                    class="fullWidth height-200 centerContent px-5 py-5"
+                                    class="col-6 centerContent"
                                     alt="예시"
                                 />
 
@@ -423,7 +423,7 @@
                             >
                                 <img
                                     :src="categoriesImg[interest.category]"
-                                    class="fullWidth height-200 centerContent px-5 py-5"
+                                    class="col-6 centerContent"
                                     alt="예시"
                                 />
 
