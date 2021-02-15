@@ -75,6 +75,16 @@ public class MemberServiceImpl implements MemberService {
 		// 회원정보 수정은 이미 로그인이 된 상태로 진행 가능
 		sqlSession.getMapper(MemberMapper.class).memberUpdate(memberDto);
 	}
+	
+	/**
+	 * 비밀번호 변경을 위한 현재 pw 확인 후 변경.
+	 * 
+	 * @param memberDto : 비밀번호를 변경하려는 회원의 id와 password가 포함된 객체
+	 */
+	@Override
+	public void changePassword(Map<String, Object> param) throws Exception {
+		sqlSession.getMapper(MemberMapper.class).changePassword(param);
+	}
 
 	/**
 	 * 임시 비밀번호를 생성하여 임시 비밀번호로 바꾸어 준다
