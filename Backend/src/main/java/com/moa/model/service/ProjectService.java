@@ -30,5 +30,6 @@ public interface ProjectService {
 	public MemberDto[] waitingList(int project_num) throws Exception;
 	public void projectManager(Map<String, Object> param) throws Exception;
 	public List<Map<String, Object>> getEvaluateList(int project_num) throws Exception;
+	public ProjectDto[] search(String topic) throws Exception;
 
 }
