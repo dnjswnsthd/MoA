@@ -36,11 +36,14 @@ public interface ProjectMapper {
 	void interestingDelete(Map<String, Object> param) throws SQLException;
 
 	List<ProjectDto> getFundingList() throws SQLException;
-
+	
 	ProjectDto getFundingDetail(int project_num) throws SQLException;
 
 	MemberDto[] memberchk(int project_num) throws SQLException;
+	
 	List<ProjectDto> getFundingListByCategory(String category) throws SQLException;
+	
+	List<ProjectDto> getFundingListByProjectName(String project_name) throws SQLException;
 
 	MemberDto[] waitingList(int project_num) throws SQLException;
 
