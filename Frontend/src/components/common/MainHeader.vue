@@ -105,8 +105,8 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="searchBar">
-                        <input type="text" class="col-11"/>
-                        <button class="col-1 searchIcon">
+                        <input type="text" class="col-11" v-model="topic" />
+                        <button class="col-1 searchIcon" @click="searchProject">
                             <v-icon>mdi-magnify</v-icon>
                         </button>
                     </div>
@@ -156,6 +156,7 @@
 </template>
 
 <script>
+import http from '@/util/http-common';
 import { mapState } from 'vuex';
 
 export default {
@@ -203,6 +204,7 @@ export default {
                 },
             ],
             openFlag: false,
+            topic: '',
         };
     },
     created() {
@@ -230,6 +232,19 @@ export default {
         },
         openMenu() {
             this.openFlag = !this.openFlag;
+        },
+        searchProject() {
+            http.get('/project/', {
+                topic: this.topic,
+            })
+                .then((response) => {
+                    if (response.data.message == 'success') {
+                        topic = response.data;
+                    }
+                })
+                .catch(() => {
+                    alert('에러발생!');
+                });
         },
     },
 };
