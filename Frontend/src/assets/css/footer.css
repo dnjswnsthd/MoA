@@ -1,0 +1,94 @@
+@charset "utf-8";
+footer {
+    /* background-color:#401B7B; */
+    background: linear-gradient(to right, #401b7b, #d68ddf);
+    color: #fff;
+    margin-top: 20px;
+}
+
+.contactBox {
+    color: #fff;
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+}
+.contactBox p {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+.footerFixing {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-shrink: 0;
+}
+@media screen and (min-width: 360px) and (max-width: 600px) {
+    .flogo {
+        display: none;
+    }
+    .contactBox {
+        font-size: 8px;
+        padding: 0;
+    }
+    .contactBox i::before {
+        display: none;
+    }
+    .contactBox i {
+        display: none;
+    }
+    .contactBox i::after {
+        display: none;
+    }
+    .contactBox p {
+        margin: 0;
+        padding: 0;
+        font-size: 8px;
+        text-align: center;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 960px) {
+    .flogo {
+        display: none;
+    }
+    .contactBox {
+        font-size: 10px;
+        padding-top: 12px;
+    }
+    .contactBox i::before {
+        display: none;
+    }
+    .contactBox i {
+        display: none;
+    }
+    .contactBox i::after {
+        display: none;
+    }
+    .contactBox p {
+        font-size: 12px;
+        text-align: center;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1264px) {
+    .flogo {
+        display: block;
+    }
+
+    .contactBox i::before {
+        display: block;
+    }
+    .contactBox i {
+        display: block;
+    }
+    .contactBox i::after {
+        display: block;
+    }
+    .contactBox p {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        text-align: center;
+    }
+}

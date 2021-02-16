@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.model.mapper.ProjectMapper">
+	<!-- project create -->
+	<!-- 펀딩 오픈 -->
+	<insert id="createProject" parameterType="ProjectDto">
+		insert into
+		project(project_name, start_date, end_date, category, participants,
+		funding_cost, description, mentor_chk, deadline, leader)
+		values
+		(#{project_name}, #{start_date}, #{end_date}, #{category},
+		#{participants}, #{funding_cost}, #{description}, #{mentor_chk},
+		#{deadline}, #{leader})
+	</insert>
+	
+	<!-- project create했을때 프로젝트랑 멤버 id 추가-->
+	<!-- 펀딩 오픈 시 project_member db에 추가 -->
+	<insert id="appendProject" parameterType="Map">
+		insert into
+		member_project(select last_insert_id(), #{leader})
+	</insert>
+
+	<!-- project search -->
+	<!-- 진행중인 프로젝트 조회 -->
+	<select id="projectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from member_project inner join project on
+		member_project.project_num = project.project_num
+		where
+		member_project.id = #{id}
+	</select>
+	
+	<!-- waiting project search -->
+	<!-- 대기중인 프로젝트 조회 -->
+	<select id="waitingProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from waiting_project inner join project on
+		waiting_project.project_num = project.project_num
+		where
+		waiting_project.id = #{id}
+	</select>
+	
+	<!-- complete project search -->
+	<!-- 종료된 프로젝트 조회 -->
+	<select id="completeProjectInfo" parameterType="String" resultType="CompleteProjectInfoDto">
+		select project.project_num, project.project_name,
+		project.start_date, project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description, project.mentor_chk, complete_project.status
+		from complete_project inner join project
+		on complete_project.project_num = project.project_num
+		where complete_project.id = #{id}
+	</select>
+	
+	<!-- waiting project -->
+	<!-- 프로젝트 신청 후 대기 -->
+	<select id="getCnt" parameterType="Map" resultType="Integer">
+		select count(*) from waiting_project where project_num = #{project_num} and id = #{id}
+	</select>
+	<insert id="waiting" parameterType="Map">
+		insert into
+		waiting_project(project_num, id)
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from waiting_project where project_num = #{project_num} and id = #{id})
+	</insert>
+	<!-- 허가 시 member_project에 추가 -->
+	<insert id="projectAppend" parameterType="Map">
+		insert into
+		member_project(project_num, id)
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from member_project where project_num = #{project_num} and id = #{id})
+	</insert>
+	<!-- 허가 시 waiting_project에서 삭제 -->
+	<delete id="watingDelete" parameterType="Map">
+		delete from
+		waiting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
+	<delete id="denial" parameterType="Map">
+		delete from
+		waiting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
+	<!--  펀딩 종료 후 complete_project로 데이터 삽입 -->
+	<insert id="memberToComplete" parameterType="Map">
+		insert into complete_project(project_num,id)
+		select project_num, id
+		from member_project
+		where project_num = #{project_num}
+	</insert>
+	
+	<!--  펀딩 종료 후 진행중인 프로젝트 내용 삭제 -->
+	<delete id="deleteMemberProject" parameterType="Map">
+		delete from member_project
+		where project_num = #{project_num}
+	</delete>
+	
+	<!-- interesting project -->
+	<!-- 관심 프로젝트 등록 -->
+	<insert id="interesting" parameterType="Map">
+		insert into
+		interesting_project(project_num, id)
+		select #{project_num}, #{id}
+		from DUAL
+		where 0 = (select count(*) from member_project where project_num = #{project_num} and id = #{id})
+	</insert>
+	
+	<!-- interesting project search -->
+	<!-- 관심 프로젝트 조회 -->
+	<select id="interestingProjectInfo" parameterType="String"
+		resultType="ProjectDto">
+		select project.project_num, project.project_name,
+		project.start_date,
+		project.end_date, project.category,
+		project.participants, project.funding_cost,
+		project.description,
+		project.mentor_chk
+		from interesting_project inner join project on
+		interesting_project.project_num = project.project_num
+		where
+		interesting_project.id = #{id}
+	</select>
+	
+	<!-- interestingDelete project -->
+	<!-- 관심 프로젝트 삭제 -->
+	<delete id="interestingDelete" parameterType="Map">
+		delete from
+		interesting_project
+		where project_num = #{project_num} and id = #{id}
+	</delete>
+	
+	<!-- getFundingList -->
+	<!-- 전체 프로젝트 중 최신 순으로 6개를 가지고 온다 -->
+	<select id="getFundingList" resultType="ProjectDto">
+		SELECT project_num, category, project_name, participants, leader, mentor_chk, description, start_date, end_date, deadline
+		FROM project p 
+		ORDER BY start_date DESC 
+		limit 6;
+	</select>
+	<!-- getFundingDetail -->
+	<!-- 프로젝트 넘버로 상세 정보를 가져온다. -->
+	<select id="getFundingDetail" parameterType="Integer" resultType="ProjectDto">
+		select *
+		from project
+		where project_num = #{project_num}
+	</select> 
+	<!-- getFundingListByCategory -->
+	<!-- 선택한 카테고리에 속하는 프로젝트 목록을 제공 -->
+	<select id="getFundingListByCategory" parameterType="String" resultType="ProjectDto">
+		select *
+		from project
+		where category = #{category}
+	</select>
+	
+	<!-- 프로젝트에 포함된 친구들 가져오기 -->
+	<select id="memberchk" parameterType="Integer" resultType="MemberDto">
+		select *
+		from member
+		where id = any (select id from member_project where project_num = #{project_num})
+	</select>
+	
+	<!-- 프로젝트 대기 멤버  가져오기 -->
+	<select id="waitingList" parameterType="Integer" resultType="MemberDto">
+		select *
+		from member
+		where id = any (select id from waiting_project where project_num = #{project_num})
+	</select>
+	<!-- 포인트 수정 -->
+	<update id = "updatePoint" parameterType="Map">
+		update member set point = #{point} where id = #{id}
+	</update>
+	
+	<!-- 날짜 변화에 따른 프로젝트 관리 -->
+	<insert id = "completeAppend" parameterType="Map">
+		insert into complete_project (project_num, id)
+		select *
+		from member_project
+		where project_num = any(select project_num 
+		from project
+		where <![CDATA[date(end_date) < date(now())]]>)
+	</insert>
+	<!-- 날짜 변화에 따른 프로젝트 관리 -->
+	<delete id = "memberDelete" parameterType="Map">
+		delete from member_project
+		where project_num = any(select project_num 
+		from project
+		where <![CDATA[date(end_date) < date(now())]]>)
+	</delete>
+	
+	<!-- 완료된 프로젝트 중 평가가 완료 되지 않은 프로젝트를 가져온다 -->
+	<select id="getEvaluateList" parameterType="Integer" resultType="Map">
+		select complete_project.project_num, complete_project.id, member.status, member.name
+		from complete_project inner join member on complete_project.id = member.id
+		where complete_project.project_num = #{project_num} and complete_project.status = 0
+	</select>
+	<!-- 프로젝트명으로 검색할 경우  -->
+	<select id="search" parameterType="String" resultType="ProjectDto">
+		select *
+		from project
+		where project_name = any (select project_name from project where project_name like CONCAT("%", #{topic}, "%"));
+
+	</select>
+</mapper>

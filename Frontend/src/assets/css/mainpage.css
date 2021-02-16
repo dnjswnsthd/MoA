@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+.mainTitle {
+    margin: 0 auto;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1976d2;
+}
+.funding {
+    padding: 0;
+}
+.projectName {
+    color: #ab47bc;
+    font-weight: 900;
+}
+.pdate {
+    width: 50%;
+    margin: 0;
+    float: left;
+}
+
+.rankingBox {
+    padding: 0;
+    border-bottom: 1px dotted #bbb;
+}
+.rankingBox p {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.rankInfo p {
+    display: inline-block;
+}
+
+.rankName {
+    color: #ab47bc;
+    font-weight: 900;
+    border-bottom: 2px solid #ab47bc;
+    box-sizing: border-box;
+    font-size: 24px;
+}

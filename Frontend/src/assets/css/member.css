@@ -1,0 +1,67 @@
+@charset "utf-8";
+/*로그인*/
+/* .memberFormLogo {
+    width: 100%;
+    margin: 0 auto;
+} */
+/* .cardBox {
+    width: 450px;
+    border: none;
+} */
+.lineBox {
+    width: 100%;
+    height: 5px;
+    background-color: #ddd;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.formBox {
+    width: 100%;
+    margin: 25px auto;
+}
+
+.loginBtn {
+    background-color: #ab47bc;
+    font-size: 20px;
+    /* font-weight: 900; */
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 20px;
+}
+/*회원가입*/
+.checkBtn {
+    line-height: 20px;
+    padding: 8px 0 8px;
+    max-width: 100%;
+    min-width: 0px;
+    width: 80px;
+}
+
+/*마이페이지*/
+
+.btnBox {
+    margin: 25px auto;
+}
+
+.projectBox {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+.mypageTabs {
+    font-size: 18px;
+    color: #fff;
+}
+.mypageBtn {
+    background-color: #ab47bc;
+    color: white;
+}
+.projectImg {
+    width: 50%;
+    height: 50%;
+}

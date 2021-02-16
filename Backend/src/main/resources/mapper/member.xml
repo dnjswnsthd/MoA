@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.model.mapper.MemberMapper">
+	<!-- member login -->
+	<select id="login" parameterType="MemberDto"
+		resultType="MemberDto">
+		select id
+		from member
+		where id = #{id} and pw = #{pw}
+	</select>
+
+	<!-- ID 중복 검사 -->
+	<select id="idChk" resultType="int" parameterType="String">
+		select
+		count(*) from member where id=#{id}
+	</select>
+
+	<!-- member join -->
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="Map">
+		insert into member
+		(id,pw,name,age,major,status,phone,favorite_1,favorite_2,favorite_3,introduce)
+		values
+		(#{id},#{pw},#{name},#{age},#{major},#{status},#{phone},#{favorite_1},#{favorite_2},#{favorite_3},#{introduce})
+	</insert>
+
+	<!-- 멘토일 경우 추가되는 정보 insert -->
+	<insert id="joinMentor" parameterType="Map">
+		insert into mentor(id,
+		career)
+		values(#{id}, #{career})
+	</insert>
+
+	<!-- 멘티일 경우 추가되는 정보 insert -->
+	<insert id="joinMentee" parameterType="Map">
+		insert into mentee(id,
+		skill)
+		values(#{id}, #{skill})
+	</insert>
+
+	<!-- member search -->
+	<select id="memberSearch" parameterType="MemberDto"
+		resultType="MemberDto">
+		select id
+		from member
+		where id = #{id} and pw = #{pw}
+	</select>
+
+	<!-- member update -->
+	<update id="memberUpdate" parameterType="MemberDto">
+		update member set
+		name =
+		#{name},
+		age = #{age},
+		major = #{major},
+		phone = #{phone},
+		favorite_1 =
+		#{favorite_1},
+		favorite_2 = #{favorite_2},
+		favorite_3 =
+		#{favorite_3},
+		introduce = #{introduce}
+		where id = #{id}
+	</update>
+	
+	<!-- member change password -->
+	<update id="changePassword" parameterType="MemberDto">
+		update member set
+		pw = #{pw}
+		where id = #{id}
+	</update>
+
+	<!-- member update point -->
+	<update id="memberUpdatePoint" parameterType="MemberDto">
+		update member set
+		point = #{point}
+		where id = #{id}
+	</update>
+
+	<!-- member delete -->
+	<!-- member 삭제를 하면 Cascade 를 통해 mentor와 mentee 도 함께 삭제 된다. -->
+	<delete id="delete" parameterType="String">
+		delete from member
+		where id =
+		#{id}
+	</delete>
+
+	<!-- 임시 비밀번호로 비밀번호를 바꾸기 -->
+	<update id="updateTempPassword" parameterType="Map">
+		update member set
+		pw = #{pw}
+		where id = #{id}
+	</update>
+
+	<!-- #{id}를 가진 멤버가 멘토인지 멘티인지를 구분하기 위한 status를 반환 -->
+	<select id="getStatus" parameterType="String"
+		resultType="Integer">
+		select status
+		from member
+		where id = #{id}
+	</select>
+
+	<!-- id를 통해 멘토 정보를 조인하여 가지고 온다 -->
+	<select id="mentorInfo" parameterType="String"
+		resultType="MentorDto">
+		select member.id, member.name, member.age, member.major,
+		member.status, member.phone,
+		member.favorite_1, member.favorite_2,
+		member.favorite_3, member.point,
+		member.introduce,
+		mentor.number_of_evaluation, mentor.career, mentor.exp, mentor.morality,
+		mentor.positiveness, mentor.reliability, mentor.professional,
+		mentor.leadership
+		from member inner join mentor on member.id =
+		mentor.id
+		where member.id = #{id}
+	</select>
+
+	<!-- id를 통해 멘티 정보를 조인하여 가지고 온다 -->
+	<select id="menteeInfo" parameterType="String"
+		resultType="MenteeDto">
+		select member.id, member.name, member.age, member.major,
+		member.status, member.phone,
+		member.favorite_1, member.favorite_2,
+		member.favorite_3, member.point,
+		member.introduce,
+		mentee.number_of_evaluation, mentee.skill, mentee.communication,
+		mentee.responsibility, mentee.performance, mentee.positiveness,
+		mentee.leadership
+		from member inner join mentee on member.id =
+		mentee.id
+		where member.id = #{id}
+	</select>
+
+	<!-- pw 검사 -->
+	<select id="pwcheck" parameterType="String" resultType="String">
+		select pw
+		from member
+		where id = #{id}
+	</select>
+
+	<!-- 멘토 랭킹 가져오기 -->
+	<!-- 경험치 랭킹 -->
+	<select id="getRankingExp" resultType="RankDto">
+		select member.id,
+		mentor.exp as score
+		from member inner join mentor on member.id =
+		mentor.id
+		order by exp desc
+		limit 5;
+	</select>
+	<!-- 도덕성 랭킹 -->
+	<select id="getRankingMorality" resultType="RankDto">
+		select member.id,
+		mentor.morality as score
+		from member inner join mentor on member.id =
+		mentor.id
+		order by morality desc
+		limit 5;
+	</select>
+	<!-- 적극성 랭킹 -->
+	<select id="getRankingPositiveness" resultType="RankDto">
+		select member.id,
+		mentor.positiveness as score
+		from member inner join mentor on member.id
+		= mentor.id
+		order by positiveness desc
+		limit 5;
+	</select>
+	<!-- 신뢰도 랭킹 -->
+	<select id="getRankingReliability" resultType="RankDto">
+		select member.id,
+		mentor.reliability as score
+		from member inner join mentor on member.id
+		= mentor.id
+		order by reliability desc
+		limit 5;
+	</select>
+	<!-- 전문성 랭킹 -->
+	<select id="getRankingProfessional" resultType="RankDto">
+		select member.id,
+		mentor.professional as score
+		from member inner join mentor on member.id
+		= mentor.id
+		order by professional desc
+		limit 5;
+	</select>
+	<!-- 리더쉽 랭킹 -->
+	<select id="getRankingLeadership" resultType="RankDto">
+		select member.id,
+		mentor.leadership as score
+		from member inner join mentor on member.id =
+		mentor.id
+		order by leadership desc
+		limit 5;
+	</select>
+
+	<!-- 멘토, 멘티 평가 반영 -->
+	<!-- 멘토 평가 업데이트 -->
+	<update id="updateEvaluateMentor" parameterType="MentorDto">
+		update mentor
+		set exp = (exp + #{morality} + #{positiveness} + #{reliability} + #{professional} + #{leadership}),
+			morality = ((#{morality} + morality) / (number_of_evaluation + 1)),
+			positiveness = ((#{positiveness} + positiveness) / (number_of_evaluation + 1)),
+			reliability = ((#{reliability} + reliability) / (number_of_evaluation + 1)),
+			professional = ((#{professional} + professional) / (number_of_evaluation + 1)),
+			leadership = ((#{leadership} + leadership) / (number_of_evaluation + 1)),
+			number_of_evaluation = number_of_evaluation + 1
+		WHERE id = #{id};
+	</update>
+	<!-- 멘티 평가 업데이트 -->
+	<update id="updateEvaluateMentee" parameterType="MenteeDto">
+		update mentee
+		set communication = ((communication + #{communication}) / (number_of_evaluation + 1)),
+			responsibility = ((responsibility + #{responsibility}) / (number_of_evaluation + 1)),
+			performance = ((performance + #{performance}) / (number_of_evaluation + 1)),
+			positiveness = ((positiveness + #{positiveness}) / (number_of_evaluation + 1)),
+			leadership = ((leadership + #{leadership}) / (number_of_evaluation + 1)),
+			number_of_evaluation = number_of_evaluation + 1
+		where id = #{id}
+	</update>
+	<update id="updateCompleteStatus" parameterType="Map">
+		update complete_project
+		set status = 1
+		where project_num = #{project_num} and id = #{id}
+	</update>
+
+</mapper>

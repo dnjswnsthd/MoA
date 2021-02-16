@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moa.model.mapper.SprintMapper">
+	<insert id="add" parameterType="Map">
+		insert into
+		sprint(sprint_name, sprint_status, sprint_subject, sprint_description, sprint_start_date, sprint_end_date, project_num, sprint_member)
+		values(#{sprint_name}, #{sprint_status}, #{sprint_subject}, #{sprint_description}, #{sprint_start_date}, #{sprint_end_date}, #{project_num}, #{sprint_member})
+	</insert>
+	
+	<update id="modify" parameterType="SprintDto">
+		update sprint
+		set sprint_status = #{sprint_status}
+		where sprint_num = #{sprint_num}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from sprint
+		where sprint_num = #{sprint_num}
+	</delete>
+	
+	<select id="search" parameterType="Integer" resultType="SprintDto">
+		select *
+		from sprint
+		where project_num = #{project_num}
+	</select>
+	
+	<update id="modifycontent" parameterType="SprintDto">
+		update sprint
+		set sprint_name = #{sprint_name},
+			sprint_subject = #{sprint_subject},
+			sprint_description = #{sprint_description},
+			sprint_start_date = #{sprint_start_date},
+			sprint_end_date = #{sprint_end_date},
+			sprint_member = #{sprint_member}
+		where sprint_num = #{sprint_num}
+	</update>
+</mapper>

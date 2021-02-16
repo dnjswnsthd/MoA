@@ -1,0 +1,23 @@
+@charset "utf-8";
+.pageTitle {
+    text-decoration: underline overline;
+    text-underline-position: under;
+    font-size: 36px;
+    line-height: 100px;
+}
+
+.fundingCategory {
+    text-align: center;
+    width: 100px;
+    height: 80px;
+}
+
+.projectTitle {
+    font-size: large;
+    font-weight: 900;
+    margin: 0;
+}
+.category {
+    text-align: center;
+    height: 80px;
+}

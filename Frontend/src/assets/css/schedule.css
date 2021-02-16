@@ -1,0 +1,21 @@
+@charset "utf-8";
+.drag {
+    display: inline-block;
+}
+.drop {
+    display: inline-block;
+    vertical-align: top;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 1200px;
+    height: 220px;
+}
+
+@media screen and (min-width: 360px) and (max-width: 1264px) {
+    .webBox {
+        display: none;
+    }
+    .notWebBox {
+        display: block;
+    }
+}
