@@ -175,89 +175,115 @@ export default {
         validPassword(password) {
             return /^.*(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*#?&]).*$/.test(password);
         },
-        // validPhone(phone) {
-        //   return /^\d{3}-\d{3,4}-\d{4}$/.test(phone);
-        // },
+
+        // 가입시 mentorForm을 열고, 가입하려는 status를 1로 set
         openMentor() {
             (this.mentorForm = true), (this.menteeForm = false), (this.member.status = 1);
         },
+        // 가입시 menteeForm을 열고, 가입하려는 status를 2로 set
         openMentee() {
             (this.mentorForm = false), (this.menteeForm = true), (this.member.status = 2);
         },
+        // 회원가입.
         join() {
+            // 만약 id가 비어있다면,
             if (this.member.id == '') {
                 console.log(this.member.id);
                 swal('아이디를 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (!this.idChecked) {
+            }
+            // id중복체크를 하지 않았을 때
+            else if (!this.idChecked) {
                 swal('아이디 중복 검사를 해 주세요!', {
                     icon: 'error',
                 });
-            } else if (!this.validPassword(this.member.pw)) {
+            }
+            // pw를 조건에 맞지 않게 입력했을 시
+            else if (!this.validPassword(this.member.pw)) {
                 swal('숫자와 문자, 특수문자 포함 형태의 8자리 이상으로 입력해주세요.', {
                     icon: 'error',
                 });
-            } else if (this.member.pw == '') {
+            }
+            // pw를 입력하지 않았을 때
+            else if (this.member.pw == '') {
                 swal('비밀번호를 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.pwChecked == '') {
+            }
+            // 확인 비밀번호를 입력하지 않았을 때
+            else if (this.pwChecked == '') {
                 swal('비밀번호 확인을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.pw != this.pwChecked) {
+            }
+            // 비밀번호와 확인 비밀번호가 일치하지 않을 때
+            else if (this.member.pw != this.pwChecked) {
                 swal('비밀번호가 일치하지 않습니다!', {
                     icon: 'error',
                 });
-            } else if (this.member.name == '') {
+            }
+            // 이름을 입력하지 않았을 때
+            else if (this.member.name == '') {
                 swal('이름을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.age == Number) {
+            }
+            // 나이를 입력하지 않았을 때
+            else if (this.member.age == Number) {
                 swal('나이를 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.major == '') {
+            }
+            // 전공을 입력하지 않았을 떄
+            else if (this.member.major == '') {
                 swal('전공을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.phone1 == '' || this.phone2 == '' || this.phone3 == '') {
+            }
+            // phone을 입력하지 않았을 때
+            else if (this.phone1 == '' || this.phone2 == '' || this.phone3 == '') {
                 swal('전화번호를 입력해 주세요!', {
                     icon: 'error',
                 });
             }
-            // else if (!this.validPhone(this.member.phone)) {
-            //   swal('핸드폰 번호 양식에 맞춰 입력해 주세요!', {
-            //     icon: 'error',
-            //   });
-            // }
+            // 흥미분야1를 입력하지 않았을 때
             else if (this.member.favorite_1 == '') {
                 swal('관심분야 1 을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.favorite_2 == '') {
+            }
+            // 흥미분야2를 입력하지 않았을 때
+            else if (this.member.favorite_2 == '') {
                 swal('관심분야 2 을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.favorite_3 == '') {
+            }
+            // 흥미분야3를 입력하지 않았을 때
+            else if (this.member.favorite_3 == '') {
                 swal('관심분야 3 을 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else if (this.member.introduce == '') {
+            }
+            // 소개말을 입력하지 않았을 때
+            else if (this.member.introduce == '') {
                 swal('소개를 입력해 주세요!', {
                     icon: 'error',
                 });
-            } else {
+            }
+            // 모든게 입력했을 때
+            else {
+                // 휴대폰번호를 000-0000-0000형식으로 설정.
                 this.member.phone = this.phone1 + '-' + this.phone2 + '-' + this.phone3;
                 let data = this.member;
                 console.log(data);
+                // 회원가입
                 http.post(`/member/join`, data)
                     .then(() => {
                         swal('회원가입 성공!', {
                             icon: 'success',
                         });
-                        location.href = '/';
+                        location.href = '/'; // 가입 후 메인으로 이동.
                     })
                     .catch(() => {
                         swal('회원가입 실패!', {
@@ -266,21 +292,26 @@ export default {
                     });
             }
         },
+        // id형식 및 중복 체크.
         checkId() {
             if (!this.validEmail(this.member.id)) {
+                // 이메일 형식이 아닐 시
                 swal('이메일 양식을 맞춰주세요!', {
                     icon: 'error',
                 });
             } else {
+                // 중복체크시 id를 가지고 체크.
                 http.get(`/member/join/${this.member.id}`)
                     .then((response) => {
                         console.log(response);
                         if (response.data.message == 'fail') {
+                            // fail이 오면 이미 존재하는 아이디.
                             swal('이미 존재하는 아이디 입니다!!', {
                                 icon: 'error',
                             });
                             this.isChecked = false;
                         } else if (response.data.message == 'success') {
+                            // success면 사용가능한 아이디.
                             swal('사용가능한 아이디 입니다!!', {
                                 icon: 'success',
                             });

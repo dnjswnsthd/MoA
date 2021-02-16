@@ -94,11 +94,11 @@ export default {
     watch: {},
     created() {},
     mounted() {
-        this.topic = this.$route.params.topic;
-        http.get(`/project/search/${this.topic}`)
+        this.topic = this.$route.params.topic; // param으로 넘긴 검색어를 받음.
+        http.get(`/project/search/${this.topic}`) // 그 검색어(topic)을 가지고 통신
             .then((response) => {
                 if (response.data.message == 'success') {
-                    this.fundingDatas = response.data.list;
+                    this.fundingDatas = response.data.list; // fundingData에다가 결과값의 리스트를 담음.
                 } else {
                     alert('받기실패');
                 }
@@ -106,9 +106,10 @@ export default {
             .catch(() => {
                 alert('에러발생!');
             });
+        // 랭킹 정보 .
         http.get('member/rank')
             .then(({ data }) => {
-                this.rankDatas = data.list;
+                this.rankDatas = data.list; // rankDatas에 결과값의 리스트를 담음.
             })
             .catch(() => {
                 alert('랭킹 정보 가져오기 실패');
@@ -117,7 +118,6 @@ export default {
     data() {
         return {
             fundingDatas: [],
-
             rankings: ['경험치', '도덕성', '적극성', '신뢰도', '전문성', '리더쉽'],
             rankDatas: [],
             dategap: [],
@@ -135,24 +135,27 @@ export default {
     },
 
     methods: {
+        // pn을 가지고, 해당 pn의 FundingDetail페이지로 이동.
         goDetail(project_num) {
             this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
         },
-
+        // 프로젝트 리스트를 가져옴.
         getProjectList() {
             let today = new Date();
             let year = today.getFullYear();
-            let month = today.getMonth() + 1;
+            let month = today.getMonth() + 1; // 0부터 시작이라 +1
             let date = today.getDate();
-            let current = year + '-' + month + '-' + date;
+            let current = year + '-' + month + '-' + date; // 현재 시간을 0000-00-00 형태로 가져옴.
 
+            // 리스트를 가져옴.
             http.get('project/fundingList')
                 .then(({ data }) => {
-                    var list = data.list;
+                    var list = data.list; // list를 담음
 
+                    // 프로젝트 이미지 아래에 progressbar표시를 위한 계산
                     for (var i = 0; i < list.length; i++) {
-                        let startdate = list[i].start_date;
-                        let deadline = list[i].deadline;
+                        let startdate = list[i].start_date; // 해당 프로젝트의 시작날짜
+                        let deadline = list[i].deadline; // 해당 프로젝트의 데드라인
 
                         let ttoday = new Date(current);
                         let start = new Date(startdate);
@@ -165,19 +168,16 @@ export default {
                                 list[i].love = true;
                         }
 
-                        // let gap = (today.getTime(this.fundingDatas[i].end_date) - today.getTime(this.fundingDatas[i].start_date)) / (1000 * 60 * 60 * 24);
                         let gap = Math.floor(
-                            (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+                            (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24) // 끝 시간 - 시작 시간
                         );
                         let gap2 = Math.floor(
-                            (end.getTime() - ttoday.getTime() + 32400000) / (1000 * 60 * 60 * 24)
+                            (end.getTime() - ttoday.getTime() + 32400000) / (1000 * 60 * 60 * 24) // 끝 시간 - 현재 시간
                         );
 
-                        let result = 100 - Math.ceil((gap2 / gap) * 100);
+                        let result = 100 - Math.ceil((gap2 / gap) * 100); // 결과값을 저장해서 완료된 시점을 100이라 하고 거기서 뺀만큼을 표시.
 
-                        // let res = Math.ceil(gap );
                         this.dategap[i] = result;
-                        // console.log(res);
                     }
 
                     this.fundingDatas = list;

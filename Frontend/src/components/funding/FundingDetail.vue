@@ -262,11 +262,12 @@ export default {
     },
     mounted() {
         this.project_num = this.$route.params.pn;
-        this.mwurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
-        this.wurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num;
+        this.mwurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num; // mobileurl
+        this.wurl = 'https://i4d111.p.ssafy.io/fundingDetail/' + this.project_num; // weburl
 
         setTimeout(this.init, 200);
         // setTimeout(this.$refs.calendar.checkChange(), 1000);
+        // 해당 project_num의 상세페이지로 이동.
         http.get(`project/fundingDetail/${this.project_num}`)
             .then((response) => {
                 if (response.data.message == 'success') {
@@ -321,6 +322,7 @@ export default {
                 .catch(() => {
                     console.log('fffffff');
                 });
+            // 일정버튼을 클릭 시 pn을 가지고, 일정관리 페이지로 이동.
             http.get(`sprint/search/${this.project_num}`)
                 .then((response) => {
                     console.log('pn : ' + this.project_num);
@@ -337,6 +339,7 @@ export default {
                     alert('에러발생!');
                 });
         },
+        // 관심등록.
         plusLove() {
             if (!this.loveFlag) {
                 swal('관심 펀딩 취소되었습니다!', {
@@ -409,42 +412,37 @@ export default {
         updateRange() {
             const events = [];
 
-            // const min = new Date(`${start.date}T00:00:00`);
-            // const max = new Date(`${end.date}T23:59:59`);
-            // const days = (max.getTime() - min.getTime()) / 86400000;
-            // const eventCount = this.rnd(days, days + 20);
             console.log(`updateRange`);
             for (let i = 0; i < this.schedule.length; i++) {
-                // const allDay = this.rnd(0, 3) === 0;
-                // const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-                // const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-                // const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-                // const second = new Date(first.getTime() + secondTimestamp);
                 console.log('status : ' + this.schedule[i].sprint_status);
+                // 달력의 범위지정.
                 events.push({
-                    name: this.schedule[i].sprint_name,
-                    start: new Date(this.schedule[i].sprint_start_date),
-                    end: new Date(this.schedule[i].sprint_end_date),
-                    color: this.colors[this.schedule[i].sprint_status],
-                    description: this.schedule[i].sprint_description,
+                    name: this.schedule[i].sprint_name, // 가져온 일정의 이름.
+                    start: new Date(this.schedule[i].sprint_start_date), // 일정의 start_date
+                    end: new Date(this.schedule[i].sprint_end_date), // 일정의 end_date
+                    color: this.colors[this.schedule[i].sprint_status], // 달력에 표시할 때 색고름.
+                    description: this.schedule[i].sprint_description, // 클릭 시 나타날 description
                 });
             }
 
             this.events = events;
         },
-        // rnd(a, b) {
-        //     return Math.floor((b - a + 1) * Math.random()) + a;
-        // },
+
+        // schedule페이지로 pn을 가지고 이동.
         moveSchedule() {
             this.$router.push({ name: 'Schedule', query: { pn: this.project_num } });
         },
+
+        // 펀딩 참여.
         fundingApply(participants, funding_cost) {
             if (this.memberInfo.point < funding_cost / participants) {
+                // 포인트가 부족할 시
                 swal('포인트가 부족합니다!', {
                     icon: 'error',
                 });
             } else {
                 http.post('/project/waiting', {
+                    // 대기목록에 추가.
                     id: this.memberInfo.id,
                     project_num: this.project_num,
                 })
@@ -456,6 +454,7 @@ export default {
                             });
                             this.dialog = false;
                         } else if (response.data.message == 'FUCKING') {
+                            // 이미 신청을 한 프로젝트면,
                             swal('이미 신청되어있는 프로젝트 입니다.', {
                                 icon: 'error',
                             });
@@ -467,9 +466,12 @@ export default {
                     .catch(() => {});
             }
         },
+        // 참여인원을 가져옴.
         getParticipants(project_num) {
+            // pn을 가지고,
             console.log(project_num);
             http.get(`/project/memberchk/${project_num}`).then((response) => {
+                // 해당 프로젝트의 멤버를 가져옴.
                 if (response.data.message == 'success') {
                     this.participants = response.data.member;
                 } else {
@@ -479,19 +481,21 @@ export default {
                 }
             });
         },
+        // 공유하기 버튼 클릭시 카카오톡 공유.
         kakaoShare() {
             window.Kakao.Link.createDefaultButton({
                 container: '#shareBtn',
                 objectType: 'feed',
                 content: {
-                    title: this.project.project_name,
-                    description: this.project.description,
-                    imageUrl: 'https://i4d111.p.ssafy.io/img/logo(Bg).e2cc6ce0.png',
-                    imageWidth: 250,
-                    imageHeight: 100,
+                    title: this.project.project_name, // 카카오톡에 나올 제목
+                    description: this.project.description, // 카카오톡에 나올 설명
+                    imageUrl: 'https://i4d111.p.ssafy.io/img/logo(Bg).e2cc6ce0.png', // 카카오톡에 나올 이미지
+                    imageWidth: 250, // 이미지 넓이
+                    imageHeight: 100, // 이미지 높이
                     link: {
-                        mobileWebUrl: this.mwurl,
-                        webUrl: this.wurl,
+                        // 연결될 링크
+                        mobileWebUrl: this.mwurl, // 모바일 링크
+                        webUrl: this.wurl, // 웹 링크
                     },
                 },
             });
