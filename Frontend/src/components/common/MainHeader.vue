@@ -2,11 +2,13 @@
     <header class="backgroundImg">
         <v-container class="col-12 col-lg-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-2 logo" @click="movePage('Main')">
+                <div class="col-lg-2 col-md-2 col-2 logo">
                     <img
                         src="@/assets/images/main/logo.png"
                         alt="로고"
                         class="width-150 height-70 centerContent"
+                        @click="movePage('Main')"
+                        style="cursor:pointer"
                     />
                 </div>
                 <v-spacer></v-spacer>
@@ -211,6 +213,7 @@ export default {
         if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
     },
     methods: {
+        // 로그아웃
         onClickLogout() {
             this.$store
                 .dispatch('LOGOUT')
@@ -224,15 +227,19 @@ export default {
                     console.log('로그아웃 문제!!!');
                 });
         },
+        // category클릭 시 해당 카테고리의 펀딩리스트로 이동.
         moveByCategory(name) {
             this.$router.push({ name: 'FundingList', params: { cn: name } });
         },
+        // 페이지 이동.
         movePage(name) {
             this.$router.push({ name: name });
         },
+        // 메뉴버튼 클릭시 메뉴보이게함.
         openMenu() {
             this.openFlag = !this.openFlag;
         },
+        // 검색을 하면 검색어를 가지고 검색결과가 나오는 페이지로 이동.
         moveSearchMain() {
             this.$router.push({ name: 'SearchMain', params: { topic: this.topic } });
         },

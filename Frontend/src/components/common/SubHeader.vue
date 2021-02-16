@@ -2,11 +2,13 @@
     <header>
         <v-container class="col-12 col-lg-8">
             <v-row v-if="isLogin !== false">
-                <div class="col-lg-2 col-md-2 col-2 logo" @click="movePage('Main')">
+                <div class="col-lg-2 col-md-2 col-2 logo">
                     <img
                         src="@/assets/images/main/logo(Bg).png"
                         alt="로고"
                         class="width-150 height-70"
+                        @click="movePage('Main')"
+                        style="cursor:pointer"
                     />
                 </div>
                 <v-spacer></v-spacer>
@@ -115,9 +117,10 @@ export default {
         if (localStorage.getItem('access-token') != null) this.$store.commit('setIsLogined', true);
     },
     methods: {
+        // 로그아웃 클릭 시
         onClickLogout() {
             this.$store
-                .dispatch('LOGOUT')
+                .dispatch('LOGOUT') // store의 LOGOUT을 동작.
                 .then(() => {
                     // this.$router.push({ name: "" });
 
@@ -130,9 +133,11 @@ export default {
                     console.log('로그아웃 문제!!!');
                 });
         },
+        // 페이지이동. 컴포넌트의 이름을 가지고,
         movePage(name) {
             this.$router.push({ name: name });
         },
+        // 모바일에서 menu버튼을클릭 시 메뉴가 나타남.
         openMenu() {
             this.openFlag = !this.openFlag;
             console.log(this.openFlag);

@@ -55,14 +55,17 @@ export default {
         };
     },
     methods: {
+        // 비밀번호찾기
         findPassword() {
+            // 입력한 id를 가지고, pw를 찾음.
+            // pw는 가입한 id(이메일)로 메일을 발송.
             http.put(`/member/findpw/${this.id}`)
                 .then((response) => {
                     console.log(response.data.message);
                     if (response.data.message == 'success') {
                         swal('메일로 임시비밀번호가 보내졌습니다!', {
-                                    icon: 'success',
-                                });
+                            icon: 'success',
+                        });
                     }
                 })
                 .catch(() => {
