@@ -1,13 +1,9 @@
 import http from '@/util/http-common';
 
-// const config = {
-//   headers: { "access-token": localStorage.getItem("access-token") }
-// };
-
-function login(member, success, fail) {
-    http.defaults.headers['access-token'] = window.localStorage.getItem('access-token');
+function login(member, success, fail) { // 로그인
+    http.defaults.headers['access-token'] = window.localStorage.getItem('access-token'); 
     const body = {
-        id: member.id,
+        id: member.id, 
         pw: member.pw,
     };
 
@@ -16,7 +12,7 @@ function login(member, success, fail) {
         .catch(fail);
 }
 
-async function findById(id, success, fail) {
+async function findById(id, success, fail) { 
     http.defaults.headers['access-token'] = window.localStorage.getItem('access-token');
     await http
         .get(`/member/mypage/${id}`)

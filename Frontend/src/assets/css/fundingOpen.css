@@ -18,3 +18,13 @@
     cursor: pointer;
     font-size: 14px;
 }
+
+.fundingBtn:hover {
+    transition: all 0.4s;
+    color: #ffce55;
+}
+@media screen and (min-width: 360px) and (max-width: 1264px) {
+    .btnBox {
+        margin-bottom: 100px;
+    }
+}

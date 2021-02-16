@@ -176,12 +176,14 @@ export default {
         };
     },
     methods: {
+        // 상세페이지로 이동.
         goDetail(project_num) {
             console.log('index : ' + project_num);
             // this.project_num = this.fundingDatas[index].project_num;
             // console.log(this.project_num);
             this.$router.push({ name: 'FundingDetail', params: { pn: project_num } });
         },
+        // 관심목록을 가져옴.
         getInterestingList() {
             console.log(`getIL`);
             http.get(`project/interesting/${this.memberInfo.id}`)
@@ -192,6 +194,7 @@ export default {
                     alert(`관심 목록 가져오기 실패`);
                 });
         },
+        // 카테고리 클릭 시 변경.
         change(name) {
             this.categoryName = name;
 

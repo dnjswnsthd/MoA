@@ -164,8 +164,9 @@ export default {
         };
     },
     created() {
-        this.project_num = this.$route.query.pn;
+        this.project_num = this.$route.query.pn; // 쿼리로 가져온 pn을 저장.
         this.newTask.project_num = this.project_num;
+        // pn을 가지고, 일정정보 다가져옴.
         http.get(`sprint/search/${this.project_num}`)
             .then(({ data }) => {
                 console.log(data.sprintList);
@@ -179,7 +180,7 @@ export default {
             .catch(() => {
                 alert('에러가 발생했습니다.!!');
             });
-
+        // fundingDetail로 project정보를 가져옴
         http.get(`project/fundingDetail/${this.project_num}`)
             .then((response) => {
                 if (response.data.message == 'success') {

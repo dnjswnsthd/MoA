@@ -495,7 +495,7 @@ import RadarCanvas from '../evaluation/RadarCanvas.vue';
 
 export default {
     components: {
-        RadarCanvas,
+        RadarCanvas, // 능력치 그래프를 그리는 RadarCavas.vue를 가져옴.
     },
     computed: {
         ...mapState(['memberInfo', 'isLogin']),
@@ -552,12 +552,14 @@ export default {
             console.log(this.memberInfo);
 
             if (this.memberInfo.status == 1) {
+                // member의 status가 1( 멘토 )인 경우
                 this.data.push(this.memberInfo.morality);
                 this.data.push(this.memberInfo.positiveness);
                 this.data.push(this.memberInfo.reliability);
                 this.data.push(this.memberInfo.professional);
                 this.data.push(this.memberInfo.leadership);
             } else {
+                // member의 status가 2( 멘티 )인 경우
                 this.data.push(this.memberInfo.communication);
                 this.data.push(this.memberInfo.responsibility);
                 this.data.push(this.memberInfo.performance);
@@ -565,10 +567,11 @@ export default {
                 this.data.push(this.memberInfo.leadership);
             }
 
+            // id를 가지고 통신을 해서 진행중인 펀딩의 목록을 가져옴.
             http.get(`/project/proceeding/${this.memberInfo.id}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        this.proceeding = response.data.projectInfo;
+                        this.proceeding = response.data.projectInfo; // proceeding에 프로젝트를 담음.
                     } else {
                         alert('진행중플젝 가져오기 실패!');
                     }
@@ -577,11 +580,12 @@ export default {
                     alert('에러발생!');
                 });
             // setTimeout(function() {}, 200);
+            // id를 가지고, 종료된 프로젝트를 가져옴.
             http.get(`/project/complete/${this.memberInfo.id}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
                         console.log(response.data.list);
-                        this.complete = response.data.list;
+                        this.complete = response.data.list; // complete에 리스트를 담음.
                     } else {
                         alert('종료된플젝 가져오기 실패!');
                     }
@@ -589,10 +593,11 @@ export default {
                 .catch(() => {
                     alert('에러발생!');
                 });
+            // id를 가지고, 관심있는 프로젝트를 가져옴.
             http.get(`/project/interesting/${this.memberInfo.id}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        this.interesting = response.data.interestingProjectInfo;
+                        this.interesting = response.data.interestingProjectInfo; // interesting에 관심프로젝트목록을 담음.
                     } else {
                         alert('관심플젝 가져오기 실패!');
                     }
@@ -601,36 +606,42 @@ export default {
                     alert('에러발생!');
                 });
 
+            // id를 가지고, 대기중인 프로젝트 목록을 가져옴,.
             http.get(`/project/waiting/${this.memberInfo.id}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        this.waiting = response.data.waitingProjectInfo;
+                        this.waiting = response.data.waitingProjectInfo; // waiting에 프로젝트 목록을 가져옴.
                     } else {
-                        alert('진행중플젝 가져오기 실패!');
+                        alert('대기중플젝 가져오기 실패!');
                     }
                 })
                 .catch(() => {});
         },
+        // 평가페이지로 이동함.
         moveEvaluatePage(n, pn) {
-            if (n == 3) this.$router.push({ name: 'Evaluate', params: { pn: pn } });
+            if (n == 3) this.$router.push({ name: 'Evaluate', params: { pn: pn } }); // pn을 가지고, 평가페이지 이동.
         },
+        // 회원탈퇴
         deleteMember() {
             this.deleteDialog = false;
             http.post('/member/pwcheck', {
+                // 비밀번호 체크.
                 id: this.memberInfo.id,
                 pw: this.password,
             })
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        http.delete(`/member/delete/${this.memberInfo.id}`)
+                        // message가 success로 들어오면,
+                        http.delete(`/member/delete/${this.memberInfo.id}`) // id를 가지고 해당 회원id의 ㅣ탈퇴를 진행
                             .then(() => {
                                 console.log('@@@');
                                 this.$store
                                     .dispatch('LOGOUT')
                                     .then(() => {
+                                        // store에 있는 logout을 동작함.
                                         // this.$router.push({ name: "" });
                                         swal('삭제 성공!', { icon: 'success' });
-                                        if (this.$route.path !== '/') this.$router.replace('/');
+                                        if (this.$route.path !== '/') this.$router.replace('/'); // 로그아웃한 지점이 main이 아니면 main으로 이동함.
                                     })
                                     .catch(() => {
                                         console.log('로그아웃 문제!!!');
@@ -649,9 +660,11 @@ export default {
         },
 
         modifyMember() {
+            // 회원정보 수정
             this.modifyDialog = false;
             console.log('1');
             http.post('/member/pwcheck', {
+                // 비밀번호 체크
                 id: this.memberInfo.id,
                 pw: this.password,
             })
@@ -659,8 +672,10 @@ export default {
                     console.log('2');
                     console.log(response);
                     if (response.data.message == 'success') {
+                        // 체크에 성공하면,
                         console.log('4');
                         http.put('/member/update', {
+                            // 지금 입력된정보로 회원정보를 수정.
                             id: this.memberInfo.id,
                             name: this.memberInfo.name,
                             age: this.memberInfo.age,
@@ -687,12 +702,13 @@ export default {
                 });
         },
         projectState(project_num) {
+            // pn을 가지고, 진행중인 프로젝트의 멤버를 가져옴.
             this.project_num = project_num;
             console.log(this.project_num);
             http.get(`/project/waitingList/${this.project_num}`)
                 .then((response) => {
                     if (response.data.message == 'success') {
-                        this.proceedingMember = response.data.member;
+                        this.proceedingMember = response.data.member; // proceedingMember에 멤버목록을 담음.
                     }
                 })
                 .catch(() => {
@@ -700,26 +716,32 @@ export default {
                 });
         },
         enjoyGroup(id, funding_cost, participants) {
-            let cost = funding_cost / participants;
+            let cost = funding_cost / participants; // cost는 펀딩액에서 참가인원을 나눈 값.
             let updatePoint = this.memberInfo.point - cost;
 
             console.log('cost : ' + cost);
             console.log('updateP : ' + updatePoint);
 
             if (updatePoint < 0) {
+                // 만약 멤버포인트에서 cost를 뺀 값이 0보다 작으면
                 swal('포인트가 부족합니다.', {
+                    // 포인트가 부족합니다를 알려줌.
                     icon: 'error',
                 });
             } else {
+                // 포인트가 충분하다면,
                 http.put('/project/permission', {
+                    // pn, id, point를 가지고 동작.
                     project_num: this.project_num,
                     id: id,
                     point: updatePoint,
                 })
                     .then((response) => {
                         if (response.data.message == 'success') {
+                            // 성공 시
                             this.proceedDialog = false;
                             swal('수락 완료!', {
+                                // 수락완료
                                 icon: 'success',
                             });
                         } else {
@@ -732,6 +754,7 @@ export default {
             }
         },
         refuseGroup(id) {
+            // 거절할 시
             console.log('id : ' + id);
             console.log(this.project_num);
             http.put('/project/denial', {
@@ -739,6 +762,7 @@ export default {
                 id: id,
             })
                 .then((response) => {
+                    // 거절함.
                     if (response.data.message == 'success') {
                         this.proceedDialog = false;
                         swal('거절 완료!', {
@@ -755,8 +779,9 @@ export default {
         closeInterest() {
             this.interestingDialog = false;
         },
+        // 포인트 충전.
         plusPoint() {
-            this.changePoint = this.changePoint * 1 + this.memberInfo.point;
+            this.changePoint = this.changePoint * 1 + this.memberInfo.point; // 입력한 포인트에 현재 회원의 포인트를 더함.
             http.put('/member/updatepoint', {
                 id: this.memberInfo.id,
                 point: this.changePoint,
@@ -779,26 +804,31 @@ export default {
                     alert('에러발생!');
                 });
         },
+        // 포인트 전환
         minusPoint() {
             if (this.changePoint > this.memberInfo.point) {
+                // 보유한 포인트 보다 전환하려는 포인트가 더 크다면
                 swal('보유 포인트보다 작게 입력해주세요!', {
+                    // 메시지 출력.
                     icon: 'error',
                 });
                 alert('');
-                this.changePoint = 0;
+                this.changePoint = 0; // 입력값을 0으로 초기화.
             } else {
-                this.changePoint = this.memberInfo.point - this.changePoint * 1;
+                // 아니면
+                this.changePoint = this.memberInfo.point - this.changePoint * 1; // 멤버포인트에서 작성한 포인트를 뺌.
                 http.put('/member/updatepoint', {
                     id: this.memberInfo.id,
                     point: this.changePoint,
                 })
                     .then((response) => {
                         if (response.data.message == 'success') {
+                            // 성공시
                             swal('전환 완료!', {
                                 icon: 'success',
                             });
                             this.minusPointDialog = false;
-                            location.href = '/mypage';
+                            location.href = '/mypage'; // 마이페이지로 이동.
                         } else {
                             alert('전환실패!');
                             this.minusPointDialog = false;
@@ -809,22 +839,30 @@ export default {
                     });
             }
         },
+        // 비밀번호 변경
         changePassword() {
             http.post(`/member/pwcheck`, {
+                // 입력한 비밀번호 체크
                 id: this.memberInfo.id,
                 pw: this.password,
             }).then((response) => {
                 if (response.data.message == 'success') {
+                    // 성공 시
                     if (this.modifyPassword != this.modifyPasswordChk) {
+                        // 만약 수정하려는 비밀번호와 체크하는 비밀번호가 틀리면,
                         swal('비밀번호, 비밀번호 확인이 틀립니다!', {
+                            // 알림
                             icon: 'error',
                         });
                     } else if (this.modifyPassword == '' || this.modifyPasswordChk == '') {
+                        // 둘 중한개가 값이 비어있다면
                         swal('변경 할 비밀번호를 입력해주세요!!', {
+                            // 알림
                             icon: 'error',
                         });
                     } else {
                         http.put(`/member/changepw`, {
+                            // 모든 조건을 만족한다면, id와 pw를 가지고 해당 id의 비밀번호를 수정.
                             id: this.memberInfo.id,
                             pw: this.modifyPassword,
                         });
@@ -840,6 +878,7 @@ export default {
                 }
             });
         },
+        // 페이지이동.
         movePage(name) {
             this.$router.push({ name: name });
         },

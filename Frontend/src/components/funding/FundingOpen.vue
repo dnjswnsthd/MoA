@@ -224,7 +224,7 @@
             </div>
         </div>
 
-        <v-row class="my-5">
+        <v-row class="mt-3 btnBox">
             <v-spacer></v-spacer>
             <div class="fundingBtn width-100" @click="reset">
                 초기화
@@ -367,6 +367,7 @@ export default {
         };
     },
     methods: {
+        //클릭 한 카테고리의 이미지변경.
         categorySelect(name) {
             for (var i = 0; i < this.categories.length; i++) {
                 if (this.categories[i].name == name) {
@@ -381,11 +382,14 @@ export default {
                 }
             }
         },
+        // 펀딩오픈
         openFunding() {
             this.project.description = this.editor.getHTML();
+            // 멘토체크를 필요없으로 체크시 cost를 0으로 set
             if (this.project.mentor_chk == '필요없음') {
                 this.project.funding_cost = 0;
             }
+            // project에 담긴, 정보를 가지고 통신.
             http.post('/project/create', this.project)
                 .then((response) => {
                     console.log(response);
@@ -404,6 +408,7 @@ export default {
                     alert('추가 실패!');
                 });
         },
+        // 초기화 클릭 시 내용 초기화
         reset() {
             (this.project.project_name = ''),
                 (this.project.participants = 0),
