@@ -389,24 +389,30 @@ export default {
             if (this.project.mentor_chk == '필요없음') {
                 this.project.funding_cost = 0;
             }
-            // project에 담긴, 정보를 가지고 통신.
-            http.post('/project/create', this.project)
-                .then((response) => {
-                    console.log(response);
-                    if (response.data.message == 'success') {
-                        swal('추가 완료!', {
-                            icon: 'success',
-                        });
-                        this.$router.push({ name: 'Main' });
-                    } else {
-                        swal('추가 실패!', {
-                            icon: 'error',
-                        });
-                    }
-                })
-                .catch(() => {
-                    alert('추가 실패!');
+            if (this.project.category == '') {
+                swal('카테고리를 선택해주세요!!', {
+                    icon: 'error',
                 });
+            } else {
+                // project에 담긴, 정보를 가지고 통신.
+                http.post('/project/create', this.project)
+                    .then((response) => {
+                        console.log(response);
+                        if (response.data.message == 'success') {
+                            swal('추가 완료!', {
+                                icon: 'success',
+                            });
+                            this.$router.push({ name: 'Main' });
+                        } else {
+                            swal('추가 실패!', {
+                                icon: 'error',
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        alert('추가 실패!');
+                    });
+            }
         },
         // 초기화 클릭 시 내용 초기화
         reset() {
