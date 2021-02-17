@@ -77,10 +77,10 @@ public class ProjectController {
 		try {
 			int cnt = projectService.waiting(param);
 			if(cnt > 0) {
-				resultMap.put("message", "FUCKING");
+				resultMap.put("message", SUCCESS);
 			}
 			else{
-				resultMap.put("message", SUCCESS);
+				resultMap.put("message", FAIL);
 			}
 			status = HttpStatus.ACCEPTED;
 		} catch (Exception e) {
