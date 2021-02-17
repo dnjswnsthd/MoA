@@ -100,14 +100,12 @@
                 </div>
             </v-row>
             <v-col class="explainBox my-10">
-                <p class="pageSubTitle">
-                    상세 설명
-                </p>
+                <p class="pageSubTitle">상세 설명</p>
 
                 <div
                     class="mt-5 px-5 py-5 height-300"
                     v-html="project.description"
-                    style="border:1px solid black; overflow:scroll-y"
+                    style="border: 1px solid black; overflow: scroll-y"
                 />
             </v-col>
         </div>
@@ -191,9 +189,7 @@
                                 </v-toolbar>
 
                                 <v-card-text>
-                                    <h2 class="mb-1">
-                                        일정 설명
-                                    </h2>
+                                    <h2 class="mb-1">일정 설명</h2>
                                     <v-textarea
                                         v-model="selectedEvent.description"
                                         readonly
@@ -441,28 +437,34 @@ export default {
                     icon: 'error',
                 });
             } else {
-                http.post('/project/waiting', {
-                    // 대기목록에 추가.
-                    id: this.memberInfo.id,
-                    project_num: this.project_num,
-                })
-                    .then((response) => {
-                        console.log('메시지 : ' + response.data.message);
-                        if (response.data.message == 'success') {
-                            console.log(response.data.message);
-                            swal('신청 성공!', {
-                                icon: 'success',
-                            });
-                            this.dialog = false;
-                        } else {
-                            // 이미 신청을 한 프로젝트면,
-                            swal('이미 신청되어있는 프로젝트 입니다.', {
-                                icon: 'error',
-                            });
-                            this.dialog = false;
-                        } 
+                if (this.memberInfo.id == this.project.leader) {
+                    swal('당신이 리더인 프로젝트 입니다.', {
+                        icon: 'error',
+                    });
+                } else {
+                    http.post('/project/waiting', {
+                        // 대기목록에 추가.
+                        id: this.memberInfo.id,
+                        project_num: this.project_num,
                     })
-                    .catch(() => {});
+                        .then((response) => {
+                            console.log('메시지 : ' + response.data.message);
+                            if (response.data.message == 'success') {
+                                console.log(response.data.message);
+                                swal('신청 성공!', {
+                                    icon: 'success',
+                                });
+                                this.dialog = false;
+                            } else {
+                                // 이미 신청을 한 프로젝트면,
+                                swal('이미 신청되어있는 프로젝트 입니다.', {
+                                    icon: 'error',
+                                });
+                                this.dialog = false;
+                            }
+                        })
+                        .catch(() => {});
+                }
             }
         },
         // 참여인원을 가져옴.
