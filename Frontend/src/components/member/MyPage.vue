@@ -1,5 +1,5 @@
 <template>
-    <v-container class="col-lg-6 col-md-8 col-12 centerContent ">
+    <v-container class="col-lg-6 col-md-8 col-12 centerContent">
         <h1 class="centerText">내 정보</h1>
         <v-row>
             <div class="col-lg-6 col-md-6 col-12 centerContent">
@@ -11,7 +11,7 @@
                     <v-text-field
                         label="ID"
                         type="text"
-                        style="width:60%;"
+                        style="width: 60%"
                         v-model="memberInfo.id"
                         readonly
                     ></v-text-field>
@@ -20,14 +20,14 @@
                     <v-text-field
                         label="MoA Point"
                         type="text"
-                        style="width:15%;"
+                        style="width: 15%"
                         v-model="memberInfo.point"
                     ></v-text-field>
                     <v-dialog v-model="plusPointDialog" max-width="290">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
                                 class="ml-4"
-                                style="background-color:#ab47bc; color:white"
+                                style="background-color: #ab47bc; color: white"
                                 v-bind="attrs"
                                 v-on="on"
                             >
@@ -35,12 +35,10 @@
                             </v-btn>
                         </template>
                         <v-card>
-                            <v-card-title>
-                                충전
-                            </v-card-title>
+                            <v-card-title> 충전 </v-card-title>
                             <v-card-text>
                                 <div>
-                                    <p style="padding:0">충전 할 포인트</p>
+                                    <p style="padding: 0">충전 할 포인트</p>
                                     <v-text-field
                                         label="POINT"
                                         type="text"
@@ -51,9 +49,7 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="#ab47bc" text @click="plusPoint">
-                                    충전하기
-                                </v-btn>
+                                <v-btn color="#ab47bc" text @click="plusPoint"> 충전하기 </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -63,18 +59,16 @@
                                 class="ml-4"
                                 v-bind="attrs"
                                 v-on="on"
-                                style="background-color:#ab47bc; color:white"
+                                style="background-color: #ab47bc; color: white"
                             >
                                 전환
                             </v-btn>
                         </template>
                         <v-card>
-                            <v-card-title>
-                                전환
-                            </v-card-title>
+                            <v-card-title> 전환 </v-card-title>
                             <v-card-text>
                                 <div>
-                                    <p style="padding:0">전환 할 포인트</p>
+                                    <p style="padding: 0">전환 할 포인트</p>
                                     <v-text-field
                                         label="POINT"
                                         type="text"
@@ -85,9 +79,7 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="#ab47bc" text @click="minusPoint">
-                                    전환하기
-                                </v-btn>
+                                <v-btn color="#ab47bc" text @click="minusPoint"> 전환하기 </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -98,7 +90,7 @@
                     <v-text-field
                         label="NAME"
                         type="text"
-                        style="width:30%;"
+                        style="width: 30%"
                         v-model="memberInfo.name"
                         readonly
                     ></v-text-field>
@@ -106,7 +98,7 @@
                     <v-text-field
                         label="AGE"
                         type="text"
-                        style="width:30%;"
+                        style="width: 30%"
                         v-model="memberInfo.age"
                         readonly
                     ></v-text-field>
@@ -154,9 +146,7 @@
             <v-dialog v-model="changePasswordDialog" max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <div class="col-3">
-                        <p class="fundingBtn" v-bind="attrs" v-on="on">
-                            비밀번호 변경
-                        </p>
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">비밀번호 변경</p>
                     </div>
                 </template>
                 <v-card>
@@ -186,9 +176,7 @@
                         <v-btn small outlined color="#bc6ff1" @click="changePasswordDialog = false">
                             취소
                         </v-btn>
-                        <v-btn small outlined color="#bc6ff1" @click="changePassword">
-                            변경
-                        </v-btn>
+                        <v-btn small outlined color="#bc6ff1" @click="changePassword"> 변경 </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -197,9 +185,7 @@
             <v-dialog v-model="modifyDialog" max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <div class="col-3">
-                        <p class="fundingBtn" v-bind="attrs" v-on="on">
-                            내 정보 변경
-                        </p>
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">내 정보 변경</p>
                     </div>
                 </template>
                 <v-card>
@@ -217,9 +203,7 @@
                         <v-btn small outlined color="#bc6ff1" @click="modifyDialog = false">
                             취소
                         </v-btn>
-                        <v-btn small outlined color="#bc6ff1" @click="modifyMember">
-                            변경
-                        </v-btn>
+                        <v-btn small outlined color="#bc6ff1" @click="modifyMember"> 변경 </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -228,9 +212,7 @@
             <v-dialog v-model="deleteDialog" max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <div class="col-3">
-                        <p class="fundingBtn" v-bind="attrs" v-on="on">
-                            탈퇴 하기
-                        </p>
+                        <p class="fundingBtn" v-bind="attrs" v-on="on">탈퇴 하기</p>
                     </div>
                 </template>
                 <v-card>
@@ -248,9 +230,7 @@
                         <v-btn color="green darken-1" text @click="deleteDialog = false">
                             취소
                         </v-btn>
-                        <v-btn color="green darken-1" text @click="deleteMember">
-                            탈퇴
-                        </v-btn>
+                        <v-btn color="green darken-1" text @click="deleteMember"> 탈퇴 </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -260,7 +240,7 @@
         <div class="projectBox">
             <v-tabs left slider-color="yellow">
                 <!--원상복구시 inline style로 color주기-->
-                <v-toolbar color="#ab47bc" dark class="mb-10" style="border-radius:20px">
+                <v-toolbar color="#ab47bc" dark class="mb-10" style="border-radius: 20px">
                     <v-tab class="mb-2 mypageTabs">진행중인 펀딩</v-tab>
                     <v-tab class="mb-2 mypageTabs">참여 대기 중 펀딩</v-tab>
                     <v-tab class="mb-2 mypageTabs">종료된 펀딩</v-tab>
@@ -299,17 +279,22 @@
                                                 상태보기
                                             </v-btn>
                                         </template>
-                                        
-                                             
+
                                         <v-card>
-                                            <v-card-title>신청 인원</v-card-title>
+                                            <v-card-title>멤버현황</v-card-title>
                                             <v-divider></v-divider>
-                                            <v-card-text style="height: 300px;">
+                                            <v-card-text style="height: 300px">
                                                 <div class="mt-3">
+                                                    <div v-if="proceedingMember.length == 0">
+                                                        <p>신청 중인 멤버</p>
+                                                        <p>신청중인 멤버가없습니다.</p>
+                                                    </div>
+
                                                     <v-row
                                                         v-for="(proceedMember,
                                                         index) in proceedingMember"
                                                         :key="index"
+                                                        v-else
                                                     >
                                                         <p class="shorthand col-7">
                                                             {{ proceedMember.id }}
@@ -337,6 +322,14 @@
                                                             >거절</v-btn
                                                         >
                                                     </v-row>
+                                                    <v-divider></v-divider>
+                                                    <p>확정멤버</p>
+                                                    <div
+                                                        v-for="(participant, index) in participants"
+                                                        :key="index"
+                                                    >
+                                                        <p>{{ participant.id }}</p>
+                                                    </div>
                                                 </div>
                                             </v-card-text>
 
@@ -351,8 +344,6 @@
                                                 </v-btn>
                                             </v-card-actions>
                                         </v-card>
-                                        
-                                        
                                     </v-dialog>
                                 </v-row>
                             </div>
@@ -439,7 +430,6 @@
                                     <v-dialog
                                         v-model="interestingDialog"
                                         scrollable
-                                        
                                         :retain-focus="false"
                                         max-width="300px"
                                     >
@@ -459,7 +449,7 @@
                                         <v-card>
                                             <v-card-title>참여 인원</v-card-title>
                                             <v-divider></v-divider>
-                                            <v-card-text style="height: 300px;">
+                                            <v-card-text style="height: 300px">
                                                 <v-row
                                                     v-for="(proceedMember,
                                                     index) in proceedingMember"
@@ -469,6 +459,7 @@
                                                 </v-row>
                                             </v-card-text>
                                             <v-divider></v-divider>
+
                                             <v-card-actions>
                                                 <v-btn
                                                     color="blue darken-1"
@@ -510,7 +501,7 @@ export default {
             deleteDialog: false,
             password: '',
             proceeding: {},
-
+            participants: {},
             categoriesImg: {
                 디자인: require('@/assets/images/category/design(c).png'),
                 'IT·프로그래밍': require('@/assets/images/category/computer(c).png'),
@@ -519,6 +510,7 @@ export default {
                 '운세·상담': require('@/assets/images/category/lucky(c).png'),
                 마케팅: require('@/assets/images/category/marketing(c).png'),
             },
+            participatns: {},
             complete: {},
             interesting: {},
             waiting: {},
@@ -709,9 +701,18 @@ export default {
             // pn을 가지고, 진행중인 프로젝트의 멤버를 가져옴.
             this.project_num = project_num;
             console.log(this.project_num);
+            http.get(`/project/memberchk/${project_num}`).then((response) => {
+                // 해당 프로젝트의 멤버를 가져옴.
+                if (response.data.message == 'success') {
+                    this.participants = response.data.member;
+                } else {
+                    swal('확인 실패.', {
+                        icon: 'error',
+                    });
+                }
+            });
             http.get(`/project/waitingList/${this.project_num}`)
                 .then((response) => {
-                    
                     if (response.data.message == 'success') {
                         this.proceedingMember = response.data.member; // proceedingMember에 멤버목록을 담음.
                     }
@@ -748,7 +749,7 @@ export default {
                                 // 수락완료
                                 icon: 'success',
                             });
-                                this.proceedDialog = false;
+                            this.proceedDialog = false;
                         } else {
                             alert('거절실패');
                         }
@@ -772,7 +773,7 @@ export default {
                         swal('거절 완료!', {
                             icon: 'success',
                         });
-                            this.proceedDialog = false;
+                        this.proceedDialog = false;
                     } else {
                         alert('거절 실패');
                     }
@@ -784,7 +785,7 @@ export default {
         closeInterest() {
             this.interestingDialog = false;
         },
-        closeProceed(){
+        closeProceed() {
             this.proceedDialog = false;
         },
         // 포인트 충전.
