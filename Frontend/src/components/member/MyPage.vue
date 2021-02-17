@@ -299,8 +299,10 @@
                                                 상태보기
                                             </v-btn>
                                         </template>
+                                        
+                                             
                                         <v-card>
-                                            <v-card-title>참여 인원</v-card-title>
+                                            <v-card-title>신청 인원</v-card-title>
                                             <v-divider></v-divider>
                                             <v-card-text style="height: 300px;">
                                                 <div class="mt-3">
@@ -343,12 +345,14 @@
                                                 <v-btn
                                                     color="blue darken-1"
                                                     text
-                                                    @click="proceedDialog = false"
+                                                    @click="closeProceed"
                                                 >
                                                     Close
                                                 </v-btn>
                                             </v-card-actions>
                                         </v-card>
+                                        
+                                        
                                     </v-dialog>
                                 </v-row>
                             </div>
@@ -435,7 +439,7 @@
                                     <v-dialog
                                         v-model="interestingDialog"
                                         scrollable
-                                        persistent
+                                        
                                         :retain-focus="false"
                                         max-width="300px"
                                     >
@@ -707,6 +711,7 @@ export default {
             console.log(this.project_num);
             http.get(`/project/waitingList/${this.project_num}`)
                 .then((response) => {
+                    
                     if (response.data.message == 'success') {
                         this.proceedingMember = response.data.member; // proceedingMember에 멤버목록을 담음.
                     }
@@ -739,11 +744,11 @@ export default {
                     .then((response) => {
                         if (response.data.message == 'success') {
                             // 성공 시
-                            this.proceedDialog = false;
                             swal('수락 완료!', {
                                 // 수락완료
                                 icon: 'success',
                             });
+                                this.proceedDialog = false;
                         } else {
                             alert('거절실패');
                         }
@@ -764,10 +769,10 @@ export default {
                 .then((response) => {
                     // 거절함.
                     if (response.data.message == 'success') {
-                        this.proceedDialog = false;
                         swal('거절 완료!', {
                             icon: 'success',
                         });
+                            this.proceedDialog = false;
                     } else {
                         alert('거절 실패');
                     }
@@ -778,6 +783,9 @@ export default {
         },
         closeInterest() {
             this.interestingDialog = false;
+        },
+        closeProceed(){
+            this.proceedDialog = false;
         },
         // 포인트 충전.
         plusPoint() {
