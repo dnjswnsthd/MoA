@@ -449,19 +449,18 @@ export default {
                     .then((response) => {
                         console.log('메시지 : ' + response.data.message);
                         if (response.data.message == 'success') {
+                            console.log(response.data.message);
                             swal('신청 성공!', {
                                 icon: 'success',
                             });
                             this.dialog = false;
-                        } else if (response.data.message == 'FUCKING') {
+                        } else {
                             // 이미 신청을 한 프로젝트면,
                             swal('이미 신청되어있는 프로젝트 입니다.', {
                                 icon: 'error',
                             });
                             this.dialog = false;
-                        } else {
-                            alert('신청 실패');
-                        }
+                        } 
                     })
                     .catch(() => {});
             }
